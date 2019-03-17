@@ -1,0 +1,307 @@
+<?php
+
+
+require_once('test_web.php');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')
+     ->name('home');
+Route::redirect('/', '/home');
+
+Route::view('/welcome', 'welcome');
+Route::get('/home/dashboard_car', 'HomeController@indexCar')->name('dashboard_car');
+Route::get('/gatedevices/allData', 'GatedeviceController@allData');
+Route::get('/gatepasses/manual', 'GatepassController@manualData');
+Route::get('/gatedirects/manual', 'GatedirectController@manualData');
+Route::get('/province/allProvince', 'ProvinceController@allProvince')
+            ->name('provinces.allProvince');
+
+Route::resources ([
+    // Base data
+    '/melliats'             => 'MelliatController',
+    '/universities'         => 'UniversityController',
+    '/fields'               => 'FieldController',
+    '/carColors'            => 'CarColorController',
+    '/carFuels'             => 'CarFuelController',
+    '/carLevels'            => 'CarLevelController',
+    '/carSystems'           => 'CarSystemController',
+    '/carModels'            => 'CarModelController',
+    '/carTypes'             => 'CarTypeController',
+    '/carPlateTypes'        => 'CarPlateTypeController',
+    '/carPlateWords'        => 'CarPlateWordController',
+    '/carPlateCities'       => 'CarPlateCityController',
+    '/commonRanges'         => 'CommonRangeController',
+    '/contractors'          => 'ContractorController',
+    '/cars'                 => 'CarController',
+    '/carSites'             => 'CarSiteController',
+     '/provinces'           => 'ProvinceController',
+     '/degrees'             => 'DegreeController',
+     '/parts'               => 'PartController',
+     '/situations'          => 'SituationController',
+     '/cities'              => 'CityController',
+     '/departments'         => 'DepartmentController',
+     '/contracts'           => 'ContractController',
+     '/genders'             => 'GenderController',
+     '/zones'               => 'ZoneController',
+     '/cards'               => 'CardController',
+     '/cardtypes'           => 'CardtypeController',
+     '/students'            => 'StudentController',
+     '/groups'              => 'GroupController',
+     '/gatezones'           => 'GatezoneController',
+     '/gateoptions'         => 'GateoptionController',
+     '/gategenders'         => 'GategenderController',
+     '/gatetraffics'        => 'GatetrafficController',
+     '/gategroups'          => 'GategroupController',
+     '/gatemessages'        => 'GatemessageController',
+     '/gatepasses'          => 'GatepassController',
+     '/gatedevices'         => 'GatedeviceController',
+     '/gatedirects'         => 'GatedirectController',
+     '/registration'        => 'RegistrationController',
+     '/permissions'         => 'PermissionController',
+     '/roles'              => 'RoleController',
+     '/grouppermits'       => 'GroupPermitController',
+     '/kintypes'           => 'KintypeController',
+     '/relatives'          => 'RelativeController',
+     '/vacationRequests'   => 'VacationRequestController',
+     '/vacationTypes'      => 'VacationTypeController',
+     '/vacationStatuses'   => 'VacationStatusController',
+     '/people'              => 'PeopleController',
+     '/warranties'          => 'WarrantyController',
+     '/referralTypes'       => 'ReferralTypeController',
+     '/referrals'           => 'ReferralController',
+     '/semesters'           => 'SemesterController',
+     '/terms'               => 'TermController',
+]);
+
+Route::get('/auth/edit', 'HomeController@editProfile')
+        ->name('profile_show');
+
+Route::get('/auth/lock', 'HomeController@lockPage')
+     ->name('lock_page');
+
+Route:: view('error', 'layouts.error-master');
+Route::get('/auth/error', 'HomeController@errorPage')
+        ->name('error_page');
+
+Route::get('carLoad', 'CarController@loadCar');
+
+Route::view('carBase', 'cars.index')
+                ->name('car_base');
+Route::view('base-structure', 'base-structure.index')
+                ->name('base.structure');
+
+Route::view('base-education', 'base-education.index')
+                ->name('base.education');
+
+Route::get('/cars/load', 'CarController@loadCar')
+        ->name('cars.filter');
+Route::get('/cards/filter/{groupType}', 'CardController@filterCard')
+        ->name('cards.filter');
+Route::get('/gategroups/data/all', 'GategroupController@allGateGroup');
+Route::put('/gategroups/{gategroup}/setGatedevice', 'GategroupController@setGatedevice');
+Route::put('/gateoptions/{gateoption}/setGatedevice', 'GateoptionController@setGatedevice');
+Route::get('/gatemessages/manual', 'GatemessageController@manualData');
+Route::get('/gatedevices/manual', 'GatedeviceController@manualData');
+Route::get('/gatedevices/data/all', 'GatedeviceController@allGatedevices');
+
+Route::get('/permissions/data/all', 'PermissionController@allPermissions');
+Route::put('/roles/{role}/setPermission', 'RoleController@setPermission');
+Route::get('/roles/data/all', 'RoleController@allRoles');
+Route::put('/grouppermits/{grouppermit}/setRole', 'GroupPermitController@setRole');
+Route::get('/grouppermits/data/all', 'GroupPermitController@allGroupPermit');
+
+Route::get('/vacationManagment', 'VacationRequestController@managment')
+        ->name('vacation_managment');
+Route::view('carBase', 'cars.index')
+                ->name('car_base');
+Route::get('/cars/loadCar', 'CarController@loadCar');
+Route::put(
+        '/vacationRequests/{vacationRequest}/updateField',
+        'VacationRequestController@updateField'
+)
+        ->name('update_field_readed');
+Route::put(
+        '/vacationRequests/{vacationRequest}/updateRequest',
+        'VacationRequestController@updateRequest'
+)
+        ->name('update_request');
+
+Route::get('base/data/notification/unread_count',
+           'VacationRequestController@unreadVacationRequest')
+    ->name('notification.count_unreaded_vacation');
+
+//Find user for manual tarffic , reportStore
+// Route::post('/people/loaduser', 'PeopleController@loaduser');
+Route::put('/people/{user}/setGrouppermit', 'PeopleController@setGrouppermit');
+Route::put('/people/{user}/setGateGroup', 'PeopleController@setGateGroup');
+Route::put('/people/{user}/setTerm', 'PeopleController@setTerm');
+Route::post('/people/uploadImage', 'PeopleController@uploadImage');
+Route::get('/people/{people}/loadParent', 'PeopleController@loadParent');
+Route::put('/people/{user}/setParent', 'PeopleController@setParent');
+Route::get('/people/filter/{groupType}', 'PeopleController@filterPeople')
+        ->name('people.filter');
+
+Route::get('/uploadImage', 'PeopleController@upload')
+        ->name('upload_images');
+// Upload images from folder
+Route::get('/uploadImageFromFolder', 'PeopleController@uploadImageFromFolder');
+Route::get('/grouppermit/{user}/loadGroupPermit', 'GroupPermitController@loadGroupPermit');
+Route::get('/gategroup/{user}/loadGateGroup', 'GategroupController@loadGateGroup');
+Route::resource('/sms', 'SmsController')
+        ->parameters([
+                'sms' => 'sms'
+        ]);
+Route::post('/car/search', 'CarController@search')
+        ->name('search_car');
+
+/* search info search by data for card */
+Route::post('/card/search', 'CardController@indexSearch')
+        ->name('search_card');
+
+Route::post('/card/loadCard', 'CardController@loadCard')
+        ->name('load_card');
+/* search only card*/
+Route::post('/cards/searchCard', 'CardController@cardSearch')
+        ->name('card_search');
+Route::get('/terms/data/all', 'TermController@allTerm');
+
+Route::get('/base/all_information', 'RegistrationController@baseInformation')
+    ->name ('base.all_Information');
+
+Route::post('unlock', 'HomeController@checkAndUnlockUser')
+     ->name ('unlock');
+/*
+ * Report based on
+ */
+
+/* report  show user*/
+Route::get('/report/showUser', 'ReportController@showUser')
+        ->name('report_show_user');
+
+/* report search user */
+Route::post('/report/search', 'ReportController@searchUser')
+        ->name('report_search_user');
+
+/* report search edit user */
+Route::post('/report/search/edit', 'ReportController@searchEditUser')
+        ->name('report_search_edit_user');
+
+/* report  traffic */
+Route::get('/report/traffic', 'ReportController@index')
+        ->name('report_traffic');
+
+/* report show 50 log traffic */
+Route::get('/report/showTraffic', 'ReportController@showTraffic')
+        ->name('report_show_traffic');
+
+ /* report show 50 log traffic */
+Route::get('/report/monitorTraffic', 'ReportController@monitorTraffic')
+        ->name('report_monitor_traffic');
+
+/* report search traffic */
+Route::post('/report/searchTraffic', 'ReportController@searchTraffic')
+        ->name('report_search_tarffic');
+
+/* report search traffic */
+Route::post('/report/searchMyTraffic', 'ReportController@searchMyTraffic')
+        ->name('report_search_my_tarffic');
+
+ /* Dashboard chart based on */
+Route::get('/report/chartTodayTraffic', 'ReportController@chartTodayTraffic')
+        ->name('chart_today_hour');
+
+Route::get('/report/InputOutput', 'InputOutputReportController@InputOutputPDF')
+        ->name('download_all_traffic');
+
+// Route::post('/report/exportToExcel', 'GatetrafficController@exportToExcel');
+Route::get('/report/exportToExcel/{startDate}/{endDate}', 'GatetrafficController@exportToExcel')
+        ->name('export.report.excel');
+
+/* Dashboard  home group */
+/**
+ * Show Count Daily Traffic
+ */
+Route::get('traffic-count-daily', 'DashboardChartController@chartCountDailyTraffic')
+        ->name('report.count.traffic.daily');
+/**
+ * Show Count Gate Device active
+ */
+Route::get('gatedevice-count-active', 'GatedeviceController@chartCountActiveDevice')
+        ->name('report.count.gatedevice.active');
+/**
+ * Show Count SMS
+ */
+Route::get('posted-sms-count', 'SmsController@CountPostedSMS')
+        ->name('report.count.posted.sms');
+/**
+ * Show Count Refferal
+ */
+Route::get('referral-data-count', 'ReferralController@countReferral')
+        ->name('report.count.referral.data');
+/**
+ * Show Chart daily traffic
+ */
+Route::get('traffic-daily', 'DashboardChartController@chartDailyTraffic')
+        ->name('report.traffic.daily');
+/**
+ * Show Chart weekday traffic
+ */
+Route::get('traffic-weekly', 'DashboardChartController@chartWeekdayTraffic')
+        ->name('report.traffic.weekly');
+/**
+ * Show Chart month traffic
+ */
+Route::get('traffic-monthly', 'DashboardChartController@chartMonthTraffic')
+        ->name('report.traffic.monthly');
+/* end Dashboard  home group */
+
+
+/* Car Dashboard group */
+/**
+ * Show Count Daily Traffic
+ */
+Route::get('car-traffic-count-daily', 'DashboardCarController@CountDailyCarTraffic')
+        ->name('report.count.car.traffic.daily');
+/**
+ * Show Count Antenna
+ */
+Route::get('antenna-count-active', 'GatedeviceController@CountActiveAntenna')
+        ->name('report.count.antenna.active');
+
+/**
+ * Show Chart daily traffic
+ */
+Route::get('car-traffic-daily', 'DashboardCarController@chartDailyCarTraffic')
+        ->name('report.car.traffic.daily');
+/**
+ * Show Chart weekday traffic
+ */
+Route::get('car-traffic-weekly', 'DashboardCarController@chartWeekdayCarTraffic')
+        ->name('report.car.traffic.weekly');
+/**
+ * Show Chart month traffic
+ */
+Route::get('car-traffic-monthly', 'DashboardCarController@chartMonthCarTraffic')
+        ->name('report.car.traffic.monthly');
+/* end Car Dashboard group */
+
+/**
+ * Show  Pie Chart Staff in report Users
+ */
+Route::get('staff-chart', 'StaffController@staffChart')
+        ->name('report.user.staff.count.all');
+
+/**
+ * Show Pie Chart Student report Users
+ */
+Route::get('student-chart', 'StudentController@studentChart')
+        ->name('report.user.student.count.all');
+
+/**
+ * Show Pie Chart Teacher report Users
+ */
+Route::get('teacher-chart', 'TeacherController@teacherChart')
+        ->name('report.user.teacher.count.all');
+
+
