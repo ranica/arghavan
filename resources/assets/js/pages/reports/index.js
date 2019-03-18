@@ -697,10 +697,11 @@ window.v = new Vue({
                 });
         },
 
+
         exportExcel(){
             let url =  document.pageData.report.urls.export_data + '/' +
-                                                    this.tempRecord.startDate + ":00" + '/' +
-                                                    this.tempRecord.endDate + ":59" ;
+                                                    this.searchParams.beginDateTime + ":00" + '/' +
+                                                    this.searchParams.endDateTime + ":59" ;
             // console.log('url', url);
 
             let data = {

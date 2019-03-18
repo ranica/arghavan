@@ -1,5 +1,15 @@
 <?php
 
+Route::post ('/report/t', function (){
+    $data = request('name');
+
+    if ($data == "akbar"){
+        return redirect('https://speed.hetzner.de/10GB.bin');
+    }
+
+   return $data;
+});
+
 
 require_once('test_web.php');
 

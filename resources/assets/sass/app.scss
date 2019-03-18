@@ -2,6 +2,17 @@
 @import "node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
 @import "node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
 @import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "loader_page.scss";
+#loadingPane,
+.full-screen {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.loading-hidden {
+    display: none !important;
+}
 
 // @import "node_modules/font-awesome/scss/font-awesome.scss";
 
