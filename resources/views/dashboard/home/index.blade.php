@@ -7,6 +7,8 @@
                         icon="equalizer"
                         text="حاضرین"
                         :is-loading="loadingTrafficPresents"
+                        item-key="key1"
+                        @title-click="titleClick"
                         @on-refresh="refreshChart('traffic-presents')" >
             </simple-counter>
     </div>
@@ -17,6 +19,8 @@
                         icon="cell_wifi"
                         text="گیت های فعال"
                         :is-loading="loadingActiveGatedevice"
+                        item-key="key2"
+                        @title-click="titleClick"
                         @on-refresh="refreshChart('gatedevice-active')" >
         </simple-counter>
     </div>
@@ -48,7 +52,9 @@
 @endcan
 
 @can('dashboard_gate')
-    <h3> گیت های کنترل تردد</h3>
+    <h3>
+        <div class="panel-heading">گیت های کنترل تردد</div>
+    </h3>
     <br>
     <div class="row">
         <gate-widget class="col-md-3" v-for="item in gaterecords" :gate-data="item" @refresh-data="refreshGate">
@@ -67,7 +73,9 @@
 @endcan
 
 @can('dashboard_chart')
-    <h3>  گزارشات آماری </h3>
+    <h3>
+        <div class="panel-heading">گزارشات آماری</div>
+    </h3>
     <br>
     <div class="row">
         {{-- Daily Chart --}}

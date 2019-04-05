@@ -129,9 +129,9 @@ window.v = new Vue({
                   datasets: [{
                         fill: true,
                         backgroundColor: [
-                            "#e8f8f5",
-                            "#76d7c4",
-                            "#148f77"
+                            "#60992d",
+                            "#82b749",
+                            "#9dc978"
                             ],
                         data: this.chartData.series,
                         // Notice the borderColor
@@ -203,9 +203,9 @@ window.v = new Vue({
                   datasets: [{
                         fill: true,
                         backgroundColor: [
-                            "#e8f8f5",
-                            "#76d7c4",
-                            "#148f77"
+                            "#576191",
+                            "#7887c9",
+                            "#8e9acc"
                             ],
                         data: this.chartData.series,
                         // Notice the borderColor
@@ -272,9 +272,9 @@ window.v = new Vue({
                   datasets: [{
                         fill: true,
                         backgroundColor: [
-                            "#e8f8f5",
-                            "#76d7c4",
-                            "#148f77"
+                            "#146570",
+                            "#1c8e9e",
+                            "#66d8e8"
                             ],
                         data: this.chartData.series,
                         // Notice the borderColor

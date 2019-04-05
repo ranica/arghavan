@@ -96,7 +96,7 @@ Route::get('/auth/error', 'HomeController@errorPage')
 
 Route::get('carLoad', 'CarController@loadCar');
 
-Route::view('carBase', 'cars.index')
+Route::view('carBase', 'base-car.index')
                 ->name('car_base');
 Route::view('base-structure', 'base-structure.index')
                 ->name('base.structure');
@@ -123,7 +123,7 @@ Route::get('/grouppermits/data/all', 'GroupPermitController@allGroupPermit');
 
 Route::get('/vacationManagment', 'VacationRequestController@managment')
         ->name('vacation_managment');
-Route::view('carBase', 'cars.index')
+Route::view('carBase', 'base-car.index')
                 ->name('car_base');
 Route::get('/cars/loadCar', 'CarController@loadCar');
 Route::put(
@@ -225,7 +225,7 @@ Route::get('/report/InputOutput', 'InputOutputReportController@InputOutputPDF')
         ->name('download_all_traffic');
 
 // Route::post('/report/exportToExcel', 'GatetrafficController@exportToExcel');
-Route::get('/report/exportToExcel/{startDate}/{endDate}', 'GatetrafficController@exportToExcel')
+Route::post('/report/exportToExcel', 'GatetrafficController@exportToExcel')
         ->name('export.report.excel');
 
 /* Dashboard  home group */

@@ -29,7 +29,7 @@
                       aria-hidden="true">
                       <div class="modal-dialog modal-notice">
                           <div class="modal-content">
-                              @include('cars.car.tabs.modal')
+                              @include('cars.tabs.modal')
                           </div>
                       </div>
                   </div>

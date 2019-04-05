@@ -3,9 +3,8 @@
 
         <h3 class="card-title">
             <div>
-                <!-- <i class="material-icons md-48">public</i> -->
-                <i class="fas fa-palet fa-2x"></i>
-                <span class="panel-heading">رنگ خودرو</span>
+                <i class="fas fa-gas-pump"></i>
+                <span class="panel-heading">سوخت خودرو</span>
 
                 @can('command_insert')
                     <span class="pull-left" v-show="isNormalMode">
@@ -23,13 +22,13 @@
             {{-- Data list --}}
             <div v-show="isNormalMode">
 
-                <div v-if="! hasColorRows">
+                <div v-if="! hasFuelRows">
                     <h4 class="text-center f-BYekan">
                         رکوردی ثبت نشده است
                     </h4>
                 </div>
 
-                <div v-for="record in car_colors">
+                <div v-for="record in car_fuels">
                     <div class="col-lg-2">
                         <div class="card">
                             <div class="card-header card-header-icon card-header-rose">
@@ -50,9 +49,8 @@
 
                                     @can('command_delete')
                                         <a href="#" class="btn btn-round btn-just-icon pull-center"
-                                            data-toggle="modal" data-target="#removeRecordModal"
+                                            data-toggle="modal" data-target="#removeRecordModal_fuel"
                                             @click.prevent="readyToDelete(record)">
-
                                             <i class="material-icons">delete</i>
                                             <div class="ripple-container"></div>
                                         </a>
@@ -65,8 +63,8 @@
 
                 <div class="row"></div>
                 <div class="text-center">
-                    <pagination :data="car_colors_paginate"
-                                v-on:pagination-change-page="loadCarColors"
+                    <pagination :data="car_fuels_paginate"
+                                v-on:pagination-change-page="loadCarFuels"
                                 :limit="{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
                                 :show-disable= "true">
                     </pagination>
@@ -76,12 +74,12 @@
 
             {{-- Register Form --}}
             <div v-if="isRegisterMode">
-                @include('cars.color.create')
+                @include('base-car.fuel.create')
             </div>
             {{-- /Register Form --}}
 
-            <!-- small modal -->
-            <div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog"
+           <!-- small modal -->
+            <div class="modal fade" id="removeRecordModal_fuel" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel" aria-hidden="true">
 
                 <div class="modal-dialog modal-small ">
@@ -96,7 +94,7 @@
                         <div class="modal-footer text-center">
                             <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
                             <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                @click.prevent="deleteRecord('carColors')">بله</button>
+                                @click.prevent="deleteRecord('carFuels')">بله</button>
                         </div>
                     </div>
                 </div>

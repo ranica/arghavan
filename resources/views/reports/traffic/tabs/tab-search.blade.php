@@ -110,29 +110,6 @@
                                 </persian-calendar>
                             </div>
                         </div>
-
-                    <!--    <div class="row">
-                            <div class="col-md-6">
-                                <persian-calendar  name="startTime"
-                                                    v-model="tempRecord.startClock"
-                                                    type="time"
-                                                    v-validate="'required'"
-                                                    placeholder="ساعت شروع"
-                                                    :editable="true"
-                                                    color= "#ec407a">
-                                </persian-calendar>
-                            </div>
-                            <div class="col-md-6">
-                                 <persian-calendar  name="endTime"
-                                                    v-model="tempRecord.endClock"
-                                                    type="time"
-                                                    v-validate="'required'"
-                                                    placeholder="ساعت پایان"
-                                                    :editable="true"
-                                                    color= "#ec407a">
-                                </persian-calendar>
-                            </div>
-                        </div> -->
                     </div>
 
                     <div class="row">

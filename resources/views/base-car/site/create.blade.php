@@ -17,7 +17,7 @@
                         <input type="submit"
                                 value="ذخیره"
                                 class="btn btn-fill btn-rose"
-                                @click.prevent="saveSiteRecord()">
+                                @click.prevent="saveSiteRecord">
                         <input type="button"
                                 value="انصراف"
                                 class="btn btn-fill btn-default"
@@ -34,7 +34,7 @@
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"
-                        v-validate="{ required: true, is_not:'null' }"
+                        v-validate="{ required: true, is_not: 'null' }"
                         data-vv-delay="250"
                         data-vv-as ="نام پارکینگ" />
                     <span class="material-input"></span>

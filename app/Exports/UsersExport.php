@@ -23,8 +23,8 @@ class UsersExport implements FromQuery
     */
     public function collection()
     {
-        // $user = user::select('id', 'code')
-        //             ->get();
-        // return $user;
+        $user = user::select('id', 'code')
+                    ->get();
+        return $user;
     }
 }

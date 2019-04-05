@@ -3,9 +3,8 @@
 
         <h3 class="card-title">
             <div>
-                <!-- <i class="material-icons md-48">public</i> -->
-                <i class="fas fa-palet fa-2x"></i>
-                <span class="panel-heading">مدل خودرو</span>
+                <i class="fas fa-palette fa-2x"></i>
+                <span class="panel-heading">رنگ خودرو</span>
 
                 @can('command_insert')
                     <span class="pull-left" v-show="isNormalMode">
@@ -23,13 +22,13 @@
             {{-- Data list --}}
             <div v-show="isNormalMode">
 
-                <div v-if="! hasModelRows">
+                <div v-if="! hasColorRows">
                     <h4 class="text-center f-BYekan">
                         رکوردی ثبت نشده است
                     </h4>
                 </div>
 
-                <div v-for="record in car_models">
+                <div v-for="record in car_colors">
                     <div class="col-lg-2">
                         <div class="card">
                             <div class="card-header card-header-icon card-header-rose">
@@ -42,18 +41,18 @@
                                 </div>
                                 <div class="row text-center">
                                     @can('command_edit')
-                                        <a href="#" class="btn btn-simple btn-info btn-just-icon pull-center" @click.prevent="editRecord(record)">
+                                        <a href="#" class="btn btn-round btn-info btn-just-icon pull-center" @click.prevent="editRecord(record)">
                                             <i class="material-icons">create</i>
                                             <div class="ripple-container"></div>
                                         </a>
                                     @endcan
 
                                     @can('command_delete')
-                                        <a href="#" class="btn btn-simple btn-danger btn-just-icon pull-center"
-                                            data-toggle="modal" data-target="#removeRecordModal_model"
+                                        <a href="#" class="btn btn-round btn-just-icon pull-center"
+                                            data-toggle="modal" data-target="#removeRecordModal"
                                             @click.prevent="readyToDelete(record)">
 
-                                            <i class="material-icons">clear</i>
+                                            <i class="material-icons">delete</i>
                                             <div class="ripple-container"></div>
                                         </a>
                                     @endcan
@@ -65,8 +64,8 @@
 
                 <div class="row"></div>
                 <div class="text-center">
-                    <pagination :data="car_models_paginate"
-                                v-on:pagination-change-page="loadCarModels"
+                    <pagination :data="car_colors_paginate"
+                                v-on:pagination-change-page="loadCarColors"
                                 :limit="{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
                                 :show-disable= "true">
                     </pagination>
@@ -76,12 +75,12 @@
 
             {{-- Register Form --}}
             <div v-if="isRegisterMode">
-                @include('cars.model.create')
+                @include('base-car.color.create')
             </div>
             {{-- /Register Form --}}
 
             <!-- small modal -->
-            <div class="modal fade" id="removeRecordModal_model" tabindex="-1" role="dialog"
+            <div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel" aria-hidden="true">
 
                 <div class="modal-dialog modal-small ">
@@ -96,7 +95,7 @@
                         <div class="modal-footer text-center">
                             <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
                             <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                @click.prevent="deleteRecord('carModels')">بله</button>
+                                @click.prevent="deleteRecord('carColors')">بله</button>
                         </div>
                     </div>
                 </div>

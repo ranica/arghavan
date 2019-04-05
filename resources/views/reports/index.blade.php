@@ -26,7 +26,7 @@
   document.pageData.report = {
     urls: {
         baseInformation: '{{ route('base.all_Information') }}',
-        export_data: '{{ route('export.report.excel', ['', '']) }}'
+        export_data: '{{ route('export.report.excel') }}'
     }
   };
 </script>

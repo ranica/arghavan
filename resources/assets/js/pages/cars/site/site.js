@@ -84,7 +84,7 @@ const actions = {
             context.dispatch('loadModule/loadRecords', data)
                 .then(res => {
 
-                    console.log('res', res.data);
+                    console.log('store-> site module -> res', res.data);
                     context.commit('setData', res);
                     response(res);
                 })

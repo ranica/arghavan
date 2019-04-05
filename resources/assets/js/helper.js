@@ -1,4 +1,43 @@
 let Helper = {
+    downloadFile (url, data)
+    {
+        var mapForm = document.createElement("form");
+        mapForm.target = "Map";
+        mapForm.method = "POST"; // or "post" if appropriate
+        mapForm.action = url;
+
+
+        var props = Object.keys (data);
+        for (var i =0; i<props.length ;i++)
+        {
+            var oName = props[i];
+            var oValue = data[oName];
+
+            var mapInput = document.createElement("input");
+            mapInput.type = "text";
+            mapInput.name = oName;
+            mapInput.value = oValue;
+            mapForm.appendChild(mapInput);
+        }
+
+        mapInput = document.createElement("input");
+        mapInput.type = "hidden";
+        mapInput.name = "_token";
+        mapInput.value = document.querySelector('[name="csrf-token"]').content;
+        mapForm.appendChild(mapInput);
+
+        document.body.appendChild(mapForm);
+
+        var map = window.open("", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
+
+        if (map) {
+            mapForm.submit();
+
+            // setTimeout (() => { map.close ()}, 3000);
+        } else {
+            alert('You must allow popups for this map to work.');
+        }
+    },
     /**
      * Scroll to app
      */

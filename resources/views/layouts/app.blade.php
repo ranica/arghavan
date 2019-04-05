@@ -34,17 +34,45 @@
 <body class="rtl-active f-BYekan">
 
     <div id="loadingPane"
-        class="full-screen">
+        class="full_screen">
+            <body_loading>
+                <div class="wrapper_loading">
+                    <marjan>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
+                        <ojvar></ojvar>
 
-        <div class='container'>
-            <i class='layer'></i>
-            <i class='layer'></i>
-            <i class='layer'></i>
+                    </marjan>
+                </div>
+            </body_loading>
         </div>
     </div>
+
     <div id="container"
              class="loading-hidden">
-        <div class="body-main-content hidden" >
+        <div class="body-main-content" >
             <div class="wrapper">
                 <div class="sidebar" data-active-color="rose" data-background-color="white" data-image="{{ asset("theme/img/sidebar-1.jpg") }}">
                     <div class="logo" >
@@ -57,6 +85,7 @@
                     </div>
                         @include('layouts.sidebar')
                 </div>
+
                 <div class="main-panel">
                     <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
                         <div class="container-fluid">
@@ -68,7 +97,6 @@
                                     <i class="material-icons visible-on-sidebar-regular">more_vert</i>
                                     <i class="material-icons visible-on-sidebar-mini">view_list</i>
                                 </button>
-
                             </div>
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle" data-toggle="collapse">
@@ -77,7 +105,9 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="#"> TITLE </a>
+                                <a class="navbar-brand" href="#">
+                                    TITLE
+                                </a>
                             </div>
 
                             <div class="collapse navbar-collapse">
@@ -137,10 +167,10 @@
                                     @endcan
 
                                     <li>
-                                            <a href="#">
-                                                <i class="material-icons">transfer_within_a_station</i> ثبت دستی تردد
-                                            </a>
-                                        </li>
+                                        <a href="#">
+                                            <i class="material-icons">transfer_within_a_station</i> ثبت دستی تردد
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -269,14 +299,7 @@
             <!-- Material Dashboard DEMO methods, don't include it in your project! -->
             <script src="{{ asset ("theme/js/demo.js") }}"></script>
             <script src="{{ asset ("theme/js/jquery.steps.js") }}"></script>
-            <script>
-                $(document).ready(() => {
-                    $(window).load(() => {
-                        $('#container').removeClass ('loading-hidden');
-                        $('#loadingPane').remove ();
-                    });
-                });
-            </script>
+
 
             <script type="text/javascript">
                 $(document).ready(() => {
@@ -320,10 +343,17 @@
 
             updateNotifictaion();
             </script>
+            <script>
+                $(document).ready(() => {
+                    $('#container').removeClass ('loading-hidden');
+                    // $('body').css ('background-color', '#FFF');
+                    $('#loadingPane').remove ();
+                });
+            </script>
 
             @yield('scripts')
         </div>
-    </div>
+    {{-- </div> --}}
 </body>
 
 </html>

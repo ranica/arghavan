@@ -27,7 +27,13 @@
             <div class="card-body">
                 <!-- Actions -->
                 <div class="card-actions">
-                    <button type="button" class="btn btn-info btn-link" rel="tooltip" data-placement="bottom" title="بازخوانی" v-if="refreshMode" @click.prevent="refreshSignal">
+                    <button type="button"
+                            class="btn btn-info btn-link"
+                            rel="tooltip"
+                            data-placement="bottom"
+                            title="بازخوانی"
+                            v-if="refreshMode"
+                            @click.prevent="refreshSignal">
                         <i class="material-icons">refresh</i>
                     </button>
                     <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="ویرایش" v-if="editMode" @click.prevent="editSignal">

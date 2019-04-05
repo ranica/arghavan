@@ -3,7 +3,7 @@
 
         <h3 class="card-title">
             <div>
-                <i class="fas fa-palet fa-2x"></i>
+                <i class="fas fa-parking fa-2x"></i>
                 <span class="panel-heading">پارکینگ</span>
 
                 @can('command_insert')
@@ -27,51 +27,13 @@
                         رکوردی ثبت نشده است
                     </h4>
                 </div>
+                <site-widget class="col-md-2"
+                             v-for="record in car_sites"
+                             :site-data="record"
+                             v-on:edit-data="editRecord"
+                             v-on:delete-data="readyToDeleteSiteCar(record)" >
+                </site-widget>
 
-                <div v-for="record in car_sites">
-                    <div class="col-lg-2">
-                        <div class="card">
-                            <div class="card-header card-header-icon card-header-rose">
-                            </div>
-
-                            <div class="card-body">
-                                <div class="row"></div>
-                                <div class="row text-center">
-                                    @{{ record.name }}
-                                </div>
-
-                                <div class="row text-center">
-                                    @{{ record.capacity }}
-                                </div>
-
-                                <div class="row text-center">
-                                    @{{ record.stateStr }}
-                                </div>
-                                <div class="row text-center">
-                                    @can('command_edit')
-                                        <a href="#" class="btn btn-simple btn-info btn-just-icon pull-center" @click.prevent="editRecord(record)">
-                                            <i class="material-icons">create</i>
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    @endcan
-
-                                    @can('command_delete')
-                                        <a href="#" class="btn btn-simple btn-danger btn-just-icon pull-center"
-                                            data-toggle="modal"
-                                            data-target="#removeRecordModal_site"
-                                            @click.prevent="readyToDelete(record)">
-
-                                            <i class="material-icons">clear</i>
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    @endcan
-                                </div>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row"></div>
                 <div class="text-center">
                     <pagination :data="car_sites_paginate"
                                 v-on:pagination-change-page="loadCarSites"
@@ -84,7 +46,7 @@
 
             {{-- Register Form --}}
             <div v-if="isRegisterMode">
-                @include('cars.site.create')
+                @include('base-car.site.create')
             </div>
             {{-- /Register Form --}}
 

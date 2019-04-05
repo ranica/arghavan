@@ -3,6 +3,7 @@
 @import "node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
 @import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "loader_page.scss";
+
 #loadingPane,
 .full-screen {
     -webkit-background-size: cover;
@@ -10,6 +11,7 @@
     -o-background-size: cover;
     background-size: cover;
 }
+
 .loading-hidden {
     display: none !important;
 }
@@ -19,6 +21,7 @@
 // @import "node_modules/font-awesome/scss/font-awesome.scss";
 
 @import "./wizardForm.scss";
+
 .wizard {
     margin: 20px auto;
     background: #fff;
@@ -72,7 +75,7 @@ $min-mobile-width: 766px;
     border-bottom-color: #e0e0e0;
 }
 
-.wizard > div.wizard-inner {
+.wizard>div.wizard-inner {
     position: relative;
 }
 
@@ -88,7 +91,9 @@ $min-mobile-width: 766px;
     z-index: 1;
 }
 
-.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+.wizard .nav-tabs>li.active>a,
+.wizard .nav-tabs>li.active>a:hover,
+.wizard .nav-tabs>li.active>a:focus {
     color: #555555;
     cursor: default;
     border: 0;
@@ -109,15 +114,18 @@ span.round-tab {
     text-align: center;
     font-size: 25px;
 }
-span.round-tab i{
-    color:#555555;
+
+span.round-tab i {
+    color: #555555;
 }
+
 .wizard li.active span.round-tab {
     background: #fff;
     border: 2px solid #5bc0de;
 
 }
-.wizard li.active span.round-tab i{
+
+.wizard li.active span.round-tab i {
     color: #5bc0de;
 }
 
@@ -126,7 +134,7 @@ span.round-tab:hover {
     border: 2px solid #333;
 }
 
-.wizard .nav-tabs > li {
+.wizard .nav-tabs>li {
     width: 25%;
 }
 
@@ -153,7 +161,7 @@ span.round-tab:hover {
     border-bottom-color: #5bc0de;
 }
 
-.wizard .nav-tabs > li a {
+.wizard .nav-tabs>li a {
     width: 70px;
     height: 70px;
     margin: 20px auto;
@@ -161,9 +169,9 @@ span.round-tab:hover {
     padding: 0;
 }
 
-    .wizard .nav-tabs > li a:hover {
-        background: transparent;
-    }
+.wizard .nav-tabs>li a:hover {
+    background: transparent;
+}
 
 .wizard .tab-pane {
     position: relative;
@@ -174,7 +182,7 @@ span.round-tab:hover {
     margin-top: 0;
 }
 
-@media( max-width : 585px ) {
+@media(max-width : 585px) {
 
     .wizard {
         width: 90%;
@@ -188,7 +196,7 @@ span.round-tab:hover {
         line-height: 50px;
     }
 
-    .wizard .nav-tabs > li a {
+    .wizard .nav-tabs>li a {
         width: 50px;
         height: 50px;
         line-height: 50px;
@@ -213,6 +221,7 @@ span.round-tab:hover {
 .pd-left-05em {
     padding-left: .5em;
 }
+
 .pd-right-05em {
     padding-right: .5em;
 }
@@ -222,22 +231,22 @@ span.round-tab:hover {
 }
 
 /*  Cursor */
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
 /* Display rules */
-.inline-block{
+.inline-block {
     display: inline-block;
 }
 
 
 /* Color rules */
-.color-white{
+.color-white {
     color: white;
 }
 
-.color-black{
+.color-black {
     color: black;
 }
 
@@ -328,7 +337,7 @@ html {
 
 .card.no-shadow .card-header-image,
 .card.no-shadow .card-header-image img {
-    box-shadow: none!important
+    box-shadow: none !important
 }
 
 .card .card-body,
@@ -455,7 +464,7 @@ html {
 }
 
 .card .card-header.card-header-image.no-shadow .colored-shadow {
-    display: none!important
+    display: none !important
 }
 
 
@@ -657,7 +666,7 @@ html {
 
 .card-plain {
     background: transparent;
-    box-shadow: none!important
+    box-shadow: none !important
 }
 
 .card-plain .card-header:not(.card-avatar) {
@@ -676,7 +685,7 @@ html {
 }
 
 .card-plain .card-header-image {
-    margin: 0!important;
+    margin: 0 !important;
     border-radius: 6px
 }
 
@@ -836,7 +845,7 @@ html {
 }
 
 .card-pricing:after {
-    background-color: rgba(0, 0, 0, .7)!important
+    background-color: rgba(0, 0, 0, .7) !important
 }
 
 .card-pricing .card-title {
@@ -844,8 +853,8 @@ html {
 }
 
 .card-pricing .card-body {
-    padding: 15px!important;
-    margin: 0!important
+    padding: 15px !important;
+    margin: 0 !important
 }
 
 .card-pricing .card-icon {
@@ -916,7 +925,7 @@ html {
 .card-pricing.card-background [class*=text-],
 .card-pricing[class*=bg-] .card-category,
 .card-pricing[class*=bg-] [class*=text-] {
-    color: #fff!important
+    color: #fff !important
 }
 
 .card-pricing .card-footer {
@@ -938,7 +947,7 @@ html {
     border-bottom: 1px solid #ddd;
     padding: 25px 10px 5px 0;
     margin: 0;
-    box-shadow: none!important;
+    box-shadow: none !important;
     background: #fff
 }
 
@@ -1053,7 +1062,7 @@ html {
 .card-background .card-category,
 .card-background .card-description,
 .card-background small {
-    color: hsla(0, 0%, 100%, .7)!important
+    color: hsla(0, 0%, 100%, .7) !important
 }
 
 .card-background .card-title {
@@ -1097,7 +1106,7 @@ html {
 }
 
 .card .card-header {
-    z-index: 3!important
+    z-index: 3 !important
 }
 
 .card .card-header .card-category {
@@ -1385,7 +1394,7 @@ html {
 }
 
 .card-wizard .nav.nav-pills .nav-item .nav-link {
-    padding: 6px 15px!important
+    padding: 6px 15px !important
 }
 
 .card-wizard .nav-pills:not(.flex-column) .nav-item+.nav-item:not(:first-child) {
@@ -1395,16 +1404,16 @@ html {
 .card-wizard .nav-item .nav-link.active,
 .card-wizard .nav-item .nav-link:focus,
 .card-wizard .nav-item .nav-link:hover {
-    background-color: inherit!important;
-    box-shadow: none!important
+    background-color: inherit !important;
+    box-shadow: none !important
 }
 
 .card-wizard .input-group-text {
-    padding: 6px 15px 0!important
+    padding: 6px 15px 0 !important
 }
 
 .card-wizard .card-footer {
-    border-top: none!important
+    border-top: none !important
 }
 
 .card-chart .card-body+.card-footer,
@@ -1435,8 +1444,8 @@ html {
 /* Chartist */
 .ct-label.ct-horizontal {
     position: relative;
-//    transform: rotate(180deg);
-//    transform-origin: left bottom;
+    //    transform: rotate(180deg);
+    //    transform-origin: left bottom;
     color: white;
 }
 
@@ -1459,18 +1468,19 @@ html {
     font-size: 16em;
 }
 
-.material-icons.vacation-count{
+.material-icons.vacation-count {
     font-size: 2.5em !important;
 }
 
-.notification.vacation-count{
+.notification.vacation-count {
     font-size: 2em;
 }
 
-.vpd-icon-btn{
+.vpd-icon-btn {
     background-color: transparent !important;
 }
-.vpd-icon-btn svg{
+
+.vpd-icon-btn svg {
     border: none !important;
     fill: black !important;
 }
@@ -1478,16 +1488,17 @@ html {
 .card .card-actions {
     z-index: 1 !important;
 }
+
 .card .card-header {
     z-index: 10 !important;
 }
 
 
-.direction-rtl{
+.direction-rtl {
     direction: rtl;
 }
-.checkbox input[type="checkbox"]:checked + .checkbox-material .check
-{
+
+.checkbox input[type="checkbox"]:checked+.checkbox-material .check {
     direction: ltr;
 }
 
@@ -1500,16 +1511,18 @@ html {
     padding-right: 1.5em;
 }
 
-.form-control.form-control-sm.text-color{
-    color : #faf3f3 !important;
+.form-control.form-control-sm.text-color {
+    color: #faf3f3 !important;
 }
-.checkbox label.radio label label.label-on-left.label-on-right{
+
+.checkbox label.radio label label.label-on-left.label-on-right {
     color: #040000 !important;
 }
 
-.bootstrap-select.btn-group.dropdown-toggle.filter-option{
+.bootstrap-select.btn-group.dropdown-toggle.filter-option {
     text-align: right !important;
 }
+
 .bootstrap-select.btn-group.dropdown-toggle.caret {
     position: none !important;
 }
@@ -1519,6 +1532,7 @@ html {
     top: -25px;
     font-size: 11px;
 }
+
 .page-header {
     height: 100vh !important;
 }
@@ -1527,14 +1541,15 @@ html {
 
 
 // Fix bug of menu in mobile versino
-ul.dropdown-menu{
+ul.dropdown-menu {
     right: -300px !important;
 }
 
-.nav-pills > li{
+.nav-pills>li {
     float: right !important;
 }
-.fas.icon-cog{
+
+.fas.icon-cog {
     color: #e91e63;
 }
 
@@ -1555,3 +1570,18 @@ ul.dropdown-menu{
     filter: grayscale(1);
 }
 
+
+body {
+    background-color: #9ab1c7;
+    // background-image: radial-gradient(ellipse farthest-corner at center top, #9ab1c7 0%, #1a242f 100%);
+}
+
+
+.panel-heading{
+    color: #fff;
+    text-shadow: 2px 2px 4px #090000, 5px 4px 0px rgba(255, 255, 255, 0.15);
+}
+.navbar .navbar-brand {
+    color: #fff;
+    text-shadow: 2px 2px 4px #090000, 5px 4px 0px rgba(255, 255, 255, 0.15);
+}

@@ -138,6 +138,9 @@ window.x = new Vue({
     },
 
     methods: {
+        titleClick(sender){
+            console.log (sender);
+        },
 
         refreshGate(){
             this.loadRecords(1);

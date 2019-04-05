@@ -300,12 +300,13 @@ class ReportController extends Controller
      */
      public function searchTraffic(Request $request)
     {
+        $dateRange = [
+                          $request->startDate,
+                          $request->endDate
+                     ];
         $items = Gatetraffic::where(function ($query) use ($request) {
                                 if (! is_null ($request->startDate) && ! is_null($request->endDate)){
-                                      $query->orWhereBetween('gatedate', [
-                                                                        $request->startDate,
-                                                                        $request->endDate
-                                                                        ]);
+                                      $query->orWhereBetween('gatedate', $dateRange);
                                 }
                             })
                             ->join('users', function($join) use ($request)
@@ -373,6 +374,7 @@ class ReportController extends Controller
         $gender_id = $request->genderId;
         $startDate = $request->beginDateTime;
         $endDate = $request->endDateTime;
+
         $commonRange_id = $request->commonrangeId;
         // IF filter = true : startDate and endDate
         // IF filter = false: Common range
@@ -383,8 +385,12 @@ class ReportController extends Controller
             $startDate = $dateFilter['startOfDate'];
             $endDate = $dateFilter['endOfDate'];
         }
+        $dateRange =[
+                        $startDate,
+                        $endDate
+                    ];
 
-        $res = \App\Gatetraffic::whereBetween('gatedate',[$startDate,$endDate]);
+        $res = \App\Gatetraffic::whereBetween('gatedate',$dateRange);
         $res = $res->join ('users', 'gatetraffics.user_id', 'users.id')
                    ->join ('people', 'people.id', 'users.people_id')
                    ->join ('genders', 'genders.id', 'people.gender_id')

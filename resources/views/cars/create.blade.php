@@ -7,10 +7,10 @@
              next-button-text=""
              back-button-text=""
              finish-button-text="">
-                @include('cars.car.tabs.tab-search')
-                @include('cars.car.tabs.tab-user')
-                @include('cars.car.tabs.tab-car')
-                @include('cars.car.tabs.tab-tag')
+                @include('cars.tabs.tab-search')
+                @include('cars.tabs.tab-user')
+                @include('cars.tabs.tab-car')
+                @include('cars.tabs.tab-tag')
 
                 <template slot="footer" scope="props">
                     <wizard-button class="wizard-footer-left cancel-button"

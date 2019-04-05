@@ -5,7 +5,19 @@
         <simple-counter background-color="green"
                         :value="carTrafficPresentsCount"
                         icon="equalizer"
-                        text="تعداد تردد ها"
+                        text="حاضرین"
+                        :is-loading="loadingCarTrafficPresents"
+                        @on-refresh="refreshChart('car-traffic-presents')" >
+        </simple-counter>
+    </div>
+@endcan
+
+@can('dashboard_number_chart')
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <simple-counter background-color="blue"
+                        :value="carTrafficPresentsCount"
+                        icon="local_parking"
+                        text="ظرفیت پارکینگ"
                         :is-loading="loadingCarTrafficPresents"
                         @on-refresh="refreshChart('car-traffic-presents')" >
         </simple-counter>

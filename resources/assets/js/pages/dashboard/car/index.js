@@ -375,9 +375,9 @@ window.x = new Vue({
                   datasets: [{
                         fill: true,
                         backgroundColor: [
-                            "#e8f8f5",
-                            "#76d7c4",
-                            "#148f77"
+                            "#146570",
+                            "#1c8e9e",
+                            "#66d8e8"
                             ],
                         data: [30, 20, 50],
                         // Notice the borderColor

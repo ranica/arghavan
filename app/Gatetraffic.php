@@ -85,7 +85,7 @@ class Gatetraffic extends Model
     public function scopeInputTraffic($query)
     {
         // Input Traffic
-        $query->where('gatedirect_id', '=', \App\Report::$GATE_INPUT);
+        $query->where('gatetraffics.gatedirect_id', '=', \App\Report::$GATE_INPUT);
     }
 
     /**
@@ -96,7 +96,7 @@ class Gatetraffic extends Model
     public function scopeOutputTraffic($query)
     {
         // Output Traffic
-        $query->where('gatedirect_id', '=', \App\Report::$GATE_OUTPUT);
+        $query->where('gatetraffics.gatedirect_id', '=', \App\Report::$GATE_OUTPUT);
     }
 
     /**
@@ -107,17 +107,24 @@ class Gatetraffic extends Model
     public function scopeDoneTraffic($query)
     {
         // Done Traffic
-        $query->where('gatemessage_id', '=', \App\Report::$GATE_TARFFIC_DONE);
+        $query->where('gatetraffics.gatemessage_id', '=', \App\Report::$GATE_TARFFIC_DONE);
     }
      /**
      * Query all Car traffics
-     * @param  [type] $query [description]
-     * @return [type]        [description]
+     */
+    public function scopePassDontCarTraffic($query)
+    {
+        // Dont Pass Car Traffic
+        $query->where('gatetraffics.gatepass_id', '<>', \App\Report::$GATE_PASS_CAR);
+    }
+
+    /**
+     * Query all Car traffics
      */
     public function scopePassCarTraffic($query)
     {
         // Pass Car Traffic
-        $query->where('gatepass_id', '=', \App\Report::$GATE_PASS_CAR);
+        $query->where('gatetraffics.gatepass_id', '=', \App\Report::$GATE_PASS_CAR);
     }
 
     /**

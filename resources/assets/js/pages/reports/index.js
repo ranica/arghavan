@@ -699,15 +699,13 @@ window.v = new Vue({
 
 
         exportExcel(){
-            let url =  document.pageData.report.urls.export_data + '/' +
-                                                    this.searchParams.beginDateTime + ":00" + '/' +
-                                                    this.searchParams.endDateTime + ":59" ;
-            // console.log('url', url);
+            let url =  document.pageData.report.urls.export_data;
 
             let data = {
                 url: url,
                 exportData: this.searchParams
             };
+            console.log(this.searchParams);
             this.$store.dispatch('exportData', data)
                 .then(res => {
                     this.isLoading = false;

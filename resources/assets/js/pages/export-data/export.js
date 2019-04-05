@@ -2,6 +2,7 @@ export default {
     namespaced: true,
 
     actions: {
+
         /**
          * export data
          */
@@ -10,7 +11,7 @@ export default {
                 let url = data.url;
                 let exportData = data.exportData;
 
-                Helper.redirect (url);
+                Helper.downloadFile (url, exportData);
             });
         },
     }

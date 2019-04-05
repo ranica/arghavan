@@ -227,7 +227,7 @@ const actions = {
      */
     updateCarSites(context, data) {
         return new Promise((response, reject) => {
-            context.dispatch('PlateTypeModule/updateRecords', data)
+            context.dispatch('SiteModule/updateRecords', data)
                 .then(res => response(res))
                 .catch(err => reject(err));
         });

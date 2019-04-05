@@ -1,8 +1,15 @@
-import Store from './store'
+import Store from './store';
+import SiteWidget from '../Components/SiteWidget';
+// import BaseCarWidget from '../Components/BaseCarWidget';
 
 window.v = new Vue({
     el: '#app',
     store: Store,
+
+    components:{
+        SiteWidget,
+        // BaseCarWidget
+    },
 
     data: {
         formMode: Enums.FormMode.normal,
@@ -32,7 +39,9 @@ window.v = new Vue({
          */
         emptyRecord: () => { return {
                                         id: 0,
-                                        name: ''
+                                        name: '',
+                                        capacity: '',
+                                        state:0,
                                     }
                             },
 
@@ -219,7 +228,6 @@ window.v = new Vue({
 
             this.$store.dispatch('loadCarSites', data);
             Helper.scrollToApp ();
-
         },
         /**
          * New record dialog
@@ -231,15 +239,15 @@ window.v = new Vue({
         },
         /**
          * Edit record
-         *
-         * @param      {<type>}  record  The record
          */
         editRecord(record){
             this.errors.clear();
 
             this.tempRecord = {
                 id: record.id,
-                name: record.name
+                name: record.name,
+                capacity: record.capacity,
+                state: record.state
             };
 
             this.formMode = Enums.FormMode.register;
@@ -478,13 +486,16 @@ window.v = new Vue({
          * Save Site Record
          */
         saveSiteRecord() {
-            this.$validator.validate('name_site')
+            this.$validator.validate('name_site'),
+            this.$validator.validate('name_capacity')
                 .then(result => {
                     if (result) {
                         // Prepare data
                         let data = {
                             id: this.tempRecord.id,
                             name: this.tempRecord.name,
+                            capacity: this.tempRecord.capacity,
+                            state: this.tempRecord.state,
                             url: '/carSites',
                             function: 'createCarSites',
                         };
@@ -569,6 +580,15 @@ window.v = new Vue({
          */
         readyToDelete(record){
             this.tempRecord = record;
+        },
+        /**
+         * Preapre to delete for site car
+         *
+         * @param      {<type>}  record  The record
+         */
+        readyToDeleteSiteCar(record){
+            this.tempRecord = record;
+            $('#removeRecordModal_site').modal('show');
         },
         /**
          * Delete a record

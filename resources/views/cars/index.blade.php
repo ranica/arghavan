@@ -1,161 +1,122 @@
 @extends('layouts.app')
 
 @section('content')
-
-<!-- <link rel="stylesheet" type="text/css" href="{{ mix('css/pages/base.css') }}"> -->
+<link rel="stylesheet" type="text/css" href="{{ mix('css/pages/car.css') }}">
 
 <div class="content f-BYekan hidden" id="app">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <div class="card">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-md-12 ml-auto mr-auto">
+    <div class="container-fluid">
 
-              <div class="page-categories">
-                <h3 class="title text-center">اطلاعات پایه خودرو</h3>
-                <br />
-                <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
-                    <li class="nav-item tabStyle active">
-                        <a class="nav-link" data-toggle="tab" href="#carColor" role="tablist">
-                            <i class="material-icons">dashboard</i> رنگ خودرو
-                        </a>
-                    </li>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-content">
+                    <div class="card-header card-header-tabs card-header-rose" v-show="isNormalMode">
 
-                     <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#carFuel" role="tablist">
-                            <i class="material-icons">schedule</i> سوخت خودرو
-                        </a>
-                    </li>
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <!--  Tab Car  -->
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#">
+                                            <i class="fas fa-car fa-2x"></i>
+                                            <strong>مشخصات خودرو</strong>
+                                            <div class="ripple-container"></div>
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <!--  /Tab Car  -->
 
-                    <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#carLevel" role="tablist">
-                            <i class="material-icons">schedule</i> تیپ خودرو
-                        </a>
-                    </li>
-
-                    <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#carModel" role="tablist">
-                            <i class="material-icons">schedule</i> مدل خودرو
-                        </a>
-                    </li>
-
-                    <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#carSystem" role="tablist">
-                            <i class="material-icons">schedule</i> سیستم خودرو
-                        </a>
-                    </li>
-
-                    <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#carType" role="tablist">
-                            <i class="material-icons">schedule</i> نوع خودرو
-                        </a>
-                    </li>
-
-                    <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#carPlateType" role="tablist">
-                            <i class="material-icons">schedule</i> نوع پلاک خودرو
-                        </a>
-                    </li>
-
-                     <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#carSite" role="tablist">
-                            <i class="material-icons">schedule</i> پارکینگ
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content tab-space tab-subcategories">
-                   <div class="tab-pane active" id="carColor">
-                        @include('cars.color.index')
+                                    <!--  Button insert  -->
+                                    <li class="nav-item pull-left">
+                                        @can('command_insert')
+                                            <span class="pull-left">
+                                                    <a class="btn btn-white" href="#" @click.prevent="newRecord">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                        ثبت رکورد جدید
+                                                    </a>
+                                            </span>
+                                        @endcan
+                                    </li>
+                                    <!--  Button insert  -->
+                                    <div class="input-group no-border">
+                                        <input type="search"
+                                            v-model="searchWord"
+                                            class="form-control form-control-sm text-color"
+                                            placeholder="جستجو...">
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row">
+                    <!--  Data list  -->
+                        <div v-show="isNormalMode">
+                            <div class="text-left">
+                            </div>
+                            <div v-if="! hasRow">
+                                <h4 class="text-center f-BYekan">
+                                    رکوردی ثبت نشده است
+                                </h4>
+                            </div>
 
-                    <div class="tab-pane" id="carFuel">
-                        @include('cars.fuel.index')
-                    </div>
+                            <car-widget class="col-md-3"
+                                v-for="record in records"
+                                :key = "record.id"
+                                :car-data="record"
+                                @edit-data="prepareEditRecord"
+                                @delete-data="readyToDelete(record)"
+                                v-show="hasRow">
+                            </car-widget>
 
-                    <div class="tab-pane" id="carLevel">
-                        @include('cars.level.index')
-                    </div>
+                            <div class="text-center">
+                                <pagination :data="allData"
+                                            v-on:pagination-change-page="loadRecords"
+                                            :limit= "{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
+                                            :show-disable= "true">
+                                </pagination>
+                            </div>
+                        </div>
+                        <!--  /Data List  -->
 
-                    <div class="tab-pane" id="carModel">
-                        @include('cars.model.index')
-                    </div>
+                        <!--  Register Form  -->
+                        <div v-show="isRegisterMode">
+                            @include('cars.create')
+                        </div>
+                        <!--  /Register Form  -->
 
-                    <div class="tab-pane" id="carSystem">
-                        @include('cars.system.index')
-                    </div>
+                        <!-- small modal -->
+                        <div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel" aria-hidden="true">
 
-                    <div class="tab-pane" id="carType">
-                        @include('cars.type.index')
-                    </div>
-
-                    <div class="tab-pane" id="carPlateType">
-                        @include('cars.plate_type.index')
-                    </div>
-
-                    <div class="tab-pane" id="carSite">
-                        @include('cars.site.index')
+                            <div class="modal-dialog modal-small ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close"
+                                            data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <h5>برای حذف اطمینان دارید؟ </h5>
+                                    </div>
+                                    <div class="modal-footer text-center">
+                                        <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
+                                        <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
+                                            @click.prevent="deleteRecord">بله</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--    end small modal -->
                     </div>
                 </div>
-              </div>
             </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 @endsection
 @section('scripts')
-
-    <script type="text/javascript">
-        document.pageData.carBase = {
-            pageUrls: {
-                carColors_index: '{{ route('carColors.index', '') }}',
-                carColors_store: '{{ route('carColors.store') }}',
-                carColors_update: '{{ route('carColors.update', '') }}',
-                carColors_delete: '{{ route('carColors.destroy', '') }}',
-
-                carFuels_index: '{{ route('carFuels.index', '') }}',
-                carFuels_store: '{{ route('carFuels.store') }}',
-                carFuels_update: '{{ route('carFuels.update', '') }}',
-                carFuels_delete: '{{ route('carFuels.destroy', '') }}',
-
-                carLevels_index: '{{ route('carLevels.index', '') }}',
-                carLevels_store: '{{ route('carLevels.store') }}',
-                carLevels_update: '{{ route('carLevels.update', '') }}',
-                carLevels_delete: '{{ route('carLevels.destroy', '') }}',
-
-                carModels_index: '{{ route('carModels.index', '') }}',
-                carModels_store: '{{ route('carModels.store') }}',
-                carModels_update: '{{ route('carModels.update', '') }}',
-                carModels_delete: '{{ route('carModels.destroy', '') }}',
-
-                carSystems_index: '{{ route('carSystems.index', '') }}',
-                carSystems_store: '{{ route('carSystems.store') }}',
-                carSystems_update: '{{ route('carSystems.update', '') }}',
-                carSystems_delete: '{{ route('carSystems.destroy', '') }}',
-
-                carTypes_index: '{{ route('carTypes.index', '') }}',
-                carTypes_store: '{{ route('carTypes.store') }}',
-                carTypes_update: '{{ route('carTypes.update', '') }}',
-                carTypes_delete: '{{ route('carTypes.destroy', '') }}',
-
-                carPlateTypes_index: '{{ route('carPlateTypes.index', '') }}',
-                carPlateTypes_store: '{{ route('carPlateTypes.store') }}',
-                carPlateTypes_update: '{{ route('carPlateTypes.update', '') }}',
-                carPlateTypes_delete: '{{ route('carPlateTypes.destroy', '') }}',
-
-                carSites_index: '{{ route('carSites.index', '') }}',
-                carSites_store: '{{ route('carSites.store') }}',
-                carSites_update: '{{ route('carSites.update', '') }}',
-                carSites_delete: '{{ route('carSites.destroy', '') }}',
-            }
-        };
-    </script>
-
-    <script src="{{ mix('js/pages/cars/index.js') }}" type="text/javascript" charset="utf-8" defer></script>
-
+<script type="text/javascript">
+    document.pageData = {
+        load_url: '{{ route('cars.filter', '') }}',
+    };
+</script>
+<script type="text/javascript" src="{{ mix('js/pages/cars/car/index.js') }}"></script>
 @endsection

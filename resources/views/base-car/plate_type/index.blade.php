@@ -3,8 +3,8 @@
 
         <h3 class="card-title">
             <div>
-                <i class="fas fa-palet fa-2x"></i>
-                <span class="panel-heading">نوع خودرو</span>
+                <i class="fas fa-tags fa-2x"></i>
+                <span class="panel-heading">نوع پلاک خودرو</span>
 
                 @can('command_insert')
                     <span class="pull-left" v-show="isNormalMode">
@@ -22,13 +22,13 @@
             {{-- Data list --}}
             <div v-show="isNormalMode">
 
-                <div v-if="! hasTypeRows">
+                <div v-if="! hasCarPlateTypeRows">
                     <h4 class="text-center f-BYekan">
                         رکوردی ثبت نشده است
                     </h4>
                 </div>
 
-                <div v-for="record in car_types">
+                <div v-for="record in car_plate_types">
                     <div class="col-lg-2">
                         <div class="card">
                             <div class="card-header card-header-icon card-header-rose">
@@ -41,15 +41,19 @@
                                 </div>
                                 <div class="row text-center">
                                     @can('command_edit')
-                                        <a href="#" class="btn btn-simple btn-info btn-just-icon pull-center" @click.prevent="editRecord(record)">
+                                        <a href="#"
+                                            class="btn btn-round btn-info btn-just-icon pull-center"
+                                            @click.prevent="editRecord(record)">
                                             <i class="material-icons">create</i>
                                             <div class="ripple-container"></div>
                                         </a>
                                     @endcan
 
                                     @can('command_delete')
-                                        <a href="#" class="btn btn-simple btn-danger btn-just-icon pull-center"
-                                            data-toggle="modal" data-target="#removeRecordModal_type"
+                                        <a href="#"
+                                            class="btn btn-round btn-just-icon pull-center"
+                                            data-toggle="modal"
+                                            data-target="#removeRecordModal_plate"
                                             @click.prevent="readyToDelete(record)">
 
                                             <i class="material-icons">clear</i>
@@ -64,8 +68,8 @@
 
                 <div class="row"></div>
                 <div class="text-center">
-                    <pagination :data="car_types_paginate"
-                                v-on:pagination-change-page="loadCarTypes"
+                    <pagination :data="car_plate_types_paginate"
+                                v-on:pagination-change-page="loadCarPlateTypes"
                                 :limit="{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
                                 :show-disable= "true">
                     </pagination>
@@ -75,12 +79,12 @@
 
             {{-- Register Form --}}
             <div v-if="isRegisterMode">
-                @include('cars.type.create')
+                @include('base-car.plate_type.create')
             </div>
             {{-- /Register Form --}}
 
             <!-- small modal -->
-            <div class="modal fade" id="removeRecordModal_type" tabindex="-1" role="dialog"
+            <div class="modal fade" id="removeRecordModal_plate" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel" aria-hidden="true">
 
                 <div class="modal-dialog modal-small ">
@@ -95,7 +99,7 @@
                         <div class="modal-footer text-center">
                             <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
                             <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                @click.prevent="deleteRecord('carTypes')">بله</button>
+                                @click.prevent="deleteRecord('carPlateTypes')">بله</button>
                         </div>
                     </div>
                 </div>

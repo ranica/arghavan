@@ -12,18 +12,53 @@ Route::view('vue', 'vue-router.app');
 
 // Route::view('chart', 'report-test');
 Route::view('error', 'layouts.err-master');
-Route::view('report', 'reports.report');
+// Route::view('report', 'reports.report');
 Route::view('tab', 'car_base.index');
 
-Route::get('staff', function(){
-    $group_id = 3;
-    $res = \App\User::where('group_id', $group_id)
-                    ->whereHas('people')
-                    // ->whereDoesntHave('cards')
-                    ->join('teachers', 'teachers.user_id', 'users.id')
-                    ->select(['users.id', 'code', 'email', 'state', 'level_id', 'people_id', 'group_id'])
-                    ->get();
-        return $res;
+Route::get('report', function(){
+
+      $dateRange = [\Carbon\Carbon::today(),
+                    \Carbon\Carbon::today()->endOfDay()];
+
+        $fieldsInput = ([
+                        'gatetraffics.user_id as user',
+                        'gatetraffics.gatedate',
+                        'genders.gender',
+                        'groups.name as group_name',
+                        'users.code',
+                        'people.name',
+                        'people.lastname',
+                        'people.nationalId',
+                        'gatemessages.message',
+                        'gatepasses.name as gatepass',
+                        'gatedirects.name as gatedirect'
+            ]);
+
+        $groupByFields =(\DB::raw('gatetraffics.gatedirect_id'));
+
+        $reportInput = \App\Gatetraffic::whereBetween('gatetraffics.gatedate', $dateRange)
+                            ->join ('users', 'gatetraffics.user_id', 'users.id')
+                            ->join ('groups', 'groups.id', 'users.group_id')
+                            ->join ('people', 'people.id', 'users.people_id')
+                            ->join ('genders', 'genders.id', 'people.gender_id')
+                            ->join('gatedevices', 'gatedevices.id', 'gatedevices.gatepass_id')
+                            ->join('gatepasses', 'gatepasses.id', 'gatetraffics.gatepass_id')
+                            ->join('gatedirects', 'gatedirects.id', 'gatetraffics.gatedirect_id')
+                            ->join('gatemessages', 'gatemessages.id', 'gatetraffics.gatemessage_id')
+                            ->doneTraffic()
+                            ->inputTraffic()
+                            ->passDontCarTraffic()
+                            ->whereNotIn('user_id', function ($query) use($dateRange) {
+                                                $query->select(\DB::raw('gatetraffics.user_id'))
+                                                    ->from('gatetraffics')
+                                                    ->whereBetween('gatetraffics.gatedate', $dateRange)
+                                                    ->where('gatetraffics.gatedirect_id', '=', \App\Report::$GATE_OUTPUT);
+                                            })
+                            ->select($fieldsInput)
+                            ->groupBy($groupByFields)
+                            ->get();
+
+        return $reportInput;
 });
 
 // Route::get('data', function() {

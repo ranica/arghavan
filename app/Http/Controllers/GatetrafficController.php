@@ -119,12 +119,9 @@ class GatetrafficController extends Controller
      /**
      * Export Excel
      */
-    public function exportToExcel(Request $request,
-                                        $startDate,
-                                        $endDate)
+    public function exportToExcel(Request $request)
     {
-        $exportGateTraffic = new ReportTrafficExport ($startDate,
-                                                        $endDate);
+        $exportGateTraffic = new ReportTrafficExport ($request);
         return $exportGateTraffic->download('invoices.xlsx');
     }
 }
