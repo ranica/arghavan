@@ -225,8 +225,11 @@ Route::get('/report/InputOutput', 'InputOutputReportController@InputOutputPDF')
         ->name('download_all_traffic');
 
 // Route::post('/report/exportToExcel', 'GatetrafficController@exportToExcel');
-Route::post('/report/exportToExcel', 'GatetrafficController@exportToExcel')
-        ->name('export.report.excel');
+Route::post('/report/traffic/exportToExcel', 'GatetrafficController@trafficExportToExcel')
+        ->name('export.report.traffic.excel');
+
+Route::post('/report/traffic/exportToPDF', 'GatetrafficController@trafficExportToPDF')
+        ->name('export.report.traffic.pdf');
 
 /* Dashboard  home group */
 /**

@@ -33,7 +33,7 @@ let Helper = {
         if (map) {
             mapForm.submit();
 
-            // setTimeout (() => { map.close ()}, 3000);
+            setTimeout (() => { map.close ()}, 3000);
         } else {
             alert('You must allow popups for this map to work.');
         }

@@ -5,7 +5,7 @@
 
 <div class="row" id="app">
     <h3>
-        <div class="panel-heading">داشبورد من</div>
+        <div class="panel-heading my-dashboard">داشبورد من</div>
     </h3>
 
     @include('dashboard.home.index')

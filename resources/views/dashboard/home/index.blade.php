@@ -53,7 +53,7 @@
 
 @can('dashboard_gate')
     <h3>
-        <div class="panel-heading">گیت های کنترل تردد</div>
+        <div class="panel-heading my-dashboard">گیت های کنترل تردد</div>
     </h3>
     <br>
     <div class="row">
@@ -74,7 +74,7 @@
 
 @can('dashboard_chart')
     <h3>
-        <div class="panel-heading">گزارشات آماری</div>
+        <div class="panel-heading my-dashboard">گزارشات آماری</div>
     </h3>
     <br>
     <div class="row">

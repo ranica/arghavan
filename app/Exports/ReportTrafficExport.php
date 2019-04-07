@@ -45,12 +45,11 @@ class ReportTrafficExport implements FromCollection
         $fields = [
             'gatetraffics.gatedate',
             'gatemessages.message',
-            'gatedirects.name',
-            'genders.gender',
-            'groups.name',
+            'gatedirects.name as direct',
+            'genders.gender as gender',
             'users.code',
-            'people.name',
-            'people.lastname',
+            'people.name as name',
+            'people.lastname as lastname',
             'people.nationalId'
         ];
 
@@ -66,8 +65,7 @@ class ReportTrafficExport implements FromCollection
                    ->join('gatemessages', 'gatemessages.id', 'gatetraffics.gatemessage_id');
 
 
-
-        /*if (! is_null($this->group_id) && ($this->group_id > 0)){
+        if (! is_null($this->group_id) && ($this->group_id > 0)){
             $res = $res->where('users.group_id', $this->group_id);
         }
 
@@ -89,14 +87,20 @@ class ReportTrafficExport implements FromCollection
 
         if (!is_null ($this->gender_id)) {
             $res = $res->Where ('genders.id', '=', $this->gender_id);
-        }*/
+        }
         $res = $res->select ($fields)
                    ->get();
 
         $res = $res->map (function ($item) {
             return [
+                $item['code'],
+                $item['name'],
+                $item['lastname'],
+                $item['nationalId'],
+                $item['gender'],
                 $item['gatedate'],
-                $item['name']
+                $item['message'],
+                $item['direct']
             ];
         });
 

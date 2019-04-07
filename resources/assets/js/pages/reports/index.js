@@ -684,7 +684,7 @@ window.v = new Vue({
                 });
         },
 
-        PDFExport(){
+        exportPDF(){
              let data = this.searchParams;
 
             this.$store.dispatch('pdfExport', data)
@@ -705,7 +705,7 @@ window.v = new Vue({
                 url: url,
                 exportData: this.searchParams
             };
-            console.log(this.searchParams);
+
             this.$store.dispatch('exportData', data)
                 .then(res => {
                     this.isLoading = false;

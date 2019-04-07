@@ -11,6 +11,14 @@
 
                 <div class="card">
                     <div class="card-content">
+                       {{-- Title --}}
+                        <h4 class="card-title">
+                            <div>
+                                <i class="fa fa-users fa-2x"></i>
+                                <span class="panel-heading">گزارشات تردد</span>
+                            </div>
+                        </h4>
+                        {{-- /Title --}}
                        @include('reports.traffic.index')
                     </div>
                 </div>
@@ -26,7 +34,8 @@
   document.pageData.report = {
     urls: {
         baseInformation: '{{ route('base.all_Information') }}',
-        export_data: '{{ route('export.report.excel') }}'
+        traffic_export_excel_data: '{{ route('export.report.traffic.excel') }}'
+        traffic_export_pdf_data: '{{ route('export.report.traffic.pdf') }}'
     }
   };
 </script>
