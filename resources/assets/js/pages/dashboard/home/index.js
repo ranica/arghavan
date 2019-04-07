@@ -1,4 +1,4 @@
-import Store from '../../Stores/DashboardStore';
+import Store from './store';
 import VueChartist from 'vue-chartist';
 import GateWidget from '../../Components/GateWidget';
 import CircularCounter from '../../Components/CircularCounter';
@@ -63,6 +63,7 @@ window.x = new Vue({
         gatedeviceActiveCount: 0,
         postedSMSCount: 0,
         referralDataCount: 0,
+        isLoading: true,
 
         dailyChartData,
         dailyChartOptions,
@@ -85,6 +86,11 @@ window.x = new Vue({
     },
 
     computed: {
+        isNormalMode: state => state.formMode == Enums.FormMode.normal,
+        records: state => state.$store.getters.records,
+        allData: state => state.$store.getters.allData,
+        hasRow: state => (0 < state.records.length),
+
         loadingPostedSMS: state => (state.loadingStatus & LOADING_POSTED_SMS) == LOADING_POSTED_SMS,
         loadingReferralData: state => (state.loadingStatus & LOADING_REFERRAL_DATA) == LOADING_REFERRAL_DATA,
 
@@ -139,7 +145,27 @@ window.x = new Vue({
 
     methods: {
         titleClick(sender){
-            console.log (sender);
+            if ('key1' == sender){
+                this.loadReportPresents();
+                console.log (sender);
+            }
+        },
+        /**
+         * Loads a report present.
+         */
+        loadReportPresents() {
+            let data = {
+                url: document.pageData.home.report_daily_traffic_url
+            };
+
+            this.$store.dispatch('loadReportPresents', data)
+                .then(res => {
+                    this.isLoading = false;
+                })
+                .catch(err => {
+                    this.isLoading = false;
+                });
+        $('#PresentReportModal').modal('show');
         },
 
         refreshGate(){

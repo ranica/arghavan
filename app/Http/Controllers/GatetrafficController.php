@@ -6,6 +6,7 @@ use App\Gatetraffic;
 use Illuminate\Http\Request;
 use Illuminate\Http\Request\GatetrafficRequest;
 use App\Exports\ReportTrafficExport;
+use App\Exports\ReportTrafficPDFExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GatetrafficController extends Controller
@@ -117,11 +118,19 @@ class GatetrafficController extends Controller
     }
 
      /**
-     * Export Excel
+     * Export traffic to Excel
      */
-    public function exportToExcel(Request $request)
+    public function trafficExportToExcel(Request $request)
     {
         $exportGateTraffic = new ReportTrafficExport ($request);
         return $exportGateTraffic->download('report.xlsx');
+    }
+      /**
+     * Export traffic to PDF
+     */
+    public function trafficExportToPDF(Request $request)
+    {
+        $exportGateTraffic = new ReportTrafficPDFExport ($request);
+        return $exportGateTraffic->download('invoices.pdf');
     }
 }

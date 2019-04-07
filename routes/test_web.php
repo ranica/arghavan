@@ -56,7 +56,8 @@ Route::get('report', function(){
                                             })
                             ->select($fieldsInput)
                             ->groupBy($groupByFields)
-                            ->get();
+                            ->toSql();
+                            dd($reportInput);
 
         return $reportInput;
 });

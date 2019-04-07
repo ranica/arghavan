@@ -44,13 +44,10 @@ const getters = {
 	 * Return gatedirects
 	 */
 	gatedirects: state => state._gatedirects,
-
 	/**
 	 * Return zones
 	 */
 	zones: state => state._zones,
-
-
 };
 
 const mutations = {
@@ -94,7 +91,7 @@ const mutations = {
 	insertRecord: (state, record) => {
 		state._data.data.push(record);
 	},
-	
+
 };
 
 const actions = {
@@ -193,7 +190,41 @@ const actions = {
 				});
 		});
 	},
-	
+	/**
+	 * Load records data
+	 */
+	loadReportPresents(context, data) {
+		return new Promise((resolve, reject) =>	{
+			let url = data.url;
+			console.log('url', url);
+
+			axios.get(url)
+				.then(res => {
+					// Add "selected" property to items
+					console.log('dashboard -> store ->res. data', res.data);
+					let allData = res.data;
+					let rowData = allData.data;
+
+					rowData = rowData.map(x => {
+						x.selected = false;
+
+						return x;
+					});
+
+					// Set data
+					context.commit('setData', allData);
+
+					resolve(res);
+				})
+				.catch(err => {
+					// Empty List
+					context.commit('setData', []);
+
+					resolve(err);
+				});
+		});
+	},
+
 };
 
 export default new Vuex.Store({
