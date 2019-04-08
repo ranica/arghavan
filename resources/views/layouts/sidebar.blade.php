@@ -30,9 +30,9 @@
 
                     <li>
                         <a href= "{{ route('lock_page') }}">
-							<span class="sidebar-mini">
+							{{-- <span class="sidebar-mini">
 								ق.ص
-							</span>
+							</span> --}}
 							<span class="sidebar-normal">
 								قفل صفحه
 							</span>
@@ -80,11 +80,15 @@
 
         <!-- Gate Management Menu  -->
         @include('layouts.managementGate.sidebar-menu-gate')
-        <!--  / Gate Management Menu  -->
+        <!--  /Gate Management Menu  -->
 
-        <!--Menu Setting -->
+         <!-- Dormitory Management Menu  -->
+        @include('layouts.managementDormitory.sidebar-menu-dormitory')
+        <!--  /Dormitory Management Menu  -->
+
+        <!-- Menu Setting -->
         @include('layouts.managementSetting.sidebar-menu-setting')
-        <!--/Menu Setting -->
+        <!-- /Menu Setting -->
 
 		<!-- Report Menu  -->
         @include('layouts.managementReport.sidebar-menu-report')

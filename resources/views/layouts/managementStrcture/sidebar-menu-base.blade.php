@@ -31,10 +31,29 @@
                 @endisUniversity
                 <!-- /Base Eduaction  -->
 
-                {{-- @include('layouts.managementStrcture.menu-base') --}}
-                {{-- @include('layouts.managementStrcture.menu-educational') --}}
-                {{-- @include('layouts.managementStrcture.menu-user') --}}
+                <!-- Base Dormitory  -->
+                @isUniversity
+                <li>
+                    <a href="{{ route('base.dormitory') }}">
+                        <span class="sidebar-normal">
+                             اطلاعات پایه خوابگاه
+                        </span>
+                    </a>
+                </li>
+                @endisUniversity
+                <!-- /Base Dormitory  -->
 
+                 <!-- Base Parking  -->
+                @isUniversity
+                <li>
+                    <a href="{{ route('base.parking') }}">
+                        <span class="sidebar-normal">
+                             اطلاعات پایه پارکینگ
+                        </span>
+                    </a>
+                </li>
+                @endisUniversity
+                <!-- /Base Parking  -->
             </ul>
         </div>
     </li>

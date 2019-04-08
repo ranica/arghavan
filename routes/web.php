@@ -104,10 +104,18 @@ Route::view('base-structure', 'base-structure.index')
 Route::view('base-education', 'base-education.index')
                 ->name('base.education');
 
+Route::view('base-dormitory', 'base-dormitory.index')
+                ->name('base.dormitory');
+
+Route::view('base-parking', 'base-parking.index')
+                ->name('base.parking');
+
 Route::get('/cars/load', 'CarController@loadCar')
         ->name('cars.filter');
+
 Route::get('/cards/filter/{groupType}', 'CardController@filterCard')
         ->name('cards.filter');
+
 Route::get('/gategroups/data/all', 'GategroupController@allGateGroup');
 Route::put('/gategroups/{gategroup}/setGatedevice', 'GategroupController@setGatedevice');
 Route::put('/gateoptions/{gateoption}/setGatedevice', 'GateoptionController@setGatedevice');
@@ -123,8 +131,7 @@ Route::get('/grouppermits/data/all', 'GroupPermitController@allGroupPermit');
 
 Route::get('/vacationManagment', 'VacationRequestController@managment')
         ->name('vacation_managment');
-Route::view('carBase', 'base-car.index')
-                ->name('car_base');
+
 Route::get('/cars/loadCar', 'CarController@loadCar');
 Route::put(
         '/vacationRequests/{vacationRequest}/updateField',
