@@ -134,7 +134,6 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			axios.get(url)
 				.then(res => {
-					console.log('res.data', res.data);
 					context.commit('setBaseInformation', res.data);
 
 					resolve(res);
@@ -210,22 +209,20 @@ const actions = {
 		});
 	},
 
-
-	pdfExport(context, data) {
-		return new Promise((resolve, reject) => {
-			let url = '/report/export';
-			var config = {
-		      headers: data
-		    };
-			axios.post(url, data)
-				.then(res => resolve(res))
-				.catch(res => reject(res));
-		});
+	/**
+	 * Export traffic to PDF
+	 */
+	exportTrafficPDF(context, data) {
+		return new Promise((response, reject) => {
+            context.dispatch('export_data/exportData', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
 	},
 	 /**
-     * export data
+     * export traffic to excel
      */
-    exportData(context, data) {
+    exportTrafficExcel(context, data) {
         return new Promise((response, reject) => {
             context.dispatch('export_data/exportData', data)
                 .then(res => response(res))

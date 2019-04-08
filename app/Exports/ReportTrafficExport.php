@@ -17,7 +17,6 @@ class ReportTrafficExport implements FromCollection
 
     public function __construct($request)
     {
-
         $this->code = $request->code;
         $this->group_id = $request->groupId;
         $this->type_filter = $request->type_filter;
@@ -98,7 +97,7 @@ class ReportTrafficExport implements FromCollection
                 $item['lastname'],
                 $item['nationalId'],
                 $item['gender'],
-                $item['gatedate'],
+                miladiToPersianDateTime($item['gatedate']) ,
                 $item['message'],
                 $item['direct']
             ];

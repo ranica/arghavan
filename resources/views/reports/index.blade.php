@@ -34,7 +34,7 @@
   document.pageData.report = {
     urls: {
         baseInformation: '{{ route('base.all_Information') }}',
-        traffic_export_excel_data: '{{ route('export.report.traffic.excel') }}'
+        traffic_export_excel_data: '{{ route('export.report.traffic.excel') }}',
         traffic_export_pdf_data: '{{ route('export.report.traffic.pdf') }}'
     }
   };

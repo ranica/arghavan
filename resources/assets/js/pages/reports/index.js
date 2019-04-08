@@ -683,11 +683,18 @@ window.v = new Vue({
                     demo.showNotification('خطا در حذف رکورد! این خطا در سامانه ذخیره شد و مورد بررسی قرار خواهد گرفت', 'danger');
                 });
         },
+        /**
+         * Export Traffic PDF
+         */
+        exportTrafficPDF(){
+             let url =  document.pageData.report.urls.traffic_export_pdf_data;
 
-        exportPDF(){
-             let data = this.searchParams;
+            let data = {
+                url: url,
+                exportData: this.searchParams
+            };
 
-            this.$store.dispatch('pdfExport', data)
+            this.$store.dispatch('exportTrafficPDF', data)
                 .then(res => {
                     this.isLoading = false;
                 })
@@ -696,17 +703,18 @@ window.v = new Vue({
                     demo.showNotification(err.message, 'danger');
                 });
         },
-
-
-        exportExcel(){
-            let url =  document.pageData.report.urls.export_data;
+        /**
+         * Export traffic excel
+         */
+        exportTrafficExcel(){
+            let url =  document.pageData.report.urls.traffic_export_excel_data;
 
             let data = {
                 url: url,
                 exportData: this.searchParams
             };
 
-            this.$store.dispatch('exportData', data)
+            this.$store.dispatch('exportTrafficExcel', data)
                 .then(res => {
                     this.isLoading = false;
                 })

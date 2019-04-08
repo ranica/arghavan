@@ -222,6 +222,9 @@ class RegistrationController extends Controller
           ];
         }
     }
+    /**
+     * Load Base Information when load program
+     */
     public function baseInformation(Request $request)
     {
         $C_BASE_INFORMATION = 'base_information';
