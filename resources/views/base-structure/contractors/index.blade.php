@@ -7,7 +7,7 @@
                     <!-- Title -->
                     <h3 class="card-title col-sm-12">
                         <div>
-							<i class="fas fa-user-tie"></i>
+							<i class="fas fa-user-tie fa-2x"></i>
                             <span class="panel-heading">پیمانکاران</span>
 
                             @can('command_insert')

@@ -6,7 +6,7 @@
                 <!-- Title -->
                 <h3 class="card-title col-sm-12">
                     <div>
-                        <i class="material-icons"> my_location</i>
+                        <i class="material-icons md-48"> my_location</i>
                         <span class="panel-heading">شهرستان</span>
 
                         @can('command_insert')

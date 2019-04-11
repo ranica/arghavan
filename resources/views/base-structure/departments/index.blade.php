@@ -7,7 +7,8 @@
                     <!-- Title -->
                     <h3 class="card-title col-sm-12">
                         <div>
-                            <i class="material-icons md-48">business</i>
+                            {{-- <i class="material-icons md-48">business</i> --}}
+                            <i class="fas fa-building fa-2x"></i>
                             <span class="panel-heading"> ساختمان ها</span>
 
                             @can('command_insert')

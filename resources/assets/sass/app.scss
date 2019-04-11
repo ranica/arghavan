@@ -1569,18 +1569,26 @@ ul.dropdown-menu {
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
 }
+
 body {
     background-color: #9ab1c7;
     // background-image: radial-gradient(ellipse farthest-corner at center top, #9ab1c7 0%, #1a242f 100%);
 }
+
 .panel-heading.my-dashboard,
 .navbar .navbar-brand,
-.navbar, .navbar.navbar-default {
-    color: #fff  !important;
+.navbar,
+.navbar.navbar-default {
+    color: #fff !important;
     text-shadow: 2px 2px 4px #090000, 5px 4px 0px rgba(255, 255, 255, 0.15);
 }
 
 .panel-heading {
-    color: #060808  !important;
+    color: #060808 !important;
     text-shadow: 2px 2px 4px #090000, 5px 4px 0px rgba(255, 255, 255, 0.15);
 }
+.nav.nav-pills.nav-pills-warning.nav-pills-icons.justify-content-center{
+    background-color: #fff3;
+    border-radius: 5px;
+}
+

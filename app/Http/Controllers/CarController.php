@@ -36,7 +36,7 @@ class CarController extends Controller
 
             return $car;
         }
-         return view('cars.car.index');
+         return view('cars.index');
     }
 
     /**

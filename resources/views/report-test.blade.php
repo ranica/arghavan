@@ -1,39 +1,71 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" type="text/css" href="{{ mix('css/pages/chart.css') }}">
+<div id="app">
+  <div class="btn-group"
+    data-toggle="buttons">
 
+    <button type="button"
+      @click="selectFinger(finger)"
+      class="btn btn-lg btn-round btn-default"
+      :class="{ 'btn-primary': finger_index == finger.index, }"
+      v-for="finger in fingers_right">
 
-<div class="row" id="app">
+      @{{ finger.name }}
 
-    <h3>
-        <div class="panel-heading">داشبورد من</div>
-    </h3>
+        <div class="ripple-container"></div>
+    </button>
+  </div>
 
-<div class="container">
-  <h1>I'm a dev, and these are my skills</h1>
-  <div class="chart" data-percent="95">HTML</div>
-  <div class="chart" data-percent="95">SCSS</div>
-  <div class="chart" data-percent="70">jQuery</div>
-  <div class="chart" data-percent="90">WP</div>
-  <div class="chart" data-percent="110"> Making Tea</div>
+/////////////////
+
+  <div class="btn-group"
+    data-toggle="buttons">
+
+    <button type="button"
+      @click="selectFinger(finger)"
+      class="btn btn-lg btn-round btn-default"
+      :class="{ 'btn-primary': finger_index == finger.index, }"
+      v-for="finger in fingers_left">
+
+      @{{ finger.name }}
+
+        <div class="ripple-container"></div>
+    </button>
+  </div>
 </div>
-
-
 @endsection
 
 @section('scripts')
 
 <script>
+  new Vue({
+    el: '#app',
+    data: {
+      fingers_right: [
+        {index: 0, name: 'کوچک'},
+        {index: 1, name: 'f 1'},
+        {index: 2, name: 'f 2'},
+        {index: 3, name: 'f 3'},
+        {index: 4, name: 'f 4'},
+      ],
+      fingers_left: [
+        {index: 5, name: 'f 5'},
+        {index: 6, name: 'f 6'},
+        {index: 7, name: 'f 7'},
+        {index: 8, name: 'f 8'},
+        {index: 9, name: 'f 9'},
+      ],
+      finger_index: 0,
+    },
 
-    $('.chart').easyPieChart({
-      scaleColor: false,
-      lineWidth: 10,
-      lineCap: 'round',
-      barColor: '#333',
-      size: 150,
-      animate: 500
-    });
+    methods:
+    {
+        selectFinger(finger){
+          this.finger_index = finger.index;
+        }
+    }
+  })
 </script>
 
 @endsection

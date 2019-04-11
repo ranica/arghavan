@@ -13,8 +13,9 @@ export default {
         assignPermission: 10,
         assignGrouppermit: 11,
         assignGateGroup: 12,
-        normalModal: 13,
-        registerParent: 14,
+        assignFingerPrint: 13,
+        normalModal: 14,
+        registerParent: 15,
 
         normal: 99
     }

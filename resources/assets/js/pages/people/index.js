@@ -19,6 +19,7 @@ window.v = new Vue({
         parent: false,
         term: false,
         gateGroup: false,
+        fingerPrint:false,
         modalMode: Enums.FormMode.normalModal,
 
         formMode: Enums.FormMode.normal,
@@ -29,6 +30,21 @@ window.v = new Vue({
         updateMode: false,
         file: null,
         url: '',
+        fingers_right: [
+            {index: 0, name: 'شست'},
+            {index: 1, name: 'اشاره'},
+            {index: 2, name: 'سبابه'},
+            {index: 3, name: 'انگشتری'},
+            {index: 4, name: 'کوچک'},
+        ],
+        fingers_left: [
+            {index: 5, name: 'شست'},
+            {index: 6, name: 'اشاره'},
+            {index: 7, name: 'سبابه'},
+            {index: 8, name: 'انگشتری'},
+            {index: 9, name: 'کوچک'},
+        ],
+        finger_index: 0,
 
         tempRecord: {
             user: {},
@@ -80,11 +96,21 @@ window.v = new Vue({
     },
 
     computed: {
+        tempRecordPeopleFullName(){
+            if (this.tempRecord == null){
+                return '';
+            }
+
+            return this.tempRecord.people.name + ' ' +
+                this.tempRecord.people.lastname;
+        },
+
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
         isAssignGrouppermit: state => state.formMode == Enums.FormMode.assignGrouppermit,
         isAssignGateGroup: state => state.formMode == Enums.FormMode.assignGateGroup,
         isAssignTerm: state => state.formMode == Enums.FormMode.assignTerm,
+        isAssignFingerPrint: state => state.formMode == Enums.FormMode.assignFingerPrint,
 
         isNormalModalMode: state => state.modalMode == Enums.FormMode.normal,
         isRegisterParentMode: state => state.modalMode == Enums.FormMode.register,
@@ -95,6 +121,7 @@ window.v = new Vue({
         isShowParent() { return this.parent; },
         isShowTerm() { return this.term; },
         isShowGateGroup() { return this.gateGroup; },
+        isShowFingerPrint() { return this.fingerPrint; },
         /*
         User Info
         */
@@ -253,6 +280,10 @@ window.v = new Vue({
     },
 
     methods: {
+        selectFinger(finger){
+          this.finger_index = finger.index;
+        },
+
        getNationalId(){
             alert ('ok');
         },
@@ -318,6 +349,7 @@ window.v = new Vue({
          * @return {[type]}    [description]
          */
         filterUsers(groupId) {
+            this.fingerPrint = true;
             if (groupId == document.pageData.people.group_students) {
                 this.parent = true;
                 this.term = true;
@@ -1024,7 +1056,6 @@ window.v = new Vue({
          * Set Group_Permit to record
          */
         setTerm(record) {
-            console.log('setTerm -> record', record.terms);
             this.formMode = Enums.FormMode.assignTerm;
 
             this.errors.clear();
@@ -1068,7 +1099,6 @@ window.v = new Vue({
 
                         this.isLoading = true;
 
-                        console.log('save term -> data', data);
                         // Try to save
                         this.$store.dispatch('saveTermRecord', data)
                             .then(res => {
@@ -1105,7 +1135,6 @@ window.v = new Vue({
          * Set Group_Permit to record
          */
         setGroupPermit(record) {
-            console.log('set group permit', record);
             this.formMode = Enums.FormMode.assignGrouppermit;
 
             this.errors.clear();
@@ -1259,6 +1288,53 @@ window.v = new Vue({
 
                     demo.showNotification(err, 'warning');
                 });
+        },
+
+        /**
+         * Sets the finger print.
+         */
+        setFingerPrint(record){
+             this.formMode = Enums.FormMode.assignFingerPrint;
+
+            this.errors.clear();
+            console.log('this.record', record);
+            // this.tempRecord = $.extend(true, {}, this.emptyRecord);
+            this.tempRecord.user = {
+                id: record.id,
+                code: record.code,
+                group: record.group,
+            };
+
+           if(null != record.people){
+                this.tempRecord.people = {
+                    id: record.people.id,
+                    name: record.people.name,
+                    lastname: record.people.lastname,
+                    nationalId: record.people.nationalId,
+                    birthdate: Helper.gregorianToJalaali(record.people.birthdate),
+                    // father    : record.people.father,
+                    phone: record.people.phone,
+                    mobile: record.people.mobile,
+                    address: record.people.address,
+                    pictureUrl: record.people.pictureUrl,
+                    melliat: {
+                        id: record.people.melliat.id,
+                        name: record.people.melliat.name
+                    },
+                    gender: {
+                        id: record.people.gender.id,
+                        gender: record.people.gender.gender
+                    },
+                    province: {
+                        id: record.people.city.province.id,
+                        name: record.people.city.province.name
+                    },
+                    city: {
+                        id: record.people.city.id,
+                        name: record.people.city.name
+                    },
+                };
+            }
         },
 
         /**

@@ -35,7 +35,9 @@
                                 <td>
                                     <div class="picture-container">
                                         <div class="picture">
-                                            <img  :src="record.people.pictureThumbUrl" class="picture-src larger" title="" />
+                                            <img  :src="record.people.pictureThumbUrl"
+                                                    class="picture-src larger"
+                                                    title="" />
                                         </div>
                                     </div>
                                 </td>
@@ -50,9 +52,12 @@
 
                                 <td class="text-left" width="250">
                                       @can('command_delete')
-                                        <a href="#" class="btn btn-round btn-danger btn-just-icon remove pull-left"
-                                            data-toggle="modal" data-target="#removeRecordModal" title = "حذف"
-                                                @click.prevent="readyToDelete(record)">
+                                        <a href="#"
+                                            class="btn btn-round btn-danger btn-just-icon remove pull-left"
+                                            data-toggle="modal"
+                                            data-target="#removeRecordModal"
+                                            title = "حذف"
+                                            @click.prevent="readyToDelete(record)">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             <div class="ripple-container"></div>
                                         </a>
@@ -95,11 +100,19 @@
                                     </div>
 
                                     <div v-if="isShowTerm">
-                                         <a href="#" class="btn btn-round btn-info btn-just-icon pull-left"
+                                        <a href="#" class="btn btn-round btn-info btn-just-icon pull-left"
                                                      title="اختصاص نیمسال تحصیلی"
                                                     @click.prevent="setTerm(record)">
                                                     {{-- <i class="fas fa-user-graduate"></i> --}}
                                                     <i class="fas fa-graduation-cap"></i>
+                                        </a>
+                                    </div>
+
+                                    <div v-if="isShowFingerPrint">
+                                        <a href="#" class="btn btn-round btn-info btn-just-icon pull-left"
+                                                     title="اختصاص اثر انگشت"
+                                                    @click.prevent="setFingerPrint(record)">
+                                                    <i class="fas fa-hand-point-up"></i>
                                         </a>
                                     </div>
 
@@ -165,6 +178,12 @@
                 @include('people.assign-gate-group.assign-gate-group')
             </div>
             <!-- /Assign Gate Group dialog -->
+
+             <!-- Assign Finger Print dialog -->
+            <div v-show="isAssignFingerPrint">
+                @include('people.assign-finger-print.assign-finger-print')
+            </div>
+            <!-- /Assign Finger Print dialog -->
 
             <!-- Parent modal -->
             <div class="modal fade" id="ParentRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

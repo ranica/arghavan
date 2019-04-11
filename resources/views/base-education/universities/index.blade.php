@@ -7,7 +7,7 @@
                        <!-- Title -->
                         <h3 class="card-title col-sm-12">
                             <div>
-                                <i class="material-icons">local_library</i>
+                                <i class="fas fa-university fa-2x"></i>
                                 <span class="panel-heading">دانشکده تحصیلی</span>
 
                                 @can('command_insert')

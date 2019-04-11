@@ -46,7 +46,7 @@
                  <!-- Base Parking  -->
                 @isUniversity
                 <li>
-                    <a href="{{ route('base.parking') }}">
+                    <a href= "{{ route('base.parking') }}">
                         <span class="sidebar-normal">
                              اطلاعات پایه پارکینگ
                         </span>

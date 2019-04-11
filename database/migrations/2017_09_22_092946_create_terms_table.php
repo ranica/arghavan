@@ -15,8 +15,8 @@ class CreateTermsTable extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('semester_id')->unsigned();;
-            $table->string('year');
+            $table->unsignedInteger('semester_id');
+            $table->unsignedInteger('year');
             $table->date('startDate');
             $table->date('endDate');
             $table->softDeletes();

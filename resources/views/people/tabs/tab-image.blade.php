@@ -9,30 +9,30 @@
                     <div class="row">
                         <div class="text-center">
                               {{-- <h4 class="title">Regular Image</h4> --}}
-                              <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img :src="tempRecord.people.pictureUrl" alt="...">
-                                    </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                    <div>
-                                        <span class="btn btn-rose btn-round btn-file">
-                                            <span class="fileinput-new">انتخاب تصویر</span>
-                                            <span class="fileinput-exists">ویرایش</span>
-                                            <input type="file" name="picture" @change="fileSelect" id="wizard-picture">
-                                        </span>
-                                        <a href="#"
-                                            class="btn btn-danger btn-round fileinput-exists"
-                                            data-dismiss="fileinput">
-                                            <i class="fa fa-times"></i> حذف
-                                        </a>
-                                    </div>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img :src="tempRecord.people.pictureUrl" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-rose btn-round btn-file">
+                                        <span class="fileinput-new">انتخاب تصویر</span>
+                                        <span class="fileinput-exists">ویرایش</span>
+                                        <input type="file" name="picture" @change="fileSelect" id="wizard-picture">
+                                    </span>
+                                    <a href="#"
+                                        class="btn btn-danger btn-round fileinput-exists"
+                                        data-dismiss="fileinput">
+                                        <i class="fa fa-times"></i> حذف
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </tab-content>
+    </div>
+</tab-content>
 
 <!-- /Fifth Tab : Image -->

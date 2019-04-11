@@ -53,6 +53,6 @@ class UserSeeder extends Seeder
        Fill grouppermit_user table
        */
        $user ->grouppermits()->attach([1]);
-             
+
     }
-}   
+}

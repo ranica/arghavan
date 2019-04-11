@@ -7,7 +7,7 @@
                        <!-- Title -->
                         <h3 class="card-title col-sm-12">
                             <div>
-                                <i class="material-icons">library_books</i>
+                                <i class="material-icons md-48">library_books</i>
                                 <span class="panel-heading">رشته تحصیلی</span>
 
                                 @can('command_insert')

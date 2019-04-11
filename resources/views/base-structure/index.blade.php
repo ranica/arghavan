@@ -38,10 +38,24 @@
                         </a>
                     </li>
                     <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#department" role="tablist">
-                            <i class="material-icons">business</i> تعریف ساختمان
+                        <a class="nav-link" data-toggle="tab" href="#block" role="tablist">
+                            <i class="material-icons md-48">business</i> تعریف بلوک
                         </a>
                     </li>
+
+                    <li class="nav-item tabStyle">
+                        <a class="nav-link" data-toggle="tab" href="#building_type" role="tablist">
+                          <i class="fas fa-warehouse fa-2x"></i>تعریف نوع ساختمان
+                        </a>
+                    </li>
+
+                    <li class="nav-item tabStyle">
+                        <a class="nav-link" data-toggle="tab" href="#department" role="tablist">
+                            <i class="fas fa-building fa-2x"></i>تعریف ساختمان
+                        </a>
+                    </li>
+
+
                     <li class="nav-item tabStyle">
                         <a class="nav-link" data-toggle="tab" href="#kin_type" role="tablist">
                             <i class="material-icons">people_outline</i> تعریف نسبت افراد

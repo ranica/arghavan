@@ -10,7 +10,7 @@ Route::view('me', 'gatedevices.test');
 Route::view('router', 'layouts.vue-app');
 Route::view('vue', 'vue-router.app');
 
-// Route::view('chart', 'report-test');
+Route::view('chart', 'report-test');
 Route::view('error', 'layouts.err-master');
 // Route::view('report', 'reports.report');
 Route::view('tab', 'car_base.index');
@@ -186,7 +186,7 @@ Route::get('send-sms', function () {
 });
 
 // Route::get('report-count', 'ReportController@chartCountDailyTraffic');
-Route::view('chart', 'chartTest');
+// Route::view('chart', 'chartTest');
 // Route::view('test-ojvar', 'dashboard.index');
 // //Route::view('test-card', 'test-card');
 // Route::get('/report/test', 'ReportController@indexTest')

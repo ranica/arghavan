@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{-- <link rel="stylesheet" type="text/css" href="{{ mix('css/pages/base.css') }}"> --}}
-
 <div class="content f-BYekan hidden" id="app">
     <div class="container-fluid">
 
@@ -22,7 +20,7 @@
                                 </li>
                                 <li class="nav-item tabStyle">
                                     <a class="nav-link" data-toggle="tab" href="#university" role="tablist">
-                                        <i class="material-icons">local_library</i> تعریف دانشکده تحصیلی
+                                        <i class="fas fa-university fa-2x"></i>تعریف دانشکده تحصیلی
                                     </a>
                                 </li>
 

@@ -13,7 +13,7 @@
         <ul class="nav">
 
              {{-- Capacity Parking --}}
-                @can('menu_car_capacity_parking')
+               {{--  @can('menu_car_capacity_parking')
                     <li>
                         <a href= "{{ route('car_base') }}">
                             <span class="sidebar-normal">
@@ -21,9 +21,8 @@
                             </span>
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
                 {{-- /Capacity Parking --}}
-
 
                 {{-- Car management --}}
                 @can('menu_car_management_parking')
