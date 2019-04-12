@@ -337,11 +337,23 @@ window.v = new Vue({
                     this.isLoading = false;
                 });
         },
-
-        changeNationalId(){
-            document.getElementById('nationalId').addEventListener ('blur', function (){
-                alert('blured')
-            });
+        /**
+         * Enroll Fingerprint
+         */
+        enroll(){
+           console.log('enroll');
+           SocketClient.connect('172.20.20.143', 20000,
+                                 (e) => {
+                                    console.log (e);
+                                 });
+            SocketClient.send ( '[enroll]');
+            SocketClient.disconnect()
+        },
+        /**
+         * Identify Fingerprint
+         */
+        identify(){
+           console.log('identify');
         },
         /**
          * Filter users

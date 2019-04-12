@@ -219,6 +219,92 @@ class CreateGateProcedure extends Migration
                  (@error, @source, @innerException, @stackTrace, @targetSite, @targetSiteName, @targetSiteModule, now());
                 END";
 
+        #geoip_region_by_name(Store Procedure Present Report)
+        $spPresentReport = "CREATE DEFINER=`root`@`localhost` PROCEDURE `spPresentReport`()
+
+            BEGIN
+                SELECT
+                    inputs.user_id,
+                    users.code AS code,
+                    people.name AS name,
+                    people.lastname AS lastname,
+
+                    inputs.count as input_count,
+                    outputs.count as output_count,
+                    inputs.count - outputs.count as diff,
+                    gatemessages.message as gatemessage,
+                    gatedevices.name as gatedevice,
+                    gatepasses.name as gatepass
+
+            FROM  (
+                        SELECT   user_id,
+                                 count(gatedirect_id) as count,
+                                gatemessage_id,
+                                gatedevice_id,
+                                gatepass_id
+
+
+                        FROM     gatetraffics
+
+                        WHERE    (date(gatedate) = current_date()) and
+                                 (gatedirect_id = 1)
+
+                        group by user_id
+                    ) as inputs
+
+                LEFT JOIN
+                    (
+                        SELECT   user_id,
+                                 count(gatedirect_id) as count
+
+                        FROM     gatetraffics
+
+                        WHERE    (date(gatedate) = current_date()) and
+                                 (gatedirect_id = 2)
+
+                        group by user_id
+                    ) as outputs
+
+
+                    ON (outputs.user_id = inputs.user_id)
+
+                    INNER JOIN gatemessages ON gatemessages.id = inputs.gatemessage_id
+                    INNER JOIN gatedevices ON gatedevices.id = inputs.gatedevice_id
+                    INNER JOIN gatepasses ON gatepasses.id = inputs.gatepass_id
+                    INNER JOIN users ON users.id = inputs.user_id
+                    INNER JOIN people ON people.id = users.people_id
+
+                    WHERE inputs.gatemessage_id = 1
+                     AND ((inputs.count - outputs.count) <> 0) or ((inputs.count - outputs.count) is null);
+            END";
+
+        #geoip_region_by_name(Store Procedure Gate device Active)
+        $spGateActiveReport = "CREATE DEFINER=`root`@`localhost` PROCEDURE `spGateActiveReport`()
+
+            BEGIN
+                SELECT
+                gatedevices.id,
+                gatedevices.name,
+                gatedevices.ip,
+                gatedirects.name as gatedirect,
+                gategenders.gender as gender,
+                gatepasses.name as gatepass,
+                zones.name as gatezone
+
+            FROM
+                gatedevices
+
+                INNER JOIN gategenders on gategenders.id = gatedevices.gategender_id
+                INNER JOIN gatedirects on gatedirects.id = gatedevices.gatedirect_id
+                INNER JOIN gatepasses on gatepasses.id = gatedevices.gatepass_id
+                INNER JOIN zones on zones.id = gatedevices.zone_id
+
+                WHERE
+                    gatedevices.netState = 1 AND gatedevices.gate = 1 AND gatedevices.state = 1 AND gatedevices.type = 0;
+            END";
+
+
+
         DB::unprepared('DROP PROCEDURE IF EXISTS spUpdateStatusGateDevice');
         DB::unprepared('DROP PROCEDURE IF EXISTS spDisconnectGateDevice');
         DB::unprepared('DROP PROCEDURE IF EXISTS spGetUserGate');
@@ -229,6 +315,8 @@ class CreateGateProcedure extends Migration
         DB::unprepared('DROP PROCEDURE IF EXISTS spLoadUser');
         DB::unprepared('DROP PROCEDURE IF EXISTS spInsertLog');
         DB::unprepared('DROP PROCEDURE IF EXISTS spLoadGateDeviceById');
+        DB::unprepared('DROP PROCEDURE IF EXISTS spPresentReport');
+        DB::unprepared('DROP PROCEDURE IF EXISTS spGateActiveReport');
 
         DB::unprepared($spUpdateStatusGateDevice);
         DB::unprepared($spDisconnectGateDevice);
@@ -240,6 +328,9 @@ class CreateGateProcedure extends Migration
         DB::unprepared($spLoadUser);
         DB::unprepared($spInsertLog);
         DB::unprepared($spLoadGateDeviceById);
+        DB::unprepared($spPresentReport);
+        DB::unprepared($spGateActiveReport);
+
 
     }
 
@@ -261,5 +352,7 @@ class CreateGateProcedure extends Migration
         DB::unprepared('DROP PROCEDURE IF EXISTS spLoadUser');
         DB::unprepared('DROP PROCEDURE IF EXISTS spInsertLog');
         DB::unprepared('DROP PROCEDURE IF EXISTS spLoadGateDeviceById');
+        DB::unprepared('DROP PROCEDURE IF EXISTS spPresentReport');
+        DB::unprepared('DROP PROCEDURE IF EXISTS spGateActiveReport');
     }
 }

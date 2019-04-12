@@ -1,6 +1,6 @@
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">اطلاعات والدین</h5>
+                            <h5 class="modal-title" id="myModalLabel">گزارش حاضرین</h5>
                             <button type="button"
                                     class="close"
                                     data-dismiss="modal"
@@ -22,12 +22,12 @@
                                             <div class="table-responsive col-md-12">
                                                 <table id="myTable" class="table table-striped table-hover">
                                                     <thead v-show="!isLoading">
-                                                        <td>نسبت</td>
-                                                      <!--   <td>نام</td>
+                                                        <td>کد کاربری</td>
+                                                        <td>نام</td>
                                                         <td>نام خانوادگی</td>
-                                                        <td>تلفن ثابت</td>
-                                                        <td>موبایل</td>
-                                                        <td></td> -->
+                                                        <td>پیام</td>
+                                                        <td>نام دستگاه</td>
+                                                        <td>نحوه عبور</td>
                                                     </thead>
 
                                                     <tbody>
@@ -36,7 +36,12 @@
                                                         </tr>
 
                                                         <tr v-for="record in records">
+                                                            <td>@{{ record.code }}</td>
                                                             <td>@{{ record.name }}</td>
+                                                            <td>@{{ record.lastname }}</td>
+                                                            <td>@{{ record.gatemessage }}</td>
+                                                            <td>@{{ record.gatedevice }}</td>
+                                                            <td>@{{ record.gatepass }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

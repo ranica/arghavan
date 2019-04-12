@@ -234,7 +234,7 @@ Route::post('/report/traffic/exportToPDF', 'GatetrafficController@trafficExportT
 Route::get('traffic-count-daily', 'DashboardChartController@chartCountDailyTraffic')
         ->name('report.count.traffic.daily');
 
-Route::get('report-traffic-count-daily', 'HomeController@reportPresent')
+Route::get('report-traffic-daily', 'DashboardChartController@loadPresentReport')
         ->name('report.traffic.present');
 /**
  * Show Count Gate Device active

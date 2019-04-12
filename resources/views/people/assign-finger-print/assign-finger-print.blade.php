@@ -112,11 +112,11 @@
                   <input type="submit"
                     value="ثبت اثرانگشت"
                     class="btn btn-fill btn-rose"
-                    @click.prevent="saveFingerPrint('FingerprintScope')">
+                    @click.prevent="enroll()">
                     <input type="button"
                             value="شناسایی اثرانگشت"
                             class="btn btn-fill btn-rose"
-                            @click.prevent="registerCancel">
+                            @click.prevent="identify()">
                 </div>
               </div>
 

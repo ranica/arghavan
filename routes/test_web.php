@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\DB;
 
-
+Route::get('mydata', 'DashboardChartController@loadGateDeviceActiveReport');
 Route::view('rp', 'reports.manual.index');
 Route::get('export', 'UserController@export');
 Route::get('pdf', 'TestController@tcp_pdf');
@@ -46,7 +46,7 @@ Route::get('report', function(){
                             ->join('gatedirects', 'gatedirects.id', 'gatetraffics.gatedirect_id')
                             ->join('gatemessages', 'gatemessages.id', 'gatetraffics.gatemessage_id')
                             ->doneTraffic()
-                            ->inputTraffic()
+                            ->inputTrfafic()
                             ->passDontCarTraffic()
                             ->whereNotIn('user_id', function ($query) use($dateRange) {
                                                 $query->select(\DB::raw('gatetraffics.user_id'))
@@ -55,12 +55,25 @@ Route::get('report', function(){
                                                     ->where('gatetraffics.gatedirect_id', '=', \App\Report::$GATE_OUTPUT);
                                             })
                             ->select($fieldsInput)
-                            ->groupBy($groupByFields)
-                            ->toSql();
-                            dd($reportInput);
+                            // ->groupBy($groupByFields)
+                            ->get();
 
         return $reportInput;
 });
+
+/*select gatetraffics.*
+from  gatetraffics
+    inner join (
+                SELECT user_id,
+                       max(gatedate) as gatedate
+
+                FROM gatetraffics
+
+                group by user_id
+                ) as t
+           on (t.user_id = gatetraffics.user_id) and
+              (t.gatedate = gatetraffics.gatedate)
+where gatetraffics.gatedirect_id = 1*/
 
 // Route::get('data', function() {
 //     $cardtype_id = 4;

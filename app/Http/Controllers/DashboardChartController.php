@@ -52,52 +52,6 @@ class DashboardChartController extends Controller
         return 0;
     }
 
-    public function reportDailyTraffic()
-    {
-        $dateRange = [\Carbon\Carbon::today(),
-                    \Carbon\Carbon::today()->endOfDay()];
-
-        $fieldsInput = ([
-                        'gatetraffics.user_id as user',
-                        'gatetraffics.gatedate',
-                        'genders.gender',
-                        'groups.name as group_name',
-                        'users.code',
-                        'people.name',
-                        'people.lastname',
-                        'people.nationalId',
-                        'gatemessages.message',
-                        'gatepasses.name as gatepass',
-                        'gatedirects.name as gatedirect'
-            ]);
-
-        $groupByFields =(\DB::raw('gatetraffics.gatedirect_id'));
-
-        $reportInput = \App\Gatetraffic::whereBetween('gatetraffics.gatedate', $dateRange)
-                            ->join ('users', 'gatetraffics.user_id', 'users.id')
-                            ->join ('groups', 'groups.id', 'users.group_id')
-                            ->join ('people', 'people.id', 'users.people_id')
-                            ->join ('genders', 'genders.id', 'people.gender_id')
-                            ->join('gatedevices', 'gatedevices.id', 'gatedevices.gatepass_id')
-                            ->join('gatepasses', 'gatepasses.id', 'gatetraffics.gatepass_id')
-                            ->join('gatedirects', 'gatedirects.id', 'gatetraffics.gatedirect_id')
-                            ->join('gatemessages', 'gatemessages.id', 'gatetraffics.gatemessage_id')
-                            ->doneTraffic()
-                            ->inputTraffic()
-                            ->passDontCarTraffic()
-                            ->whereNotIn('user_id', function ($query) use($dateRange) {
-                                                $query->select(\DB::raw('gatetraffics.user_id'))
-                                                    ->from('gatetraffics')
-                                                    ->whereBetween('gatetraffics.gatedate', $dateRange)
-                                                    ->where('gatetraffics.gatedirect_id', '=', \App\Report::$GATE_OUTPUT);
-                                            })
-                            ->select($fieldsInput)
-                            ->groupBy($groupByFields)
-                            ->get();
-
-        return $reportInput;
-    }
-
     /**
      * Show Dashboard Chart Today based on hours
      */
@@ -215,4 +169,22 @@ class DashboardChartController extends Controller
         $result = meargeMonthTraffics($reportInput, $reportOutput);
         return $result;
    }
+   /**
+    * Loads a present report.
+    */
+   public function loadPresentReport()
+   {
+
+   }
+   /**
+    * Load Gate Device active report
+    */
+    public function loadGateDeviceActiveReport()
+    {
+
+       $res = \DB::raw("CALL spGateActiveReport();");
+        $mydata = \DB::select($res);
+        dd($mydata);
+        return $mydata;
+    }
 }

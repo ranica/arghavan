@@ -58,6 +58,7 @@ window.x = new Vue({
     },
 
     data: {
+        formMode: Enums.FormMode.normal,
         loadingStatus: 0,
         trafficPresentsCount: 0,
         gatedeviceActiveCount: 0,
@@ -87,7 +88,7 @@ window.x = new Vue({
 
     computed: {
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
-        records: state => state.$store.getters.records,
+        records: state => state.$store.getters.presentReports,
         allData: state => state.$store.getters.allData,
         hasRow: state => (0 < state.records.length),
 
@@ -147,7 +148,6 @@ window.x = new Vue({
         titleClick(sender){
             if ('key1' == sender){
                 this.loadReportPresents();
-                console.log (sender);
             }
         },
         /**

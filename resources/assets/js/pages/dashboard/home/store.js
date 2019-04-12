@@ -5,6 +5,7 @@ const state = {
 	_gatepasses: [],
 	_gatedirects: [],
 	_zones: [],
+	_presentData:[],
 
 	_data: {
 		data         : [],
@@ -48,6 +49,7 @@ const getters = {
 	 * Return zones
 	 */
 	zones: state => state._zones,
+	presentReports: state => state._presentData,
 };
 
 const mutations = {
@@ -90,6 +92,13 @@ const mutations = {
 	 */
 	insertRecord: (state, record) => {
 		state._data.data.push(record);
+	},
+
+	/**
+	 * Sets the present report.
+	 */
+	setPresentReport:(state, data) =>{
+		state._presentData = data;
 	},
 
 };
@@ -203,16 +212,16 @@ const actions = {
 					// Add "selected" property to items
 					console.log('dashboard -> store ->res. data', res.data);
 					let allData = res.data;
-					let rowData = allData.data;
+					// let rowData = allData.data;
 
-					rowData = rowData.map(x => {
-						x.selected = false;
+					// rowData = rowData.map(x => {
+					// 	x.selected = false;
 
-						return x;
-					});
+					// 	return x;
+					// });
 
 					// Set data
-					context.commit('setData', allData);
+					context.commit('setPresentReport', allData);
 
 					resolve(res);
 				})
