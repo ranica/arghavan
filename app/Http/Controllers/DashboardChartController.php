@@ -174,33 +174,57 @@ class DashboardChartController extends Controller
     */
    public function loadPresentReport()
    {
+        // $page = $request->page;
+        $page = 1;
         $res = \DB::raw("CALL spPresentReport();");
         $mydata = \DB::select($res);
-        // $mydata = $mydata->paginate(Controller::C_PAGINATE_SIZE);
-        // dd($data);
-        return $mydata;
+
+        $perPage = Controller::C_PAGINATE_SIZE;
+        $offset = ($page * $perPage) - $perPage;
+        $result = new \Illuminate\Pagination\LengthAwarePaginator(
+            array_slice($mydata, $offset, $perPage, true), // Only grab the items we need
+            count($mydata), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()] // We need this so we can keep all old query parameters from the url
+        );
+
+        return $result;
    }
    /**
     * Load Gate Device active report
     */
     public function loadGateDeviceActiveReport()
     {
-       $res = \DB::raw("CALL spGateActiveReport();");
+        $page = 1;
+        $res = \DB::raw("CALL spGateActiveReport();");
         $mydata = \DB::select($res);
-                        // ->paginate(Controller::C_PAGINATE_SIZE);
-        return $mydata;
+
+        $perPage = Controller::C_PAGINATE_SIZE;
+        $offset = ($page * $perPage) - $perPage;
+        $result = new \Illuminate\Pagination\LengthAwarePaginator(
+            array_slice($mydata, $offset, $perPage, true), // Only grab the items we need
+            count($mydata), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()] // We need this so we can keep all old query parameters from the url
+        );
+
+        return $result;
     }
 
+    /**
+     * Loads a posted sms report.
+     */
     public function loadPostedSMSReport()
     {
         try {
-            $myData = \App\Sms::status()
+            $mydata = \App\Sms::status()
                             ->paginate(Controller::C_PAGINATE_SIZE);
         }
         catch (\Exception $e) {
-            $myData = [];
+            $mydata = [];
         }
-
-        return $myData;
+        return $mydata;
     }
 }

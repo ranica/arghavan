@@ -93,20 +93,34 @@ window.x = new Vue({
         allData: state => state.$store.getters.allData,
         hasRow: state => (0 < state.records.length),
 
-        presentRecords: state => state.$store.getters.presentReports,
-        gateActiveRecords: state => state.$store.getters.gateActiveReports,
-        smsRecords: state => state.$store.getters.smsReports,
+
         gategenders: state => state.$store.getters.gategenders,
         gatepasses: state => state.$store.getters.gatepasses,
         gatedirects: state => state.$store.getters.gatedirects,
         zones: state => state.$store.getters.zones,
+
         gaterecords: state => state.$store.getters.gaterecords,
-        hasGateRecordRow: state => (0 < state.gaterecords.length),
+        hasGateRecordRow: state => (0 < state.$store.getters.gaterecords.length),
+
+        /**
+         * Report Present in Dashboar
+         */
+        presentRecords: state => state.$store.getters.presentReports,
+        hasPresentReportRow: state =>(0 < state.$store.getters.presentReports.length),
+
+        /**
+         * Report Gate Active In Dashboard
+         */
+        gateActiveRecords: state => state.$store.getters.gateActiveReports,
+        hasGateActiveReportRow: state =>(0 < state.$store.getters.gateActiveReports.length),
+
+        /**
+         * Report SMS in Dashboard
+         */
+        smsRecords: state => state.$store.getters.smsReports,
+        hasSMSReportRow: state =>(0 < state.$store.getters.smsReports.length),
 
 
-        hasSMSReportRow: state =>(0 < state.smsRecords.length),
-        hasPresentReportRow: state =>(0 < state.presentRecords.length),
-        hasGateActiveReportRow: state =>(0 < state.gateActiveRecords.length),
 
         loadingPostedSMS: state => (state.loadingStatus & LOADING_POSTED_SMS) == LOADING_POSTED_SMS,
         loadingReferralData: state => (state.loadingStatus & LOADING_REFERRAL_DATA) == LOADING_REFERRAL_DATA,

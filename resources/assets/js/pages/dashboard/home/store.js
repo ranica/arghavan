@@ -52,8 +52,17 @@ const getters = {
 	 * Return zones
 	 */
 	zones: state => state._zones,
+	/**
+	 * Return Present report
+	 */
 	presentReports: state => state._presentData,
+	/**
+	 * Return gate_active report
+	 */
 	gateActiveReports: state => state._gateActiveData,
+	/**
+	 * Return sms report
+	 */
 	smsReports: state => state._smsData,
 };
 
@@ -103,14 +112,15 @@ const mutations = {
 	 * Sets the present report.
 	 */
 	setPresentReport:(state, data) =>{
-		state._presentData = data;
+		state._presentData = data.data;
 	},
 
 	/**
 	 * Sets the gate active report.
 	 */
 	setReportGateActiveData:(state, data) =>{
-		state._gateActiveData = data;
+		console.log('setReportGateActiveData -> data', data);
+		state._gateActiveData = data.data;
 	},
 
 	/**
@@ -229,23 +239,13 @@ const actions = {
 				.then(res => {
 					// Add "selected" property to items
 					let allData = res.data;
-					// let rowData = allData.data;
+					let rowData = allData.data;
 
-					// rowData = rowData.map(x => {
-					// 	x.selected = false;
+					rowData = rowData.map(x => {
+						x.selected = false;
 
-					// 	return x;
-					// });
-					//
-					//
-				 	// Update data
-					// let data = {
-					// 	data : allData
-					// };
-					// data = Object.assign(data, allData.links);
-					// data = Object.assign(data, allData.meta);
-
-					// console.log('home- > data', data);
+						return x;
+					});
 
 					// Set data
 					context.commit('setPresentReport', allData);
@@ -254,7 +254,7 @@ const actions = {
 				})
 				.catch(err => {
 					// Empty List
-					context.commit('setData', []);
+					context.commit('setPresentReport', []);
 
 					resolve(err);
 				});
@@ -272,13 +272,13 @@ const actions = {
 				.then(res => {
 					// Add "selected" property to items
 					let allData = res.data;
-					// let rowData = allData.data;
+					let rowData = allData.data;
 
-					// rowData = rowData.map(x => {
-					// 	x.selected = false;
+					rowData = rowData.map(x => {
+						x.selected = false;
 
-					// 	return x;
-					// });
+						return x;
+					});
 
 					// Set data
 					context.commit('setReportGateActiveData', allData);
@@ -287,7 +287,7 @@ const actions = {
 				})
 				.catch(err => {
 					// Empty List
-					context.commit('setData', []);
+					context.commit('setReportGateActiveData', []);
 
 					resolve(err);
 				});
