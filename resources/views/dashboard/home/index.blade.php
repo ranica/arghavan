@@ -31,6 +31,8 @@
                         icon="message"
                         text="پیامک های ارسالی"
                         :is-loading="loadingPostedSMS"
+                        item-key="key3"
+                        @title-click="titleClick"
                         @on-refresh="refreshChart('posted-SMS')">
         </simple-counter>
     </div>

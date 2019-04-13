@@ -1,6 +1,6 @@
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">گزارش حاضرین</h5>
+                            <h5 class="modal-title" id="myModalLabel">گزارش پیامک های ارسالی</h5>
                             <button type="button"
                                     class="close"
                                     data-dismiss="modal"
@@ -17,8 +17,7 @@
                                     <div class="row">
                                         <!-- Data list -->
                                         <div v-show="isNormalMode">
-
-                                            <div v-if="! hasPresentReportRow">
+                                            <div v-if="! hasSMSReportRow">
                                                 <h4 class="text-center f-BYekan">
                                                     رکوردی ثبت نشده است
                                                 </h4>
@@ -28,14 +27,10 @@
                                             <div class="table-responsive col-md-12">
                                                 <table id="myTable"
                                                         class="table table-striped table-hover"
-                                                        v-show="hasPresentReportRow">
+                                                        v-show="hasSMSReportRow">
                                                     <thead v-show="!isLoading">
                                                         <td>کد کاربری</td>
-                                                        <td>نام</td>
-                                                        <td>نام خانوادگی</td>
-                                                        <td>پیام</td>
-                                                        <td>نام دستگاه</td>
-                                                        <td>نحوه عبور</td>
+
                                                     </thead>
 
                                                     <tbody>
@@ -43,13 +38,9 @@
                                                             <td colspan="2" class="text-center">در حال بارگذاری اطلاعات</td>
                                                         </tr>
 
-                                                        <tr v-for="record in presentRecords">
+                                                        <tr v-for="record in smsRecords">
                                                             <td>@{{ record.code }}</td>
-                                                            <td>@{{ record.name }}</td>
-                                                            <td>@{{ record.lastname }}</td>
-                                                            <td>@{{ record.gatemessage }}</td>
-                                                            <td>@{{ record.gatedevice }}</td>
-                                                            <td>@{{ record.gatepass }}</td>
+
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -65,7 +56,6 @@
                                             <!-- /List Data Table -->
                                         </div>
                                         <!-- /Data List -->
-
                                     </div>
                                 </div>
                             </div>

@@ -13,7 +13,6 @@ window.v = new Vue({
     data: {
         formMode: Enums.FormMode.normal,
         page: 1,
-        ///editMode: true,
         isLoading: true,
         insertMode: false,
         tempRecord: {},

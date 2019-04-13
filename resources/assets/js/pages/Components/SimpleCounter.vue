@@ -15,7 +15,7 @@
             <div class="stats">
                 <h4>
                     <i v-if="showRefresh"
-                        class="fa fa-refresh fa-2x pd-right-05em pd-left-05em cursor-pointer"
+                        class="fas fa-sync-alt fa-2x pd-right-05em pd-left-05em cursor-pointer"
                         @click.prevent="refreshChart">
                     </i>
 

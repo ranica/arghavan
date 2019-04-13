@@ -10,6 +10,8 @@
 
     @include('dashboard.home.index')
     @include('dashboard.home.modal.present')
+    @include('dashboard.home.modal.gate_active')
+    @include('dashboard.home.modal.sms')
 @endsection
 
 @section('scripts')
@@ -19,7 +21,10 @@
         report_daily_traffic_url: '{{ route('report.traffic.present') }}',
 
         count_active_gatedevice_url: '{{ route('report.count.gatedevice.active') }}',
+        report_active_gatedevice_url: '{{ route('report.gatedevice.active') }}',
+
         count_posted_sms_url: '{{ route('report.count.posted.sms') }}',
+        report_posted_sms_url: '{{ route('report.posted.sms') }}',
         count_referral_data_url: '{{ route('report.count.referral.data') }}',
 
         daily_traffic_url: '{{ route('report.traffic.daily') }}',

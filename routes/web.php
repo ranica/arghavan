@@ -241,11 +241,17 @@ Route::get('report-traffic-daily', 'DashboardChartController@loadPresentReport')
  */
 Route::get('gatedevice-count-active', 'GatedeviceController@chartCountActiveDevice')
         ->name('report.count.gatedevice.active');
+
+Route::get('report-gatedevice-active', 'DashboardChartController@loadGateDeviceActiveReport')
+        ->name('report.gatedevice.active');
 /**
  * Show Count SMS
  */
 Route::get('posted-sms-count', 'SmsController@CountPostedSMS')
         ->name('report.count.posted.sms');
+
+Route::get('report-posted-sms', 'DashboardChartController@loadPostedSMSReport')
+        ->name('report.posted.sms');
 /**
  * Show Count Refferal
  */

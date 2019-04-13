@@ -30,12 +30,12 @@
                             </div>
                         </h3>
                         {{-- /Title --}}
-                        
+
                         <div class="row">
                             {{-- Data list --}}
                             <div v-show="isNormalMode">
                                 <div class="text-left">
-                                    
+
                                 </div>
 
                                 <div v-if="! hasRow">
@@ -45,7 +45,9 @@
                                 </div>
 
                                 {{-- List Data Table --}}
-                                <table id="myTable" class="table table-striped table-hover" v-show="hasRow">
+                                <table id="myTable"
+                                        class="table table-striped table-hover"
+                                        v-show="hasRow">
                                     <thead v-show="!isLoading">
                                         <td>نام منطقه</td>
                                         <td></td>
@@ -82,9 +84,9 @@
                                 {{-- /List Data Table --}}
 
                                  <div class="text-center">
-                                    <pagination :data="allData" 
-                                                v-on:pagination-change-page="loadRecords" 
-                                                :limit= {{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }} 
+                                    <pagination :data="allData"
+                                                v-on:pagination-change-page="loadRecords"
+                                                :limit= {{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}
                                                 :show-disable= true>
                                     </pagination>
                                 </div>

@@ -5,7 +5,9 @@ const state = {
 	_gatepasses: [],
 	_gatedirects: [],
 	_zones: [],
-	_presentData:[],
+	_presentData: [],
+	_gateActiveData: [],
+	_smsData: [],
 
 	_data: {
 		data         : [],
@@ -21,11 +23,12 @@ const state = {
 };
 
 const getters = {
+
+	records: state => state._data.data,
 	/**
 	 * Return gaterecords list
 	 */
 	gaterecords: state => state._data.data,
-
 	/**
 	 * Return all data
 	 */
@@ -50,6 +53,8 @@ const getters = {
 	 */
 	zones: state => state._zones,
 	presentReports: state => state._presentData,
+	gateActiveReports: state => state._gateActiveData,
+	smsReports: state => state._smsData,
 };
 
 const mutations = {
@@ -99,6 +104,20 @@ const mutations = {
 	 */
 	setPresentReport:(state, data) =>{
 		state._presentData = data;
+	},
+
+	/**
+	 * Sets the gate active report.
+	 */
+	setReportGateActiveData:(state, data) =>{
+		state._gateActiveData = data;
+	},
+
+	/**
+	 * Sets sms report.
+	 */
+	setReportSMSData:(state, data) =>{
+		state._smsData = data;
 	},
 
 };
@@ -205,12 +224,10 @@ const actions = {
 	loadReportPresents(context, data) {
 		return new Promise((resolve, reject) =>	{
 			let url = data.url;
-			console.log('url', url);
 
 			axios.get(url)
 				.then(res => {
 					// Add "selected" property to items
-					console.log('dashboard -> store ->res. data', res.data);
 					let allData = res.data;
 					// let rowData = allData.data;
 
@@ -219,6 +236,16 @@ const actions = {
 
 					// 	return x;
 					// });
+					//
+					//
+				 	// Update data
+					// let data = {
+					// 	data : allData
+					// };
+					// data = Object.assign(data, allData.links);
+					// data = Object.assign(data, allData.meta);
+
+					// console.log('home- > data', data);
 
 					// Set data
 					context.commit('setPresentReport', allData);
@@ -233,6 +260,73 @@ const actions = {
 				});
 		});
 	},
+
+	/**
+	 * Load records data
+	 */
+	loadReportGateActives(context, data) {
+		return new Promise((resolve, reject) =>	{
+			let url = data.url;
+
+			axios.get(url)
+				.then(res => {
+					// Add "selected" property to items
+					let allData = res.data;
+					// let rowData = allData.data;
+
+					// rowData = rowData.map(x => {
+					// 	x.selected = false;
+
+					// 	return x;
+					// });
+
+					// Set data
+					context.commit('setReportGateActiveData', allData);
+
+					resolve(res);
+				})
+				.catch(err => {
+					// Empty List
+					context.commit('setData', []);
+
+					resolve(err);
+				});
+		});
+	},
+
+	/**
+	 * Load report SMS data
+	 */
+	loadReportSMS(context, data) {
+		return new Promise((resolve, reject) =>	{
+			let url = data.url;
+
+			axios.get(url)
+				.then(res => {
+					// Add "selected" property to items
+					let allData = res.data;
+					// let rowData = allData.data;
+
+					// rowData = rowData.map(x => {
+					// 	x.selected = false;
+
+					// 	return x;
+					// });
+
+					// Set data
+					context.commit('setReportSMSData', allData);
+
+					resolve(res);
+				})
+				.catch(err => {
+					// Empty List
+					context.commit('setData', []);
+
+					resolve(err);
+				});
+		});
+	},
+
 
 };
 

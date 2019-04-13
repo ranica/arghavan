@@ -174,17 +174,33 @@ class DashboardChartController extends Controller
     */
    public function loadPresentReport()
    {
-
+        $res = \DB::raw("CALL spPresentReport();");
+        $mydata = \DB::select($res);
+        // $mydata = $mydata->paginate(Controller::C_PAGINATE_SIZE);
+        // dd($data);
+        return $mydata;
    }
    /**
     * Load Gate Device active report
     */
     public function loadGateDeviceActiveReport()
     {
-
        $res = \DB::raw("CALL spGateActiveReport();");
         $mydata = \DB::select($res);
-        dd($mydata);
+                        // ->paginate(Controller::C_PAGINATE_SIZE);
         return $mydata;
+    }
+
+    public function loadPostedSMSReport()
+    {
+        try {
+            $myData = \App\Sms::status()
+                            ->paginate(Controller::C_PAGINATE_SIZE);
+        }
+        catch (\Exception $e) {
+            $myData = [];
+        }
+
+        return $myData;
     }
 }

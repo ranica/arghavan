@@ -287,7 +287,7 @@ class CreateGateProcedure extends Migration
                 gatedevices.name,
                 gatedevices.ip,
                 gatedirects.name as gatedirect,
-                gategenders.gender as gender,
+                gategenders.gender as gategender,
                 gatepasses.name as gatepass,
                 zones.name as gatezone
 

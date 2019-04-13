@@ -88,13 +88,28 @@ window.x = new Vue({
 
     computed: {
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
-        records: state => state.$store.getters.presentReports,
+
+        records: state => state.$store.getters.records,
         allData: state => state.$store.getters.allData,
         hasRow: state => (0 < state.records.length),
 
+        presentRecords: state => state.$store.getters.presentReports,
+        gateActiveRecords: state => state.$store.getters.gateActiveReports,
+        smsRecords: state => state.$store.getters.smsReports,
+        gategenders: state => state.$store.getters.gategenders,
+        gatepasses: state => state.$store.getters.gatepasses,
+        gatedirects: state => state.$store.getters.gatedirects,
+        zones: state => state.$store.getters.zones,
+        gaterecords: state => state.$store.getters.gaterecords,
+        hasGateRecordRow: state => (0 < state.gaterecords.length),
+
+
+        hasSMSReportRow: state =>(0 < state.smsRecords.length),
+        hasPresentReportRow: state =>(0 < state.presentRecords.length),
+        hasGateActiveReportRow: state =>(0 < state.gateActiveRecords.length),
+
         loadingPostedSMS: state => (state.loadingStatus & LOADING_POSTED_SMS) == LOADING_POSTED_SMS,
         loadingReferralData: state => (state.loadingStatus & LOADING_REFERRAL_DATA) == LOADING_REFERRAL_DATA,
-
         loadingActiveGatedevice: state => (state.loadingStatus & LOADING_ACTIVE_GATEDEVICE) == LOADING_ACTIVE_GATEDEVICE,
         loadingTrafficPresents: state => (state.loadingStatus & LOADING_TRAFFIC_PRESENTS) == LOADING_TRAFFIC_PRESENTS,
         loadingTrafficDaily: state => (state.loadingStatus & LOADING_TRAFFIC_DAILY) == LOADING_TRAFFIC_DAILY,
@@ -127,13 +142,7 @@ window.x = new Vue({
                 refreshMode: false,
             };
         },
-        gategenders: state => state.$store.getters.gategenders,
-        gatepasses: state => state.$store.getters.gatepasses,
-        gatedirects: state => state.$store.getters.gatedirects,
-        zones: state => state.$store.getters.zones,
-        gaterecords: state => state.$store.getters.gaterecords,
-        allData: state => state.$store.getters.allData,
-        hasRow: state => (0 < state.gaterecords.length),
+
     },
 
     created() {
@@ -148,6 +157,12 @@ window.x = new Vue({
         titleClick(sender){
             if ('key1' == sender){
                 this.loadReportPresents();
+            }
+            if('key2' == sender){
+                this.loadReportGateActives();
+            }
+            if('key3' == sender){
+                this.loadReportSMS();
             }
         },
         /**
@@ -165,9 +180,48 @@ window.x = new Vue({
                 .catch(err => {
                     this.isLoading = false;
                 });
-        $('#PresentReportModal').modal('show');
+                $('#PresentReportModal').modal('show');
         },
 
+        /**
+         * Loads a report gatedevice active.
+         */
+        loadReportGateActives() {
+            let data = {
+                url: document.pageData.home.report_active_gatedevice_url
+            };
+
+            this.$store.dispatch('loadReportGateActives', data)
+                .then(res => {
+                    this.isLoading = false;
+                })
+                .catch(err => {
+                    this.isLoading = false;
+                });
+                $('#GateActiveReportModal').modal('show');
+        },
+
+         /**
+         * Loads a report SMS
+         */
+        loadReportSMS() {
+            let data = {
+                url: document.pageData.home.report_posted_sms_url
+            };
+
+            this.$store.dispatch('loadReportSMS', data)
+                .then(res => {
+                    this.isLoading = false;
+                    $('#SMSReportModal').modal('show');
+                })
+                .catch(err => {
+                    this.isLoading = false;
+                });
+
+        },
+        /**
+         * Refersh Chart
+         */
         refreshGate(){
             this.loadRecords(1);
         },

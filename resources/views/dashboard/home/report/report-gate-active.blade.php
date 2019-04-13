@@ -1,6 +1,6 @@
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">گزارش حاضرین</h5>
+                            <h5 class="modal-title" id="myModalLabel">گزارش گیت  های  فعال</h5>
                             <button type="button"
                                     class="close"
                                     data-dismiss="modal"
@@ -18,7 +18,7 @@
                                         <!-- Data list -->
                                         <div v-show="isNormalMode">
 
-                                            <div v-if="! hasPresentReportRow">
+                                            <div v-if="! hasGateActiveReportRow">
                                                 <h4 class="text-center f-BYekan">
                                                     رکوردی ثبت نشده است
                                                 </h4>
@@ -28,14 +28,14 @@
                                             <div class="table-responsive col-md-12">
                                                 <table id="myTable"
                                                         class="table table-striped table-hover"
-                                                        v-show="hasPresentReportRow">
+                                                        v-show="hasGateActiveReportRow">
                                                     <thead v-show="!isLoading">
-                                                        <td>کد کاربری</td>
-                                                        <td>نام</td>
-                                                        <td>نام خانوادگی</td>
-                                                        <td>پیام</td>
                                                         <td>نام دستگاه</td>
+                                                        <td>آدرس آی پی</td>
+                                                        <td>مسیر عبور</td>
+                                                        <td>جنسیت ترددکننده</td>
                                                         <td>نحوه عبور</td>
+                                                        <td>منطقه عبور</td>
                                                     </thead>
 
                                                     <tbody>
@@ -43,29 +43,31 @@
                                                             <td colspan="2" class="text-center">در حال بارگذاری اطلاعات</td>
                                                         </tr>
 
-                                                        <tr v-for="record in presentRecords">
-                                                            <td>@{{ record.code }}</td>
+                                                        <tr v-for="record in gateActiveRecords">
                                                             <td>@{{ record.name }}</td>
-                                                            <td>@{{ record.lastname }}</td>
-                                                            <td>@{{ record.gatemessage }}</td>
-                                                            <td>@{{ record.gatedevice }}</td>
+                                                            <td>@{{ record.ip }}</td>
+                                                            <td>@{{ record.gatedirect }}</td>
+                                                            <td>@{{ record.gategender }}</td>
                                                             <td>@{{ record.gatepass }}</td>
+                                                            <td>@{{ record.gatezone }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
-
-                                         <!--    <div class="text-center">
-                                                <pagination :data="allData"
-                                                            v-on:pagination-change-page="loadReportPresents"
-                                                            :limit= "{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
-                                                            :show-disable= "true">
-                                                </pagination>
-                                            </div> -->
                                             <!-- /List Data Table -->
                                         </div>
                                         <!-- /Data List -->
 
+                                        <!-- small modal -->
+                                        <div class="modal fade"
+                                            id="GateActiveReportModal"
+                                            tabindex="-2"
+                                            role="dialog"
+                                            aria-labelledby="myModalLabel"
+                                            aria-hidden="true">
+
+                                        </div>
+                                        <!--    end small modal -->
                                     </div>
                                 </div>
                             </div>

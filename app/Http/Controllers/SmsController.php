@@ -122,21 +122,5 @@ class SmsController extends Controller
         }
 
         return $count;
-
-
-        // $fields = ([\DB::raw('count(*) as count')]);
-
-        // $reportCount = \App\Sms::status()
-        //                     ->count()
-        //                     // ->select($fields)
-        //                     // ->get();
-
-        // if (isset($reportCount[0]) )
-        // {
-        //     $count = $reportCount[0]->count;
-
-        //     return $count;
-        // }
-        // return 0;
     }
 }
