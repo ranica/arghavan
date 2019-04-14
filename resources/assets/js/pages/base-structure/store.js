@@ -8,6 +8,7 @@ import KinTypeModule  from "./kin_type/kin_type";
 import ProvinceModule  from "./province/province";
 import CityModule  from "./city/city";
 import BlockModule  from "./block/block";
+import BuildingTypeModule  from "./building_type/building_type";
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ const modules = {
     ProvinceModule,
     CityModule,
     BlockModule,
+    BuildingTypeModule,
 };
 
 
@@ -56,6 +58,9 @@ const getters = {
 
     blocks: (state, getters) => getters['BlockModule/records'],
     blocksPaginate: (state, getters) => getters['BlockModule/allData'],
+
+    buildingTypes: (state, getters) => getters['BuildingTypeModule/records'],
+    buildingTypesPaginate: (state, getters) => getters['BuildingTypeModule/allData'],
 };
 
 const mutations = {
@@ -63,8 +68,6 @@ const mutations = {
 };
 
 const actions = {
-
-
     /**
      * Loads Melliat
     */
@@ -75,7 +78,6 @@ const actions = {
                 .catch(err => reject(err));
         });
     },
-
 
     /**
      * update Melliat
@@ -90,10 +92,6 @@ const actions = {
 
     /**
      * Create Melliat
-     *
-     * @param      {<type>}   context  The context
-     * @param      {<type>}   data     The data
-     * @return     {Promise}  { description_of_the_return_value }
      */
     createMelliats(context, data) {
         return new Promise((response, reject) => {
@@ -550,6 +548,49 @@ const actions = {
     deleteblocks(context, data) {
         return new Promise((resolve, reject) => {
             context.dispatch('BlockModule/deleteRecords', data)
+                .then(res => resolve(res))
+            .catch(err => reject(err));
+        });
+    },
+
+     /**
+     * Loads BuildingTypes
+    */
+   loadBuildingTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('BuildingTypeModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+    /**
+     * update Building Type
+     */
+    updateBuildingTypes(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('BuildingTypeModule/updateRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Create BuildingTypes
+     */
+    createBuildingTypes(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('BuildingTypeModule/createRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * delete BuildingTypes
+     */
+    deletebuildingTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('BuildingTypeModule/deleteRecords', data)
                 .then(res => resolve(res))
             .catch(err => reject(err));
         });

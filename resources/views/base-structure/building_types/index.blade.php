@@ -8,7 +8,7 @@
                     <h3 class="card-title col-sm-12">
                         <div>
                             <i class="material-icons md-48">group</i>
-                            <span class="panel-heading">گروه بندی</span>
+                            <span class="panel-heading">نوع ساختمان</span>
 
                             @can('command_insert')
                             <span class="pull-left" v-show="isNormalMode">
@@ -29,16 +29,18 @@
                             <div class="text-left">
                             </div>
 
-                            <div v-if="! hasGroupRows">
+                            <div v-if="! hasBuildingTypeRows">
                                 <h4 class="text-center f-BYekan">
                                     رکوردی ثبت نشده است
                                 </h4>
                             </div>
                             <!-- List Data Table -->
                             <div class="table-responsive col-md-12 pc">
-                                <table id="myTable" class="table table-striped table-hover" v-show="hasGroupRows">
+                                <table id="myTable"
+                                        class="table table-striped table-hover"
+                                        v-show="hasBuildingTypeRows">
                                     <thead v-show="!isLoading">
-                                        <td>نام گروه</td>
+                                        <td>نوع ساختمان</td>
                                         <td></td>
                                     </thead>
                                     <tbody>
@@ -52,14 +54,15 @@
                                                 @can('command_delete')
                                                     <a href="#" class="btn btn-round btn-just-icon pull-left"
                                                         data-toggle="modal"
-                                                        data-target="#removeRecordModalGroup"
+                                                        data-target="#removeRecordModal‌BuildingType"
                                                         @click.prevent="readyToDelete(record)">
                                                         <i class="material-icons">delete</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 @endcan
                                                 @can('command_edit')
-                                                    <a href="#" class="btn btn-round btn-info btn-just-icon pull-left"
+                                                    <a href="#"
+                                                        class="btn btn-round btn-info btn-just-icon pull-left"
                                                         @click.prevent="editRecord(record)">
                                                         <i class="material-icons">create</i>
                                                         <div class="ripple-container"></div>
@@ -71,17 +74,17 @@
                                 </table>
                             </div>
                             <card-mobile
-                                        v-for="record in groups"
+                                        v-for="record in buildingTypes"
                                         :key= "record.id"
                                         :my-data="record"
                                         @edit-data="editRecord"
                                         @delete-data="readyToDelete(record)"
-                                        title="نام گروه">
+                                        title="نوع ساختمان">
                             </card-mobile>
 
                             <div class="text-center">
-                                <pagination :data="groups_paginate"
-                                            v-on:pagination-change-page="loadGroups"
+                                <pagination :data="building_types_paginate"
+                                            v-on:pagination-change-page="loadBuildingTypes"
                                             :limit= "{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
                                             :show-disable= "true">
                                 </pagination>
@@ -91,33 +94,49 @@
 
                         <!-- Register Form -->
                         <div v-show="isRegisterMode">
-                            @include('base-structure.groups.create')
+                            @include('base-structure.building_types.create')
                         </div>
                         <!-- /Register Form -->
 
                         <!-- small modal -->
-                        <div class="modal fade" id="removeRecordModalGroup" tabindex="-1" role="dialog"
-                            aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade"
+                                id="removeRecordModal‌BuildingType"
+                                tabindex="-1"
+                                role="dialog"
+                                aria-labelledby="myModalLabel"
+                                aria-hidden="true">
 
                             <div class="modal-dialog modal-small ">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close"
-                                            data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                                        <button type="button"
+                                                class="close"
+                                                data-dismiss="modal"
+                                                aria-hidden="true">
+                                                <i class="material-icons">clear</i>
+                                        </button>
                                     </div>
+
                                     <div class="modal-body text-center">
                                         <h5>برای حذف اطمینان دارید؟ </h5>
                                     </div>
+
                                     <div class="modal-footer text-center">
-                                        <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
-                                        <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                            @click.prevent="deleteRecord('groups')">بله</button>
+                                        <button type="button"
+                                                class="btn btn-simple"
+                                                data-dismiss="modal">خیر
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-success btn-simple"
+                                                data-dismiss="modal"
+                                                @click.prevent="deleteRecord('buildingTypes')">بله
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--    end small modal -->
-
                     </div>
                 </div>
             </div>

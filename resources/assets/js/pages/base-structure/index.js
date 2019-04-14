@@ -305,12 +305,25 @@ window.v = new Vue({
         },
 
         /**
+         * Loads Building Type
+         */
+        loadBuildingTypes(page) {
+            let url = document.pageData.base_structure.pageUrls.building_types_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadBuildingTypes', data);
+            Helper.scrollToApp ();
+        },
+
+        /**
          * New record dialog
          */
         newRecord() {
             this.errors.clear();
             this.tempRecord = $.extend(true, {}, this.emptyRecord);
-            // this.tempRecord = this.emptyRecord;
             this.changeFormMode(Enums.FormMode.register);
         },
         /**
@@ -332,8 +345,6 @@ window.v = new Vue({
 
         /**
          * Edit city record
-         *
-         * @param      {<type>}  record  The record
          */
         editCityRecord(record) {
             this.errors.clear();
@@ -725,6 +736,9 @@ window.v = new Vue({
             });
         },
 
+        /**
+         * Saves a block.
+         */
         saveBlock() {
             // Prepare data
             let data = {
@@ -741,6 +755,54 @@ window.v = new Vue({
             } else {
                 data.url = '/blocks/' + data.id;
                 data.function = 'updateBlocks';
+                this.updateRecord(data);
+            }
+
+            return;
+        },
+        /**
+         * Save Building Type Record
+         */
+        saveBuildingTypeRecord() {
+            this.errors.clear();
+
+            return Promise.all([
+                this.$validator.validate('name_building_type'),
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
+
+                if (!hasErr) {
+                    this.saveBuildingType();
+                    return true;
+                }
+
+                let err = this.errors.all();
+
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
+
+                return false;
+            });
+        },
+
+        /**
+         * Save a Building Type.
+         */
+        saveBuildingType() {
+            // Prepare data
+            let data = {
+                id: this.tempRecord.id,
+                name: this.tempRecord.name,
+                url: '/building_types',
+                function: 'createBuildingTypes',
+            };
+
+            this.isLoading = true;
+            if (0 == data.id) {
+                this.createRecord(data);
+            } else {
+                data.url = '/building_types/' + data.id;
+                data.function = 'updateBuildingTypes';
                 this.updateRecord(data);
             }
 
@@ -774,8 +836,6 @@ window.v = new Vue({
         },
         /**
          * Update Record
-         *
-         * @param      {<type>}  data    The data
          */
         updateRecord(data) {
             this.$store.dispatch(data.function, data)

@@ -167,6 +167,11 @@
                blocks_update: '{{ route('blocks.update', '') }}',
                blocks_delete: '{{ route('blocks.destroy', '') }}',
 
+               building_types_index: '{{ route('building_types.index', '') }}',
+               building_types_store: '{{ route('building_types.store') }}',
+               building_types_update: '{{ route('building_types.update', '') }}',
+               building_types_delete: '{{ route('building_types.destroy', '') }}',
+
                departments_index: '{{ route('departments.index', '') }}',
                departments_store: '{{ route('departments.store') }}',
                departments_update: '{{ route('departments.update', '') }}',
