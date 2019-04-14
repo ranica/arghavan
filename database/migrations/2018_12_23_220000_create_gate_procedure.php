@@ -197,9 +197,7 @@ class CreateGateProcedure extends Migration
             order by gatetraffics.gatedate desc LIMIT 1;
             END";
 
-
-
-        #geoip_region_by_name(Procedure Insert Log (error))
+             #geoip_region_by_name(Procedure Insert Log (error))
             $spInsertLog = "CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertLog`(IN `P_ERROR` TEXT CHARSET utf8, IN `P_SOURCE` TEXT CHARSET utf8, IN `P_eINNEREXCEPTION` TEXT, IN `P_eSTACKTRACE` TEXT, IN `P_eTARGETSITE` TEXT, IN `P_eTARGETSITENAME` TEXT, IN `P_eTARGETSITEMODULE` TEXT)
                 BEGIN
                 SET @error = P_ERROR;
@@ -221,7 +219,6 @@ class CreateGateProcedure extends Migration
 
         #geoip_region_by_name(Store Procedure Present Report)
         $spPresentReport = "CREATE DEFINER=`root`@`localhost` PROCEDURE `spPresentReport`()
-
             BEGIN
                 SELECT
                     inputs.user_id,

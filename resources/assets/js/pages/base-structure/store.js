@@ -7,6 +7,7 @@ import DepartmentModule  from "./department/department";
 import KinTypeModule  from "./kin_type/kin_type";
 import ProvinceModule  from "./province/province";
 import CityModule  from "./city/city";
+import BlockModule  from "./block/block";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ const modules = {
     KinTypeModule,
     ProvinceModule,
     CityModule,
+    BlockModule,
 };
 
 
@@ -51,6 +53,9 @@ const getters = {
 
     cities: (state, getters) => getters['CityModule/records'],
     citiesPaginate: (state, getters) => getters['CityModule/allData'],
+
+    blocks: (state, getters) => getters['BlockModule/records'],
+    blocksPaginate: (state, getters) => getters['BlockModule/allData'],
 };
 
 const mutations = {
@@ -487,10 +492,6 @@ const actions = {
 
     /**
      * Create Cities
-     *
-     * @param      {<type>}   context  The context
-     * @param      {<type>}   data     The data
-     * @return     {Promise}  { description_of_the_return_value }
      */
     createCities(context, data) {
         return new Promise((response, reject) => {
@@ -506,6 +507,49 @@ const actions = {
     deletecities(context, data) {
         return new Promise((resolve, reject) => {
             context.dispatch('CityModule/deleteRecords', data)
+                .then(res => resolve(res))
+            .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Loads blocks
+    */
+   loadBlocks(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('BlockModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+    /**
+     * update blocks
+     */
+    updateBlocks(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('BlockModule/updateRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Create Blocks
+     */
+    createBlocks(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('BlockModule/createRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * delete Blocks
+     */
+    deleteblocks(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('BlockModule/deleteRecords', data)
                 .then(res => resolve(res))
             .catch(err => reject(err));
         });

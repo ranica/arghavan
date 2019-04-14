@@ -1,6 +1,7 @@
 import Store from './store';
 import CardMobile from '../Components/MobileWidget';
 import CityMobile from '../Components/CityWidget';
+import BlockMobile from '../Components/BlockWidget';
 import ContractorMobile from '../Components/ContractorWidget';
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
 
@@ -11,6 +12,7 @@ window.v = new Vue({
     components: {
         CardMobile,
         CityMobile,
+        BlockMobile,
         ContractorMobile,
         persianCalendar: VuePersianDatetimePicker
     },
@@ -37,6 +39,8 @@ window.v = new Vue({
         this.loadProvinces(this.page);
         this.loadAllProvinces(this.page);
         this.loadCities(this.page);
+        this.loadBlocks(this.page);
+        this.loadBuildingTypes(this.page);
     },
 
     computed: {
@@ -47,10 +51,11 @@ window.v = new Vue({
             return {
                 id: 0,
                 name: '',
+                code: '', // for block
                 beginDate: '',
                 endDate: '',
                 state: 0,
-                province: {
+                province: { // for city
                     id: 0,
                 },
             }
@@ -83,6 +88,11 @@ window.v = new Vue({
         hasCityRows: state => ((state.$store.getters.cities != null) &&
             (state.$store.getters.cities.length > 0)),
 
+        hasBlockRows: state => ((state.$store.getters.blocks != null) &&
+            (state.$store.getters.blocks.length > 0)),
+
+        hasBuildingTypeRows: state => ((state.$store.getters.buildingTypes != null) &&
+            (state.$store.getters.buildingTypes.length > 0)),
 
         melliats: state => state.$store.getters.melliats,
         melliats_paginate: state => state.$store.getters.melliatsPaginate,
@@ -112,6 +122,12 @@ window.v = new Vue({
         cities: state => state.$store.getters.cities,
         cities_paginate: state => state.$store.getters.citiesPaginate,
 
+        blocks: state => state.$store.getters.blocks,
+        blocks_paginate: state => state.$store.getters.blocksPaginate,
+
+        buildingTypes: state => state.$store.getters.buildingTypes,
+        buildingTypes_paginate: state => state.$store.getters.buildingTypesPaginate,
+
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
     },
@@ -131,6 +147,8 @@ window.v = new Vue({
             this.loadProvinces(this.page);
             this.loadAllProvinces(this.page);
             this.loadCities(this.page);
+            this.loadBlocks(this.page);
+            this.loadBuildingTypes(this.page);
         },
 
         /**
@@ -272,6 +290,19 @@ window.v = new Vue({
             this.$store.dispatch('loadCities', data);
             Helper.scrollToApp ();
         },
+        /**
+         * Loads Blocks
+         */
+        loadBlocks(page) {
+            let url = document.pageData.base_structure.pageUrls.blocks_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadBlocks', data);
+            Helper.scrollToApp ();
+        },
 
         /**
          * New record dialog
@@ -279,6 +310,7 @@ window.v = new Vue({
         newRecord() {
             this.errors.clear();
             this.tempRecord = $.extend(true, {}, this.emptyRecord);
+            // this.tempRecord = this.emptyRecord;
             this.changeFormMode(Enums.FormMode.register);
         },
         /**
@@ -322,7 +354,6 @@ window.v = new Vue({
          * edit contractor record
          */
         editContractorRecord(record) {
-            console.log('edit contractor', record);
             this.errors.clear();
 
             this.tempRecord = {
@@ -331,6 +362,22 @@ window.v = new Vue({
                 state: record.state,
                 beginDate: Helper.gregorianToJalaali(record.beginDate),
                 endDate: Helper.gregorianToJalaali(record.endDate),
+                province: 0,
+            };
+
+            this.formMode = Enums.FormMode.register;
+        },
+
+        /*
+         * edit contractor record
+         */
+        editBlockRecord(record) {
+            this.errors.clear();
+
+            this.tempRecord = {
+                id: record.id,
+                name: record.name,
+                code: record.code,
                 province: 0,
             };
 
@@ -653,8 +700,55 @@ window.v = new Vue({
         },
 
         /**
-         *
-         * @param {*} data
+         * Save Blocks Record
+         */
+        saveBlockRecord() {
+            this.errors.clear();
+
+            return Promise.all([
+                this.$validator.validate('name_block'),
+                this.$validator.validate('code_block'),
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
+
+                if (!hasErr) {
+                    this.saveBlock();
+                    return true;
+                }
+
+                let err = this.errors.all();
+
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
+
+                return false;
+            });
+        },
+
+        saveBlock() {
+            // Prepare data
+            let data = {
+                id: this.tempRecord.id,
+                name: this.tempRecord.name,
+                code: this.tempRecord.code,
+                url: '/blocks',
+                function: 'createBlocks',
+            };
+
+            this.isLoading = true;
+            if (0 == data.id) {
+                this.createRecord(data);
+            } else {
+                data.url = '/blocks/' + data.id;
+                data.function = 'updateBlocks';
+                this.updateRecord(data);
+            }
+
+            return;
+        },
+
+        /**
+         * Create Record
          */
         createRecord(data) {
             this.$store.dispatch(data.function, data)
@@ -729,7 +823,7 @@ window.v = new Vue({
                     this.isLoading = false;
 
                     demo.showNotification('حذف رکورد با موفقیت انجام شد', 'success');
-                    this.tempRecord = {};
+                    this.tempRecord = $.extend(true, {}, this.emptyRecord);
                 })
                 .catch(err => {
                     demo.showNotification('خطا در حذف رکورد! این خطا در سامانه ذخیره شد و مورد بررسی قرار خواهد گرفت', 'danger');

@@ -12,40 +12,51 @@
                 <span class="card-title f-BYekan">
                     ثبت اطلاعات
                 </span>
-                <!-- Province name field -->
-                <div class="form-group label-floating"  :class="{'has-error' : errors.has('province_id')}">
-                    <label class="control-label">استان نام</label>
-                    <select class="form-control"
-                        v-model="tempRecord.province.id"
-                        name="province_id"
-                        v-validate="{ required: true, is_not: 0}"
-                        data-vv-as ="نام استان ">
-                        <option v-for="province in allProvinces" :value="province.id">
-                            @{{ province.name }}
-                        </option>
-                    </select>
-                    <span class="material-input"></span>
-                </div>
-                <!-- /Province name field -->
 
-                <!-- City name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_city')}">
-                    <label class="control-label">نام شهرستان</label>
+                <!-- Block name field -->
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_block')}">
+                    <label class="control-label">نام بلوک</label>
                     <input autofocus required class="form-control"
                         type="text"
-                        name="name_city"
+                        name="name_block"
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"
                        v-validate="{ required: true, is_not:'null' }"
                         data-vv-delay="250"
-                        data-vv-as ="نام شهرستان" />
+                        data-vv-as ="نام بلوک" />
                     <span class="material-input"></span>
                 </div>
-                <!-- /Name field -->
+                 <!-- /Block name field -->
+
+                <!-- Block code field -->
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('code_block')}">
+                    <label class="control-label">کد بلوک</label>
+                    <input autofocus required class="form-control"
+                        type="text"
+                        name="code_block"
+                        minlength="2"
+                        maxlength="50"
+                        v-model="tempRecord.code"
+                       v-validate="{ required: true, is_not:'null' }"
+                        data-vv-delay="250"
+                        data-vv-as ="کد بلوک" />
+                    <span class="material-input"></span>
+                </div>
+                 <!-- /Block code field -->
+
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveCityRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveBlockRecord">
+
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
 
             </form>

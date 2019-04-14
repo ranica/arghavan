@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Melliat extends Model
+class Block extends Model
 {
-    use SoftDeletes;
+     use SoftDeletes;
      /**
      * The attributes that should be mutated to dates.
      *
@@ -16,38 +16,33 @@ class Melliat extends Model
     protected $dates = [
         'deleted_at'
     ];
-
-    public $timestamps = false;
-
     protected $guarded = [
         'id'
     ];
-
-
     /**
-     * Create new Melliat
-     * @param  [type] $request [description]
-     * @return [type]          [description]
+     * Creates if not exist.
      */
-    public static function createIfNotExist($request)
+    public static function
+    createIfNotExist($request)
     {
-        $melliat = Melliat::withTrashed()
+        $block = Block::withTrashed()
                             ->where('name', $request->name)
                             ->first();
 
-        if (is_null($melliat))
+        if (is_null($block))
         {
-            $newMelliat = Melliat::create([
+            $newBlock = Block::create([
                     'name' => $request->name,
+                    'code' => $request->code,
                 ]);
 
-            return $newMelliat;
+            return $newBlock;
         }
         else
         {
-            $melliat->restore();
+            $block->restore();
 
-            return $melliat;
+            return $block;
         }
 
         return null;

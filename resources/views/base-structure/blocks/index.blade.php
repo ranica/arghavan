@@ -6,7 +6,7 @@
                 <!-- Title -->
                 <h3 class="card-title col-sm-12">
                     <div>
-                        <i class="material-icons md-48">business</i>
+                        <i class="fas fa-home fa-2x"></i>
                         <span class="panel-heading">بلوک</span>
 
                         @can('command_insert')
@@ -28,14 +28,16 @@
                         <div class="text-left">
                         </div>
 
-                        <div v-if="! hasCityRows">
+                        <div v-if="! hasBlockRows">
                             <h4 class="text-center f-BYekan">
                                 رکوردی ثبت نشده است
                             </h4>
                         </div>
                         <!-- List Data Table -->
                         <div class="table-responsive col-md-12 pc">
-                            <table id="myTable" class="table table-striped table-hover " v-show="has‌BlockRows">
+                            <table id="myTable"
+                                    class="table table-striped table-hover "
+                                    v-show="hasBlockRows">
                                 <thead v-show="!isLoading">
                                     <td width="160">نام بلوک</td>
                                     <td>کد بلوک</td>
@@ -46,7 +48,7 @@
                                         <td colspan="2" class="text-center">در حال بارگذاری اطلاعات</td>
                                     </tr>
 
-                                    <tr v-for="record in cities">
+                                    <tr v-for="record in blocks">
                                         <td>@{{ record.name }}</td>
                                         <td>@{{ record.code }}</td>
                                         <td class="text-left" width="160">
@@ -73,14 +75,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        <city-mobile
+                        <block-mobile
                                     v-for="record in blocks"
                                     :key= "record.id"
                                     :my-data="record"
                                     @edit-data="editRecord"
                                     @delete-data="readyToDelete(record)"
                                     title="مشخصات بلوک">
-                        </city-mobile>
+                        </block-mobile>
 
                         <div class="text-center">
                             <pagination :data="blocks_paginate"

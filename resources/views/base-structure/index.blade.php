@@ -39,7 +39,7 @@
                     </li>
                     <li class="nav-item tabStyle">
                         <a class="nav-link" data-toggle="tab" href="#block" role="tablist">
-                            <i class="material-icons md-48">business</i> تعریف بلوک
+                           <i class="fas fa-home fa-2x"></i>  تعریف بلوک
                         </a>
                     </li>
 
@@ -93,6 +93,14 @@
 
                     <div class="tab-pane" id="contract">
                         @include('base-structure.contracts.index')
+                    </div>
+
+                    <div class="tab-pane" id="block">
+                        @include('base-structure.blocks.index')
+                    </div>
+
+                    <div class="tab-pane" id="building_type">
+                        @include('base-structure.building_types.index')
                     </div>
 
                     <div class="tab-pane" id="department">
@@ -153,6 +161,11 @@
                contracts_store: '{{ route('contracts.store') }}',
                contracts_update: '{{ route('contracts.update', '') }}',
                contracts_delete: '{{ route('contracts.destroy', '') }}',
+
+               blocks_index: '{{ route('blocks.index', '') }}',
+               blocks_store: '{{ route('blocks.store') }}',
+               blocks_update: '{{ route('blocks.update', '') }}',
+               blocks_delete: '{{ route('blocks.destroy', '') }}',
 
                departments_index: '{{ route('departments.index', '') }}',
                departments_store: '{{ route('departments.store') }}',
