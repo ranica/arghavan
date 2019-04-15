@@ -22,7 +22,7 @@
                     <input autofocus required
                         class="form-control"
                         type="text"
-                        name="name_group"
+                        name="name_building_type"
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"

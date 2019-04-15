@@ -55,7 +55,14 @@ window.v = new Vue({
                 beginDate: '',
                 endDate: '',
                 state: 0,
-                province: { // for city
+                //for city
+                province: {
+                    id: 0,
+                },
+                block:{
+                    id: 0,
+                },
+                building_type: {
                     id: 0,
                 },
             }
@@ -94,6 +101,9 @@ window.v = new Vue({
         hasBuildingTypeRows: state => ((state.$store.getters.buildingTypes != null) &&
             (state.$store.getters.buildingTypes.length > 0)),
 
+        hasBuildingRows: state => ((state.$store.getters.buildings != null) &&
+            (state.$store.getters.buildings.length > 0)),
+
         melliats: state => state.$store.getters.melliats,
         melliats_paginate: state => state.$store.getters.melliatsPaginate,
 
@@ -126,7 +136,10 @@ window.v = new Vue({
         blocks_paginate: state => state.$store.getters.blocksPaginate,
 
         buildingTypes: state => state.$store.getters.buildingTypes,
-        buildingTypes_paginate: state => state.$store.getters.buildingTypesPaginate,
+        building_types_paginate: state => state.$store.getters.buildingTypesPaginate,
+
+        buildings: state => state.$store.getters.buildings,
+        building_paginate: state => state.$store.getters.buildingsPaginate,
 
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
@@ -149,6 +162,7 @@ window.v = new Vue({
             this.loadCities(this.page);
             this.loadBlocks(this.page);
             this.loadBuildingTypes(this.page);
+            this.loadBuildings(this.page);
         },
 
         /**
@@ -318,18 +332,31 @@ window.v = new Vue({
             Helper.scrollToApp ();
         },
 
+         /**
+         * Loads Building
+         */
+        loadBuildings(page) {
+            let url = document.pageData.base_structure.pageUrls.buildings_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadBuildings', data);
+            Helper.scrollToApp ();
+        },
+
         /**
          * New record dialog
          */
         newRecord() {
             this.errors.clear();
             this.tempRecord = $.extend(true, {}, this.emptyRecord);
+            console.log('newRecord -> this.tempRecord', this.tempRecord);
             this.changeFormMode(Enums.FormMode.register);
         },
         /**
          * Edit record
-         *
-         * @param      {<type>}  record  The record
          */
         editRecord(record) {
             this.errors.clear();
@@ -394,6 +421,31 @@ window.v = new Vue({
 
             this.formMode = Enums.FormMode.register;
         },
+
+         /**
+         * Edit Building record
+         */
+        editBuildingRecord(record) {
+            this.errors.clear();
+
+            this.tempRecord = {
+                id: record.id,
+                name: record.name,
+                room_count: record.room_count,
+                floor_count: record.floor_count,
+                building_type: {
+                    id: record.building_type.id,
+                    name: record.building_type.name,
+                },
+                block: {
+                    id: record.block.id,
+                    name: record.block.name,
+                }
+            };
+
+            this.formMode = Enums.FormMode.register;
+        },
+
         /**
          * Save Melliat Record
          */
@@ -501,7 +553,7 @@ window.v = new Vue({
                 var hasErr = this.errors.any();
 
                 if (!hasErr) {
-                    this.saveContractor();
+                    this.saveDataContractor();
                     return true;
                 }
 
@@ -513,8 +565,10 @@ window.v = new Vue({
                 return false;
             });
         },
-
-        saveContractor() {
+        /**
+         * Saves a data contractor.
+         */
+        saveDataContractor() {
             // Prepare data
             let data = {
                 id: this.tempRecord.id,
@@ -538,6 +592,8 @@ window.v = new Vue({
             return;
 
         },
+
+
 
         /**
          * Save Contract Record
@@ -676,7 +732,7 @@ window.v = new Vue({
                 var hasErr = this.errors.any();
 
                 if (!hasErr) {
-                    this.saveCity();
+                    this.saveDataCity();
                     return true;
                 }
 
@@ -688,8 +744,10 @@ window.v = new Vue({
                 return false;
             });
         },
-
-        saveCity() {
+        /**
+         * Saves a data city.
+         */
+        saveDataCity() {
             // Prepare data
             let data = {
                 id: this.tempRecord.id,
@@ -723,7 +781,7 @@ window.v = new Vue({
                 var hasErr = this.errors.any();
 
                 if (!hasErr) {
-                    this.saveBlock();
+                    this.saveDataBlock();
                     return true;
                 }
 
@@ -739,7 +797,7 @@ window.v = new Vue({
         /**
          * Saves a block.
          */
-        saveBlock() {
+        saveDataBlock() {
             // Prepare data
             let data = {
                 id: this.tempRecord.id,
@@ -764,15 +822,50 @@ window.v = new Vue({
          * Save Building Type Record
          */
         saveBuildingTypeRecord() {
+            this.$validator.validate('name_building_type')
+                .then(result => {
+                    if (result) {
+                        // Prepare data
+                        let data = {
+                            id: this.tempRecord.id,
+                            name: this.tempRecord.name,
+                            url: '/buildingTypes',
+                            function: 'createBuildingTypes',
+                        };
+
+                        this.isLoading = true;
+                        if (0 == data.id) {
+                            this.createRecord(data);
+                        } else {
+                            data.url = '/buildingTypes/' + data.id;
+                            data.function = 'updateBuildingTypes';
+                            this.updateRecord(data);
+                        }
+
+                        return;
+                    }
+                    let err = Helper.generateErrorString();
+                    demo.showNotification(err, 'warning');
+                });
+        },
+
+        /**
+         * Save Building Record
+         */
+        saveBuildingRecord() {
             this.errors.clear();
 
             return Promise.all([
-                this.$validator.validate('name_building_type'),
+                this.$validator.validate('name_building'),
+                this.$validator.validate('room_count_building'),
+                this.$validator.validate('floor_count_building'),
+                this.$validator.validate('building_type_id'),
+                this.$validator.validate('block_id'),
             ]).then((resolve, reject) => {
                 var hasErr = this.errors.any();
 
                 if (!hasErr) {
-                    this.saveBuildingType();
+                    this.saveDataBuilding();
                     return true;
                 }
 
@@ -785,30 +878,32 @@ window.v = new Vue({
             });
         },
 
-        /**
-         * Save a Building Type.
+         /**
+         * Saves a data building.
          */
-        saveBuildingType() {
+        saveDataCity() {
             // Prepare data
             let data = {
                 id: this.tempRecord.id,
                 name: this.tempRecord.name,
-                url: '/building_types',
-                function: 'createBuildingTypes',
+                floor_count: this.tempRecord.floor_count,
+                room_count: this.tempRecord.room_count,
+                block_id: this.tempRecord.block.id,
+                building_type_id: this.tempRecord.building_type.id,
+                url: '/cities',
+                function: 'createCities',
             };
-
             this.isLoading = true;
             if (0 == data.id) {
                 this.createRecord(data);
             } else {
-                data.url = '/building_types/' + data.id;
-                data.function = 'updateBuildingTypes';
+                data.url = '/cities/' + data.id;
+                data.function = 'updateCities';
                 this.updateRecord(data);
             }
 
             return;
         },
-
         /**
          * Create Record
          */
@@ -884,6 +979,10 @@ window.v = new Vue({
 
                     demo.showNotification('حذف رکورد با موفقیت انجام شد', 'success');
                     this.tempRecord = $.extend(true, {}, this.emptyRecord);
+                    console.log('deleteRecord -> this.emptyRecord', this.emptyRecord);
+                    // this.tempRecord = {};
+                    this.emptyRecord.id = 0;
+                    console.log('deleteRecord -> this.TempRecord', this.tempRecord);
                 })
                 .catch(err => {
                     demo.showNotification('خطا در حذف رکورد! این خطا در سامانه ذخیره شد و مورد بررسی قرار خواهد گرفت', 'danger');

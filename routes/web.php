@@ -48,6 +48,7 @@ Route::resources ([
      '/students'            => 'StudentController',
      '/groups'              => 'GroupController',
      '/blocks'              => 'BlockController',
+     '/buildingTypes'       => 'BuildingTypeController',
      '/gatezones'           => 'GatezoneController',
      '/gateoptions'         => 'GateoptionController',
      '/gategenders'         => 'GategenderController',

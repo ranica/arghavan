@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class BlockRequest extends FormRequest
+class BuildingTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,23 +22,23 @@ class BlockRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+     public function rules(Request $request)
     {
         $method = $request->method();
 
         if ($method == "post")
         {
             return [
-                'name' => 'required|min:2|max:50|unique:blocks,deleted_at,null'
+                'name' => 'required|min:2|max:50|unique:buildingTypes,deleted_at,null'
             ];
         }
 
         if (($method == "put") || ($method == "push"))
         {
-            $id = $this->block->id;
+            $id = $this->buildingTypes->id;
 
             return [
-                'name' => 'required|min:2|max:50|unique:blocks,deleted_at,null,name,' . $id
+                'name' => 'required|min:2|max:50|unique:buildingTypes,deleted_at,null,name,' . $id
             ];
         }
 

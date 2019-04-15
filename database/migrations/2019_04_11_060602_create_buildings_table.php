@@ -20,7 +20,7 @@ class CreateBuildingsTable extends Migration
             $table->unsignedInteger('room_count');
             $table->unsignedInteger('floor_count');
             $table->unsignedInteger('building_type_id');
-            $table->unsignedInteger('block_id');
+            $table->unsignedInteger('block_id')->nullable();
             $table->json('extra');
             $table->softDeletes();
 

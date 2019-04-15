@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BuildingType;
 use Illuminate\Http\Request;
+use App\Http\Requests\BuildingTypeRequest;
 
 class BuildingTypeController extends Controller
 {
@@ -12,9 +13,15 @@ class BuildingTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+         if ($request->ajax())
+        {
+            $building_types = \App\BuildingType::paginate(Controller::C_PAGINATE_SIZE);
+            return $building_types;
+        }
+
+        return view ('building_types.index');
     }
 
     /**
@@ -33,9 +40,18 @@ class BuildingTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BuildingTypeRequest $request)
     {
-        //
+        if ($request->ajax())
+        {
+            // Check for duplicate
+            $new_building_type = \App\BuildingType::createIfNotExist($request);
+
+            return [
+                'status' => is_null($new_building_type) ? 1 : 0,
+                'building_type' => $new_building_type
+            ];
+        }
     }
 
     /**
@@ -67,9 +83,19 @@ class BuildingTypeController extends Controller
      * @param  \App\BuildingType  $buildingType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BuildingType $buildingType)
+    public function update(BuildingTypeRequest $request, BuildingType $buildingType)
     {
-        //
+         if ($request->ajax())
+        {
+            $buildingType->update([
+                                'name' => $request->name,
+                            ]);
+
+            return [
+                'status' => 0,
+                'building_type' => $buildingType
+            ];
+        }
     }
 
     /**
@@ -78,8 +104,15 @@ class BuildingTypeController extends Controller
      * @param  \App\BuildingType  $buildingType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BuildingType $buildingType)
+    public function destroy(Request $request, BuildingType $buildingType)
     {
-        //
+       if ($request->ajax())
+        {
+            $buildingType->delete();
+
+            return [
+                'status' => 0
+            ];
+        }
     }
 }

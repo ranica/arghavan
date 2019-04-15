@@ -3,6 +3,7 @@ import updateModule from "../../CRUD/update";
 import createModule from "../../CRUD/create";
 import deleteModule from "../../CRUD/delete";
 
+
 const modules = {
     loadModule,
     updateModule,
@@ -72,7 +73,6 @@ const mutations = {
 
         state._data.data.splice(index, 1);
     },
-
 };
 
 const actions = {
@@ -97,7 +97,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             context.dispatch('updateModule/updateRecords', data)
                 .then(res => {
-                    let updatedRecord = res.data.building_type;
+                    let updatedRecord = res.data.building;
 
                     if (res.data.status == 0) {
                         context.commit('updateRecord', {
@@ -115,14 +115,11 @@ const actions = {
      * Create Record
      */
     createRecords(context, data) {
-        console.log('building_type -> create Record -> data', data);
         return new Promise((resolve, reject) => {
             context.dispatch('createModule/createRecords', data)
                 .then(res => {
                     if (res.data.status == 0) {
-                            console.log('buiding_type -> create Record -> res.data', res.data);
-
-                        context.commit('createRecord', res.data.building_type);
+                        context.commit('createRecord', res.data.building);
                     }
 
                     resolve(res);

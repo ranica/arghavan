@@ -7,7 +7,7 @@
                     <!-- Title -->
                     <h3 class="card-title col-sm-12">
                         <div>
-                            <i class="material-icons md-48">group</i>
+                            <i class="fas fa-warehouse fa-2x"></i>
                             <span class="panel-heading">نوع ساختمان</span>
 
                             @can('command_insert')
@@ -48,7 +48,7 @@
                                             <td colspan="2" class="text-center">در حال بارگذاری اطلاعات</td>
                                         </tr>
 
-                                        <tr v-for="record in groups">
+                                        <tr v-for="record in buildingTypes">
                                             <td>@{{ record.name }}</td>
                                             <td class="text-left" width="160">
                                                 @can('command_delete')
