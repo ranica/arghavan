@@ -35,7 +35,7 @@ class CreateBuildingsTable extends Migration
                     ->references('id')
                     ->on('blocks')
                     ->onDelete('cascade')
-                    ->onUodate('cascade');
+                    ->onUpdate('cascade');
         });
     }
 

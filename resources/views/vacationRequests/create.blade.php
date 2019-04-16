@@ -12,8 +12,15 @@
 			<h3 class="card-title f-BYekan">
 			ثبت اطلاعات
 				<div class="pull-left">
-                    <input type="button" value="ذخیره" class="btn btn-fill btn-rose" @click.prevent="saveRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-default" @click.prevent="registerCancel">
+                    <input type="button"
+                            value="ذخیره"
+                            class="btn btn-fill btn-rose"
+                            @click.prevent="saveRecord">
+
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-default"
+                            @click.prevent="registerCancel">
                 </div>
 		    </h3>
 
@@ -41,11 +48,18 @@
                                 </span>
                                 <div class="form-group label-floating">
                                     <label class="control-label">موضوع</label>
-                                    <input name="code" type="text" class="form-control" minlength="2" maxlength="50"
-                                     autofocus required v-validate="'required|min:2|max:50'"
-                                     data-vv-delay="250"
-                                     data-vv-name="موضوع درخواست"
-                                     v-model="tempRecord.subject">
+                                    <input name="code"
+                                            type="text"
+                                            class="form-control"
+                                            minlength="2"
+                                            maxlength="50"
+                                            autofocus
+                                            required
+                                            v-validate="'required|min:2|max:50'"
+                                            data-vv-delay="250"
+                                            data-vv-name="موضوع درخواست"
+                                            v-model="tempRecord.subject">
+
                                     <i v-show="errors.has('subject')" class="fa fa-warning"></i>
                                     <span v-show="errors.has('subject')" class="help is-danger">موضوع درخواست</span>
                                 </div>
@@ -61,10 +75,11 @@
                                 </span>
                                 <div class="form-group label-floating"  :class="{'has-error' : errors.has('vacationType_id')}">
                                 <label class="control-label">نوع مرخصی</label>
-                                <select class="form-control" @change="updateFields"
-                                    v-model="tempRecord.vacationType.id"
-                                    name="vacationType_id" required
-                                    data-vv-name ="نوع مرخصی">
+                                <select class="form-control"
+                                        @change="updateFields"
+                                        v-model="tempRecord.vacationType.id"
+                                        name="vacationType_id" required
+                                        data-vv-name ="نوع مرخصی">
                                     <option v-for="vacationType in vacationTypes" :value="vacationType.id"
                                         :selected="tempRecord.vacationType.id == vacationType.id">
                                         @{{ vacationType.name }}
@@ -79,11 +94,12 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <persian-calendar color="#ec407a" placeholder= "تاریخ مرخصی"
-                                        name = "begin_date"
-                                        v-model="tempRecord.begin_date"
-                                        format="jYYYY/jMM/jDD"
-                                        data-vv-name ="تاریخ مرخصی">
+                                    <persian-calendar color="#ec407a"
+                                                        placeholder= "تاریخ مرخصی"
+                                                        name = "begin_date"
+                                                        v-model="tempRecord.begin_date"
+                                                        format="jYYYY/jMM/jDD"
+                                                        data-vv-name ="تاریخ مرخصی">
                                     </persian-calendar>
                                 </div>
                             </div>

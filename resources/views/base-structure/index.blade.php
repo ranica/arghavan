@@ -50,11 +50,16 @@
                     </li>
 
                     <li class="nav-item tabStyle">
-                        <a class="nav-link" data-toggle="tab" href="#department" role="tablist">
+                        <a class="nav-link" data-toggle="tab" href="#building" role="tablist">
                             <i class="fas fa-building fa-2x"></i>تعریف ساختمان
                         </a>
                     </li>
 
+                   {{--  <li class="nav-item tabStyle">
+                        <a class="nav-link" data-toggle="tab" href="#department" role="tablist">
+                            <i class="fas fa-building fa-2x"></i>تعریف ساختمان
+                        </a>
+                    </li> --}}
 
                     <li class="nav-item tabStyle">
                         <a class="nav-link" data-toggle="tab" href="#kin_type" role="tablist">
@@ -103,8 +108,9 @@
                         @include('base-structure.building_types.index')
                     </div>
 
-                    <div class="tab-pane" id="department">
-                        @include('base-structure.departments.index')
+                    <div class="tab-pane" id="building">
+                        @include('base-structure.buildings.index')
+                        {{-- @include('base-structure.departments.index') --}}
                     </div>
 
                     <div class="tab-pane" id="kin_type">
@@ -171,6 +177,11 @@
                building_types_store: '{{ route('buildingTypes.store') }}',
                building_types_update: '{{ route('buildingTypes.update', '') }}',
                building_types_delete: '{{ route('buildingTypes.destroy', '') }}',
+
+               buildings_index: '{{ route('buildings.index', '') }}',
+               buildings_store: '{{ route('buildings.store') }}',
+               buildings_update: '{{ route('buildings.update', '') }}',
+               buildings_delete: '{{ route('buildings.destroy', '') }}',
 
                departments_index: '{{ route('departments.index', '') }}',
                departments_store: '{{ route('departments.store') }}',

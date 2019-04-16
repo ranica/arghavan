@@ -4,7 +4,9 @@ import CityMobile from '../Components/CityWidget';
 import BlockMobile from '../Components/BlockWidget';
 import ContractorMobile from '../Components/ContractorWidget';
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
+import NumberInput from '@chenfengyuan/vue-number-input';
 
+Vue.component('number-input', NumberInput);
 
 window.v = new Vue({
     el: '#app',
@@ -41,6 +43,7 @@ window.v = new Vue({
         this.loadCities(this.page);
         this.loadBlocks(this.page);
         this.loadBuildingTypes(this.page);
+        this.loadBuildings(this.page);
     },
 
     computed: {
@@ -51,6 +54,8 @@ window.v = new Vue({
             return {
                 id: 0,
                 name: '',
+                room_count: 0,
+                floor_count: 0,
                 code: '', // for block
                 beginDate: '',
                 endDate: '',
@@ -139,7 +144,7 @@ window.v = new Vue({
         building_types_paginate: state => state.$store.getters.buildingTypesPaginate,
 
         buildings: state => state.$store.getters.buildings,
-        building_paginate: state => state.$store.getters.buildingsPaginate,
+        buildings_paginate: state => state.$store.getters.buildingsPaginate,
 
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
@@ -860,7 +865,6 @@ window.v = new Vue({
                 this.$validator.validate('room_count_building'),
                 this.$validator.validate('floor_count_building'),
                 this.$validator.validate('building_type_id'),
-                this.$validator.validate('block_id'),
             ]).then((resolve, reject) => {
                 var hasErr = this.errors.any();
 
@@ -881,7 +885,7 @@ window.v = new Vue({
          /**
          * Saves a data building.
          */
-        saveDataCity() {
+        saveDataBuilding() {
             // Prepare data
             let data = {
                 id: this.tempRecord.id,
@@ -890,15 +894,15 @@ window.v = new Vue({
                 room_count: this.tempRecord.room_count,
                 block_id: this.tempRecord.block.id,
                 building_type_id: this.tempRecord.building_type.id,
-                url: '/cities',
-                function: 'createCities',
+                url: '/buildings',
+                function: 'createBuildings',
             };
             this.isLoading = true;
             if (0 == data.id) {
                 this.createRecord(data);
             } else {
-                data.url = '/cities/' + data.id;
-                data.function = 'updateCities';
+                data.url = '/buildings/' + data.id;
+                data.function = 'updateBuildings';
                 this.updateRecord(data);
             }
 

@@ -9,6 +9,7 @@ import ProvinceModule  from "./province/province";
 import CityModule  from "./city/city";
 import BlockModule  from "./block/block";
 import BuildingTypeModule  from "./building_type/building_type";
+import BuildingModule  from "./building/building";
 
 Vue.use(Vuex);
 
@@ -24,6 +25,7 @@ const modules = {
     CityModule,
     BlockModule,
     BuildingTypeModule,
+    BuildingModule,
 };
 
 
@@ -61,6 +63,9 @@ const getters = {
 
     buildingTypes: (state, getters) => getters['BuildingTypeModule/records'],
     buildingTypesPaginate: (state, getters) => getters['BuildingTypeModule/allData'],
+
+    buildings: (state, getters) => getters['BuildingModule/records'],
+    buildingsPaginate: (state, getters) => getters['BuildingModule/allData'],
 };
 
 const mutations = {
@@ -591,6 +596,49 @@ const actions = {
     deletebuildingTypes(context, data) {
         return new Promise((resolve, reject) => {
             context.dispatch('BuildingTypeModule/deleteRecords', data)
+                .then(res => resolve(res))
+            .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Loads Building
+    */
+   loadBuildings(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('BuildingModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+    /**
+     * update Building Type
+     */
+    updateBuildings(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('BuildingModule/updateRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Create Buildings
+     */
+    createBuildings(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('BuildingModule/createRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * delete Buildings
+     */
+    deletebuildings(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('BuildingModule/deleteRecords', data)
                 .then(res => resolve(res))
             .catch(err => reject(err));
         });
