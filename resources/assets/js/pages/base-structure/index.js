@@ -2,6 +2,7 @@ import Store from './store';
 import CardMobile from '../Components/MobileWidget';
 import CityMobile from '../Components/CityWidget';
 import BlockMobile from '../Components/BlockWidget';
+import BuildingMobile from '../Components/BuildingWidget';
 import ContractorMobile from '../Components/ContractorWidget';
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
 import NumberInput from '@chenfengyuan/vue-number-input';
@@ -16,6 +17,7 @@ window.v = new Vue({
         CityMobile,
         BlockMobile,
         ContractorMobile,
+        BuildingMobile,
         persianCalendar: VuePersianDatetimePicker
     },
 

@@ -13,8 +13,6 @@
                     ثبت اطلاعات
                 </span>
 
-
-
                 <!-- building_type name field -->
                 <div class="form-group label-floating"
                     :class="{'has-error' : errors.has('building_type_id')}">

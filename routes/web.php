@@ -74,6 +74,8 @@ Route::resources ([
      '/referrals'           => 'ReferralController',
      '/semesters'           => 'SemesterController',
      '/terms'               => 'TermController',
+
+     '/rooms'             =>'RoomController',
 ]);
 
 Route::get('/auth/edit', 'HomeController@editProfile')

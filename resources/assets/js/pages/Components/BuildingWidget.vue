@@ -9,13 +9,18 @@
                 <h5 class="card-title f-BYekan">
                     {{ title }}
                 </h5>
-                <h3>
+                <h6>
                     <p class="card-text"> نام ساختمان: {{ building_name }} </p>
                     <hr>
                     <p class="card-text"> نوع ساختمان: {{ building_type_name }} </p>
                     <hr>
                     <p class="card-text"> نام بلوک: {{ block_name }} </p>
-                </h3>
+                    <hr>
+                    <p class="card-text">تعداد طبقه: {{ building_floor_count }} </p>
+                    <hr>
+                    <p class="card-text">تعداد اتاق: {{ building_room_count }} </p>
+                   
+                </h6>
                 <a href="#" class="btn btn-round btn-info btn-just-icon"
                     @click.prevent="editSignal">
                     <i class="material-icons">create</i>
@@ -30,11 +35,14 @@
 </template>
 <script>
 export default {
-    name:'CityMobile',
+    name:'BuildingMobile',
     props: ['myData', 'title'],
     computed:{
-        name_city: state => state.myData.name,
-        name_province: state => state.myData.province.name,
+        building_type_name: state => state.myData.building_type.name,
+        block_name: state => state.myData.block.name,
+        building_name: state => state.myData.name,
+        building_room_count: state => state.myData.room_count,
+        building_floor_count: state => state.myData.floor_count,
     },
 
     methods:{
