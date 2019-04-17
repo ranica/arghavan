@@ -6,7 +6,7 @@
                 <!-- Title -->
                 <h3 class="card-title col-sm-12">
                     <div>
-                        <i class="fas fa-building fa-2x"></i>
+                        <i class="fas fa-door-open fa-2x"></i>
                         <span class="panel-heading">اتاق</span>
 
                         @can('command_insert')
@@ -17,7 +17,6 @@
                             </a>
                         </span>
                         @endcan
-
                     </div>
                 </h3>
                 <!-- /Title -->
@@ -59,7 +58,8 @@
                                         <td>@{{ record.floor }}</td>
                                         <td class="text-left" width="160">
                                             @can('command_delete')
-                                                <a href="#" class="btn btn-round btn-just-icon pull-left"
+                                                <a href="#"
+                                                    class="btn btn-round btn-just-icon pull-left"
                                                     data-toggle="modal"
                                                     data-target="#removeRecordModalRoom"
                                                     @click.prevent="readyToDelete(record)">
@@ -102,7 +102,7 @@
 
                     <!-- Register Form -->
                     <div v-show="isRegisterMode">
-                        @include('base-structure.rooms.create')
+                        @include('base-dormitory.rooms.create')
                     </div>
                     <!-- /Register Form -->
 

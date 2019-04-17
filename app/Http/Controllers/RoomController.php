@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Room;
 use Illuminate\Http\Request;
+use App\Http\Requests\RoomRequest;
 
 class RoomController extends Controller
 {
@@ -12,9 +13,17 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $rooms = Room::with(['building', 'gategender'])
+                         ->paginate(Controller::C_PAGINATE_SIZE);
+
+            return $rooms;
+        }
+
+         return view('rooms.index');
     }
 
     /**
@@ -33,9 +42,17 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
-        //
+        if ($request->ajax())
+        {
+            // Check for duplicate
+            $newRoom = Room::createIfNotExists($request);
+
+            return [
+                'status'   => is_null($newRoom) ? 1 : 0,
+                'room'     => $newRoom
+            ];
     }
 
     /**
@@ -67,9 +84,23 @@ class RoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(RoomRequest $request, Room $room)
     {
-        //
+        if ($request->ajax())
+        {
+            $room->update([
+                'capacity'  => $request->capacity,
+                'number' => $request->number
+                'floor'  => $request->floor,
+                'building_id'  => $request->building_id,
+                'gender_id'  => $request->gender_id,
+            ]);
+
+            return [
+                'status'    => 0,
+                'room' => $room
+            ];
+        }
     }
 
     /**
@@ -78,8 +109,14 @@ class RoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy(Request $request, Room $room)
     {
-        //
+        if ($request->ajax())
+        {
+            $room->delete();
+
+            return [
+                'status' => 0
+            ];
     }
 }

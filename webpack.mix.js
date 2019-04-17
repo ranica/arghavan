@@ -64,6 +64,7 @@ mix
    .js('resources/assets/js/pages/cars/car/index.js', 'public/js/pages/cars/car')
    .js('resources/assets/js/pages/base-structure/index.js', 'public/js/pages/base-structure')
    .js('resources/assets/js/pages/base-education/index.js', 'public/js/pages/base-education')
+   .js('resources/assets/js/pages/base-dormitory/index.js', 'public/js/pages/base-dormitory')
    // .js('resources/assets/js/pages/car/index.js', 'public/js/pages/car')
    // .js('resources/assets/js/pages/common_range/index.js', 'public/js/pages/common_range')
 

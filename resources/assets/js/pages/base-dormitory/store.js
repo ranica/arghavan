@@ -1,18 +1,23 @@
-import DormitoryModule  from "./dormitory/dormitory";
+import RoomModule  from "./room/room";
+import GenderModule  from "./gender/gender";
+import BuildingModule  from "../base-structure/building/building";
 
 Vue.use(Vuex);
 
 const modules = {
-    DormitoryModule,
+    RoomModule,
+    BuildingModule,
+    GenderModule,
 };
 
 
 const getters = {
 
-    dormitories: (state, getters) => getters['TermModule/records'],
-    dormitoriesPaginate: (state, getters) => getters['DormitoryModule/allData'],
+    buildings: (state, getters) => getters['BuildingModule/records'],
+    genders: (state, getters) => getters['GenderModule/records'],
 
-    
+    rooms: (state, getters) => getters['RoomModule/records'],
+    roomsPaginate: (state, getters) => getters['RoomModule/allData'],
 };
 
 const mutations = {
@@ -20,59 +25,76 @@ const mutations = {
 };
 
 const actions = {
-   
-
     /**
-     * Loads Dormitory
+     * Loads Building
     */
-   	loadDormitories(context, data) {
+   loadBuildings(context, data) {
         return new Promise((resolve, reject) => {
-            context.dispatch('DormitoryModule/loadRecords', data)
+            context.dispatch('BuildingModule/loadRecords', data)
                 .then(res => resolve(res))
                 .catch(err => reject(err));
         });
     },
 
     /**
-     * update Dormitory
+     * Loads Gender
+    */
+   loadGenders(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('GenderModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Loads Room
+    */
+   	loadRooms(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('RoomModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * update Room
      */
-    updateDormitories(context, data) {
+    updateRooms(context, data) {
         return new Promise((response, reject) => {
-            context.dispatch('DormitoryModule/updateRecords', data)
+            context.dispatch('RoomModule/updateRecords', data)
                 .then(res => response(res))
                 .catch(err => reject(err));
         });
     },
 
     /**
-     * Create Dormitory
+     * Create Room
      *
      * @param      {<type>}   context  The context
      * @param      {<type>}   data     The data
      * @return     {Promise}  { description_of_the_return_value }
      */
-    createDormitories(context, data) {
+    createRooms(context, data) {
         return new Promise((response, reject) => {
-            context.dispatch('DormitoryModule/createRecords', data)
+            context.dispatch('RoomModule/createRecords', data)
                 .then(res => response(res))
                 .catch(err => reject(err));
         });
     },
 
     /**
-     * delete Dormitory 
+     * delete Room
      */
-    deleteDormitories(context, data) {
+    deleterooms(context, data) {
         return new Promise((resolve, reject) => {
-            context.dispatch('DormitoryModule/deleteRecords', data)
+            context.dispatch('RoomModule/deleteRecords', data)
 				.then(res => resolve(res))
                	.catch(err => reject(err));
         });
     },
 
-    
-
-   
 
 };
 

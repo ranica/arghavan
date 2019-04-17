@@ -22,8 +22,10 @@ window.v = new Vue({
     },
 
     mounted() {
-        this.loadDormitories(this.page);
-        
+        this.loadRooms(this.page);
+        this.loadBuildings(this.page);
+        this.loadGenders(this.page);
+
     },
 
     computed: {
@@ -33,27 +35,30 @@ window.v = new Vue({
         emptyRecord: () => {
             return {
                 id      : 0,
-                dormitory: {
+                room: {
 					id: 0,
 					name: '',
-					address: '',
-					phone1: '',
-					phone2: '',
-					phone_internal: '',
-					mobile: ''
+					capacity: 0,
+					floor: '',
+					number: '',
+                    gender:{
+                        id: 0,
+                    },
+                    building:{
+                        id:0
+                    },
 				}
             }
         },
 
-        hasDormitoryRows: state => ((state.$store.getters.dormitories != null) &&
-            (state.$store.getters.dormitories.length > 0)),
+        hasRoomRows: state => ((state.$store.getters.rooms != null) &&
+            (state.$store.getters.rooms.length > 0)),
 
-       
+        buildings: state => state.$store.getters.buildings,
+        genders: state => state.$store.getters.genders,
 
-        dormitories: state => state.$store.getters.dormitories,
-        dormitories_paginate: state => state.$store.getters.dormitoriesPaginate,
-
-       
+        rooms: state => state.$store.getters.rooms,
+        rooms_paginate: state => state.$store.getters.roomsPaginate,
 
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
@@ -64,28 +69,71 @@ window.v = new Vue({
          * Page changed
          */
         pageChanged() {
-            this.loadDormitories(this.page);
-           
+            this.loadRooms(this.page);
+            this.loadBuildings(this.page);
+            this.loadGenders(this.page);
         },
 
-       
+
         /**
-         * Loads Dormitories
+         * Loads Rooms
          */
-        loadDormitories(page) {
-            let url = document.pageData.base_dormitory.pageUrls.dormitory_index + '?page=' + page;
+        loadRooms(page) {
+            let url = document.pageData.base_dormitory.pageUrls.rooms_index + '?page=' + page;
 
             let data = {
                 url: url
             };
 
-            this.$store.dispatch('loadDormitories', data);
+            this.$store.dispatch('loadRooms', data);
             Helper.scrollToApp ();
             this.isLoading = false;
         },
-       
-      
-        
+
+        /**
+         * Loads Genders
+         */
+        loadGenders(page) {
+            let url = document.pageData.base_dormitory.pageUrls.genders_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadGenders', data);
+            Helper.scrollToApp ();
+            this.isLoading = false;
+        },
+
+         /**
+         * Loads Building
+         */
+        loadBuildings(page) {
+            let url = document.pageData.base_dormitory.pageUrls.buildings_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadBuildings', data);
+            Helper.scrollToApp ();
+            this.isLoading = false;
+        },
+
+        /**
+         * Loads Gender
+         */
+        loadGenders(page) {
+            let url = document.pageData.base_dormitory.pageUrls.genders_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadGenders', data);
+            Helper.scrollToApp ();
+            this.isLoading = false;
+        },
 
         /**
          * New record dialog
@@ -106,30 +154,38 @@ window.v = new Vue({
 
 			// check tempRecord
             this.tempRecord = {
-				dormitory: {
+				room: {
 					id: record.id,
-					name: record.name
+					name: record.name,
+                    number: record.number,
+                    capacity: record.capacity,
+                    floor: record.floor,
+                    building_id: record.building.id,
+                    gender_id: record.gender.id,
 				},
-                id: record.id,
-              
             };
 
             this.formMode = Enums.FormMode.register;
         },
-               
+
         /**
-         * Save Dormitory Record
+         * Save Room Record
          */
-        saveTermRecord() {
+        saveRoomRecord() {
             this.errors.clear();
 
             return Promise.all([
-                this.$validator.validate('dormitory_name'),
+                this.$validator.validate('room_name'),
+                this.$validator.validate('room_number'),
+                this.$validator.validate('room_capacity'),
+                this.$validator.validate('room_floor'),
+                this.$validator.validate('room_building_id'),
+                this.$validator.validate('room_gender_id'),
             ]).then((resolve, reject) => {
                 var hasErr = this.errors.any();
 
                 if (!hasErr) {
-                    this.saveDormitory();
+                    this.saveRoomData();
                     return true;
                 }
 
@@ -141,33 +197,33 @@ window.v = new Vue({
                 return false;
             });
         },
-		
+
 		/**
-		 * Save dormitory base data
+		 * Save room data
 		 */
-        saveDormitory() {
+        saveRoomData() {
             // Prepare data
             let data = {
                 id: this.tempRecord.id,
-                name: this.tempRecord.name,
-                url: '/dormitories',
-                function: 'createDormitories',
+                name: this.tempRecord.room.name,
+                capacity: this.tempRecord.room.capacity,
+                floor: this.tempRecord.room.floor,
+                number: this.tempRecord.room.number,
+                url: '/rooms',
+                function: 'createRooms',
 			};
-			
+
             this.isLoading = true;
             if (0 == data.id) {
                 this.createRecord(data);
             } else {
-                data.url = '/dormitories/' + data.id;
-                data.function = 'updateDormitories';
+                data.url = '/rooms/' + data.id;
+                data.function = 'updateRooms';
                 this.updateRecord(data);
             }
 
             return;
         },
-        
-
-        
         /**
          *
          * @param {*} data
@@ -194,11 +250,9 @@ window.v = new Vue({
                     }
                 });
 		},
-		
+
         /**
          * Update Record
-         *
-         * @param      {<type>}  data    The data
          */
         updateRecord(data) {
             this.$store.dispatch(data.function, data)

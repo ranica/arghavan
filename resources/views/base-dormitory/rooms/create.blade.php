@@ -16,14 +16,14 @@
 
                 <!-- building name field -->
                 <div class="form-group label-floating"
-                    :class="{'has-error' : errors.has('building_id')}">
+                    :class="{'has-error' : errors.has('room_building_id')}">
                     <label class="control-label">نام ساختمان</label>
                     <select class="form-control"
-                        v-model="tempRecord.building.id"
-                        name="building_id"
+                        v-model="tempRecord.room.building.id"
+                        name="room_building_id"
                         v-validate="{ required: true, is_not: 0}"
                         data-vv-as ="نام ساختمان ">
-                        
+
                         <option v-for="building in buildings"
                                 :value="building.id">
                             @{{ building.name }}
@@ -36,15 +36,15 @@
 
                  <!-- gender name field -->
                 <div class="form-group label-floating"
-                    :class="{'has-error' : errors.has('gender_id')}">
+                    :class="{'has-error' : errors.has('room_gender_id')}">
                     <label class="control-label">جنسیت ساختمان</label>
-                    
+
                     <select class="form-control"
-                        v-model="tempRecord.gender.id"
-                        name="gender_id"
+                        v-model="tempRecord.room.gender.id"
+                        name="room_gender_id"
                         v-validate="{ required: true, is_not: 0}"
                         data-vv-as ="جنسیت ساختمان ">
-                        
+
                         <option v-for="gender in genders"
                                 :value="gender.id">
                             @{{ gender.name }}
@@ -57,72 +57,72 @@
 
                  <!--  number room field -->
                 <div class="form-group label-floating mrg-top-2em"
-                    :class="{'has-error' : errors.has('number_room')}">
+                    :class="{'has-error' : errors.has('room_number')}">
                     <label class="control-label">شماره اتاق</label>
-                    
-                    <input autofocus 
-                        required 
+
+                    <input autofocus
+                        required
                         class="form-control"
-                        type="number"  
-                        step="1" 
-                        min="0" 
+                        type="number"
+                        step="1"
+                        min="0"
                         max="500"
-                        name="number_room"
+                        name="room_number"
                         minlength="2"
                         maxlength="50"
-                        v-model="tempRecord.number"
+                        v-model="tempRecord.room.number"
                         v-validate="{ required: true, is_not:'0' }"
                         data-vv-delay="250"
                         data-vv-as ="شماره اتاق" />
-                   
+
                     <span class="material-input"></span>
                 </div>
                 <!-- /number room field -->
 
                  <!--  capacity room field -->
                 <div class="form-group label-floating mrg-top-2em"
-                    :class="{'has-error' : errors.has('capacity_room')}">
+                    :class="{'has-error' : errors.has('room_capacity')}">
                     <label class="control-label">ظرفیت اتاق</label>
 
-                    <input autofocus 
-                        required 
+                    <input autofocus
+                        required
                         class="form-control"
-                        type="number"  
-                        step="1" 
-                        min="0" 
+                        type="number"
+                        step="1"
+                        min="0"
                         max="500"
-                        name="capacity_room"
+                        name="room_capacity"
                         minlength="2"
                         maxlength="50"
-                        v-model="tempRecord.capacity"
+                        v-model="tempRecord.room.capacity"
                         v-validate="{ required: true, is_not:'0' }"
                         data-vv-delay="250"
                         data-vv-as ="ظرفیت اتاق" />
-                   
+
                     <span class="material-input"></span>
                 </div>
                 <!-- /capacity room field -->
 
                 <!--  floor_room field -->
                 <div class="form-group label-floating mrg-top-2em"
-                    :class="{'has-error' : errors.has('floor_room')}">
+                    :class="{'has-error' : errors.has('room_floor')}">
                     <label class="control-label">شماره طبقه</label>
 
-                    <input autofocus 
-                        required 
+                    <input autofocus
+                        required
                         class="form-control"
-                        type="number"  
-                        step="1" 
-                        min="0" 
+                        type="number"
+                        step="1"
+                        min="0"
                         max="500"
-                        name="floor_room"
+                        name="room_floor"
                         minlength="2"
                         maxlength="50"
-                        v-model="tempRecord.floor"
+                        v-model="tempRecord.room.floor"
                         v-validate="{ required: true, is_not:'0' }"
                         data-vv-delay="250"
                         data-vv-as ="شماره طبقه" />
-                        
+
                     <span class="material-input"></span>
                 </div>
                 <!-- /floor_room field -->

@@ -108,10 +108,9 @@ const actions = {
     loadAllRecords(context, data) {
         return new Promise((resolve, reject) => {
              let url = data.url;
-             console.log('url', url);
+
             axios.get(url)
                 .then(res => {
-                    console.log('res', res);
                     context.commit('setAllProvinces', res.data);
 
                     resolve(res);
