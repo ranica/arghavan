@@ -47,7 +47,7 @@
 
                         <option v-for="gender in genders"
                                 :value="gender.id">
-                            @{{ gender.name }}
+                            @{{ gender.gender }}
                         </option>
 
                     </select>
@@ -68,7 +68,7 @@
                         min="0"
                         max="500"
                         name="room_number"
-                        minlength="2"
+                        minlength="1"
                         maxlength="50"
                         v-model="tempRecord.room.number"
                         v-validate="{ required: true, is_not:'0' }"
@@ -92,7 +92,7 @@
                         min="0"
                         max="500"
                         name="room_capacity"
-                        minlength="2"
+                        minlength="1"
                         maxlength="50"
                         v-model="tempRecord.room.capacity"
                         v-validate="{ required: true, is_not:'0' }"
@@ -116,7 +116,7 @@
                         min="0"
                         max="500"
                         name="room_floor"
-                        minlength="2"
+                        minlength="1"
                         maxlength="50"
                         v-model="tempRecord.room.floor"
                         v-validate="{ required: true, is_not:'0' }"

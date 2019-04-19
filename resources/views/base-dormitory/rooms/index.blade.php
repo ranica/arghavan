@@ -85,7 +85,7 @@
                                     v-for="record in rooms"
                                     :key= "record.id"
                                     :my-data="record"
-                                    @edit-data="editRecord"
+                                    @edit-data="editRoomRecord"
                                     @delete-data="readyToDelete(record)"
                                     title="مشخصات اتاق">
                         </room-mobile>

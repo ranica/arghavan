@@ -1,4 +1,5 @@
 import RoomModule  from "./room/room";
+import MaterialTypeModule  from "./material_type/material_type";
 import GenderModule  from "./gender/gender";
 import BuildingModule  from "../base-structure/building/building";
 
@@ -6,6 +7,7 @@ Vue.use(Vuex);
 
 const modules = {
     RoomModule,
+    MaterialTypeModule,
     BuildingModule,
     GenderModule,
 };
@@ -18,6 +20,9 @@ const getters = {
 
     rooms: (state, getters) => getters['RoomModule/records'],
     roomsPaginate: (state, getters) => getters['RoomModule/allData'],
+
+    material_types: (state, getters) => getters['MaterialTypeModule/records'],
+    material_typesPaginate: (state, getters) => getters['MaterialTypeModule/allData'],
 };
 
 const mutations = {
@@ -42,7 +47,10 @@ const actions = {
    loadGenders(context, data) {
         return new Promise((resolve, reject) => {
             context.dispatch('GenderModule/loadRecords', data)
-                .then(res => resolve(res))
+                .then(res =>  {
+                    console.log('loadGenders -> res', res);
+                  resolve(res);
+                } )
                 .catch(err => reject(err));
         });
     },
@@ -71,10 +79,6 @@ const actions = {
 
     /**
      * Create Room
-     *
-     * @param      {<type>}   context  The context
-     * @param      {<type>}   data     The data
-     * @return     {Promise}  { description_of_the_return_value }
      */
     createRooms(context, data) {
         return new Promise((response, reject) => {
@@ -92,6 +96,50 @@ const actions = {
             context.dispatch('RoomModule/deleteRecords', data)
 				.then(res => resolve(res))
                	.catch(err => reject(err));
+        });
+    },
+
+     /**
+     * Loads Room
+    */
+    loadMaterialTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('MaterialTypeModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * update MaterialType
+     */
+    updateMaterialTypes(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('MaterialTypeModule/updateRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Create MaterialType
+     */
+    createMaterialTypes(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('MaterialTypeModule/createRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * delete MaterialType
+     */
+    deletematerialTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('MaterialTypeModule/deleteRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
         });
     },
 

@@ -31,7 +31,7 @@ class CreateRoomsTable extends Migration
 
             $table->foreign('gender_id')
                     ->references('id')
-                    ->on('genders')
+                    ->on('gategenders')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 

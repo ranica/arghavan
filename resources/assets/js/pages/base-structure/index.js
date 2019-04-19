@@ -979,12 +979,15 @@ window.v = new Vue({
                 record: this.tempRecord
             };
 
+            console.log('deleteRecord -> data', data);
+
             this.$store.dispatch(funName, data)
                 .then(res => {
                     this.isLoading = false;
 
                     demo.showNotification('حذف رکورد با موفقیت انجام شد', 'success');
                     this.tempRecord = $.extend(true, {}, this.emptyRecord);
+
                     console.log('deleteRecord -> this.emptyRecord', this.emptyRecord);
                     // this.tempRecord = {};
                     this.emptyRecord.id = 0;

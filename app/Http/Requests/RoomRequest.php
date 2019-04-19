@@ -22,15 +22,14 @@ class RoomRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-         {
         $method = $request->method();
 
         if ($method == "post")
         {
             return [
-                'number' => 'required|min:2|max:50|unique:rooms,deleted_at,null',
+                'number' => 'required|min:1|max:50|unique:rooms,deleted_at,null',
                 'building_id'   => 'required|numeric|exists:buildings,id'
             ];
         }
@@ -46,6 +45,5 @@ class RoomRequest extends FormRequest
         }
 
         return [];
-    }
     }
 }

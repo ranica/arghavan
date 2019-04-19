@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('mydata', 'DashboardChartController@loadGateDeviceActiveReport');
 Route::view('rp', 'reports.manual.index');
-Route::get('export', 'UserController@export');
+Route::get('room', 'RoomController@index');
 Route::get('pdf', 'TestController@tcp_pdf');
 // Route::get('pdf', 'TestController@testMPDF');
 Route::view('me', 'gatedevices.test');

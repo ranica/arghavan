@@ -17,7 +17,7 @@ class RoomController extends Controller
     {
         if ($request->ajax())
         {
-            $rooms = Room::with(['building', 'gategender'])
+            $rooms = Room::with(['building', 'gender'])
                          ->paginate(Controller::C_PAGINATE_SIZE);
 
             return $rooms;
@@ -48,11 +48,14 @@ class RoomController extends Controller
         {
             // Check for duplicate
             $newRoom = Room::createIfNotExists($request);
+            $newRoom->load('building')->get();
+            $newRoom->load('gender')->get();
 
             return [
                 'status'   => is_null($newRoom) ? 1 : 0,
                 'room'     => $newRoom
             ];
+        }
     }
 
     /**
@@ -63,7 +66,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        //
+    //
     }
 
     /**
@@ -90,11 +93,14 @@ class RoomController extends Controller
         {
             $room->update([
                 'capacity'  => $request->capacity,
-                'number' => $request->number
+                'number' => $request->number,
                 'floor'  => $request->floor,
                 'building_id'  => $request->building_id,
                 'gender_id'  => $request->gender_id,
             ]);
+
+            $room->load('building')->get();
+            $room->load('gender')->get();
 
             return [
                 'status'    => 0,
@@ -118,5 +124,6 @@ class RoomController extends Controller
             return [
                 'status' => 0
             ];
+    }
     }
 }

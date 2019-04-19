@@ -75,7 +75,8 @@ Route::resources ([
      '/semesters'           => 'SemesterController',
      '/terms'               => 'TermController',
 
-     '/rooms'             =>'RoomController',
+     '/rooms'               =>'RoomController',
+     '/materialTypes'       =>'MaterialTypeController',
 ]);
 
 Route::get('/auth/edit', 'HomeController@editProfile')

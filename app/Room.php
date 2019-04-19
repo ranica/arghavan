@@ -22,6 +22,19 @@ class Room extends Model
     protected $dates = [
         'deleted_at'
     ];
+
+     /**
+     * @return mixed
+     */
+    public function gender()
+    {
+        return $this->belongsTo(\App\Gender::class);
+    }
+
+    public function building()
+    {
+        return $this->belongsTo(\App\Building::class);
+    }
     /**
      * Creates if not exists.
      *
@@ -33,18 +46,20 @@ class Room extends Model
     {
         $room = Room::withTrashed()
                             ->where([
-                                'number', $request->number,
-                                'building_id', $request->building_id,
-                                'gender_id', $request->gender,
+                                ['number', $request->number],
+                                ['building_id', $request->building_id],
+                                ['gender_id', $request->gender_id],
                             ])
                             ->first();
 
         if (is_null($room))
         {
             $newRoom = Room::create([
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'state' => $request->state,
+                    'number' => $request->number,
+                    'capacity' => $request->capacity,
+                    'floor' => $request->floor,
+                    'building_id' => $request->building_id,
+                    'gender_id' => $request->gender_id,
                 ]);
 
             return $newRoom;

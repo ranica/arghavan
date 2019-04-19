@@ -1,12 +1,12 @@
 import Store from './store';
-import CardMobile from '../Components/MobileWidget';
+import RoomMobile from '../Components/RoomWidget';
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
 
 window.v = new Vue({
     el: '#app',
     store: Store,
     components: {
-        CardMobile,
+        RoomMobile,
         persianCalendar: VuePersianDatetimePicker
     },
 
@@ -25,7 +25,7 @@ window.v = new Vue({
         this.loadRooms(this.page);
         this.loadBuildings(this.page);
         this.loadGenders(this.page);
-
+        this.loadMaterialTypes(this.page);
     },
 
     computed: {
@@ -34,31 +34,38 @@ window.v = new Vue({
          */
         emptyRecord: () => {
             return {
-                id      : 0,
+                id: 0,
+                name: '',
                 room: {
 					id: 0,
-					name: '',
 					capacity: 0,
-					floor: '',
-					number: '',
+					floor: 0,
+					number: 0,
                     gender:{
                         id: 0,
                     },
                     building:{
                         id:0
                     },
-				}
+				},
+
             }
         },
 
         hasRoomRows: state => ((state.$store.getters.rooms != null) &&
             (state.$store.getters.rooms.length > 0)),
 
+        hasMaterialTypeRows: state => ((state.$store.getters.material_types != null) &&
+            (state.$store.getters.material_types.length > 0)),
+
         buildings: state => state.$store.getters.buildings,
         genders: state => state.$store.getters.genders,
 
         rooms: state => state.$store.getters.rooms,
         rooms_paginate: state => state.$store.getters.roomsPaginate,
+
+        materialTypes: state => state.$store.getters.materialTypes,
+        materialTypes_paginate: state => state.$store.getters.materialTypesPaginate,
 
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
@@ -72,6 +79,7 @@ window.v = new Vue({
             this.loadRooms(this.page);
             this.loadBuildings(this.page);
             this.loadGenders(this.page);
+            this.loadMaterialTypes(this.page);
         },
 
 
@@ -90,6 +98,21 @@ window.v = new Vue({
             this.isLoading = false;
         },
 
+         /**
+         * Loads Rooms
+         */
+        loadMaterialTypes(page) {
+            let url = document.pageData.base_dormitory.pageUrls.material_types_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadMaterialTypes', data);
+            Helper.scrollToApp ();
+            this.isLoading = false;
+        },
+
         /**
          * Loads Genders
          */
@@ -101,7 +124,6 @@ window.v = new Vue({
             };
 
             this.$store.dispatch('loadGenders', data);
-            Helper.scrollToApp ();
             this.isLoading = false;
         },
 
@@ -121,21 +143,6 @@ window.v = new Vue({
         },
 
         /**
-         * Loads Gender
-         */
-        loadGenders(page) {
-            let url = document.pageData.base_dormitory.pageUrls.genders_index + '?page=' + page;
-
-            let data = {
-                url: url
-            };
-
-            this.$store.dispatch('loadGenders', data);
-            Helper.scrollToApp ();
-            this.isLoading = false;
-        },
-
-        /**
          * New record dialog
          */
         newRecord() {
@@ -143,27 +150,51 @@ window.v = new Vue({
             this.tempRecord = $.extend(true, {}, this.emptyRecord);
             this.changeFormMode(Enums.FormMode.register);
         },
-
         /**
-         * Edit record
-         *
-         * @param      {<type>}  record  The record
+         * Edit record Main
          */
         editRecord(record) {
             this.errors.clear();
 
+            this.tempRecord = {
+                id: record.id,
+                name: record.name,
+                room: {
+                    id: 0
+                },
+            };
+
+            this.formMode = Enums.FormMode.register;
+        },
+
+        /**
+         * Edit record
+         */
+        editRoomRecord(record) {
+            this.errors.clear();
+            console.log('record', record);
+
 			// check tempRecord
             this.tempRecord = {
+                id: record.id,
 				room: {
-					id: record.id,
-					name: record.name,
                     number: record.number,
                     capacity: record.capacity,
                     floor: record.floor,
-                    building_id: record.building.id,
-                    gender_id: record.gender.id,
+                    building:{
+                        id: record.building.id,
+                        name: record.building.name
+                    },
+                    gender:{
+                        id: record.gender.id,
+                        gender: record.gender.gender
+                    }
 				},
+
             };
+
+            console.log('editRoomRecord -> tempRecord ', this.tempRecord);
+
 
             this.formMode = Enums.FormMode.register;
         },
@@ -175,7 +206,6 @@ window.v = new Vue({
             this.errors.clear();
 
             return Promise.all([
-                this.$validator.validate('room_name'),
                 this.$validator.validate('room_number'),
                 this.$validator.validate('room_capacity'),
                 this.$validator.validate('room_floor'),
@@ -205,13 +235,16 @@ window.v = new Vue({
             // Prepare data
             let data = {
                 id: this.tempRecord.id,
-                name: this.tempRecord.room.name,
                 capacity: this.tempRecord.room.capacity,
                 floor: this.tempRecord.room.floor,
                 number: this.tempRecord.room.number,
+                building_id: this.tempRecord.room.building.id,
+                gender_id: this.tempRecord.room.gender.id,
                 url: '/rooms',
                 function: 'createRooms',
 			};
+
+            console.log('save data room -> data', data);
 
             this.isLoading = true;
             if (0 == data.id) {
@@ -224,9 +257,40 @@ window.v = new Vue({
 
             return;
         },
+
         /**
-         *
-         * @param {*} data
+         * Save material type Record
+         */
+        saveMaterialTypeRecord() {
+            this.$validator.validate('name_material_tyep')
+                .then(result => {
+                    if (result) {
+                        // Prepare data
+                        let data = {
+                            id: this.tempRecord.id,
+                            name: this.tempRecord.name,
+                            url: '/materialTypes',
+                            function: 'createMaterialTypes',
+                        };
+
+                        this.isLoading = true;
+                        if (0 == data.id) {
+                            this.createRecord(data);
+                        } else {
+                            data.url = '/materialTypes/' + data.id;
+                            data.function = 'updateMaterialTypes';
+                            this.updateRecord(data);
+                        }
+
+                        return;
+                    }
+                    let err = Helper.generateErrorString();
+                    demo.showNotification(err, 'warning');
+                });
+        },
+
+        /**
+         * Create Record
          */
         createRecord(data) {
             this.$store.dispatch(data.function, data)
@@ -300,7 +364,12 @@ window.v = new Vue({
                     this.isLoading = false;
 
                     demo.showNotification('حذف رکورد با موفقیت انجام شد', 'success');
-                    this.tempRecord = {};
+                    this.tempRecord = $.extend(true, {}, this.emptyRecord);
+                    this.tempRecord.room = 0;
+                     this.emptyRecord.id = 0;
+                     this.tempRecord = $.extend(true, {}, this.emptyRecord);
+                     this.tempRecord.room.building = this.emptyRecord;
+                    // this.tempRecord = {};
                 })
                 .catch(err => {
                     demo.showNotification('خطا در حذف رکورد! این خطا در سامانه ذخیره شد و مورد بررسی قرار خواهد گرفت', 'danger');

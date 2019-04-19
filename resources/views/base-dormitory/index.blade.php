@@ -49,12 +49,17 @@
         document.pageData.base_dormitory = {
             pageUrls: {
                     buildings_index: '{{ route('buildings.index', '') }}',
-                    genders_index: '{{ route('gategenders.index', '') }}',
+                    genders_index: '{{ route('genders.index', '') }}',
 
                     rooms_index: '{{ route('rooms.index', '') }}',
                     rooms_store: '{{ route('rooms.store') }}',
                     rooms_update: '{{ route('rooms.update', '') }}',
                     rooms_delete: '{{ route('rooms.destroy', '') }}',
+
+                    material_types_index: '{{ route('material_types.index', '') }}',
+                    material_types_store: '{{ route('material_types.store') }}',
+                    material_types_update: '{{ route('material_types.update', '') }}',
+                    material_types_delete: '{{ route('material_types.destroy', '') }}',
 
             }
         };
@@ -65,6 +70,4 @@
             charset="utf-8"
             defer>
     </script>
-
-
 @endsection
