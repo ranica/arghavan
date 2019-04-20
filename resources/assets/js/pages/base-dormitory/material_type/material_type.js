@@ -13,6 +13,8 @@ const modules = {
 
 const state = {
 
+    _all_material_type: [],
+
     _data: {
         data: [],
         current_page: 1,
@@ -37,6 +39,11 @@ const getters = {
      * Return all data
      */
     allData: state => state._data,
+
+     /**
+     * Return all record list
+     */
+    allRecords: state => state._all_material_type,
 };
 
 const mutations = {
@@ -44,6 +51,10 @@ const mutations = {
      * Set Data
      */
     setData: (state, data) => state._data = data.data,
+    /**
+     * set all MaterialTypes
+     */
+    setAllMaterialTypes: (state, data) => state._all_material_type = data,
     /**
      * Insert a Record
      */
@@ -88,6 +99,23 @@ const actions = {
                     response(res);
                 })
                 .catch(err => reject(err));
+        });
+    },
+
+     /**
+     * Load all Record
+     */
+    loadAllRecords(context, data) {
+        return new Promise((resolve, reject) => {
+             let url = data.url;
+
+            axios.get(url)
+                .then(res => {
+                    context.commit('setAllMaterialTypes', res.data);
+
+                    resolve(res);
+                })
+                .catch(res => reject(res));
         });
     },
 

@@ -20,6 +20,12 @@
                                 </li>
 
                                 <li class="nav-item tabStyle">
+                                    <a class="nav-link" data-toggle="tab" href="#material_type" role="tablist">
+                                        <i class="fas fa-couch"></i>تعریف انواع تجهیزات
+                                    </a>
+                                </li>
+
+                                <li class="nav-item tabStyle">
                                     <a class="nav-link" data-toggle="tab" href="#material" role="tablist">
                                         <i class="fas fa-couch"></i>تعریف تجهیزات
                                     </a>
@@ -29,6 +35,10 @@
                             <div class="tab-content tab-space tab-subcategories">
                                  <div class="tab-pane active" id="room">
                                     @include('base-dormitory.rooms.index')
+                                </div>
+
+                                <div class="tab-pane" id="material_type">
+                                    @include('base-dormitory.material_types.index')
                                 </div>
 
                                 <div class="tab-pane" id="material">
@@ -56,10 +66,16 @@
                     rooms_update: '{{ route('rooms.update', '') }}',
                     rooms_delete: '{{ route('rooms.destroy', '') }}',
 
-                    material_types_index: '{{ route('material_types.index', '') }}',
-                    material_types_store: '{{ route('material_types.store') }}',
-                    material_types_update: '{{ route('material_types.update', '') }}',
-                    material_types_delete: '{{ route('material_types.destroy', '') }}',
+                    material_types_index: '{{ route('materialTypes.index', '') }}',
+                    material_types_store: '{{ route('materialTypes.store') }}',
+                    material_types_update: '{{ route('materialTypes.update', '') }}',
+                    material_types_delete: '{{ route('materialTypes.destroy', '') }}',
+                    material_types_all_index: '{{ route('materialTypes.allMaterialType', '') }}',
+
+                    materials_index: '{{ route('materials.index', '') }}',
+                    materials_store: '{{ route('materials.store') }}',
+                    materials_update: '{{ route('materials.update', '') }}',
+                    materials_delete: '{{ route('materials.destroy', '') }}',
 
             }
         };

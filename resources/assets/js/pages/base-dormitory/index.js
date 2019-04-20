@@ -1,5 +1,6 @@
 import Store from './store';
 import RoomMobile from '../Components/RoomWidget';
+import CardMobile from '../Components/MobileWidget';
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
 
 window.v = new Vue({
@@ -7,6 +8,7 @@ window.v = new Vue({
     store: Store,
     components: {
         RoomMobile,
+        CardMobile,
         persianCalendar: VuePersianDatetimePicker
     },
 
@@ -26,6 +28,8 @@ window.v = new Vue({
         this.loadBuildings(this.page);
         this.loadGenders(this.page);
         this.loadMaterialTypes(this.page);
+        this.loadAllMaterialTypes(this.page);
+        this.loadMaterials(this.page);
     },
 
     computed: {
@@ -36,6 +40,10 @@ window.v = new Vue({
             return {
                 id: 0,
                 name: '',
+                code: '',
+                material_type: {
+                    id: 0,
+                },
                 room: {
 					id: 0,
 					capacity: 0,
@@ -55,8 +63,11 @@ window.v = new Vue({
         hasRoomRows: state => ((state.$store.getters.rooms != null) &&
             (state.$store.getters.rooms.length > 0)),
 
-        hasMaterialTypeRows: state => ((state.$store.getters.material_types != null) &&
-            (state.$store.getters.material_types.length > 0)),
+        hasMaterialTypeRows: state => ((state.$store.getters.materialTypes != null) &&
+            (state.$store.getters.materialTypes.length > 0)),
+
+        hasMaterialRows: state => ((state.$store.getters.materials != null) &&
+            (state.$store.getters.materials.length > 0)),
 
         buildings: state => state.$store.getters.buildings,
         genders: state => state.$store.getters.genders,
@@ -66,6 +77,11 @@ window.v = new Vue({
 
         materialTypes: state => state.$store.getters.materialTypes,
         materialTypes_paginate: state => state.$store.getters.materialTypesPaginate,
+        allMaterialTypes: state => state.$store.getters.allMaterialTypes,
+
+        materials: state => state.$store.getters.materials,
+        materials_paginate: state => state.$store.getters.materialsPaginate,
+
 
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
@@ -80,6 +96,8 @@ window.v = new Vue({
             this.loadBuildings(this.page);
             this.loadGenders(this.page);
             this.loadMaterialTypes(this.page);
+            this.loadAllMaterialTypes(this.page);
+            this.loadMaterials(this.page);
         },
 
 
@@ -126,7 +144,6 @@ window.v = new Vue({
             this.$store.dispatch('loadGenders', data);
             this.isLoading = false;
         },
-
          /**
          * Loads Building
          */
@@ -142,6 +159,31 @@ window.v = new Vue({
             this.isLoading = false;
         },
 
+        /**
+         * Loads All Material Type  page
+         */
+        loadAllMaterialTypes(page) {
+            let url = document.pageData.base_dormitory.pageUrls.material_types_all_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+            this.$store.dispatch('loadAllMaterialTypes', data);
+        },
+        /**
+         * Loads Material
+         */
+        loadMaterials(page) {
+            let url = document.pageData.base_dormitory.pageUrls.materials_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadMaterials', data);
+            Helper.scrollToApp ();
+            this.isLoading = false;
+        },
         /**
          * New record dialog
          */
@@ -159,8 +201,15 @@ window.v = new Vue({
             this.tempRecord = {
                 id: record.id,
                 name: record.name,
+                code: record.code,
                 room: {
-                    id: 0
+                    id: 0,
+                    building: {
+                        id:0
+                    },
+                    gender:{
+                        id:0
+                    },
                 },
             };
 
@@ -172,7 +221,6 @@ window.v = new Vue({
          */
         editRoomRecord(record) {
             this.errors.clear();
-            console.log('record', record);
 
 			// check tempRecord
             this.tempRecord = {
@@ -192,9 +240,6 @@ window.v = new Vue({
 				},
 
             };
-
-            console.log('editRoomRecord -> tempRecord ', this.tempRecord);
-
 
             this.formMode = Enums.FormMode.register;
         },
@@ -252,6 +297,61 @@ window.v = new Vue({
             } else {
                 data.url = '/rooms/' + data.id;
                 data.function = 'updateRooms';
+                this.updateRecord(data);
+            }
+
+            return;
+        },
+
+         /**
+         * Save Room Record
+         */
+        saveMaterialRecord() {
+            this.errors.clear();
+
+            return Promise.all([
+                this.$validator.validate('material_name'),
+                this.$validator.validate('material_code'),
+                this.$validator.validate('material_type_id'),
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
+
+                if (!hasErr) {
+                    this.saveMaterialData();
+                    return true;
+                }
+
+                let err = this.errors.all();
+
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
+
+                return false;
+            });
+        },
+
+        /**
+         * Save Material data
+         */
+        saveMaterialData() {
+            // Prepare data
+            let data = {
+                id: this.tempRecord.id,
+                name: this.tempRecord.name,
+                code: this.tempRecord.code,
+                material_type_id: this.tempRecord.material.id,
+                url: '/materials',
+                function: 'createMaterials',
+            };
+
+            console.log('save data Material  -> data', data);
+
+            this.isLoading = true;
+            if (0 == data.id) {
+                this.createRecord(data);
+            } else {
+                data.url = '/materials/' + data.id;
+                data.function = 'updateMaterials';
                 this.updateRecord(data);
             }
 

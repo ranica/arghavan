@@ -103,7 +103,7 @@ const actions = {
     },
 
     /**
-     * Load Record
+     * Load all Record
      */
     loadAllRecords(context, data) {
         return new Promise((resolve, reject) => {

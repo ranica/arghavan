@@ -16,6 +16,9 @@ Route::get('/gatedirects/manual', 'GatedirectController@manualData');
 Route::get('/province/allProvince', 'ProvinceController@allProvince')
             ->name('provinces.allProvince');
 
+Route::get('/materialType/allMaterialType', 'MaterialTypeController@allMaterialType')
+            ->name('materialTypes.allMaterialType');
+
 Route::resources ([
     // Base data
     '/melliats'             => 'MelliatController',

@@ -93,7 +93,7 @@
 
                            <!-- Register Form -->
                             <div v-if="isRegisterMode">
-                                @include('base-dormitories.materialTypes.create')
+                                @include('base-dormitory.material_types.create')
                             </div>
                            <!-- /Register Form -->
 
@@ -121,7 +121,7 @@
                                         <div class="modal-footer text-center">
                                             <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
                                             <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                                @click.prevent="deleteRecord('universities')">بله</button>
+                                                @click.prevent="deleteRecord('materialTypes')">بله</button>
                                         </div>
                                     </div>
                                 </div>

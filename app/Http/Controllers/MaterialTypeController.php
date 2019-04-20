@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\MaterialType;
 use Illuminate\Http\Request;
+use App\Http\Requests\MaterialTypeRequest;
+
 
 class MaterialTypeController extends Controller
 {
@@ -12,9 +14,29 @@ class MaterialTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
+     {
+        if ($request->ajax())
+        {
+            $material_types = MaterialType::paginate(Controller::C_PAGINATE_SIZE);
+
+            return $material_types;
+        }
+
+        return view('material_types.index');
+    }
+    /**
+     * Load all Data MaterialType
+     */
+
+    public function allMaterialType(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $material_types = MaterialType::all();
+
+            return $material_types;
+        }
     }
 
     /**
@@ -33,9 +55,18 @@ class MaterialTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MaterialTypeRequest $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $new_material_type = MaterialType::createIfNotExists($request);
+
+            return [
+                'status' => is_null($new_material_type) ? 1 : 0,
+                'material_type' => $new_material_type
+            ];
+
+        }
     }
 
     /**
@@ -67,9 +98,19 @@ class MaterialTypeController extends Controller
      * @param  \App\MaterialType  $materialType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MaterialType $materialType)
+    public function update(MaterialTypeRequest $request, MaterialType $materialType)
     {
-        //
+        if ($request->ajax())
+        {
+            $materialType->update([
+                    'name' => $request->name
+                ]);
+
+            return [
+                'status'   => 0,
+                'material_type'     => $materialType
+            ];
+        }
     }
 
     /**
@@ -78,8 +119,15 @@ class MaterialTypeController extends Controller
      * @param  \App\MaterialType  $materialType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MaterialType $materialType)
+    public function destroy(Request $request, MaterialType $materialType)
     {
-        //
+        if ($request->ajax())
+        {
+            $materialType->delete();
+
+            return [
+                'status' => 0
+            ];
+        }
     }
 }

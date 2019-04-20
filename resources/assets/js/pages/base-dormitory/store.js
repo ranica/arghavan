@@ -2,6 +2,7 @@ import RoomModule  from "./room/room";
 import MaterialTypeModule  from "./material_type/material_type";
 import GenderModule  from "./gender/gender";
 import BuildingModule  from "../base-structure/building/building";
+import MaterialModule  from "../base-structure/material/material";
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ const modules = {
     MaterialTypeModule,
     BuildingModule,
     GenderModule,
+    MaterialModule,
 };
 
 
@@ -21,8 +23,12 @@ const getters = {
     rooms: (state, getters) => getters['RoomModule/records'],
     roomsPaginate: (state, getters) => getters['RoomModule/allData'],
 
-    material_types: (state, getters) => getters['MaterialTypeModule/records'],
-    material_typesPaginate: (state, getters) => getters['MaterialTypeModule/allData'],
+    materialTypes: (state, getters) => getters['MaterialTypeModule/records'],
+    materialTypesPaginate: (state, getters) => getters['MaterialTypeModule/allData'],
+    allMaterialTypes: (state, getters) => getters['MaterialTypeModule/allRecords'],
+
+    materials: (state, getters) => getters['MaterialModule/records'],
+    materialsPaginate: (state, getters) => getters['MaterialModule/allData'],
 };
 
 const mutations = {
@@ -100,7 +106,7 @@ const actions = {
     },
 
      /**
-     * Loads Room
+     * Loads MaterialType
     */
     loadMaterialTypes(context, data) {
         return new Promise((resolve, reject) => {
@@ -143,7 +149,60 @@ const actions = {
         });
     },
 
+     /**
+     * Loads Material Type all
+    */
+   loadAllMaterialTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('MaterialTypeModule/loadAllRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
 
+    /**
+     * Loads Material
+    */
+    loadMaterials(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('MaterialModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * update Material
+     */
+    updateMaterials(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('MaterialModule/updateRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Create Material
+     */
+    createMaterials(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('MaterialModule/createRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * delete Material
+     */
+    deletematerials(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('MaterialModule/deleteRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
 };
 
 export default new Vuex.Store({

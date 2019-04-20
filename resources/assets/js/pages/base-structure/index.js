@@ -414,7 +414,7 @@ window.v = new Vue({
         },
 
         /*
-         * edit contractor record
+         * edit Block record
          */
         editBlockRecord(record) {
             this.errors.clear();
