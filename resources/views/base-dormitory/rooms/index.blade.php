@@ -62,7 +62,8 @@
                                                     class="btn btn-round btn-just-icon pull-left"
                                                     data-toggle="modal"
                                                     data-target="#removeRecordModalRoom"
-                                                    @click.prevent="readyToDelete(record)">
+                                                    @click.prevent="readyToDelete(record)"
+                                                    title="حذف رکورد">
                                                     <i class="material-icons">delete</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
@@ -70,11 +71,20 @@
                                             @can('command_edit')
                                                 <a href="#"
                                                     class="btn btn-round btn-info btn-just-icon pull-left"
-                                                    @click.prevent="editRoomRecord(record)">
+                                                    @click.prevent="editRoomRecord(record)"
+                                                    title="ویرایش رکورد">
                                                     <i class="material-icons">create</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
                                             @endcan
+
+                                            <a href="#"
+                                                class="btn btn-round btn-info btn-just-icon pull-left"
+                                                @click.prevent="setMaterial(record)"
+                                                title="تخصیص تجهیزات">
+                                                 <i class="fas fa-couch"></i>
+                                                <div class="ripple-container"></div>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>

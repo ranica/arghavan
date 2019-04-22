@@ -46,6 +46,12 @@
                                 </div>
                             </div>
                         </div>
+
+                         <!-- Assign permission dialog -->
+                        <div v-show="isAssignMaterial">
+                            @include('base-dormitory.assign-material-room.index')
+                        </div>
+
                     </div>
                 </div>
             </div>

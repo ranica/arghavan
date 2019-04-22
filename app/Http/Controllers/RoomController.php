@@ -17,7 +17,7 @@ class RoomController extends Controller
     {
         if ($request->ajax())
         {
-            $rooms = Room::with(['building', 'gender'])
+            $rooms = Room::with(['building', 'gender', 'materials'])
                          ->paginate(Controller::C_PAGINATE_SIZE);
 
             return $rooms;
@@ -124,6 +124,25 @@ class RoomController extends Controller
             return [
                 'status' => 0
             ];
+        }
     }
+
+    /**
+     * Set Room Material to User
+     */
+    public function setRoomMaterial(Request $request, Room $room)
+    {
+        if ($request->ajax() || true)       ///TODO: Remove true criteria ! just for test
+        {
+            $materials = $request->materials;
+            $room->giveMaterialsTo(materials);
+
+            // $user = static::loadPersonsData($user->id);
+
+            return [
+                'status'   => is_null($user) ? 1 : 0,
+                'room'     => $room
+            ];
+        }
     }
 }

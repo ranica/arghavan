@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
-class ReferralRequest extends FormRequest
+
+class MaterialRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,16 +30,20 @@ class ReferralRequest extends FormRequest
         if ($method == "post")
         {
             return [
-                'nationalId' => 'required|min:2|max:10|unique:referrals,deleted_at,null'
+                'code' => 'required|min:1|max:10|unique:materials,deleted_at,null',
+                'material_type_id'   => 'required|numeric|exists:materialTypes,id'
+
             ];
         }
 
         if (($method == "put") || ($method == "push"))
         {
-            $id = $this->referral->id;
+            $id = $this->material->id;
 
             return [
-                'nationalId' => 'required|min:2|max:10|unique:referrals,deleted_at,null,nationalId,' . $id
+                'code' => 'required|min:1|max:10|unique:materials,deleted_at,null,nationalId,' . $id,
+                'material_type_id'   => 'required|numeric|exists:materialTypes,id'
+
             ];
         }
 

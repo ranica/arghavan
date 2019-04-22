@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Material;
 use Illuminate\Http\Request;
+use App\Http\Requests\MaterialRequest;
+
 
 class MaterialController extends Controller
 {
@@ -12,9 +14,17 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $materials = Material::with('materialType')
+                             ->paginate(Controller::C_PAGINATE_SIZE);
+
+            return $materials;
+        }
+
+        return view('materials.index');
     }
 
     /**
@@ -33,9 +43,20 @@ class MaterialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MaterialRequest $request)
     {
-        //
+        if ($request->ajax())
+        {
+            // Check for duplicate
+            $new_material = Material::createIfNotExists($request);
+
+            $new_material->load('materialType')->get();
+
+            return [
+                'status' => is_null($new_material) ? 1 : 0,
+                'material'  => $new_material
+            ];
+        }
     }
 
     /**
@@ -67,9 +88,23 @@ class MaterialController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Material $material)
+    public function update(MaterialRequest $request, Material $material)
     {
-        //
+        if ($request->ajax())
+        {
+            $material->update([
+                'name' => $request->name,
+                'code' => $request->code,
+                'material_type_id' => $request->material_type_id
+            ]);
+
+            $material->load('materialType')->get();
+
+            return [
+                'status' => 0,
+                'material'  => $material
+            ];
+        }
     }
 
     /**
@@ -78,8 +113,15 @@ class MaterialController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material $material)
+    public function destroy(Request $request, Material $material)
     {
-        //
+        if ($request->ajax())
+        {
+            $material->delete();
+
+            return [
+                'status' => 0
+            ];
+        }
     }
 }

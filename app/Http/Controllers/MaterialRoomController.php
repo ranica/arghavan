@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\MaterialRoom;
 use Illuminate\Http\Request;
 
+
 class MaterialRoomController extends Controller
 {
     /**

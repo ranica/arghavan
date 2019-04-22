@@ -13,7 +13,6 @@
                     ثبت اطلاعات
                 </span>
 
-
                 <!-- material Type field -->
                 <div class="form-group label-floating"
                     :class="{'has-error' : errors.has('material_type_id')}">
@@ -24,9 +23,9 @@
                         v-validate="{ required: true, is_not: 0}"
                         data-vv-as ="دسته بندی ">
 
-                        <option v-for="material in materials"
-                                :value="material.id">
-                            @{{ material.name }}
+                        <option v-for="material_type in materialTypes"
+                                :value="material_type.id">
+                            @{{ material_type.name }}
                         </option>
 
                     </select>
@@ -34,19 +33,18 @@
                 </div>
                 <!-- /material type field -->
 
-                <!--  number room field -->
+                <!--  name field -->
                 <div class="form-group label-floating mrg-top-2em"
-                    :class="{'has-error' : errors.has('name')}">
+                    :class="{'has-error' : errors.has('material_name')}">
                     <label class="control-label">نام تجهیزات</label>
 
                     <input autofocus
                         required
                         class="form-control"
                         type="text"
-                        step="1"
                         min="0"
                         max="500"
-                        name="name"
+                        name="material_name"
                         minlength="1"
                         maxlength="50"
                         v-model="tempRecord.name"
@@ -56,21 +54,20 @@
 
                     <span class="material-input"></span>
                 </div>
-                <!-- /number room field -->
+                <!-- /name field -->
 
                  <!--  code field -->
                 <div class="form-group label-floating mrg-top-2em"
-                    :class="{'has-error' : errors.has('code')}">
+                    :class="{'has-error' : errors.has('material_code')}">
                     <label class="control-label">کد اموال</label>
 
                     <input autofocus
                         required
                         class="form-control"
                         type="text"
-                       
                         min="0"
                         max="500"
-                        name="code"
+                        name="material_code"
                         minlength="1"
                         maxlength="50"
                         v-model="tempRecord.code"
@@ -82,13 +79,11 @@
                 </div>
                 <!-- /code field -->
 
-              
-
                 <span class="pull-left">
                     <input type="submit"
                             value="ذخیره"
                             class="btn btn-fill btn-round btn-rose"
-                            @click.prevent="saveRoomRecord">
+                            @click.prevent="saveMaterialRecord">
 
                     <input type="button"
                             value="انصراف"

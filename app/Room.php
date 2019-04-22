@@ -36,6 +36,13 @@ class Room extends Model
         return $this->belongsTo(\App\Building::class);
     }
     /**
+     * Get assigned Group permit
+     */
+    public function materials()
+    {
+        return $this->belongsToMany(\App\Material::class);
+    }
+    /**
      * Creates if not exists.
      *
      * @param      <type>  $request  The request

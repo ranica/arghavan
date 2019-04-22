@@ -332,4 +332,7 @@ Route::get('student-chart', 'StudentController@studentChart')
 Route::get('teacher-chart', 'TeacherController@teacherChart')
         ->name('report.user.teacher.count.all');
 
+Route::put('/room/{room}/setMaterialRoom', 'RoomController@setMaterialRoom');
+
+
 

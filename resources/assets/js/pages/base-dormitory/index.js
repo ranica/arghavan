@@ -69,6 +69,9 @@ window.v = new Vue({
         hasMaterialRows: state => ((state.$store.getters.materials != null) &&
             (state.$store.getters.materials.length > 0)),
 
+        isAssignMaterial: state => state.formMode == Enums.FormMode.assignMaterial,
+
+
         buildings: state => state.$store.getters.buildings,
         genders: state => state.$store.getters.genders,
 
@@ -339,7 +342,7 @@ window.v = new Vue({
                 id: this.tempRecord.id,
                 name: this.tempRecord.name,
                 code: this.tempRecord.code,
-                material_type_id: this.tempRecord.material.id,
+                material_type_id: this.tempRecord.material_type.id,
                 url: '/materials',
                 function: 'createMaterials',
             };
@@ -530,6 +533,68 @@ window.v = new Vue({
             this.tempRecord = this.emptyRecord;
 
             this.changeFormMode(Enums.FormMode.normal);
+        },
+
+         /**
+         * Set material_room to record
+         */
+        setMaterial(record) {
+            console.log('set material -> record', record);
+            this.formMode = Enums.FormMode.assignMaterial;
+            this.tempRecord.id = record.id;
+
+            this.errors.clear();
+            this.tempRecord = $.extend(true, {}, this.emptyRecord);
+            // Update material-room checked state
+            this.materials.forEach(material => {
+                material.checked = false;
+                let res = record.materials.filter(materialRoom => materialRoom.id == material.id);
+
+                material.checked = (res.length > 0);
+            });
+        },
+
+        /**
+         * Save Material Record
+         */
+        saveMaterialRoomRecord () {
+            // Prepare data
+            let data = {
+                room_id: this.tempRecord.id,
+                materials: []
+            };
+              // Prepare data
+            data.materials = this.materials.filter(el => el.checked == true)
+                .map(el => el.id);
+
+            this.isLoading = true;
+
+            console.log('saveMaterialRoomRecord -> data', data);
+
+            // Try to save
+            this.$store.dispatch('saveMaterialRoomRecord', data)
+                .then(res => {
+                    this.isLoading = false;
+
+                    if (res) {
+                        demo.showNotification('ﺪﺷ ﻡﺎﺠﻧا ﺕیﻖﻓﻮﻣ ﺎﺑ ﺕﺎﻋﻼﻃا ﺖﺒﺛ', 'success');
+
+                        this.registerCancel();
+                    } else {
+                        demo.showNotification('ﺖﺳا ﻩﺪﺷ ﺖﺒﺛ ﻼﺒﻗ ﻡﺎﻧ ﻥیا', 'warning');
+                    }
+                })
+                .catch(err => {
+                    this.isLoading = false;
+
+                    if (err.response.status) {
+                        demo.showNotification('ﺖﺳا ﻩﺪﺷ ﺖﺒﺛ ﻼﺒﻗ ﻡﺎﻧ ﻥیا', 'danger');
+                    } else {
+                        demo.showNotification(err.message, 'danger');
+                    }
+                });
+
+            return;
         },
     },
 })

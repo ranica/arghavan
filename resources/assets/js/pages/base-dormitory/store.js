@@ -203,6 +203,35 @@ const actions = {
                 .catch(err => reject(err));
         });
     },
+
+    /**
+     * save Material Room
+     */
+    saveMaterialRoomRecord: (context, record) => {
+        return new Promise((resolve, reject) =>
+        {
+            let url = '/room/' + record.id + '/setMaterial';
+            let data = {
+                materials: record.materials
+            };
+
+            axios.put(url, data)
+                .then(res => {
+
+                    let status = (0 == res.data.status);
+                    let record = res.data.room;
+
+                    if (null != record) {
+                        context.commit ('updateRecord', {
+                                    getters: context.getters,
+                                    record : record[0]
+                                });
+                    }
+                    resolve(status);
+                })
+                .catch(err => reject(err));
+        });
+    },
 };
 
 export default new Vuex.Store({

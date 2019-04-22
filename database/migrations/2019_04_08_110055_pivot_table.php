@@ -170,6 +170,28 @@ class PivotTable extends Migration
             $table->primary(['user_id', 'term_id']);
         });
 
+         /**
+         * Migrate term to user
+         */
+        Schema::create('material_room', function (Blueprint $table) {
+            $table->unsignedInteger('material_id');
+            $table->unsignedInteger('room_id');
+
+            $table->foreign('material_id')
+                    ->references('id')
+                    ->on('materials')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->foreign('room_id')
+                    ->references('id')
+                    ->on('rooms')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->primary(['material_id', 'room_id']);
+        });
+
 
     }
     /**

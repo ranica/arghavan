@@ -1147,6 +1147,7 @@ window.v = new Vue({
          * Set Group_Permit to record
          */
         setGroupPermit(record) {
+            console.log('set grouppermits -> record', record);
             this.formMode = Enums.FormMode.assignGrouppermit;
 
             this.errors.clear();
