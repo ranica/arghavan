@@ -80,6 +80,7 @@ Route::resources ([
 
      '/rooms'               =>'RoomController',
      '/materialTypes'       =>'MaterialTypeController',
+     '/materials'           =>'MaterialController',
 ]);
 
 Route::get('/auth/edit', 'HomeController@editProfile')

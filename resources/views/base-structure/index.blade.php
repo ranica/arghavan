@@ -45,7 +45,7 @@
 
                     <li class="nav-item tabStyle">
                         <a class="nav-link" data-toggle="tab" href="#building_type" role="tablist">
-                          <i class="fas fa-warehouse fa-2x"></i>تعریف نوع ساختمان
+                          <i class="fas fa-warehouse fa-2x"></i>تعریف انواع ساختمان
                         </a>
                     </li>
 

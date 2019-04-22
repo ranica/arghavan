@@ -15,12 +15,12 @@
                             <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <li class="nav-item tabStyle active">
                                     <a class="nav-link" data-toggle="tab" href="#term" role="tablist">
-                                        <i class="material-icons">school</i> تعریف نیمسال تحصیلی
+                                        <i class="material-icons">school</i> نیمسال تحصیلی
                                     </a>
                                 </li>
                                 <li class="nav-item tabStyle">
                                     <a class="nav-link" data-toggle="tab" href="#university" role="tablist">
-                                        <i class="fas fa-university fa-2x"></i>تعریف دانشکده تحصیلی
+                                        <i class="fas fa-university fa-2x"></i> دانشکده تحصیلی
                                     </a>
                                 </li>
 

@@ -2,7 +2,7 @@ import RoomModule  from "./room/room";
 import MaterialTypeModule  from "./material_type/material_type";
 import GenderModule  from "./gender/gender";
 import BuildingModule  from "../base-structure/building/building";
-import MaterialModule  from "../base-structure/material/material";
+import MaterialModule  from "./material/material";
 
 Vue.use(Vuex);
 
