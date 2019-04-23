@@ -7,7 +7,7 @@
                 <h3 class="card-title col-sm-12">
                     <div>
                         <i class="fas fa-door-open fa-2x"></i>
-                        <span class="panel-heading">تجهیزات</span>
+                        <span class="panel-heading">مشخصات خوابگاه</span>
 
                         @can('command_insert')
                         <span class="pull-left" v-show="isNormalMode">
@@ -27,7 +27,7 @@
                         <div class="text-left">
                         </div>
 
-                        <div v-if="! hasMaterialRows">
+                        <div v-if="! hasDormitoryRows">
                             <h4 class="text-center f-BYekan">
                                 رکوردی ثبت نشده است
                             </h4>
@@ -36,11 +36,12 @@
                         <div class="table-responsive col-md-12 pc">
                             <table id="myTable"
                                     class="table table-striped table-hover "
-                                    v-show="hasMaterialRows">
+                                    v-show="hasDormitoryRows">
                                 <thead v-show="!isLoading">
-                                    <td width="160">دسته</td>
-                                    <td>نام تجهیزات</td>
-                                    <td>کد</td>
+                                    <td width="160">نام ساختمان</td>
+                                    <td>نیمسال تحصیلی</td>
+                                    <td>مقطع تحصیلی</td>
+                                    <td>برنامه تردد</td>
                                     <td></td>
                                 </thead>
                                 <tbody>
@@ -48,17 +49,19 @@
                                         <td colspan="2" class="text-center">در حال بارگذاری اطلاعات</td>
                                     </tr>
 
-                                    <tr v-for="record in materials">
-                                        <td>@{{ record.material_type.name }}</td>
-                                        <td>@{{ record.name }}</td>
-                                        <td>@{{ record.code }}</td>
+                                    <tr v-for="record in rooms">
+                                        <td>@{{ record.building.name }}</td>
+                                        <td>@{{ record.term.year }} @{{ record.term.semester.name }}</td>
+                                        <td>@{{ record.degree }}</td>
+                                        <td>@{{ record.gate_plan.name }}</td>
                                         <td class="text-left" width="160">
                                             @can('command_delete')
                                                 <a href="#"
                                                     class="btn btn-round btn-just-icon pull-left"
                                                     data-toggle="modal"
-                                                    data-target="#removeRecordModalMaterial"
-                                                    @click.prevent="readyToDelete(record)">
+                                                    data-target="#removeRecordModalDormitory"
+                                                    @click.prevent="readyToDelete(record)"
+                                                    title="حذف رکورد">
                                                     <i class="material-icons">delete</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
@@ -66,29 +69,31 @@
                                             @can('command_edit')
                                                 <a href="#"
                                                     class="btn btn-round btn-info btn-just-icon pull-left"
-                                                    @click.prevent="editMaterialRecord(record)">
+                                                    @click.prevent="editDormitoryRecord(record)"
+                                                    title="ویرایش رکورد">
                                                     <i class="material-icons">create</i>
                                                     <div class="ripple-container"></div>
                                                 </a>
                                             @endcan
+                                           
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <material-mobile
-                                    v-for="record in materials"
+                        <dormitory-mobile
+                                    v-for="record in dormitories"
                                     :key= "record.id"
                                     :my-data="record"
-                                    @edit-data="editMaterialRecord"
+                                    @edit-data="editDormitoryRecord"
                                     @delete-data="readyToDelete(record)"
-                                    title="مشخصات تجهیزات">
-                        </material-mobile>
+                                    title="مشخصات خوابگاه">
+                        </dormitory-mobile>
 
                         <div class="text-center">
-                            <pagination :data="materials_paginate"
-                                        v-on:pagination-change-page="loadMaterials"
+                            <pagination :data="dormitories_paginate"
+                                        v-on:pagination-change-page="loadDormitories"
                                         :limit= "{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
                                         :show-disable= "true">
                             </pagination>
@@ -98,13 +103,13 @@
 
                     <!-- Register Form -->
                     <div v-show="isRegisterMode">
-                        @include('base-dormitory.materials.create')
+                        @include('base-dormitory.dormitories.create')
                     </div>
                     <!-- /Register Form -->
 
                     <!-- small modal -->
                     <div class="modal fade"
-                        id="removeRecordModalMaterial"
+                        id="removeRecordModalDormitory"
                         tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel"
                         aria-hidden="true">
@@ -130,7 +135,7 @@
                                     <button type="button"
                                             class="btn btn-success btn-simple"
                                             data-dismiss="modal"
-                                            @click.prevent="deleteRecord('materials')">بله
+                                            @click.prevent="deleteRecord('dormitoreis')">بله
                                     </button>
                                 </div>
                             </div>

@@ -14,13 +14,27 @@
                             <h3 class="title text-center">اطلاعات پایه خوابگاه </h3>
                             <ul class="nav nav-pills nav-pills-warning nav-pills-icons justify-content-center" role="tablist">
                                 <li class="nav-item tabStyle active">
-                                    <a class="nav-link" data-toggle="tab" href="#room" role="tablist">
+                                    <a class="nav-link" 
+                                        data-toggle="tab" 
+                                        href="#dormitory" 
+                                        role="tablist">
+                                        <i class="fas fa-bed"></i> مشخصات خوابگاه
+                                    </a>
+                                </li>
+                                <li class="nav-item tabStyle">
+                                    <a class="nav-link" 
+                                        data-toggle="tab" 
+                                        href="#room" 
+                                        role="tablist">
                                         <i class="fas fa-door-open"></i>تعریف اتاق
                                     </a>
                                 </li>
 
                                 <li class="nav-item tabStyle">
-                                    <a class="nav-link" data-toggle="tab" href="#material_type" role="tablist">
+                                    <a class="nav-link" 
+                                        data-toggle="tab" 
+                                        href="#material_type" 
+                                        role="tablist">
                                         <i class="fas fa-couch"></i>تعریف انواع تجهیزات
                                     </a>
                                 </li>
@@ -33,7 +47,11 @@
                             </ul>
 
                             <div class="tab-content tab-space tab-subcategories">
-                                 <div class="tab-pane active" id="room">
+                                <div class="tab-pane active" id="dormitory">
+                                    @include('base-dormitory.dormitories.index')
+                                </div>
+
+                                <div class="tab-pane" id="room">
                                     @include('base-dormitory.rooms.index')
                                 </div>
 

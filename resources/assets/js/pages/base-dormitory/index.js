@@ -1,6 +1,7 @@
 import Store from './store';
 import RoomMobile from '../Components/RoomWidget';
 import CardMobile from '../Components/MobileWidget';
+import MaterialMobile from '../Components/MaterialWidget';
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
 
 window.v = new Vue({
@@ -9,6 +10,7 @@ window.v = new Vue({
     components: {
         RoomMobile,
         CardMobile,
+        MaterialMobile,
         persianCalendar: VuePersianDatetimePicker
     },
 
@@ -199,12 +201,43 @@ window.v = new Vue({
          * Edit record Main
          */
         editRecord(record) {
+            console.log('record', record);
             this.errors.clear();
 
             this.tempRecord = {
                 id: record.id,
                 name: record.name,
                 code: record.code,
+                room: {
+                    id: 0,
+                    building: {
+                        id:0
+                    },
+                    gender:{
+                        id:0
+                    },
+                },
+            };
+
+            this.formMode = Enums.FormMode.register;
+        },
+
+         /**
+         * Edit record Main
+         */
+        editMaterialRecord(record) {
+            this.errors.clear();
+
+            console.log('edit material record', record);
+
+            this.tempRecord = {
+                id: record.id,
+                name: record.name,
+                code: record.code,
+                material_type: {
+                    id: record.material_type.id,
+                    name: record.material_type.name,
+                },
                 room: {
                     id: 0,
                     building: {

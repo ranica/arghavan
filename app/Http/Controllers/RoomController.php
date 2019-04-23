@@ -130,17 +130,17 @@ class RoomController extends Controller
     /**
      * Set Room Material to User
      */
-    public function setRoomMaterial(Request $request, Room $room)
+    public function setMaterial(Request $request, Room $room)
     {
-        if ($request->ajax() || true)       ///TODO: Remove true criteria ! just for test
+        if ($request->ajax())       ///TODO: Remove true criteria ! just for test
         {
             $materials = $request->materials;
-            $room->giveMaterialsTo(materials);
+            $room->giveMaterialsTo($materials);
 
             // $user = static::loadPersonsData($user->id);
 
             return [
-                'status'   => is_null($user) ? 1 : 0,
+                'status'   => is_null($room) ? 1 : 0,
                 'room'     => $room
             ];
         }

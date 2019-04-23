@@ -32,6 +32,20 @@ const getters = {
 };
 
 const mutations = {
+    /**
+     * Update an existing record
+     */
+    updateRecord: (state, payload) => {
+        let getters = payload.getters;
+        let record  = payload.record;
+
+        let index   = getters.records.map(el => el.id )
+                                    .indexOf(record.id);
+        if (-1 == index){
+            return;
+        }
+        getters.records[index] = record;
+    },
 
 };
 
@@ -210,7 +224,7 @@ const actions = {
     saveMaterialRoomRecord: (context, record) => {
         return new Promise((resolve, reject) =>
         {
-            let url = '/room/' + record.id + '/setMaterial';
+            let url = '/room/' + record.room_id + '/setMaterial';
             let data = {
                 materials: record.materials
             };

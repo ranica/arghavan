@@ -81,4 +81,12 @@ class Room extends Model
         return null;
     }
 
+     /**
+     * Give Material
+     */
+    public function giveMaterialsTo($material)
+    {
+        $this->materials()->sync($material);
+    }
+
 }
