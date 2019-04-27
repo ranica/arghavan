@@ -61,7 +61,7 @@
                                             <tr v-for="record in records">
                                                 <td>@{{ record.building.name }}</td>
                                                 <td>@{{ record.term.year }} @{{ record.term.semester.name }}</td>
-                                                <td>@{{ record.degree }}</td>
+                                                <td>@{{ record.degree.name }}</td>
                                                 <td>@{{ record.gate_plan.name }}</td>
                                                 <td class="text-left" width="160">
 

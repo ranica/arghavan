@@ -95,6 +95,8 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.get(url)
                 .then(res => {
+
+                    console.log('res.data', res.data);
                     context.commit('setDormitoryInformation', res.data);
 
                     resolve(res);
@@ -145,7 +147,7 @@ const actions = {
                 axios.post('/buildingInformations', record)
                     .then(res => {
                         let status   = (0 == res.data.status);
-                        let newRecord = res.data.building_information;
+                        let newRecord = res.data.buildingInformation;
 
                         if (null != newRecord) {
                             context.commit('insertRecord', newRecord);
@@ -161,7 +163,7 @@ const actions = {
                 axios.put('/buildingInformations/' + record.id, record)
                     .then(res => {
                         let status       = (0 == res.data.status);
-                        let updatedRecord = res.data.building_information;
+                        let updatedRecord = res.data.buildingInformation;
 
                         if (null != updatedRecord) {
                             context.commit('updateRecord', {

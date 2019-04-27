@@ -101,6 +101,7 @@ window.v = new Vue({
             this.$store.dispatch('loadRecords', page)
                 .then(res => {
                     this.showInvisibleItems();
+                    this.isLoading = false;
                 })
                 .catch(err => {
                     this.isLoading = false;
@@ -135,7 +136,6 @@ window.v = new Vue({
          */
         readyToDelete(record) {
             this.tempRecord = record;
-            $('#removeRecordModal').modal('show');
         },
         /**
          * Delete a record

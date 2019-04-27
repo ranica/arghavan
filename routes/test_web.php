@@ -171,9 +171,33 @@ Route::view('table', 'people.table');
 
 
 Route::get('ipass', function () {
-    $uni = \App\Field::where('university_id', '=', 1)->get();
+   $buildings = \App\Building::select (['id',
+                                                'name'])
+                                ->get ();
 
-    return $uni;
+            $terms = \App\Term::with('semester')
+                                ->select (['id',
+                                            'semester_id',
+                                            'year',
+                                            'startDate',
+                                            'endDate'])
+                                  ->get ();
+            $degrees = \App\Degree::select (['id',
+                                            'name'])
+                                     ->get ();
+            $gatePlans = \App\GatePlan::select (['id',
+                                                'name'])
+                                     ->get ();
+
+
+            $result = [
+                        'degrees'        => $degrees,
+                        'buildings'      => $buildings,
+                        'gatePlans'      => $gatePlans,
+                        'terms'           => $terms,
+                   ];
+
+            return $result;
 });
 
 

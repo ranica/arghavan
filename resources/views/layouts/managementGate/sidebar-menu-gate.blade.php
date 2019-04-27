@@ -13,7 +13,7 @@
                   <!-- Gate plan -->
                 <!-- @can('menu_gate_zoon') -->
                     <li>
-                        <a href="{{ url('/gatePlan') }}">
+                        <a href="{{ url('/gatePlans') }}">
                             <span class="sidebar-normal">
                                 برنامه تردد
                             </span>

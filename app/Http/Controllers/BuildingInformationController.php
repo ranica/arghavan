@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\BuildingInformation;
 use Illuminate\Http\Request;
+use App\Http\Requests\BuildingInformationRequest;
+
 
 class BuildingInformationController extends Controller
 {
@@ -16,7 +18,7 @@ class BuildingInformationController extends Controller
     {
         if ($request->ajax())
         {
-            $building_informations = BuildingInformation::with('degree','term', 'gatePlan','building')
+            $building_informations = BuildingInformation::with('degree','term.semester', 'gatePlan','building')
                           ->paginate(Controller::C_PAGINATE_SIZE);
 
             return $building_informations;
@@ -41,9 +43,24 @@ class BuildingInformationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function store(BuildingInformationRequest $request)
     {
-        //
+        if ($request->ajax())
+        {
+            // Check for duplicate
+            $newDormitory = BuildingInformation::createIfNotExists($request);
+
+            $newDormitory->load('degree')->get();
+            $newDormitory->load('building')->get();
+            $newDormitory->load('gatePlan')->get();
+            $newDormitory->load('term.semester')->get();
+
+            return [
+                'status' => is_null($newDormitory) ? 1 : 0,
+                'buildingInformation'   => $newDormitory
+            ];
+        }
     }
 
     /**
@@ -75,9 +92,27 @@ class BuildingInformationController extends Controller
      * @param  \App\BuildingInformation  $buildingInformation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BuildingInformation $buildingInformation)
+    public function update(BuildingInformationRequest $request, BuildingInformation $buildingInformation)
     {
-        //
+        if ($request->ajax())
+        {
+            $buildingInformation->update([
+                'degree_id'     => $request->degree_id,
+                'term_id'       => $request->term_id,
+                'building_id'   => $request->building_id,
+                'gate_plan_id'   => $request->gatePlan_id,
+            ]);
+
+            $buildingInformation->load('degree')->get();
+            $buildingInformation->load('building')->get();
+            $buildingInformation->load('gatePlan')->get();
+            $buildingInformation->load('term.semester')->get();
+
+            return [
+                'status' => 0,
+                'buildingInformation'   => $buildingInformation
+            ];
+        }
     }
 
     /**
@@ -86,9 +121,16 @@ class BuildingInformationController extends Controller
      * @param  \App\BuildingInformation  $buildingInformation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BuildingInformation $buildingInformation)
+    public function destroy(Request $request, BuildingInformation $buildingInformation)
     {
-        //
+        if ($request->ajax())
+        {
+            $buildingInformation->delete();
+
+            return [
+                'status' => 0
+            ];
+        }
     }
 
     /**
@@ -135,17 +177,17 @@ class BuildingInformationController extends Controller
             $degrees = \App\Degree::select (['id',
                                             'name'])
                                      ->get ();
-            $gatePlans = \App\gatePlan::select (['id',
-                                                    'name'])
+            $gatePlans = \App\GatePlan::select (['id',
+                                                'name'])
                                      ->get ();
 
 
             $result = [
                         'groups'       => $groups,
-                       'degrees'        => $degrees,
-                       'buildings'      => $buildings,
-                       'gatePlans'      => $gatePlans,
-                       'terms'           => $terms,
+                        'degrees'        => $degrees,
+                        'buildings'      => $buildings,
+                        'gatePlans'      => $gatePlans,
+                        'terms'           => $terms,
                    ];
 
             return $result;

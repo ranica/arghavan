@@ -6,7 +6,6 @@ let Helper = {
         mapForm.method = "POST"; // or "post" if appropriate
         mapForm.action = url;
 
-
         var props = Object.keys (data);
         for (var i =0; i<props.length ;i++)
         {

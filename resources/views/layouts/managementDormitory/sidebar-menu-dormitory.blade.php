@@ -16,7 +16,7 @@
                             <li>
                                 <a href="{{ url('/buildingInformations') }}">
                                     <span class="sidebar-normal">
-                                        تعیرف خوابگاه
+                                        تعریف خوابگاه
                                     </span>
                                 </a>
                             </li>

@@ -1,9 +1,15 @@
 import Store from './store';
+import DormitoryMobile from '../Components/DormitoryWidget';
+
 
 window.v = new Vue({
 	el: '#app',
 
 	store: Store,
+
+     components: {
+        DormitoryMobile,
+    },
 
 	data: {
 		formMode: Enums.FormMode.normal,
@@ -56,7 +62,7 @@ window.v = new Vue({
 				semester: {
 					id: 0
 				},
-				gate_plan: {
+				gatePlan: {
 					id: 0
 				},
 			};
@@ -173,18 +179,27 @@ window.v = new Vue({
 		 */
 		editRecord(record) {
 			this.clearErrors();
+            console.log('edit record-> record', record);
 
 			this.tempRecord = {
 					id       : record.id,
 
 					building: {
-						id  : record.buildings.id,
-						name: record.buildings.name
+						id  : record.building.id,
+						name: record.building.name
 					},
-					// term: {
-					// 	id  : record.semester.id,
-					// 	name: record.ye.name
-					// }
+					term: {
+						id  : record.term.semester.id,
+						name: record.term.year
+					},
+                    degree: {
+                        id  : record.degree.id,
+                        name: record.degree.name
+                    },
+                    gatePlan: {
+                        id  : record.gate_plan.id,
+                        name: record.gate_plan.name
+                    }
 				};
 
 			this.formMode = Enums.FormMode.register;
@@ -226,10 +241,12 @@ window.v = new Vue({
 							building_id  : this.tempRecord.building.id,
 							degree_id    : this.tempRecord.degree.id,
 							term_id      : this.tempRecord.term.id,
-                            gate_plan_id : this.tempRecord.gatePlan.id,
+                            gatePlan_id : this.tempRecord.gatePlan.id,
 						};
 
 						this.isLoading = true;
+
+                        console.log('save record->data', data);
 
 						// Try to save
 						this.$store.dispatch('saveRecord', data)

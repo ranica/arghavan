@@ -16,15 +16,14 @@ class CitySeeder extends Seeder
 
         if( file_exists($fileName_city))
         {
-            
             $content = \File::get($fileName_city);
             $jsonData = json_decode($content);
 
             $city = $jsonData->city->data;
-         
-          
-            for ($i= 0; $i < count($city) ; $i++) 
-            { 
+
+
+            for ($i= 0; $i < count($city) ; $i++)
+            {
                 $search = $city[$i]->name;
 
                 $value = \App\Province::where('name' , 'like', '%'. $search .'%')
@@ -36,8 +35,8 @@ class CitySeeder extends Seeder
                                 ]);
 
             }
-         
+
         }
-       
+
     }
 }

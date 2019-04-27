@@ -116,7 +116,7 @@ class BuildingController extends Controller
      * @param  \App\Building  $building
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Building $building)
+    public function destroy(Request $request, Building $building)
     {
         if ($request->ajax())
         {

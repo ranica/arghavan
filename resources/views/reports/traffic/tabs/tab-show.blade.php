@@ -49,7 +49,10 @@
                     </div>
 
                     <span class="pull-left" v-show = "is_search">
-                        <a class="btn btn-success confg" href="#" @click.prevent="exportTrafficExcel" title="خروجی اکسل">
+                        <a class="btn btn-success confg"
+                            href="#"
+                            @click.prevent="exportTrafficExcel"
+                            title="خروجی اکسل">
                           <i class="fas fa-file-excel fa-2x"></i>
                         </a>
                         <a class="btn btn-rose confg" href="#" @click.prevent="exportTrafficPDF" title="خروجی پی دی اف">

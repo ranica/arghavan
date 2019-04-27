@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\GatePlan;
 use Illuminate\Http\Request;
+use App\Http\Requests\GatePlanRequest;
+
 
 class GatePlanController extends Controller
 {

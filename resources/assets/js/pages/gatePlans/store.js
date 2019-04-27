@@ -69,13 +69,13 @@ const mutations = {
 };
 
 const actions = {
-	
+
 	/**
 	 * Load records data
 	 */
 	loadRecords(context, page) {
 		return new Promise((resolve, reject) => {
-			axios.get('/gatedevices?page=' + page)
+			axios.get('/gatePlans?page=' + page)
 				.then(res => {
 					// Add "selected" property to items
 					let allData = res.data;
@@ -112,7 +112,7 @@ const actions = {
 					.then(res => {
 
 						let status    = (0 == res.data.status);
-						let newRecord = res.data.gate_plan;
+						let newRecord = res.data.gatePlan;
 
 						if (null != newRecord) {
 							context.commit('insertRecord', newRecord);
@@ -128,7 +128,7 @@ const actions = {
 				axios.put('/gatePlans/' + record.id, record)
 					.then(res => {
 						let status       = (0 == res.data.status);
-						let updatedRecord = res.data.gate_plan;
+						let updatedRecord = res.data.gatePlan;
 
 						if (null != updatedRecord) {
 							context.commit('updateRecord',{

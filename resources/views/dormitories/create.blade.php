@@ -93,11 +93,11 @@
                     <!-- gate_plan name field -->
                     <div class="row">
                         <div class="form-group label-floating"
-                            :class="{'has-error' : errors.has('gate_plan_id')}">
+                            :class="{'has-error' : errors.has('gatePlan_id')}">
                             <label class="control-label">برنامه تردد</label>
                             <select class="form-control"
-                                v-model="tempRecord.gate_plan.id"
-                                name="gate_plan_id"
+                                v-model="tempRecord.gatePlan.id"
+                                name="gatePlan_id"
                                 v-validate="{ required: true, is_not: 0}"
                                 data-vv-as ="برنامه تردد">
 
