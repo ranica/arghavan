@@ -9,6 +9,19 @@
         </a>
         <div class="collapse" id="gateManagementMenu">
             <ul class="nav">
+
+                  <!-- Gate plan -->
+                <!-- @can('menu_gate_zoon') -->
+                    <li>
+                        <a href="{{ url('/gatePlan') }}">
+                            <span class="sidebar-normal">
+                                برنامه تردد
+                            </span>
+                        </a>
+                    </li>
+                <!-- @endcan -->
+                <!-- /Gate plan -->
+
                 <!-- Zoon -->
                 @can('menu_gate_zoon')
                     <li>

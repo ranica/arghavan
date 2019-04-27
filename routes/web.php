@@ -81,6 +81,8 @@ Route::resources ([
      '/rooms'               =>'RoomController',
      '/materialTypes'       =>'MaterialTypeController',
      '/materials'           =>'MaterialController',
+     '/buildingInformations'  =>'BuildingInformationController',
+     '/gatePlans'           =>'GatePlanController',
 ]);
 
 Route::get('/auth/edit', 'HomeController@editProfile')
@@ -184,6 +186,9 @@ Route::get('/terms/data/all', 'TermController@allTerm');
 
 Route::get('/base/all_information', 'RegistrationController@baseInformation')
     ->name ('base.all_Information');
+
+Route::get('/dormitory/all_information', 'BuildingInformationController@dormitoryInformation')
+    ->name ('dormitory.all_Information');
 
 Route::post('unlock', 'HomeController@checkAndUnlockUser')
      ->name ('unlock');

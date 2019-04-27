@@ -14,6 +14,14 @@
                         {{-- management dormitory --}}
                         {{-- @can('') --}}
                             <li>
+                                <a href="{{ url('/buildingInformations') }}">
+                                    <span class="sidebar-normal">
+                                        تعیرف خوابگاه
+                                    </span>
+                                </a>
+                            </li>
+
+                             <li>
                                 <a href="#">
                                     <span class="sidebar-normal">
                                         مدیریت خوابگاه

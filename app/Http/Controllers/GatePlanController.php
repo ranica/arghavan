@@ -12,9 +12,15 @@ class GatePlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $gate_plans = GatePlan::paginate(Controller::C_PAGINATE_SIZE);
+            return $gate_plans;
+        }
+
+        return view('gate_plans.index');
     }
 
     /**
@@ -33,9 +39,18 @@ class GatePlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GatePlanRequest $request)
     {
-        //
+        if ($request->ajax())
+        {
+            // Check for duplicate
+            $newGatePlan = \App\GatePlan::createIfNotExists($request);
+
+            return [
+                'status' => is_null($newGatePlan) ? 1 : 0,
+                'gatePlan' => $newGatePlan
+            ];
+        }
     }
 
     /**
@@ -67,9 +82,17 @@ class GatePlanController extends Controller
      * @param  \App\GatePlan  $gatePlan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GatePlan $gatePlan)
+    public function update(GatePlanRequest $request, GatePlan $gatePlan)
     {
-        //
+        if ($request->ajax())
+        {
+            $gatePlan->update([ 'name' => $request->name ]);
+
+            return [
+                'status' => 0,
+                'gatePlan' => $gatePlan
+            ];
+        }
     }
 
     /**
@@ -78,8 +101,15 @@ class GatePlanController extends Controller
      * @param  \App\GatePlan  $gatePlan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GatePlan $gatePlan)
+    public function destroy(Request $request, GatePlan $gatePlan)
     {
-        //
+        if ($request->ajax())
+        {
+            $gatePlan->delete();
+
+            return [
+                'status' => 0
+            ];
+        }
     }
 }

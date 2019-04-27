@@ -69,7 +69,7 @@ const getters =
 	/**
 	 * Group_Permit
 	 */
-	grouppermits: state => state._grouppermits,
+	// grouppermits: state => state._grouppermits,
 	/**
 	 * Terms
 	 */
@@ -78,32 +78,32 @@ const getters =
 	/**
 	*Gate Group
 	*/
-	gategroups: state => state._gategroups,
+	// gategroups: state => state._gategroups,
 
 	/**
 	 * Return melliats
 	 */
-	melliats: state => state._melliats,
+	// melliats: state => state._melliats,
 
 	/**
 	 * Return genders
 	 */
-	genders: state => state._genders,
+	// genders: state => state._genders,
 
 	/**
 	 * Return groups
 	 */
-	groups: state => state._groups,
+	// groups: state => state._groups,
 
 	/**
 	 * Return situations
 	 */
-	situations: state => state._situations,
+	// situations: state => state._situations,
 
 	/**
 	 * Return provinces
 	 */
-	provinces: state => state._provinces,
+	// provinces: state => state._provinces,
 
 	/**
 	 * Return cities
@@ -113,12 +113,12 @@ const getters =
 	/**
 	 * Return degrees
 	 */
-	degrees: state => state._degrees,
+	// degrees: state => state._degrees,
 
 	/**
 	 * Return parts
 	 */
-	parts: state => state._parts,
+	// parts: state => state._parts,
 
 	/**
 	 * Return fields
@@ -128,22 +128,22 @@ const getters =
 	/**
 	 * Return universities
 	 */
-	universities: state => state._universities,
+	// universities: state => state._universities,
 
 	/**
 	 * Return departments
 	 */
-	departments: state => state._departments,
+	// departments: state => state._departments,
 
 	/**
 	 * Return contracts
 	 */
-	contracts: state => state._contracts,
+	// contracts: state => state._contracts,
 
 	/*
 	CardTypes
 	 */
-	cardtypes: state => state._cardtypes,
+	// cardtypes: state => state._cardtypes,
 };
 
 
@@ -172,6 +172,9 @@ const mutations =
 			kintypes: data.kintypes,
 		};
 	},
+	/**
+	 * Sets the image url.
+	 */
 	setImageUrl(state, data){
 		//console.log(data.record);
 		// data.people.pictureUrl = data.thumb_url;
@@ -188,9 +191,9 @@ const mutations =
 	/**
 	 * Set Kintypes
 	 */
-	setKintypes: (state, data) => {
-		state._kintypes = data;
-	},
+	// setKintypes: (state, data) => {
+	// 	state._kintypes = data;
+	// },
 
 	/**
 	 * Set Parent
@@ -202,9 +205,9 @@ const mutations =
 	/**
 	 * Set groupPermit
 	 */
-	setGrouppermits: (state, data) => {
-		state._grouppermits = data;
-	},
+	// setGrouppermits: (state, data) => {
+	// 	state._grouppermits = data;
+	// },
 
 	/**
 	 * Set term
@@ -216,43 +219,43 @@ const mutations =
 	/**
 	 * Set gategroup
 	 */
-	setGateGroups: (state, data) => {
-		state._gategroups = data;
-	},
+	// setGateGroups: (state, data) => {
+	// 	state._gategroups = data;
+	// },
 
 	/**
 	 * Set melliats
 	 */
-	setMelliats: (state, data) => {
-		state._melliats = data;
-	},
+	// setMelliats: (state, data) => {
+	// 	state._melliats = data;
+	// },
 
 	/**
 	 * Set groups
 	 */
-	setGroups: (state, data) => {
-		state._groups = data;
-	},
+	// setGroups: (state, data) => {
+	// 	state._groups = data;
+	// },
 
 	/**
 	 * Set genders
 	 */
-	setGenders: (state, data) => {
-		state._genders = data;
-	},
+	// setGenders: (state, data) => {
+	// 	state._genders = data;
+	// },
 
 	/**
 	 * Set situations
 	 */
-	setSituations: (state, data) =>	{
-		state._situations = data;
-	},
+	// setSituations: (state, data) =>	{
+	// 	state._situations = data;
+	// },
 	/**
 	 * Set provinces
 	 */
-	setProvinces: (state, data) => {
-		state._provinces = data;
-	},
+	// setProvinces: (state, data) => {
+	// 	state._provinces = data;
+	// },
 
 	/**
 	 * Set cities
@@ -264,9 +267,9 @@ const mutations =
 	/**
 	 * Set universities
 	 */
-	setUniversities: (state, data) => {
-		state._universities = data;
-	},
+	// setUniversities: (state, data) => {
+	// 	state._universities = data;
+	// },
 
 	/**
 	 * Set fields
@@ -278,37 +281,37 @@ const mutations =
 	/**
 	 * Set degrees
 	 */
-	setDegrees: (state, data) => {
-		state._degrees = data;
-	},
+	// setDegrees: (state, data) => {
+	// 	state._degrees = data;
+	// },
 
 	/**
 	 * Set parts
 	 */
-	setParts: (state, data) => {
-		state._parts = data;
-	},
+	// setParts: (state, data) => {
+	// 	state._parts = data;
+	// },
 
 	/**
 	 * Set departments
 	 */
-	setDepartments: (state, data) => {
-		state._departments = data;
-	},
+	// setDepartments: (state, data) => {
+	// 	state._departments = data;
+	// },
 
 	/**
 	 * Set contracts
 	 */
-	setContracts: (state, data) => {
-		state._contracts = data;
-	},
+	// setContracts: (state, data) => {
+	// 	state._contracts = data;
+	// },
 
 	/**
 	 * Set cardtypes
 	 */
-	setCardtypes: (state, data) => {
-		state._cardtypes = data;
-	},
+	// setCardtypes: (state, data) => {
+	// 	state._cardtypes = data;
+	// },
 
 	/**
 	 * Update an existing Parent record
@@ -380,7 +383,7 @@ const actions = {
 	 * Load all base information
 	 */
 	loadBaseInformation(context, data) {
-		console.log('store -> load base information -> data', data);
+		// console.log('store -> load base information -> data', data);
 		let url = data.url;
 		return new Promise((resolve, reject) => {
 			axios.get(url)
@@ -396,18 +399,18 @@ const actions = {
 	/**
 	 * Load all Kintypes
 	 */
-	loadKintypes(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/kintypes')
-				.then(res => {
+	// loadKintypes(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/kintypes')
+	// 			.then(res => {
 
-					context.commit('setKintypes', res.data.data);
+	// 				context.commit('setKintypes', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
 	/**
 	 * Load Parent records data
@@ -505,17 +508,17 @@ const actions = {
 	/**
 	 * Load Grouppermits
 	 */
-	loadGrouppermits(context){
-		return new Promise((resolve, reject) => {
-			axios.get('/grouppermits/data/all')
-				.then(res => {
-					context.commit ('setGrouppermits', res.data);
+	// loadGrouppermits(context){
+	// 	return new Promise((resolve, reject) => {
+	// 		axios.get('/grouppermits/data/all')
+	// 			.then(res => {
+	// 				context.commit ('setGrouppermits', res.data);
 
-					resolve(res);
-				})
-				.catch(err => reject(err) );
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(err => reject(err) );
+	// 	});
+	// },
 
 	/**
 	 * Load Terms
@@ -535,17 +538,17 @@ const actions = {
 	/**
 	 * Load Gate Group
 	 */
-	loadGateGroups(context){
-		return new Promise((resolve, reject) => {
-			axios.get('/gategroups/data/all')
-				.then(res => {
-					context.commit ('setGateGroups', res.data);
+	// loadGateGroups(context){
+	// 	return new Promise((resolve, reject) => {
+	// 		axios.get('/gategroups/data/all')
+	// 			.then(res => {
+	// 				context.commit ('setGateGroups', res.data);
 
-					resolve(res);
-				})
-				.catch(err => reject(err) );
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(err => reject(err) );
+	// 	});
+	// },
 
 	/*
 	Upload Image
@@ -561,64 +564,38 @@ const actions = {
 		});
 	},
 
-	/**
-	 * Load all melliats
-	 */
-	loadMelliats(context) {
-		return new Promise((resolve, reject) => {
-			axios.get('/melliats')
-				.then(res => {
-					context.commit('setMelliats', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
 
 	/**
 	 * Load all groups
 	 */
-	loadGroups(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/groups')
-				.then(res => {
-					context.commit('setGroups', res.data.data);
+	// loadGroups(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/groups')
+	// 			.then(res => {
+	// 				context.commit('setGroups', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
-	/**
-	 * Load all genders
-	 */
-	loadGenders(context) {
-		return new Promise((resolve, reject) => {
-			axios.get('/genders')
-				.then(res => {
-					context.commit('setGenders', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
 
 	/**
 	 * Load all situations
 	 */
-	loadSituations(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/situations')
-				.then(res => {
-					context.commit('setSituations', res.data.data);
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// loadSituations(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/situations')
+	// 			.then(res => {
+	// 				context.commit('setSituations', res.data.data);
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
 	/**
 	 * Load all provinces
@@ -670,92 +647,92 @@ const actions = {
 	/**
 	 * Load all degrees
 	 */
-	loadDegrees(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/degrees')
-				.then(res => {
-					context.commit('setDegrees', res.data.data);
+	// loadDegrees(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/degrees')
+	// 			.then(res => {
+	// 				context.commit('setDegrees', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
 	/**
 	 * Load all universities
 	 */
-	loadUniversities(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/universities')
-				.then(res => {
-					context.commit('setUniversities', res.data.data);
+	// loadUniversities(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/universities')
+	// 			.then(res => {
+	// 				context.commit('setUniversities', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
 	/**
 	 * Load all parts
 	 */
-	loadParts(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/parts')
-				.then(res => {
-					context.commit('setParts', res.data.data);
+	// loadParts(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/parts')
+	// 			.then(res => {
+	// 				context.commit('setParts', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
 	/**
 	 * Load all contract
 	 */
-	loadContracts(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/contracts')
-				.then(res => {
-					context.commit('setContracts', res.data.data);
+	// loadContracts(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/contracts')
+	// 			.then(res => {
+	// 				context.commit('setContracts', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
-
-	/**
-	 * Load all departments
-	 */
-	loadDepartments(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/departments')
-				.then(res => {
-					context.commit('setDepartments', res.data.data);
-
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
 	/**
 	 * Load all departments
 	 */
-	loadCardtypes(context) {
-		return new Promise((resolve, reject) =>	{
-			axios.get('/cardtypes')
-				.then(res => {
-					context.commit('setCardtypes', res.data.data);
+	// loadDepartments(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/departments')
+	// 			.then(res => {
+	// 				context.commit('setDepartments', res.data.data);
 
-					resolve(res);
-				})
-				.catch(res => reject(res));
-		});
-	},
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
+
+	/**
+	 * Load all departments
+	 */
+	// loadCardtypes(context) {
+	// 	return new Promise((resolve, reject) =>	{
+	// 		axios.get('/cardtypes')
+	// 			.then(res => {
+	// 				context.commit('setCardtypes', res.data.data);
+
+	// 				resolve(res);
+	// 			})
+	// 			.catch(res => reject(res));
+	// 	});
+	// },
 
 	/**
 	 * Load records data

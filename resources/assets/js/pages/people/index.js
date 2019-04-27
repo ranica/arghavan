@@ -323,7 +323,7 @@ window.v = new Vue({
         },
 
         /**
-         * Load Gate Groups list
+         * Load Base Information
          */
         loadBaseInformation() {
             let data = {
@@ -509,7 +509,6 @@ window.v = new Vue({
          * Prepare to delete
          */
         readyToDelete(record) {
-            console.log('ready to delete -> record', record);
             this.tempRecord.id = record.id;
         },
 
@@ -709,7 +708,6 @@ window.v = new Vue({
          * Edit a record
          */
         editRecord(record) {
-            console.log('record', record);
             this.tempRecord = Object.assign({}, this.emptyRecord);
 
             this.clearErrors();
