@@ -64,13 +64,13 @@ Route::resources ([
      '/gatedirects'         => 'GatedirectController',
      '/registration'        => 'RegistrationController',
      '/permissions'         => 'PermissionController',
-     '/roles'              => 'RoleController',
-     '/grouppermits'       => 'GroupPermitController',
-     '/kintypes'           => 'KintypeController',
-     '/relatives'          => 'RelativeController',
-     '/vacationRequests'   => 'VacationRequestController',
-     '/vacationTypes'      => 'VacationTypeController',
-     '/vacationStatuses'   => 'VacationStatusController',
+     '/roles'               => 'RoleController',
+     '/grouppermits'        => 'GroupPermitController',
+     '/kintypes'            => 'KintypeController',
+     '/relatives'           => 'RelativeController',
+     '/vacationRequests'    => 'VacationRequestController',
+     '/vacationTypes'       => 'VacationTypeController',
+     '/vacationStatuses'    => 'VacationStatusController',
      '/people'              => 'PeopleController',
      '/warranties'          => 'WarrantyController',
      '/referralTypes'       => 'ReferralTypeController',
@@ -83,6 +83,7 @@ Route::resources ([
      '/materials'           =>'MaterialController',
      '/buildingInformations'  =>'BuildingInformationController',
      '/gatePlans'           =>'GatePlanController',
+     '/contactTypes'        =>'ContactTypeController',
 ]);
 
 Route::get('/auth/edit', 'HomeController@editProfile')

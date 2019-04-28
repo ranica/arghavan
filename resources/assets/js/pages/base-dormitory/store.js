@@ -3,12 +3,14 @@ import MaterialTypeModule  from "./material_type/material_type";
 import GenderModule  from "./gender/gender";
 import BuildingModule  from "../base-structure/building/building";
 import MaterialModule  from "./material/material";
+import ContactTypeModule  from "./contact_type/contact_type";
 
 Vue.use(Vuex);
 
 const modules = {
     RoomModule,
     MaterialTypeModule,
+    ContactTypeModule,
     BuildingModule,
     GenderModule,
     MaterialModule,
@@ -29,6 +31,10 @@ const getters = {
 
     materials: (state, getters) => getters['MaterialModule/records'],
     materialsPaginate: (state, getters) => getters['MaterialModule/allData'],
+
+    contactTypes: (state, getters) => getters['ContactTypeModule/records'],
+    contactTypesPaginate: (state, getters) => getters['ContactTypeModule/allData'],
+    allContactTypes: (state, getters) => getters['ContactTypeModule/allRecords'],
 };
 
 const mutations = {
@@ -243,6 +249,61 @@ const actions = {
                     }
                     resolve(status);
                 })
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Loads ContactType
+    */
+    loadContactTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('ContactTypeModule/loadRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * update ContactType
+     */
+    updateContactTypes(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('ContactTypeModule/updateRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * Create ContactType
+     */
+    createContactTypes(context, data) {
+        return new Promise((response, reject) => {
+            context.dispatch('ContactTypeModule/createRecords', data)
+                .then(res => response(res))
+                .catch(err => reject(err));
+        });
+    },
+
+    /**
+     * delete ContactType
+     */
+    deletecontactTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('ContactTypeModule/deleteRecords', data)
+                .then(res => resolve(res))
+                .catch(err => reject(err));
+        });
+    },
+
+     /**
+     * Loads Material Type all
+    */
+   loadAllMaterialTypes(context, data) {
+        return new Promise((resolve, reject) => {
+            context.dispatch('MaterialTypeModule/loadAllRecords', data)
+                .then(res => resolve(res))
                 .catch(err => reject(err));
         });
     },
