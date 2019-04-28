@@ -32,6 +32,9 @@ window.v = new Vue({
         this.loadMaterialTypes(this.page);
         this.loadAllMaterialTypes(this.page);
         this.loadMaterials(this.page);
+        this.loadContactTypes(this.page);
+        this.loadAllContactTypes(this.page);
+
     },
 
     computed: {
@@ -43,7 +46,11 @@ window.v = new Vue({
                 id: 0,
                 name: '',
                 code: '',
+                type: '',
                 material_type: {
+                    id: 0,
+                },
+                 contact_type: {
                     id: 0,
                 },
                 room: {
@@ -71,6 +78,9 @@ window.v = new Vue({
         hasMaterialRows: state => ((state.$store.getters.materials != null) &&
             (state.$store.getters.materials.length > 0)),
 
+        hasContactTypeRows: state => ((state.$store.getters.contactTypes != null) &&
+            (state.$store.getters.contactTypes.length > 0)),
+
         isAssignMaterial: state => state.formMode == Enums.FormMode.assignMaterial,
 
 
@@ -87,6 +97,9 @@ window.v = new Vue({
         materials: state => state.$store.getters.materials,
         materials_paginate: state => state.$store.getters.materialsPaginate,
 
+        ContactTypes: state => state.$store.getters.ContactTypes,
+        ContactTypes_paginate: state => state.$store.getters.ContactTypesPaginate,
+        allContactTypes: state => state.$store.getters.allContactTypes,
 
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
@@ -103,8 +116,9 @@ window.v = new Vue({
             this.loadMaterialTypes(this.page);
             this.loadAllMaterialTypes(this.page);
             this.loadMaterials(this.page);
+            this.loadContactTypes(this.page);
+            this.loadAllContactTypes(this.page);
         },
-
 
         /**
          * Loads Rooms
@@ -121,20 +135,7 @@ window.v = new Vue({
             this.isLoading = false;
         },
 
-         /**
-         * Loads Rooms
-         */
-        loadMaterialTypes(page) {
-            let url = document.pageData.base_dormitory.pageUrls.material_types_index + '?page=' + page;
 
-            let data = {
-                url: url
-            };
-
-            this.$store.dispatch('loadMaterialTypes', data);
-            Helper.scrollToApp ();
-            this.isLoading = false;
-        },
 
         /**
          * Loads Genders
@@ -163,7 +164,20 @@ window.v = new Vue({
             Helper.scrollToApp ();
             this.isLoading = false;
         },
+         /**
+         * Loads Material Types
+         */
+        loadMaterialTypes(page) {
+            let url = document.pageData.base_dormitory.pageUrls.material_types_index + '?page=' + page;
 
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadMaterialTypes', data);
+            Helper.scrollToApp ();
+            this.isLoading = false;
+        },
         /**
          * Loads All Material Type  page
          */
@@ -175,6 +189,33 @@ window.v = new Vue({
             };
             this.$store.dispatch('loadAllMaterialTypes', data);
         },
+
+         /**
+         * Loads Contact Types
+         */
+        loadContactTypes(page) {
+            let url = document.pageData.base_dormitory.pageUrls.contact_types_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+
+            this.$store.dispatch('loadContactTypes', data);
+            Helper.scrollToApp ();
+            this.isLoading = false;
+        },
+        /**
+         * Loads All contact Type  page
+         */
+        loadAllContactTypes(page) {
+            let url = document.pageData.base_dormitory.pageUrls.contact_types_all_index + '?page=' + page;
+
+            let data = {
+                url: url
+            };
+            this.$store.dispatch('loadAllContactTypes', data);
+        },
+
         /**
          * Loads Material
          */
@@ -398,7 +439,7 @@ window.v = new Vue({
          * Save material type Record
          */
         saveMaterialTypeRecord() {
-            this.$validator.validate('name_material_tyep')
+            this.$validator.validate('name_material_type')
                 .then(result => {
                     if (result) {
                         // Prepare data
@@ -415,6 +456,37 @@ window.v = new Vue({
                         } else {
                             data.url = '/materialTypes/' + data.id;
                             data.function = 'updateMaterialTypes';
+                            this.updateRecord(data);
+                        }
+
+                        return;
+                    }
+                    let err = Helper.generateErrorString();
+                    demo.showNotification(err, 'warning');
+                });
+        },
+
+         /**
+         * Save Contact type Record
+         */
+        saveContactTypeRecord() {
+            this.$validator.validate('type_contact_type')
+                .then(result => {
+                    if (result) {
+                        // Prepare data
+                        let data = {
+                            id: this.tempRecord.id,
+                            type: this.tempRecord.type,
+                            url: '/contactTypes',
+                            function: 'createContactTypes',
+                        };
+
+                        this.isLoading = true;
+                        if (0 == data.id) {
+                            this.createRecord(data);
+                        } else {
+                            data.url = '/contactTypes/' + data.id;
+                            data.function = 'updateContactTypes';
                             this.updateRecord(data);
                         }
 

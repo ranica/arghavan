@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ContactType;
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactTypeRequest;
+
 
 class ContactTypeController extends Controller
 {
@@ -12,9 +14,16 @@ class ContactTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax())
+        {
+            $contactType = ContactType::paginate($this->C_PAGE_SIZE);
+
+            return $contactType;
+        }
+
+        return view('contact_type.index');
     }
 
     /**
@@ -33,9 +42,18 @@ class ContactTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactTypeRequest $request)
     {
-        //
+        if ($request->ajax())
+        {
+            // Check for duplicate
+            $contactType = ContactType::createIfNotExists($request);
+
+            return [
+                'status' => is_null($contactType) ? 1 : 0,
+                'contactType' => $contactType
+            ];
+        }
     }
 
     /**
@@ -67,9 +85,17 @@ class ContactTypeController extends Controller
      * @param  \App\ContactType  $contactType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactType $contactType)
+    public function update(ContactTypeRequest $request, ContactType $contactType)
     {
-        //
+        if ($request->ajax())
+        {
+            $contactType->update([ 'type' => $request->type ]);
+
+            return [
+                'status' => 0,
+                'contactType' => $contactType
+            ];
+        }
     }
 
     /**
@@ -78,8 +104,15 @@ class ContactTypeController extends Controller
      * @param  \App\ContactType  $contactType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactType $contactType)
+    public function destroy(Request $request, ContactType $contactType)
     {
-        //
+        if ($request->ajax())
+        {
+            $contactType->delete();
+
+            return [
+                'status' => 0
+            ];
+        }
     }
 }
