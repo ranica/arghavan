@@ -115,4 +115,18 @@ class ContactTypeController extends Controller
             ];
         }
     }
+
+    /**
+     * Load all Data ContactType
+     */
+
+    public function allContactType(Request $request)
+    {
+        if ($request->ajax())
+        {
+            $contact_types = ContactType::all();
+
+            return $contact_types;
+        }
+    }
 }

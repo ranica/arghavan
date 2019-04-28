@@ -97,8 +97,8 @@ window.v = new Vue({
         materials: state => state.$store.getters.materials,
         materials_paginate: state => state.$store.getters.materialsPaginate,
 
-        ContactTypes: state => state.$store.getters.ContactTypes,
-        ContactTypes_paginate: state => state.$store.getters.ContactTypesPaginate,
+        contactTypes: state => state.$store.getters.contactTypes,
+        contactTypes_paginate: state => state.$store.getters.contactTypesPaginate,
         allContactTypes: state => state.$store.getters.allContactTypes,
 
         isNormalMode: state => state.formMode == Enums.FormMode.normal,

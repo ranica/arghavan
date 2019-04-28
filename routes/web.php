@@ -19,6 +19,9 @@ Route::get('/province/allProvince', 'ProvinceController@allProvince')
 Route::get('/materialType/allMaterialType', 'MaterialTypeController@allMaterialType')
             ->name('materialTypes.allMaterialType');
 
+Route::get('/contactType/allContactlType', 'ContactTypeController@allContactType')
+            ->name('contactTypes.allContactType');
+
 Route::resources ([
     // Base data
     '/melliats'             => 'MelliatController',

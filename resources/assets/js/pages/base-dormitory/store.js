@@ -298,11 +298,11 @@ const actions = {
     },
 
      /**
-     * Loads Material Type all
+     * Loads Contact Type all
     */
-   loadAllMaterialTypes(context, data) {
+   loadAllContactTypes(context, data) {
         return new Promise((resolve, reject) => {
-            context.dispatch('MaterialTypeModule/loadAllRecords', data)
+            context.dispatch('ContactTypeModule/loadAllRecords', data)
                 .then(res => resolve(res))
                 .catch(err => reject(err));
         });

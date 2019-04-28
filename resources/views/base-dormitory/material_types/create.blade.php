@@ -15,11 +15,11 @@
 
                 <!-- Name field -->
                 <div class="form-group label-floating mrg-top-2em" 
-                    :class="{'has-error' : errors.has('name_material_tyep')}">
+                    :class="{'has-error' : errors.has('name_material_type')}">
                     <label class="control-label">نام کالا</label>
                     <input autofocus required class="form-control"
                         type="text"
-                        name="name_material_tyep"
+                        name="name_material_type"
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"

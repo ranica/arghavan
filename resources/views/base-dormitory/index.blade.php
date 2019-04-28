@@ -4,7 +4,7 @@
 
 <div class="content f-BYekan hidden" id="app">
     <div class="container-fluid">
-
+02833324122-24
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="row">
@@ -37,6 +37,18 @@
                                         <i class="fas fa-couch"></i>تعریف تجهیزات
                                     </a>
                                 </li>
+
+                                <li class="nav-item tabStyle">
+                                    <a class="nav-link" data-toggle="tab" href="#contact_type" role="tablist">
+                                        <i class="fas fa-address-book"></i>انواع مخاطبین
+                                    </a>
+                                </li>
+
+                                <li class="nav-item tabStyle">
+                                    <a class="nav-link" data-toggle="tab" href="#contact_type" role="tablist">
+                                        <i class="fas fa-phone-square"></i>دفترچه تلفن
+                                    </a>
+                                </li>
                             </ul>
 
                             <div class="tab-content tab-space tab-subcategories">
@@ -50,6 +62,10 @@
 
                                 <div class="tab-pane" id="material">
                                     @include('base-dormitory.materials.index')
+                                </div>
+
+                                <div class="tab-pane" id="contact_type">
+                                    @include('base-dormitory.contact_types.index')
                                 </div>
                             </div>
                         </div>
@@ -89,6 +105,13 @@
                     materials_store: '{{ route('materials.store') }}',
                     materials_update: '{{ route('materials.update', '') }}',
                     materials_delete: '{{ route('materials.destroy', '') }}',
+
+                    contact_types_index: '{{ route('contactTypes.index', '') }}',
+                    contact_types_store: '{{ route('contactTypes.store') }}',
+                    contact_types_update: '{{ route('contactTypes.update', '') }}',
+                    contact_types_delete: '{{ route('contactTypes.destroy', '') }}',
+                    contact_types_all_index: '{{ route('contactTypes.allContactType', '') }}',
+
 
             }
         };

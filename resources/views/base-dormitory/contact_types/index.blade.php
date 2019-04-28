@@ -8,7 +8,7 @@
                         <h3 class="card-title col-sm-12">
                             <div>
                                 <i class="fas fa-university fa-2x"></i>
-                                <span class="panel-heading">انواع تجهیزات</span>
+                                <span class="panel-heading">انواع مخاطبین</span>
 
                                 @can('command_insert')
                                 <span class="pull-left" v-show="isNormalMode">
@@ -29,7 +29,7 @@
                                 <div class="text-left">
                                 </div>
 
-                                <div v-if="! hasMaterialTypeRows">
+                                <div v-if="! hasContactTypeRows">
                                     <h4 class="text-center f-BYekan">
                                         رکوردی ثبت نشده است
                                     </h4>
@@ -38,9 +38,9 @@
                                 <div class="table-responsive col-md-12 pc">
                                     <table id="myTable"
                                             class="table table-striped table-hover "
-                                            v-show="hasMaterialTypeRows">
+                                            v-show="hasContactTypeRows">
                                         <thead v-show="!isLoading">
-                                            <td>نام تجهیزات</td>
+                                            <td>نام مخاطب</td>
                                             <td></td>
                                         </thead>
                                         <tbody>
@@ -48,13 +48,13 @@
                                                 <td colspan="2" class="text-center">در حال بارگذاری اطلاعات</td>
                                             </tr>
 
-                                            <tr v-for="record in materialTypes">
-                                                <td>@{{ record.name }}</td>
+                                            <tr v-for="record in contactTypes">
+                                                <td>@{{ record.type }}</td>
                                                 <td class="text-left" width="160">
                                                     @can('command_delete')
                                                         <a href="#" class="btn btn-round btn-just-icon pull-left"
                                                             data-toggle="modal"
-                                                            data-target="#removeRecordModalMaterialType"
+                                                            data-target="#removeRecordModalContactType"
                                                             @click.prevent="readyToDelete(record)">
                                                             <i class="material-icons">delete</i>
                                                             <div class="ripple-container"></div>
@@ -73,17 +73,17 @@
                                     </table>
                                 </div>
                                <card-mobile
-                                         v-for="record in materialTypes"
+                                         v-for="record in contactTypes"
                                          :key= "record.id"
                                          :my-data="record"
                                          @edit-data="editRecord"
                                          @delete-data="readyToDelete(record)"
-                                         title="مشخصات تجهیزات">
+                                         title="مشخصات انواع تجهیزات">
                                 </card-mobile>
 
                                 <div class="text-center">
-                                    <pagination :data="materialTypes_paginate"
-                                                v-on:pagination-change-page="loadMaterialTypes"
+                                    <pagination :data="contactTypes_paginate"
+                                                v-on:pagination-change-page="loadContactTypes"
                                                 :limit= "{{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}"
                                                 :show-disable= "true">
                                     </pagination>
@@ -93,24 +93,24 @@
 
                            <!-- Register Form -->
                             <div v-if="isRegisterMode">
-                                @include('base-dormitory.material_types.create')
+                                @include('base-dormitory.contact_types.create')
                             </div>
                            <!-- /Register Form -->
 
                             <!-- small modal -->
-                            <div class="modal fade" 
-                                id="removeRecordModalMaterialType" 
-                                tabindex="-1" 
+                            <div class="modal fade"
+                                id="removeRecordModalContactType"
+                                tabindex="-1"
                                 role="dialog"
-                                aria-labelledby="myModalLabel" 
+                                aria-labelledby="myModalLabel"
                                 aria-hidden="true">
 
                                 <div class="modal-dialog modal-small ">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" 
+                                            <button type="button"
                                                     class="close"
-                                                    data-dismiss="modal" 
+                                                    data-dismiss="modal"
                                                     aria-hidden="true">
                                                 <i class="material-icons">clear</i>
                                             </button>
@@ -119,9 +119,15 @@
                                             <h5>برای حذف اطمینان دارید؟ </h5>
                                         </div>
                                         <div class="modal-footer text-center">
-                                            <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
-                                            <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                                @click.prevent="deleteRecord('materialTypes')">بله</button>
+                                            <button type="button"
+                                                    class="btn btn-simple"
+                                                    data-dismiss="modal">خیر
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-success btn-simple"
+                                                    data-dismiss="modal"
+                                                    @click.prevent="deleteRecord('contactTypes')">بله
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
