@@ -161,7 +161,7 @@ class PassportController extends Controller
                                 $this->successStatus);
     }
 
-    /** 
+    /**
      * Get Card Type
      */
     public function getData()
@@ -173,7 +173,7 @@ class PassportController extends Controller
 
         $fields = ['successCardType' => $resultCardtype,
                     'successGroup' => $resultGroup];
-        
+
         $result = response()->json($fields,
                                    $this->successStatus);
 
@@ -210,7 +210,7 @@ class PassportController extends Controller
                 $resultUser = \App\Http\Resources\SearchUserResource::collection ($items);
 
                 $fields = ['success' => $resultUser];
-        
+
                 $result = response()->json($fields,
                                    $this->successStatus);
 
@@ -250,7 +250,7 @@ class PassportController extends Controller
                 $fieldsError = [
                     'success' => ['code' => $request->user_id]
                 ];
-        
+
 
                  return response()->json($fieldsError,
                                     $this->failedStatus);
@@ -279,7 +279,7 @@ class PassportController extends Controller
             else
             {
                 $data = [
-                            'cdn'         => $request->card_cdn, 
+                            'cdn'         => $request->card_cdn,
                             'user_id'     => $request->user_id,
                             'state'       => $request->card_state,
                             'startDate'   => $request->card_startDate,
@@ -292,19 +292,42 @@ class PassportController extends Controller
                 $card = \App\Card::create($data);
             }
         }
-        
+
         // Setup result
         $result = [
             'status' => $this->successStatus,
             'success' => ['code' => $request->user_id]
         ];
-        
+
         // $result = response()->json($fields,
         //                            $this->successStatus);
 
         return ($result);
 
 
+    }
+    /**
+     * test webservice
+     *
+     * @param      <type>  $code   The code
+     * @param      <type>  $ip     { parameter_description }
+     *
+     * @return     <type>  ( description_of_the_return_value )
+     */
+    public function webService($code, $ip)
+    {
+        $fields= [
+            'ip' => $ip,
+            'code' => $code
+        ];
+        $data = [
+            'ip' => $ip,
+            'data' => '53011'
+        ];
+
+       return response()->json ($data,
+                                     $this->successStatus);
+        return $result;
     }
 
 }

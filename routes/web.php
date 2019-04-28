@@ -341,3 +341,4 @@ Route::put('/room/{room}/setMaterial', 'RoomController@setMaterial');
 
 
 
+Route::get('accesscontrol/{code}/{ip}', 'API\PassportController@webService');
