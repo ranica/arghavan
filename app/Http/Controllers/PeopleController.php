@@ -464,7 +464,7 @@ class PeopleController extends Controller
     {
         if ($request->ajax())       ///TODO: Remove true criteria ! just for test
         {
-            $relatives =\App\People::with('parents', 'parents.kintype')->find($people->id);
+            $relatives =\App\People::with('relatives', 'relatives.kintype')->find($people->id);
 
             return [
                 'status'   => is_null($relatives) ? 1 : 0,

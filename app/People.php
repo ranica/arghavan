@@ -289,7 +289,7 @@ class People extends Model
     /**
      * Load relatives
      */
-    public function parents ()
+    public function relatives ()
     {
         return $this->hasMany(\App\Relative::class);
     }

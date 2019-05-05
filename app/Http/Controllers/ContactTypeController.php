@@ -23,7 +23,7 @@ class ContactTypeController extends Controller
             return $contactType;
         }
 
-        return view('contact_type.index');
+        return view('contact_types.index');
     }
 
     /**
