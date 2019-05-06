@@ -99,18 +99,18 @@ Validator.localize({
 });
 Vue.use(VeeValidate, Veeconfig);
 
-// import PhoneNumber from 'awesome-phonenumber';
-// const phoneNumber = {
-//     getMessage: field => `${field} یک شماره معتبر نمی باشد`,
-//     validate(value) {
-//         return new Promise(resolve => {
-//             let phone = new PhoneNumber(value);
+import PhoneNumber from 'awesome-phonenumber';
+const phoneNumber = {
+    getMessage: field => `${field} یک شماره معتبر نمی باشد`,
+    validate(value) {
+        return new Promise(resolve => {
+            let phone = new PhoneNumber(value);
 
-//             resolve({
-//                 valid: phone.isValid()
-//             })
-//         });
-//     }
-// };
-// Validator.extend('phoneNumber', phoneNumber);
+            resolve({
+                valid: phone.isValid()
+            })
+        });
+    }
+};
+Validator.extend('phoneNumber', phoneNumber);
 

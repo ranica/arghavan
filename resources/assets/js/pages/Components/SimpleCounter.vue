@@ -5,16 +5,16 @@
         </div>
 
         <div class="card-content">
-            <div v-if="isLoading" class="text-center color-black">
-                <i class="fa fa-refresh fa-spin fa-fw fa-4x"></i>
+            <div v-show="isLoading" class="text-center color-black">
+                <i class="fas fa-sync-alt fa-spin fa-fw fa-4x"></i>
             </div>
             <h2 class="card-title" v-show="! isLoading"> {{ value }}</h2>
         </div>
 
-        <div class="card-footer">
+        <div class="card-footer" v-show="! isLoading">
             <div class="stats">
                 <h4>
-                    <i v-if="showRefresh"
+                    <i v-show="showRefresh"
                         class="fas fa-sync-alt fa-2x pd-right-05em pd-left-05em cursor-pointer"
                         @click.prevent="refreshChart">
                     </i>

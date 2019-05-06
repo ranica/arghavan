@@ -20,7 +20,7 @@
                                         <small>(ضروری)</small>
                                     </label>
                                     <input name="nationalId"
-                                            autofocus required
+                                             required
                                             type="text"
                                             class="form-control"
                                             minlength="5"
@@ -49,7 +49,7 @@
                                             class="form-control"
                                             minlength="2"
                                             maxlength="50"
-                                            autofocus required
+                                             required
                                             v-validate="{ required: true, is_not: 'null' }"
                                             data-vv-delay="250"
                                             data-vv-as = "نام شخص "
@@ -74,7 +74,7 @@
                                         class="form-control"
                                         minlength="2"
                                         maxlength="50"
-                                        autofocus required
+                                         required
                                         v-validate="{ required: true, is_not:'null' }"
                                         data-vv-delay="250"
                                         data-vv-as = "نام خانوادگی"
@@ -161,7 +161,7 @@
                                                 class="form-control"
                                                 minlength="11"
                                                 maxlength="11"
-                                                autofocus
+
                                                 data-vv-delay="250"
                                                 data-vv-as ="تلفن"
                                                 v-validate="{required: true, is_not: 'null'}"
@@ -183,10 +183,11 @@
                                         <input name="mobile"
                                                 type="number"
                                                 class="form-control"
-                                                minlength="11" maxlength="11" autofocus
-                                                v-validate="{required: true}"
+                                                minlength="11" maxlength="11"
+                                                {{-- v-validate="{required: true}" --}}
+                                                v-validate="{ regex:/^09[0-9][0-9]{8}$/ }"
                                                 data-vv-delay="250"
-                                                data-vv-as ="موبایل "
+                                                data-vv-as ="موبایل"
                                                 v-model="tempRecord.people.mobile">
                                     </div>
                                 </div>
@@ -259,7 +260,7 @@
                                             class="form-control"
                                             minlength="2"
                                             maxlength="500"
-                                            autofocus required
+                                             required
                                             v-model="tempRecord.people.address"
                                             v-validate="{ required: true, is_not: 'null' , min:2, max:500 }"
                                             data-vv-delay="250"
