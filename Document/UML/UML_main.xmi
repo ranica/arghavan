@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2019-05-06T16:14:23" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
+<XMI verified="false" xmi.version="1.2" timestamp="2019-05-06T16:41:37" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -829,7 +829,11 @@
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="thInzNtKpmDy" type="yOYhDTtZQ9iQ" name="value"/>
        </UML:Classifier.feature>
       </UML:Class>
-      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="gPQTN4GkBVYh" name="Referral(مراجعه کننده)"/>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="gPQTN4GkBVYh" name="Referral(مراجعه کننده)">
+       <UML:Classifier.feature>
+        <UML:Attribute visibility="private" isSpecification="false" xmi.id="sAIh5kWttkZb" type="DjlTcusKTvqo" name="id"/>
+       </UML:Classifier.feature>
+      </UML:Class>
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="DfbsQp0hpMjY" comment="ارباب رجوع&#xa;میهمان&#xa;مدعوین&#xa;پیک&#xa;اتباع خارجی&#xa;" name="RefferalType(نوع مراجعه کننده)">
        <UML:Classifier.feature>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="HK4cunw6E0Ui" type="DjlTcusKTvqo" name="id"/>
@@ -933,7 +937,7 @@
          <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-1708.08" showstereotype="1" y="-1945.45" text="مشخصات کارت تردد" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="BUKgtP1yeQ1r" pretext="" role="700" width="201" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
          <boxwidget width="338.365" showstereotype="1" x="-3639.05" usesdiagramusefillcolor="0" y="-2153.23" usesdiagramfillcolor="0" isinstance="0" localid="kQO36bpOWfMl" fillcolor="#ffff00" height="183.292" linecolor="#000000" xmi.id="UxA4J0uRsBR9" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
          <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-3477.42" showstereotype="1" y="-1933.73" text="اطلاعات دانشجویی" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="TKxUjuepywhe" pretext="" role="700" width="191" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
-         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1221.34" showattsigs="601" showstereotype="1" y="-716.316" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="FMPzVzlXTuOm" width="148" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="gPQTN4GkBVYh" showscope="1" height="37" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1221.34" showattsigs="601" showstereotype="1" y="-716.316" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="FMPzVzlXTuOm" width="148" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="gPQTN4GkBVYh" showscope="1" height="47" showopsigs="601"/>
          <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1159.74" showattsigs="601" showstereotype="1" y="-642.857" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="y0X4g3gaGlpV" width="208" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="DfbsQp0hpMjY" showscope="1" height="66" showopsigs="601"/>
         </widgets>
         <messages/>
@@ -2127,7 +2131,9 @@
       <listitem open="0" type="815" id="YVTEW8DIXexH"/>
       <listitem open="0" type="815" id="WQCUskqRDIdh"/>
      </listitem>
-     <listitem open="1" type="813" id="gPQTN4GkBVYh"/>
+     <listitem open="1" type="813" id="gPQTN4GkBVYh">
+      <listitem open="0" type="814" id="sAIh5kWttkZb"/>
+     </listitem>
      <listitem open="1" type="813" id="DfbsQp0hpMjY">
       <listitem open="0" type="814" id="HK4cunw6E0Ui"/>
       <listitem open="0" type="814" id="zMqf9ogXDUHu"/>
