@@ -22,6 +22,9 @@ Route::get('/materialType/allMaterialType', 'MaterialTypeController@allMaterialT
 Route::get('/contactType/allContactlType', 'ContactTypeController@allContactType')
             ->name('contactTypes.allContactType');
 
+Route::get('/people/loadByNationalCode', 'PeopleController@loadPeopleByNationalCode')
+            ->name('people.load_by_national_code');
+
 Route::resources ([
     // Base data
     '/melliats'             => 'MelliatController',
@@ -87,6 +90,7 @@ Route::resources ([
      '/buildingInformations'  =>'BuildingInformationController',
      '/gatePlans'           =>'GatePlanController',
      '/contactTypes'        =>'ContactTypeController',
+     '/deviceTypes'         =>'DeviceTypeController',
 ]);
 
 Route::get('/auth/edit', 'HomeController@editProfile')

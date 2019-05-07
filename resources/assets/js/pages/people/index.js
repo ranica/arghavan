@@ -92,7 +92,9 @@ window.v = new Vue({
 
         var base = this;
         document.querySelector ('[name="nationalId"]')
-                .addEventListener ('blur', () => { base.getNationalId (); })
+                .addEventListener ('blur', () => {
+                    base.getNationalId ();
+                })
     },
 
     computed: {
@@ -283,9 +285,18 @@ window.v = new Vue({
         selectFinger(finger){
           this.finger_index = finger.index;
         },
-
+        /**
+         * Gets the national identifier.
+         */
        getNationalId(){
-            alert ('ok');
+            if( null != this.tempRecord.people.nationalId){
+                // this.tempRecord.people.mobile = '09120472018';
+                this.loadDataByNationaId(this.tempRecord.people.nationalId);
+            }
+            else{
+                console.log('empty national code');
+            }
+
         },
         setImageLoader() {
             let baseVue = this;
@@ -307,12 +318,21 @@ window.v = new Vue({
         },
 
         /**
-         * Wizard tab changed
+         * Loads a data by nationa identifier.
          */
-        // wizardTabChange (prev, current){
-        //     this.currentTabIndex = current;
-        // },
+        loadDataByNationaId(nationalId){
+             let url = document.pageData.people.load_by_national_code;
 
+            let data = {
+                url: url,
+                nationalId : nationalId
+            };
+            console.log('load data by nationlal -> data' , data);
+            this.$store.dispatch('loadDataByNationaId', data);
+        },
+        /**
+         * Prepare
+         */
         prepare() {
             // console.log('prepare');
             this.page = 1;

@@ -11,8 +11,8 @@
              finish-button-text="">
              <!-- @on-change="wizardTabChange" -->
 
-				@include('people.tabs.tab-user')
 				@include('people.tabs.tab-person')
+                @include('people.tabs.tab-user')
 				@include('people.tabs.tab-otherInfo')
 				@include('people.tabs.tab-card')
 				@include('people.tabs.tab-image')

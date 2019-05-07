@@ -21,13 +21,13 @@ class CreateGatedevicesTable extends Migration
             $table->string('number');
             // type: Logical = 1, Physical = 0
             $table->integer('type');
-            // gate: Gate = 1, Antenna = 0
-            $table->integer('gate');
+            // gate: Gate = 1, Antenna = 3, Fingerprint = 2
+            $table->unsignedInteger('device_type_id');
             $table->boolean('state')->nullable();
-            $table->integer('gategender_id')->unsigned();
-            $table->integer('gatepass_id')->unsigned();
-            $table->integer('zone_id')->unsigned();
-            $table->integer('gatedirect_id')->unsigned();
+            $table->unsignedInteger('gategender_id');
+            $table->unsignedInteger('gatepass_id');
+            $table->unsignedInteger('zone_id');
+            $table->unsignedInteger('gatedirect_id');
             $table->boolean('netState')->nullable();
             $table->integer('timepass')->nullable();
             $table->integer('timeserver')->nullable();
@@ -54,10 +54,10 @@ class CreateGatedevicesTable extends Migration
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
-            // $table->foreign('group_id')
-            //         ->references('id')->on('groups')
-            //         ->onDelete('cascade')
-            //         ->onUpdate('cascade');
+            $table->foreign('device_type_id')
+                    ->references('id')->on('device_types')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
         });
     }
 

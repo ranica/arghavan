@@ -58,6 +58,9 @@ window.v = new Vue({
                 zone: {
                     id: 0
                 },
+                deviceType: {
+                    id: 0
+                },
                 editMode: false,
                 deleteMode: false,
                 refreshMode: false,
@@ -68,6 +71,7 @@ window.v = new Vue({
         gatepasses: state => state.$store.getters.gatepasses,
         gatedirects: state => state.$store.getters.gatedirects,
         zones: state => state.$store.getters.zones,
+        deviceTypes: state => state.$store.getters.deviceTypes,
         records: state => state.$store.getters.records,
         allData: state => state.$store.getters.allData,
         hasRow: state => (0 < state.records.length),
@@ -173,6 +177,19 @@ window.v = new Vue({
         },
 
         /**
+         * Load Device Type list
+         */
+        loadDeviceTypes() {
+            this.$store.dispatch('loadDeviceTypes')
+                .then(res => {
+                    this.isLoading = false;
+                })
+                .catch(err => {
+                    this.isLoading = false;
+                });
+        },
+
+        /**
          * Hide insert/update modal
          */
         registerCancel() {
@@ -194,6 +211,7 @@ window.v = new Vue({
                     this.loadGategenders();
                     this.loadGatedirects();
                     this.loadZones();
+                    this.loadDevices();
 
                     this.showInvisibleItems();
                 })
@@ -240,6 +258,11 @@ window.v = new Vue({
                 zone: {
                     id: record.zone.id,
                     name: record.zone.name
+                },
+
+                deviceType: {
+                    id: record.deviceType.id,
+                    name: record.deviceType.name
                 }
             };
             this.formMode = Enums.FormMode.register;
@@ -290,6 +313,7 @@ window.v = new Vue({
                             gatepass_id: this.tempRecord.gatepass.id,
                             gatedirect_id: this.tempRecord.gatedirect.id,
                             zone_id: this.tempRecord.zone.id,
+                            device_type_id: this.tempRecord.device_type.id,
                         };
 
                         this.isLoading = true;

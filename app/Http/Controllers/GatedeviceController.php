@@ -12,7 +12,8 @@ class GatedeviceController extends Controller
         'gatedirect',
         'gategender',
         'zone',
-        'gatepass'
+        'gatepass',
+        'deviceType'
     ];
 
     /**
@@ -130,13 +131,15 @@ class GatedeviceController extends Controller
                 'ip'             => $request->ip,
                 'state'          => $request->state,
                 // // 'netState' => $request->netState,
+                'device_type_id' => $request->deviceType_id,
                 'timepass'       => $request->timepass,
                 'timeserver'     => $request->timeserver,
                 'gategender_id'  => $request->gategender_id,
                 'gatedirect_id'  => $request->gatedirect_id,
                 'gatepass_id'    => $request->gatepass_id,
                 'zone_id'        => $request->zone_id,
-                'type'           => $request->type
+                'type'           => $request->type,
+                'device_type_id'           => $request->device_type_id
             ]);
 
             $gatedevice->load(self::$relation)->get();

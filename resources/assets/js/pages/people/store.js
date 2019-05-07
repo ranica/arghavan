@@ -3,25 +3,10 @@ Vue.use(Vuex);
 const state =
 {
 	_baseInformation: {},
-	// _melliats    : [],
-	// _groups      : [],
-	// _genders     : [],
-	// _situations  : [],
-	// _provinces   : [],
 	_cities      : [],
-	// _universities: [],
 	_fieldData   : [],
-	// _degrees     : [],
-	// _parts       : [],
-	// _contracts   : [],
-	// _departments : [],
-	// _cardtypes 	 : [],
-	// _gategroups  : [],
-	// _grouppermits : [],
 	_terms : [],
-
 	_parents : [],
-	// _kintypes: [],
 
 	_data: {
 		data         : [],
@@ -60,90 +45,18 @@ const getters =
 	 * Parent Data
 	 */
 	parents: state => state._parents,
-
-	/**
-	 * Return all Parent data
-	 */
-	//allParentData: state => state._dataParent,
-
-	/**
-	 * Group_Permit
-	 */
-	// grouppermits: state => state._grouppermits,
 	/**
 	 * Terms
 	 */
 	terms: state => state._terms,
-
-	/**
-	*Gate Group
-	*/
-	// gategroups: state => state._gategroups,
-
-	/**
-	 * Return melliats
-	 */
-	// melliats: state => state._melliats,
-
-	/**
-	 * Return genders
-	 */
-	// genders: state => state._genders,
-
-	/**
-	 * Return groups
-	 */
-	// groups: state => state._groups,
-
-	/**
-	 * Return situations
-	 */
-	// situations: state => state._situations,
-
-	/**
-	 * Return provinces
-	 */
-	// provinces: state => state._provinces,
-
 	/**
 	 * Return cities
 	 */
 	cities: state => state._cities,
-
-	/**
-	 * Return degrees
-	 */
-	// degrees: state => state._degrees,
-
-	/**
-	 * Return parts
-	 */
-	// parts: state => state._parts,
-
 	/**
 	 * Return fields
 	 */
 	fieldData: state => state._fieldData,
-
-	/**
-	 * Return universities
-	 */
-	// universities: state => state._universities,
-
-	/**
-	 * Return departments
-	 */
-	// departments: state => state._departments,
-
-	/**
-	 * Return contracts
-	 */
-	// contracts: state => state._contracts,
-
-	/*
-	CardTypes
-	 */
-	// cardtypes: state => state._cardtypes,
 };
 
 
@@ -153,7 +66,6 @@ const mutations =
 	 * Set baseInformation
 	 */
 	setBaseInformation: (state, data) =>{
-		console.log('store -> set base information-> data ', data);
 		state._baseInformation = {
 			groups: data.groups,
 			genders: data.genders,
@@ -187,132 +99,30 @@ const mutations =
 	setData: (state, data) => {
 		state._data = data;
 	},
-
-	/**
-	 * Set Kintypes
-	 */
-	// setKintypes: (state, data) => {
-	// 	state._kintypes = data;
-	// },
-
 	/**
 	 * Set Parent
 	 */
 	setParents: (state, data) => {
 		state._parents = data;
 	},
-
-	/**
-	 * Set groupPermit
-	 */
-	// setGrouppermits: (state, data) => {
-	// 	state._grouppermits = data;
-	// },
-
 	/**
 	 * Set term
 	 */
 	setTerms: (state, data) => {
 		state._terms = data;
 	},
-
-	/**
-	 * Set gategroup
-	 */
-	// setGateGroups: (state, data) => {
-	// 	state._gategroups = data;
-	// },
-
-	/**
-	 * Set melliats
-	 */
-	// setMelliats: (state, data) => {
-	// 	state._melliats = data;
-	// },
-
-	/**
-	 * Set groups
-	 */
-	// setGroups: (state, data) => {
-	// 	state._groups = data;
-	// },
-
-	/**
-	 * Set genders
-	 */
-	// setGenders: (state, data) => {
-	// 	state._genders = data;
-	// },
-
-	/**
-	 * Set situations
-	 */
-	// setSituations: (state, data) =>	{
-	// 	state._situations = data;
-	// },
-	/**
-	 * Set provinces
-	 */
-	// setProvinces: (state, data) => {
-	// 	state._provinces = data;
-	// },
-
 	/**
 	 * Set cities
 	 */
 	setCities: (state, data) =>	{
 		state._cities = data;
 	},
-
-	/**
-	 * Set universities
-	 */
-	// setUniversities: (state, data) => {
-	// 	state._universities = data;
-	// },
-
 	/**
 	 * Set fields
 	 */
 	setFields: (state, data) => {
 		state._fieldData = data;
 	},
-
-	/**
-	 * Set degrees
-	 */
-	// setDegrees: (state, data) => {
-	// 	state._degrees = data;
-	// },
-
-	/**
-	 * Set parts
-	 */
-	// setParts: (state, data) => {
-	// 	state._parts = data;
-	// },
-
-	/**
-	 * Set departments
-	 */
-	// setDepartments: (state, data) => {
-	// 	state._departments = data;
-	// },
-
-	/**
-	 * Set contracts
-	 */
-	// setContracts: (state, data) => {
-	// 	state._contracts = data;
-	// },
-
-	/**
-	 * Set cardtypes
-	 */
-	// setCardtypes: (state, data) => {
-	// 	state._cardtypes = data;
-	// },
-
 	/**
 	 * Update an existing Parent record
 	 */
@@ -331,7 +141,7 @@ const mutations =
 		getters._parents[index] = record;
 	},
 
-		/**
+	/**
 	 * Insert a new record
 	 */
 	insertRecord: (state, record) =>
@@ -395,23 +205,6 @@ const actions = {
 				.catch(res => reject(res));
 		});
 	},
-
-	/**
-	 * Load all Kintypes
-	 */
-	// loadKintypes(context) {
-	// 	return new Promise((resolve, reject) =>	{
-	// 		axios.get('/kintypes')
-	// 			.then(res => {
-
-	// 				context.commit('setKintypes', res.data.data);
-
-	// 				resolve(res);
-	// 			})
-	// 			.catch(res => reject(res));
-	// 	});
-	// },
-
 	/**
 	 * Load Parent records data
 	 */
@@ -504,22 +297,6 @@ const actions = {
 				});
 		});
 	},
-
-	/**
-	 * Load Grouppermits
-	 */
-	// loadGrouppermits(context){
-	// 	return new Promise((resolve, reject) => {
-	// 		axios.get('/grouppermits/data/all')
-	// 			.then(res => {
-	// 				context.commit ('setGrouppermits', res.data);
-
-	// 				resolve(res);
-	// 			})
-	// 			.catch(err => reject(err) );
-	// 	});
-	// },
-
 	/**
 	 * Load Terms
 	 */
@@ -535,21 +312,6 @@ const actions = {
 		});
 	},
 
-	/**
-	 * Load Gate Group
-	 */
-	// loadGateGroups(context){
-	// 	return new Promise((resolve, reject) => {
-	// 		axios.get('/gategroups/data/all')
-	// 			.then(res => {
-	// 				context.commit ('setGateGroups', res.data);
-
-	// 				resolve(res);
-	// 			})
-	// 			.catch(err => reject(err) );
-	// 	});
-	// },
-
 	/*
 	Upload Image
 	 */
@@ -564,38 +326,20 @@ const actions = {
 		});
 	},
 
-
-
 	/**
-	 * Load all groups
+	 * Load Data by national code
 	 */
-	// loadGroups(context) {
-	// 	return new Promise((resolve, reject) =>	{
-	// 		axios.get('/groups')
-	// 			.then(res => {
-	// 				context.commit('setGroups', res.data.data);
-
-	// 				resolve(res);
-	// 			})
-	// 			.catch(res => reject(res));
-	// 	});
-	// },
-
-
-
-	/**
-	 * Load all situations
-	 */
-	// loadSituations(context) {
-	// 	return new Promise((resolve, reject) =>	{
-	// 		axios.get('/situations')
-	// 			.then(res => {
-	// 				context.commit('setSituations', res.data.data);
-	// 				resolve(res);
-	// 			})
-	// 			.catch(res => reject(res));
-	// 	});
-	// },
+	loadDataByNationaId(context, data) {
+		return new Promise((resolve, reject) =>	{
+			let url = data.url;
+			axios.get(url, data)
+				.then(res => {
+					context.commit('setData', res.data.data);
+					resolve(res);
+				})
+				.catch(res => reject(res));
+		});
+	},
 
 	/**
 	 * Load all provinces

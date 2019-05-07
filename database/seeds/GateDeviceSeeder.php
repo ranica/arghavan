@@ -21,7 +21,7 @@ class GateDeviceSeeder extends Seeder
             'number' => '0',
             'ip' => '8.8.8.8',
             'type' => '1', // Logical
-            'gate' => '1', // gate or antenna
+            'device_type_id' => '1', // gate or antenna
             'state' => '1', // active
             'gatepass_id' => $pass->id,
             'gategender_id' => '3',
@@ -38,7 +38,7 @@ class GateDeviceSeeder extends Seeder
     		'ip' => '127.0.0.1',
             'type' => '0',
     		'state' => '1',
-            'gate' => '1', // gate or antenna
+            'device_type_id' => '1', // gate or antenna
             'gatepass_id' => $pass->id,
     		'gategender_id' => '1',
     		'zone_id' => '1',
@@ -54,7 +54,7 @@ class GateDeviceSeeder extends Seeder
     		'ip' => '192.168.0.2',
             'type' => '0',
             'state' => '1',
-    		'gate' => '1',
+            'device_type_id' => '1', // gate or antenna
             'gatepass_id' => $pass->id,
     		'gategender_id' => '1',
     		'zone_id' => '1',
