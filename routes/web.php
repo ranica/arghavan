@@ -87,6 +87,7 @@ Route::resources ([
      '/buildingInformations'  =>'BuildingInformationController',
      '/gatePlans'           =>'GatePlanController',
      '/contactTypes'        =>'ContactTypeController',
+     '/deviceTypes'         =>'DeviceTypeController',
 ]);
 
 Route::get('/auth/edit', 'HomeController@editProfile')

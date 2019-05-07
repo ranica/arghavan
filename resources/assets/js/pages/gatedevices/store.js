@@ -5,6 +5,7 @@ const state = {
 	_gatepasses: [],
 	_gatedirects: [],
 	_zones: [],
+	_deviceTypes: [],
 
 	_data: {
 		data         : [],
@@ -49,6 +50,7 @@ const getters = {
 	 * Return zones
 	 */
 	zones: state => state._zones,
+	deviceTypes: state => state._deviceTypes,
 };
 
 const mutations = {
@@ -87,6 +89,12 @@ const mutations = {
 		state._zones = data;
 	},
 	/**
+	 * Set ZonesDeviceTypes
+	 */
+	setDeviceTypes: (state, data) => {
+		state._deviceTypes = data;
+	},
+	/**
 	 * Insert a new record
 	 */
 	insertRecord: (state, record) => {
@@ -117,6 +125,7 @@ const mutations = {
 		state._data.data[index].gatepass = record.gatepass;
 		state._data.data[index].gatedirect = record.gatedirect;
 		state._data.data[index].zone       = record.zone;
+		state._data.data[index].deviceType       = record.deviceType;
 
 	},
 
@@ -184,6 +193,23 @@ const actions = {
 				.then(res =>
 				{
 					context.commit('setZones', res.data.data);
+
+					resolve(res);
+				})
+				.catch(res => reject(res));
+		});
+	},
+
+	/**
+	 * Load all DeviceTypes
+	 */
+	loadDeviceTypes(context) {
+		return new Promise((resolve, reject) =>
+		{
+			axios.get('/deviceTypes')
+				.then(res =>
+				{
+					context.commit('setDeviceTypes', res.data.data);
 
 					resolve(res);
 				})

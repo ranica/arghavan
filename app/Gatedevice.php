@@ -80,6 +80,11 @@ class Gatedevice extends Model
     	return $this->belongsTo(\App\Zone::class);
     }
 
+    public function deviceType()
+    {
+        return $this->belongsTo(\App\DeviceType::class);
+    }
+
      /**
      * Get Gate Tarffic
      */
@@ -150,6 +155,8 @@ class Gatedevice extends Model
                         'gatedirect_id' => $request->gatedirect_id,
                         'zone_id'       => $request->zone_id,
                         'type'          => $request->type,
+                        'device_type_id' => $request->deviceType_id,
+
                         ]);
 
             return $newGatedevice;

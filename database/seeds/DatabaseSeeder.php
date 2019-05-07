@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             UniversitySeeder::class,
             ContractSeeder::class,
             DepartmentSeeder::class,
+            DeviceTypeSeeder::class,
             ZoneSeeder::class,
             FieldSeeder::class,
             GateDirectSeeder::class,
