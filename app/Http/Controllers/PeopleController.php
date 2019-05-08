@@ -681,5 +681,29 @@ class PeopleController extends Controller
         }
     }
 
+    public function checkNationaExsit(Request $request)
+    {
+        if ($request->ajax())
+        {
+            $exsitPeople = \App\People::where('nationalId' , $request->nationalId)
+                            ->first();
+
+            if (! is_null($exsitPeople))
+            {
+                return [
+                    'exists' => true,
+                    'data'  => [
+                        'nationalId'=> $exsitPeople->nationalId
+                    ],
+                ];
+            }
+
+            return [
+                'exists' => false,
+                'data' => []
+            ];
+        }
+    }
+
 }
 

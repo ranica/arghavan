@@ -7,9 +7,9 @@
         <div class="card-content f-BYekan">
             <div class="col-lg-10 col-lg-offset-1">
 
-                <h1 v-if="userCodeExists">
-                    User Exists
-                </h1>
+               <!--  <h1 v-if="userCodeExists">
+                  <div >A notification message..</div>
+                </h1> -->
 
                 <form>
                     <h4 class="info-text f-BYekan"> حساب کاربری را با دقت کامل نمایید</h4>

@@ -368,6 +368,23 @@ const actions = {
 				.catch(res => reject(res));
 		});
 	},
+	/**
+	 * Determines if it exists national user.
+	 *
+	 * @param      {<type>}   context  The context
+	 * @param      {<type>}   data     The data
+	 * @return     {Promise}  True if exists national user, False otherwise.
+	 */
+	existsNationalUser(context, data) {
+		return new Promise((resolve, reject) =>	{
+			let url = data.url + '?nationalId=' + data.nationalId;
+			axios.get(url)
+				.then(res => {
+					resolve(res);
+				})
+				.catch(res => reject(res));
+		});
+	},
 
 	/**
 	 * Load all provinces

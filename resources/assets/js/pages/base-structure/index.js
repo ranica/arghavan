@@ -372,6 +372,8 @@ window.v = new Vue({
                 id: record.id,
                 name: record.name,
                 province: 0,
+                building_type :0,
+                block: 0,
             };
 
             this.formMode = Enums.FormMode.register;
@@ -966,6 +968,7 @@ window.v = new Vue({
          */
         readyToDelete(record) {
             this.tempRecord.id = record.id;
+            $('#removeRecordModalMelliat').modal();
         },
         /**
          * Delete a record

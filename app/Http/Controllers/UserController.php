@@ -120,14 +120,6 @@ class UserController extends Controller
                 'data' => []
             ];
         }
-        // return  user data by code
-
-        // {
-        //     exists: t/f,
-        //     data: {
-        //         name:
-        //     }
-        // }
     }
 
 

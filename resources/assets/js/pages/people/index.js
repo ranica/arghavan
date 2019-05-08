@@ -95,13 +95,13 @@ window.v = new Vue({
         var base = this;
         document.querySelector('[name="nationalId"]')
             .addEventListener('blur', () => {
-                base.getNationalId();
-            })
+                base.existsNationalId();
+            });
 
         document.querySelector('[name="code"]')
             .addEventListener('blur', () => {
                 base.existCode();
-            })
+            });
     },
 
     computed: {
@@ -165,141 +165,215 @@ window.v = new Vue({
         allData: state => state.$store.getters.allData,
         hasRow: state => (0 < state.records.length),
 
-        /**
-         * Generate new Empty record
-         */
-        emptyRecord: () => {
-            return {
-                id: 0,
-                user: {
-                    id: 0,
-                    code: '',
-                    password: '',
-                    email: '',
-                    state: 0,
-                    group: {
-                        id: 0
-                    },
-                    people: {
-                        id: 0
-                    },
-                },
+        emptyRecord: () => { return {
+                                     id: 0,
+                                    user: {
+                                        id: 0,
+                                        code: '',
+                                        email: '',
+                                        password: '',
+                                        state: 0,
+                                        group:{
+                                            id:0
+                                        },
+                                        people: {
+                                            id: 0
+                                        },
+                                        level:{
+                                            id :0
+                                        },
 
-                people: {
-                    id: 0,
-                    name: '',
-                    lastname: '',
-                    nationalId: '',
-                    birthdate: '',
-                    // father    : '',
-                    phone: '',
-                    mobile: '',
-                    address: '',
-                    pictureUrl: '',
-                    file: null,
+                                    },
+                                    people: {
+                                        id: 0,
+                                        name: '',
+                                        lastname: '',
+                                        nationalId: '',
+                                        birthdate: '',
+                                        // father    : '',
+                                        phone: '',
+                                        mobile: '',
+                                        address: '',
+                                        pictureUrl: '',
+                                        file: null,
 
-                    melliat: {
-                        id: 0
-                    },
-                    gender: {
-                        id: 0
-                    },
-                    province: {
-                        id: 0
-                    },
-                    city: {
-                        id: 0
-                    },
-                },
+                                        melliat: {
+                                            id: 0
+                                        },
+                                        gender: {
+                                            id: 0
+                                        },
+                                        province: {
+                                            id: 0
+                                        },
+                                        city: {
+                                            id: 0
+                                        },
+                                    },
 
-                student: {
-                    id: 0,
-                    term: {
-                        id: 0,
-                        semester: {
-                            id: 0,
-                        }
-                    },
-                    native: 0,
-                    suit: 0,
-                    situation: {
-                        id: 0
-                    },
-                    degree: {
-                        id: 0
-                    },
-                    part: {
-                        id: 0
-                    },
-                    field: {
-                        id: 0
-                    },
-                    university: {
-                        id: 0
-                    },
-                },
+                                    student: {
+                                        id: 0,
+                                        term: {
+                                            id: 0,
+                                            semester: {
+                                                id: 0,
+                                            }
+                                        },
+                                        native: 0,
+                                        suit: 0,
+                                        situation: {
+                                            id: 0
+                                        },
+                                        degree: {
+                                            id: 0
+                                        },
+                                        part: {
+                                            id: 0
+                                        },
+                                        field: {
+                                            id: 0
+                                        },
+                                        university: {
+                                            id: 0
+                                        },
+                                    },
 
-                teacher: {
-                    id: 0,
-                    semat: '',
-                },
-                staff: {
-                    id: 0,
-                    contract: {
-                        id: 0
-                    },
-                    department: {
-                        id: 0
-                    }
-                },
+                                    teacher: {
+                                        id: 0,
+                                        semat: '',
+                                    },
+                                    staff: {
+                                        id: 0,
+                                        contract: {
+                                            id: 0
+                                        },
+                                        department: {
+                                            id: 0
+                                        }
+                                    },
 
-                card: {
-                    id: 0,
-                    cdn: '',
-                    state: 0,
-                    startDate: '',
-                    endDate: '',
-                    user: {
-                        id: 0,
-                    },
-                    group: {
-                        id: 0
-                    },
-                    cardtype: {
-                        id: 0
-                    },
-                },
+                                    card: {
+                                        id: 0,
+                                        cdn: '',
+                                        state: 0,
+                                        startDate: '',
+                                        endDate: '',
+                                        user: {
+                                            id: 0,
+                                        },
+                                        group: {
+                                            id: 0
+                                        },
+                                        cardtype: {
+                                            id: 0
+                                        },
+                                    },
 
-                parent: {
-                    id: 0,
-                    name: '',
-                    lastname: '',
-                    phone: '',
-                    mobile: '',
-                    address: '',
-                    kintype: {
-                        id: 0,
-                    },
-                    people: {
-                        id: 0,
-                    },
-                },
-            };
-        },
-
+                                    parent: {
+                                        id: 0,
+                                        name: '',
+                                        lastname: '',
+                                        phone: '',
+                                        mobile: '',
+                                        address: '',
+                                        kintype: {
+                                            id: 0,
+                                        },
+                                        people: {
+                                            id: 0,
+                                        },
+                                    },
+                                }
+                        },
     },
 
+
     methods: {
+         /**
+         * Generate new Empty record
+         */
+        clearRecord(){
+             this.tempRecord.id = 0;
+
+            this.tempRecord.user.id = 0;
+            this.tempRecord.user.code = '';
+            this.tempRecord.user.password = '';
+            this.tempRecord.user.email = '';
+            this.tempRecord.user.state = 0;
+            this.tempRecord.user.group.id = 0;
+            this.tempRecord.user.group.name = '';
+            this.tempRecord.user.people.id = 0;
+
+            this.tempRecord.people.id =  0;
+            this.tempRecord.people.name = '';
+            this.tempRecord.people.lastname = '';
+            this.tempRecord.people.nationalId = '';
+            this.tempRecord.people.birthdate = '';
+            this.tempRecord.people.phone = '';
+            this.tempRecord.people.mobile =  '';
+            this.tempRecord.people.address = '';
+            this.tempRecord.people.pictureUrl= '',
+            this.tempRecord.people.file =  null;
+            this.tempRecord.people.melliat.id = 0;
+            this.tempRecord.people.gender.id = 0;
+            this.tempRecord.people.province.id = 0;
+            this.tempRecord.people.city.id = 0;
+
+            this.tempRecord.student.id = 0;
+            this.tempRecord.student.term.id = 0;
+            this.tempRecord.student.term.semester.id = 0;
+            this.tempRecord.student.native = 0;
+            this.tempRecord.student.suit = 0;
+            this.tempRecord.student.situation.id = 0;
+            this.tempRecord.student.degree.id = 0;
+            this.tempRecord.student.part.id = 0;
+            this.tempRecord.student.field.id = 0;
+            this.tempRecord.student.university.id = 0;
+
+            this.tempRecord.teacher.id = 0;
+            this.tempRecord.teacher.semat = '';
+
+            this.tempRecord.staff.id = 0;
+            this.tempRecord.staff.contract.id = 0;
+            this.tempRecord.staff.department.id = 0;
+
+            this.tempRecord.card.id = 0;
+            this.tempRecord.card.cdn = '';
+            this.tempRecord.card.state = 0;
+            this.tempRecord.card.startDate = '';
+            this.tempRecord.card.endDate = '';
+            this.tempRecord.card.user.id = 0;
+            this.tempRecord.card.group.id = 0;
+            this.tempRecord.card.cardtype.id = 0;
+
+            this.tempRecord.parent.id = 0;
+            this.tempRecord.parent.name = '';
+            this.tempRecord.parent.lastname = '';
+            this.tempRecord.parent.phone = '';
+            this.tempRecord.parent.mobile = '';
+            this.tempRecord.parent.address = '';
+            this.tempRecord.parent.kintype.id = 0;
+            this.tempRecord.parent.people.id = 0;
+        },
+
         selectFinger(finger) {
             this.finger_index = finger.index;
         },
         /**
          * Gets the national identifier.
          */
-        getNationalId() {
+        existsNationalId() {
             if (null != this.tempRecord.people.nationalId) {
                 // this.tempRecord.people.mobile = '09120472018';
-                this.loadDataByNationaId(this.tempRecord.people.nationalId);
+                this.existsNationalUser(this.tempRecord.people.nationalId)
+                    .then (
+                           // res => this.userCodeExists = false
+                           )
+                    .catch(err =>{
+                        $("#reloadRecordModal").modal()
+                         // this.userCodeExists = true
+                     });
+                       // .catch(err => this.userCodeExists = true);
             } else {
                 console.log('empty national code');
             }
@@ -313,9 +387,16 @@ window.v = new Vue({
                 // this.tempRecord.people.mobile = '09120472018';
                 this.existsCodeUser(this.tempRecord.user.code)
                        .then (res => this.userCodeExists = false)
-                       .catch(err => this.userCodeExists = true);
+                       .catch(err =>{
+                         demo.showNotification('شماره دانشجویی یا کد پرسنلی  قبلا ثبت شده است', 'warning');
+                         this.userCodeExists = true
+                     });
+                       // .catch(err => this.userCodeExists = true);
             }
         },
+        /**
+         * Sets the image loader.
+         */
         setImageLoader() {
             let baseVue = this;
 
@@ -334,7 +415,12 @@ window.v = new Vue({
                 }
             });
         },
-
+        /**
+         * Determines if it exists code user.
+         *
+         * @param      {<type>}   code    The code
+         * @return     {Promise}  True if exists code user, False otherwise.
+         */
         existsCodeUser(code) {
             return new Promise((resolve, reject) => {
                 let url = document.pageData.people.check_user;
@@ -357,21 +443,48 @@ window.v = new Vue({
                     });
             });
         },
+        /**
+         * Determines if it exists national user.
+         *
+         * @param      {<type>}   data    The data
+         * @return     {Promise}  True if exists national user, False otherwise.
+         */
+        existsNationalUser(nationalCode) {
+            return new Promise((resolve, reject) => {
+                let url = document.pageData.people.check_national_people;
 
+                let data = {
+                    url: url,
+                    nationalId: nationalCode
+                };
 
+                this.$store.dispatch('existsNationalUser', data)
+                    .then(res => {
+                        if (res.data.exists == false) {
+                            resolve(true);
+                        } else {
+                            reject(false);
+                        }
+                    })
+                    .catch(err => {
+                        reject(err);
+                    });
+            });
+        },
         /**
          * Loads a data by nationa identifier.
          */
-        loadDataByNationaId(nationalId) {
+        loadRecordByNationalCode(nationalId) {
             let url = document.pageData.people.load_by_national_code;
 
             let data = {
                 url: url,
-                nationalId: nationalId
+                nationalId: this.tempRecord.people.nationalId
             };
             this.$store.dispatch('loadDataByNationaId', data)
                 .then(res => {
                     let myData = res.data[0];
+                    // console.log('mydata', mydata);
                     this.tempRecord.people = {
                         id: myData.people.id,
                         name: myData.people.name,
@@ -458,6 +571,7 @@ window.v = new Vue({
          * @return {[type]}    [description]
          */
         filterUsers(groupId) {
+            console.log( 'filter user');
             this.fingerPrint = true;
             if (groupId == document.pageData.people.group_students) {
                 this.parent = true;
@@ -587,6 +701,7 @@ window.v = new Vue({
                 searchWord: searchWord
             };
 
+            console.log('index -> load records');
             this.$store.dispatch('loadRecords', data)
                 .then(res => {
                     this.isLoading = false;
@@ -658,20 +773,9 @@ window.v = new Vue({
             this.clearErrors();
             this.userCodeExists = false;
 
-            this.tempRecord.id = 0;
-
-            this.tempRecord.user.id = 0;
-            this.tempRecord.user.code = '';
-            this.tempRecord.user.password = '';
-            this.tempRecord.user.email = '';
-            this.tempRecord.user.state = 0;
-            this.tempRecord.user.group.id = 0;
-            this.tempRecord.user.group.name = '';
-
-            // = $.extend(true, {}, this.emptyRecord);
+            this.clearRecord();
             $('#wizard-picture').val('');
 
-            // this.insertMode = true;
             this.updateMode = false;
 
             setTimeout(() => {
@@ -1804,6 +1908,7 @@ window.v = new Vue({
         }
     }
 });
+
 $(document).ready(() => {
     $(".toggle-password").click(function() {
         $(this).toggleClass("fa-eye fa-eye-slash");

@@ -28,6 +28,11 @@ Route::get('/people/loadByNationalCode', 'PeopleController@loadPeopleByNationalC
 Route::get('/user/checkUser', 'UserController@checkExsit')
             ->name('user.check.exist');
 
+Route::get('/people/checkNationalPeople', 'PeopleController@checkNationaExsit')
+            ->name('people.check.exist.national');
+
+
+
 Route::resources ([
     // Base data
     '/melliats'             => 'MelliatController',

@@ -41,7 +41,9 @@
                                 </div>
                                 <div class="row text-center">
                                     @can('command_edit')
-                                        <a href="#" class="btn btn-round btn-info btn-just-icon pull-center" @click.prevent="editRecord(record)">
+                                        <a href="#"
+                                            class="btn btn-round btn-info btn-just-icon pull-center"
+                                            @click.prevent="editRecord(record)">
                                             <i class="material-icons">create</i>
                                             <div class="ripple-container"></div>
                                         </a>

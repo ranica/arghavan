@@ -1,6 +1,6 @@
 <!-- Fifth Tab : Image -->
 <tab-content title="ثبت تصویر"
-             icon="fa fa-picture-o">
+             icon="far fa-image">
     <div class="card">
     <!-- Card Content -->
         <div class="card-content f-BYekan">
@@ -8,7 +8,6 @@
                 <form>
                     <div class="row">
                         <div class="text-center">
-                              {{-- <h4 class="title">Regular Image</h4> --}}
                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail">
                                     <img :src="tempRecord.people.pictureUrl" alt="...">
