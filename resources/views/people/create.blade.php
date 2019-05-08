@@ -11,8 +11,8 @@
              finish-button-text="">
              <!-- @on-change="wizardTabChange" -->
 
-				@include('people.tabs.tab-person')
                 @include('people.tabs.tab-user')
+                @include('people.tabs.tab-person')
 				@include('people.tabs.tab-otherInfo')
 				@include('people.tabs.tab-card')
 				@include('people.tabs.tab-image')
@@ -27,14 +27,14 @@
 					<wizard-button class="wizard-footer-right back-button"
 								:style="props.fillButtonStyle"
 								v-if="props.activeTabIndex > 0"
-								@click.native="props.prevTab()">
+								@click.native="changeTab(props, 'prev')">
 									قبلی
 						{{-- <i class="fa fa-long-arrow-right" aria-hidden="true"></i> --}}
 					</wizard-button>
 
 					<wizard-button class="wizard-footer-right next-button"
 								v-if="!props.isLastStep"
-								@click.native="props.nextTab()"
+								@click.native="changeTab(props, 'next')"
 								:style="props.fillButtonStyle">
 									بعدی
 						{{-- <i class="fa fa-check" aria-hidden="true"> بعدی</i> --}}

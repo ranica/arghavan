@@ -7,6 +7,7 @@ const state =
 	_fieldData   : [],
 	_terms : [],
 	_parents : [],
+	_peopleData : [],
 
 	_data: {
 		data         : [],
@@ -57,6 +58,11 @@ const getters =
 	 * Return fields
 	 */
 	fieldData: state => state._fieldData,
+
+	/**
+	 * Return people data by code
+	 */
+	peopleData: state => state._peopleData,
 };
 
 
@@ -98,6 +104,13 @@ const mutations =
 	 */
 	setData: (state, data) => {
 		state._data = data;
+	},
+
+	/**
+	 * Set people data by code
+	 */
+	setPeopleData: (state, data) => {
+		state._peopleData = data;
 	},
 	/**
 	 * Set Parent
@@ -334,7 +347,22 @@ const actions = {
 			let url = data.url;
 			axios.get(url, data)
 				.then(res => {
-					context.commit('setData', res.data.data);
+					context.commit('setPeopleData', res.data);
+					resolve(res);
+				})
+				.catch(res => reject(res));
+		});
+	},
+
+	/**
+	 * Load Data by national code
+	 */
+	existsCodeUser(context, data) {
+		return new Promise((resolve, reject) =>	{
+			let url = data.url + '?code=' + data.code;
+			axios.get(url)
+				.then(res => {
+					// context.commit('setPeopleData', res.data);
 					resolve(res);
 				})
 				.catch(res => reject(res));

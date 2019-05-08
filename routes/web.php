@@ -25,6 +25,9 @@ Route::get('/contactType/allContactlType', 'ContactTypeController@allContactType
 Route::get('/people/loadByNationalCode', 'PeopleController@loadPeopleByNationalCode')
             ->name('people.load_by_national_code');
 
+Route::get('/user/checkUser', 'UserController@checkExsit')
+            ->name('user.check.exist');
+
 Route::resources ([
     // Base data
     '/melliats'             => 'MelliatController',
