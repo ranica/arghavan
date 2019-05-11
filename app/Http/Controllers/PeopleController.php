@@ -295,7 +295,8 @@ class PeopleController extends Controller
                     'address',
                     'gender_id',
                     'city_id',
-                    'melliat_id'
+                    'melliat_id',
+                    'picture'
                 ]);
             },
             'people.gender' => function($query){
@@ -500,8 +501,7 @@ class PeopleController extends Controller
 
             // Save resized image
             $image_resize = Image::make(file_get_contents($filename));
-            //dd($image_resize);
-            // $image_resize = \Image::make($filename);
+
             $image_resize->resize (300, 300);
             $image_resize->save ($savePath);
 
