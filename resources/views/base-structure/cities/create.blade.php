@@ -13,7 +13,8 @@
                     ثبت اطلاعات
                 </span>
                 <!-- Province name field -->
-                <div class="form-group label-floating"  :class="{'has-error' : errors.has('province_id')}">
+                <div class="form-group label-floating"
+                    :class="{'has-error' : errors.has('province_id')}">
                     <label class="control-label">استان نام</label>
                     <select class="form-control"
                         v-model="tempRecord.province.id"
@@ -29,9 +30,10 @@
                 <!-- /Province name field -->
 
                 <!-- City name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_city')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_city')}">
                     <label class="control-label">نام شهرستان</label>
-                    <input autofocus required class="form-control"
+                    <input required class="form-control"
                         type="text"
                         name="name_city"
                         minlength="2"
@@ -44,8 +46,14 @@
                 </div>
                 <!-- /Name field -->
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveCityRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveCityRecord">
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
 
             </form>

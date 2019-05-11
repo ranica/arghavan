@@ -110,7 +110,6 @@
 
                     <div class="tab-pane" id="building">
                         @include('base-structure.buildings.index')
-                        {{-- @include('base-structure.departments.index') --}}
                     </div>
 
                     <div class="tab-pane" id="kin_type">

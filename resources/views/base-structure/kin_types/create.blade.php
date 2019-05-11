@@ -14,23 +14,33 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_kin_type')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_kin_type')}">
                     <label class="control-label">نام نسبت</label>
-                    <input autofocus required class="form-control"
+                    <input autofocus
+                        required
+                        class="form-control"
                         type="text"
                         name="name_kin_type"
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"
-                       v-validate="{ required: true, is_not:'null' }"
+                        v-validate="{ required: true, is_not:'null' }"
                         data-vv-delay="250"
                         data-vv-as ="نام نسبت" />
                     <span class="material-input"></span>
                 </div>
                 <!-- /Name field -->
+
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveKinTypeRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveKinTypeRecord">
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
 
             </form>

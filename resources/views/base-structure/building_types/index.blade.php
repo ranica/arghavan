@@ -11,14 +11,25 @@
                             <span class="panel-heading">نوع ساختمان</span>
 
                             @can('command_insert')
-                            <span class="pull-left" v-show="isNormalMode">
-                                <a class="btn btn-rose" href="#" @click.prevent="newRecord">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                    ثبت رکورد جدید
-                                </a>
-                            </span>
+                                <!-- Pc size -->
+                                <span class="pull-left" v-show="isNormalMode">
+                                    <a class="btn btn-rose btn-round"
+                                        href="#"
+                                        @click.prevent="newRecord">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        ثبت رکورد جدید
+                                    </a>
+                                </span>
+                                <!--  mobile size -->
+                                <span class="mobile" v-show="isNormalMode">
+                                    <a class="btn btn-round btn-rose"
+                                        href="#"
+                                        @click.prevent="newRecord">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        ثبت رکورد جدید
+                                    </a>
+                                </span>
                             @endcan
-
                         </div>
                     </h3>
                     <!-- /Title -->
@@ -52,7 +63,8 @@
                                             <td>@{{ record.name }}</td>
                                             <td class="text-left" width="160">
                                                 @can('command_delete')
-                                                    <a href="#" class="btn btn-round btn-just-icon pull-left"
+                                                    <a href="#"
+                                                        class="btn btn-round btn-just-icon pull-left"
                                                         data-toggle="modal"
                                                         data-target="#removeRecordModal‌BuildingType"
                                                         @click.prevent="readyToDelete(record)">

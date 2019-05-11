@@ -391,7 +391,10 @@ window.v = new Vue({
                 province: {
                     id: record.province.id,
                     name: record.province.name,
-                }
+                },
+
+                building_type :0,
+                block: 0,
             };
 
             this.formMode = Enums.FormMode.register;
@@ -410,6 +413,8 @@ window.v = new Vue({
                 beginDate: Helper.gregorianToJalaali(record.beginDate),
                 endDate: Helper.gregorianToJalaali(record.endDate),
                 province: 0,
+                building_type :0,
+                block: 0,
             };
 
             this.formMode = Enums.FormMode.register;
@@ -426,6 +431,7 @@ window.v = new Vue({
                 name: record.name,
                 code: record.code,
                 province: 0,
+                building_type :0,
             };
 
             this.formMode = Enums.FormMode.register;
@@ -449,7 +455,8 @@ window.v = new Vue({
                 block: {
                     id: record.block.id,
                     name: record.block.name,
-                }
+                },
+                 province: 0,
             };
 
             this.formMode = Enums.FormMode.register;
@@ -968,7 +975,7 @@ window.v = new Vue({
          */
         readyToDelete(record) {
             this.tempRecord.id = record.id;
-            $('#removeRecordModalMelliat').modal();
+            // $('#removeRecordModal').modal();
         },
         /**
          * Delete a record

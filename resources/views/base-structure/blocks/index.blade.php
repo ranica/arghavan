@@ -10,12 +10,24 @@
                         <span class="panel-heading">بلوک</span>
 
                         @can('command_insert')
-                        <span class="pull-left" v-show="isNormalMode">
-                            <a class="btn btn-rose" href="#" @click.prevent="newRecord">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                ثبت رکورد جدید
-                            </a>
-                        </span>
+                            <!-- Pc size -->
+                            <span class="pull-left" v-show="isNormalMode">
+                                <a class="btn btn-round btn-rose"
+                                    href="#"
+                                    @click.prevent="newRecord">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    ثبت رکورد جدید
+                                </a>
+                            </span>
+                            <!--  mobile size -->
+                            <span class="mobile" v-show="isNormalMode">
+                                <a class="btn btn-round btn-rose"
+                                    href="#"
+                                    @click.prevent="newRecord">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    ثبت رکورد جدید
+                                </a>
+                            </span>
                         @endcan
 
                     </div>
@@ -101,8 +113,12 @@
                     <!-- /Register Form -->
 
                     <!-- small modal -->
-                    <div class="modal fade" id="removeRecordModalBlock" tabindex="-1" role="dialog"
-                        aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade"
+                        id="removeRecordModalBlock"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="myModalLabel"
+                        aria-hidden="true">
 
                         <div class="modal-dialog modal-small ">
                             <div class="modal-content">

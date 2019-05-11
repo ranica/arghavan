@@ -1,4 +1,5 @@
-// import CarSearchCard from './components/car_search_card'
+import VueFormWizard from 'vue-form-wizard';
+Vue.use(VueFormWizard)
 
 
 new Vue({
@@ -9,22 +10,7 @@ new Vue({
     },
 
     data: {
-        users: [
-            {
-                id: 1000,
-                name: 'Designer',
-                cars: [
-                    {
-                        id: 100,
-                        plate: '100C200IR79'
-                    },
-                    {
-                        id: 200,
-                        plate: '110C210IR79'
-                    }
-                ]
-            }
-        ]
+
     },
 
     methods: {
@@ -35,6 +21,15 @@ new Vue({
          */
         editRecord(userData){
             alert ('Edit data');
-        }
+        },
+
+          /**
+         * File Select for Image file
+         */
+        fileSelect(sender) {
+            let file = sender.target.files[0];
+
+            this.file = file;
+        },
     }
 })
