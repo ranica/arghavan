@@ -65,9 +65,12 @@ class PeopleController extends Controller
         if ($request->hasFile('image'))
         {
             $image = $request->file('image');
+
+            $ext = $image->getClientOriginalExtension();
+
             $fullSizeImageAddr = $image->store('');
 
-            $th_name = str_replace('.jpeg', '-t.jpeg', $fullSizeImageAddr);
+            $th_name = str_replace(".$ext", "-t.$ext", $fullSizeImageAddr);
             $th_name = \Storage::path($th_name);
             $thumbnailImage = Image::make($image);
             $thumbnailImage->fit(320, 320)
