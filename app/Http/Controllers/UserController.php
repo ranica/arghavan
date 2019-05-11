@@ -98,6 +98,30 @@ class UserController extends Controller
         return (new UsersExport(1000))->download('invoices.xlsx');
     }
 
+    public function checkExsit(Request $request)
+    {
+        if ($request->ajax())
+        {
+            $exsitUser = \App\User::where('code' , $request->code)
+                            ->first();
+
+            if (! is_null($exsitUser))
+            {
+                return [
+                    'exists' => true,
+                    'data'  => [
+                        'code'=> $exsitUser->code
+                    ],
+                ];
+            }
+
+            return [
+                'exists' => false,
+                'data' => []
+            ];
+        }
+    }
+
 
 
     /**

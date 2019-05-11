@@ -22,6 +22,17 @@ Route::get('/materialType/allMaterialType', 'MaterialTypeController@allMaterialT
 Route::get('/contactType/allContactlType', 'ContactTypeController@allContactType')
             ->name('contactTypes.allContactType');
 
+Route::get('/people/loadByNationalCode', 'PeopleController@loadPeopleByNationalCode')
+            ->name('people.load_by_national_code');
+
+Route::get('/user/checkUser', 'UserController@checkExsit')
+            ->name('user.check.exist');
+
+Route::get('/people/checkNationalPeople', 'PeopleController@checkNationaExsit')
+            ->name('people.check.exist.national');
+
+
+
 Route::resources ([
     // Base data
     '/melliats'             => 'MelliatController',

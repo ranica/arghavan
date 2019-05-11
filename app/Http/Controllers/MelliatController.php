@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MelliatRequest;
 use Illuminate\Http\Request;
 use PDF;
+use App\Melliat;
 
 class MelliatController extends Controller
 {

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<XMI verified="false" xmi.version="1.2" timestamp="2019-05-06T16:41:37" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
+=======
 <XMI timestamp="2019-05-06T19:36:16" xmlns:UML="http://schema.omg.org/spec/UML/1.4" xmi.version="1.2" verified="false">
+>>>>>>> 6a88f0b033417f4b845a252f66f54194f6328b3e
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -871,8 +875,17 @@
         <UML:Attribute type="yOYhDTtZQ9iQ" visibility="private" name="name" xmi.id="zMqf9ogXDUHu" isSpecification="false"/>
        </UML:Classifier.feature>
       </UML:Class>
+<<<<<<< HEAD
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="gPQTN4GkBVYh" name="Referral(مراجعه کننده)">
+       <UML:Classifier.feature>
+        <UML:Attribute visibility="private" isSpecification="false" xmi.id="sAIh5kWttkZb" type="DjlTcusKTvqo" name="id"/>
+       </UML:Classifier.feature>
+      </UML:Class>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="DfbsQp0hpMjY" comment="ارباب رجوع&#xa;میهمان&#xa;مدعوین&#xa;پیک&#xa;اتباع خارجی&#xa;" name="RefferalType(نوع مراجعه کننده)">
+=======
       <UML:Class isRoot="false" visibility="public" name="strinf" xmi.id="uf2vbsO5gS5DB" isSpecification="false" isAbstract="false" isLeaf="false" namespace="Logical View"/>
       <UML:Class isRoot="false" visibility="public" name="Gender(جنسیت)_1" xmi.id="udlandLYglBw7" isSpecification="false" isAbstract="false" isLeaf="false" namespace="Logical View">
+>>>>>>> 6a88f0b033417f4b845a252f66f54194f6328b3e
        <UML:Classifier.feature>
         <UML:Attribute type="DjlTcusKTvqo" visibility="private" name="id" xmi.id="ukIP5eAmMRFTh" isSpecification="false"/>
         <UML:Attribute type="yOYhDTtZQ9iQ" visibility="private" name="name" xmi.id="uoelQytljnQA5" isSpecification="false"/>
@@ -930,6 +943,102 @@
       <diagrams>
        <diagram snapx="25" documentation="" textcolor="#000000" showattsig="1" showscope="1" snapy="25" isopen="1" usefillcolor="1" linewidth="0" showops="1" showopsig="1" canvasheight="2894.14" linecolor="#ff0000" fillcolor="#ffff00" snapgrid="0" backgroundcolor="#ffffff" showpackage="1" canvaswidth="5073.68" name="A- class diagram" griddotcolor="#d3d3d3" showattribassocs="1" xmi.id="kZ4WNF0DxzFf" showpubliconly="0" showstereotype="1" localid="-1" showatts="1" showgrid="0" snapcsgrid="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0" zoom="57.17532455930331" type="1">
         <widgets>
+<<<<<<< HEAD
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="1" linewidth="0" textcolor="none" usesdiagramusefillcolor="1" x="-1835.72" showstereotype="1" y="-814.241" text="people_id" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="vayyuBHPbXye" pretext="-" role="710" width="96" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="7FarJM6B9WLr" height="32"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3300.42" showattsigs="601" showstereotype="1" y="-349.613" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uMXJrbDl03SZ4" width="175" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="u5Ml5zf6sSa6s" showscope="1" height="66" showopsigs="601"/>
+         <enumwidget width="203" showstereotype="1" x="-1854.47" usesdiagramusefillcolor="0" y="-702.422" usesdiagramfillcolor="0" isinstance="0" localid="5UuupMu3E1Xc" fillcolor="#ffff00" height="140" linecolor="#ff0000" xmi.id="6o25ZpC8IVvz" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-1386.07" showstereotype="1" y="-444.648" text="person -> hasone ->profile" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="ohnnKUjdPZyP" pretext="" role="700" width="234" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="8QBlFFF3x0oH" height="32"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-1515.19" showstereotype="1" y="-311.902" text="Person->hasone->melliat" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="GfZwv2m6Tre3" pretext="" role="700" width="219" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="GzpfjIxxxUuq" height="32"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-1504.38" showstereotype="1" y="-362.828" text="Melliat ->belongsToMany-> person" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="FnbysUCJiGTp" pretext="" role="700" width="299" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="Bq78HeCVRmTH" height="32"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1654.03" showattsigs="601" showstereotype="1" y="-1701.57" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="6ae6ExshiAua" width="246" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="eoZdpvpatNQz" showscope="1" height="142" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3271" showattsigs="601" showstereotype="1" y="-942.6" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uzuhDtT2RkaBn" width="113" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uZMkgyKsiKw3M" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1627.7" showattsigs="601" showstereotype="1" y="-1800.16" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="utoTHBdbiPZk1" width="146" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="u5lqqYFICGiHW" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2695.22" showattsigs="601" showstereotype="1" y="-1117.58" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uVYuPR3Rk9fl3" width="179" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uJC8FvO4TBc5i" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1601.79" showattsigs="601" showstereotype="1" y="-2434.4" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uiAKxJQgVgDpr" width="177" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uqs73T9ipvG2d" showscope="1" height="142" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4375.27" showattsigs="601" showstereotype="1" y="-516.977" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uH8dO1FvXlzmm" width="179" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uRUrhltJ5vbTQ" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1841.6" showattsigs="601" showstereotype="1" y="-1656.07" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uEbbLrP4v5ZvS" width="157" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="ukFwJ5Jn87qL6" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3814.53" showattsigs="601" showstereotype="1" y="-1601.73" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uEJ5WKLr3ZsSP" width="245" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uZFxijkgvhcDa" showscope="1" height="123" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3260.62" showattsigs="601" showstereotype="1" y="-2399.5" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="KyWGng3dtMkY" width="268" isinstance="0" usefillcolor="1" fillcolor="#55ffff" xmi.id="KuOoJGsVfljJ" showscope="1" height="104" showopsigs="601"/>
+         <enumwidget width="187" showstereotype="1" x="-3432.88" usesdiagramusefillcolor="0" y="-1850.99" usesdiagramfillcolor="0" isinstance="0" localid="RGFfgccbfXGI" fillcolor="#8ae234" height="112" linecolor="#ff0000" xmi.id="aa3OCWY7pzR6" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2781.97" showattsigs="601" showstereotype="1" y="-654" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="DHN7AGzDT3QC" width="123" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="Rb5RcWW2yqce" showscope="1" height="114" showopsigs="601"/>
+         <enumwidget width="119" showstereotype="1" x="-2142.17" usesdiagramusefillcolor="0" y="-999.637" usesdiagramfillcolor="0" isinstance="0" localid="khgQQvGrkPVd" fillcolor="#ffff00" height="112" linecolor="#ff0000" xmi.id="8qfg7UQ6K5Gs" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <enumwidget width="103" showstereotype="1" x="-2027.04" usesdiagramusefillcolor="0" y="-829.784" usesdiagramfillcolor="0" isinstance="0" localid="Kqoh8L9WRopk" fillcolor="#ffff00" height="168" linecolor="#ff0000" xmi.id="pt8rRaHsIZ4L" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <enumwidget width="118" showstereotype="1" x="-121.645" usesdiagramusefillcolor="0" y="-1993.53" usesdiagramfillcolor="0" isinstance="0" localid="QvvzgjeHaWnv" fillcolor="#00ffff" height="112" linecolor="#ff0000" xmi.id="k0JVdYh46YK9" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3516.67" showattsigs="601" showstereotype="1" y="-1696.19" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="RJkBSY5N6cbY" width="271" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="LpIs9oi34yFo" showscope="1" height="199" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1834.56" showattsigs="601" showstereotype="1" y="-1098.53" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="850G7dxYDDmq" width="207" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="H2slIbRl9Kdl" showscope="1" height="237" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3528.62" showattsigs="601" showstereotype="1" y="-2348.96" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="Ex4FihqezIhk" width="156" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="Y2vR0aOZFwL5" showscope="1" height="114" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3392.64" showattsigs="601" showstereotype="1" y="-1285.03" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="mqbYmwwvkhKI" width="140" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="16vPCWsUYRwL" showscope="1" height="114" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-92.9871" showattsigs="601" showstereotype="1" y="-1675.37" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="rgZ0w0LhHA0y" width="166" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="8zGsgaBmUkLX" showscope="1" height="114" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-530.463" showattsigs="601" showstereotype="1" y="-1637.64" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="XoICR7IvpvC4" width="321" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="DTOCOe2FKqUu" showscope="1" height="323" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-887.233" showattsigs="601" showstereotype="1" y="-1504.57" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="4chcQxa3accb" width="328" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="B8GrHnL3JwWh" showscope="1" height="190" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3067.16" showattsigs="601" showstereotype="1" y="-652.345" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="rNdxT2arlOix" width="212" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="QhOlJnFxzZLc" showscope="1" height="133" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3614.71" showattsigs="601" showstereotype="1" y="-1293.14" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="q7Ies4bXZMDA" width="149" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="4hweTwaKWKJp" showscope="1" height="114" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3455.42" showattsigs="601" showstereotype="1" y="-1451.46" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="ZfeXx8NWskpN" width="234" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="9NRilllmGBRB" showscope="1" height="133" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3683.69" showattsigs="601" showstereotype="1" y="-1736.8" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="IcK11G5Ty3X1" width="123" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="bgHLsYfmxknz" showscope="1" height="114" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2417.25" showattsigs="601" showstereotype="1" y="-1733.7" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="CYAoYkx0XnkR" width="197" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="s34yvOY0TE9t" showscope="1" height="228" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2511.58" showattsigs="601" showstereotype="1" y="-1081.07" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="9zAI2FaDPPPM" width="181" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="dm448tVtA7Xg" showscope="1" height="152" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3315.95" showattsigs="601" showstereotype="1" y="-789.034" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="26mTEQBbXZDg" width="201" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="V9zn1nwK55RM" showscope="1" height="304" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3569.6" showattsigs="601" showstereotype="1" y="-2114.59" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="LzU5lvzAQkEJ" width="157" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="5TF2SMaSzIn8" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2473.42" showattsigs="601" showstereotype="1" y="-2312.87" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="grEeA1mT0EYj" width="146" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="oqURDt9HLMJn" showscope="1" height="104" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2768.35" showattsigs="601" showstereotype="1" y="-2415.26" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="5hNxzo18OMcJ" width="247" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="Uz5TDbAL70sL" showscope="1" height="104" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2147.66" showattsigs="601" showstereotype="1" y="-2422.93" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="METXmte8Iwr4" width="302" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="xLv1TCICbt30" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2495.34" showattsigs="601" showstereotype="1" y="-2459.41" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="lAD8esvKovZe" width="312" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="XLAoFzs1riXY" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2286.16" showattsigs="601" showstereotype="1" y="-2214.22" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="8Raj9lJ48s1V" width="312" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="9Su2q7Im5dQx" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2732.89" showattsigs="601" showstereotype="1" y="-2163.83" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="F4Hjhxcr0Sxm" width="353" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="Gv0CFVTTVF2V" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3205.26" showattsigs="601" showstereotype="1" y="-1826.3" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="JfYxyjRBK5xK" width="173" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="NPcY19EvLKVJ" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2533.06" showattsigs="601" showstereotype="1" y="-1351.69" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="f0AbEyVCBWTR" width="108" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="opWhnWbqlPHK" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3525.7" showattsigs="601" showstereotype="1" y="-2468.94" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="FZxqectCeTrP" width="185" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="ABL9AohgiTQ7" showscope="1" height="66" showopsigs="601"/>
+         <enumwidget width="104" showstereotype="1" x="-242.293" usesdiagramusefillcolor="0" y="-1991.93" usesdiagramfillcolor="0" isinstance="0" localid="L1iYwdpehUVu" fillcolor="#00ffff" height="112" linecolor="#ff0000" xmi.id="doQIu5T0OraR" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-187.755" showattsigs="601" showstereotype="1" y="-1504.7" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="Lzl1qoIKSF9v" width="277" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="No8dCxfnKd4H" showscope="1" height="161" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-857.759" showattsigs="601" showstereotype="1" y="-1152.1" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="8djc656KwNXk" width="194" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="537guI2MCFv2" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3088.26" showattsigs="601" showstereotype="1" y="-479.702" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="wquvZIFXfAKs" width="260" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="AqsRxc7FJBPO" showscope="1" height="180" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2961.84" showattsigs="601" showstereotype="1" y="-746.283" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="UclNGfcuEhhh" width="108" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="SDSVprpJvBZj" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3737.17" showattsigs="601" showstereotype="1" y="-1425.5" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uFyGlQPF4TR6s" width="144" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uFI3uUFHbszV6" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2327.3" showattsigs="601" showstereotype="1" y="-142.227" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="ubI4cdlyqJnFf" width="206" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="u2QrQjnHMvYPM" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-3006.62" showattsigs="601" showstereotype="1" y="-118.126" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="uM8A9aqkdKFpY" width="175" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uFUz4xgvGOtMf" showscope="1" height="123" showopsigs="601"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-1444.92" showstereotype="1" y="-407.996" text="profile belongsTo person" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="UXsu7oHXk4sE" pretext="" role="700" width="211" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="ODdJERagzRY4" height="32"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1366.69" showattsigs="601" showstereotype="1" y="-2394.35" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="ufX8TTiyQ0ai3" width="277" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uUFQvwwflU8rS" showscope="1" height="161" showopsigs="601"/>
+         <enumwidget width="263" showstereotype="1" x="-3217" usesdiagramusefillcolor="0" y="-1629.52" usesdiagramfillcolor="0" isinstance="0" localid="psgKwxnH08a1" fillcolor="#8ae234" height="112" linecolor="#ff0000" xmi.id="dH8bdCQih4mT" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-438.855" showattsigs="601" showstereotype="1" y="-1056.61" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="xZrWMW2Tcu1O" width="218" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="uFKL2zIWCkz8" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-837.312" showattsigs="601" showstereotype="1" y="-1045.9" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="j0GKkMXnfZgk" width="326" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="jG0PoJM6MPJO" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-715.219" showattsigs="601" showstereotype="1" y="-1249.99" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="5aFy6NJOTzaL" width="189" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="nfRofIUKAPRK" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-947.694" showattsigs="601" showstereotype="1" y="-1647.24" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="16bIpGZYtmrX" width="185" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="UCp1fGCegCHz" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-484.118" showattsigs="601" showstereotype="1" y="-1163.46" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="nj1MCPJFaW6N" width="326" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="W4Y0zzq7LwhY" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-752.723" showattsigs="601" showstereotype="1" y="-1781.67" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="hEoiKUa5lpSN" width="313" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="AJUucFETh03G" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-235.847" showattsigs="601" showstereotype="1" y="-1250.47" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="8e7k70Qn3zxF" width="286" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="8ghO7lVfE71D" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-506.262" showattsigs="601" showstereotype="1" y="-1273.61" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="zhyT4bNjHwbs" width="202" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="EcTgMn5YP7lR" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-754.879" showattsigs="601" showstereotype="1" y="-1660.93" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="BLzt5CMoyCCO" width="191" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="mEhE6sJ351oy" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-307.851" showattsigs="601" showstereotype="1" y="-1791.04" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="rPp3HG3bmXjE" width="132" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="W5Fi8LPHjzEh" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4585.68" showattsigs="601" showstereotype="1" y="-950.933" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="keKlEz1nLep7" width="108" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="y8yTuWvmzsbW" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4618.8" showattsigs="601" showstereotype="1" y="-829.83" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="luIEEenQ9YS5" width="192" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="YSgTFROva5hE" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4406.56" showattsigs="601" showstereotype="1" y="-901.979" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="9JjC0pUW5FG4" width="304" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="FpQZqLHIYLp4" showscope="1" height="161" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4133.53" showattsigs="601" showstereotype="1" y="-183.931" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="CkICxKcxEVDV" width="185" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="NLcrR6PtwLsM" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4191.72" showattsigs="601" showstereotype="1" y="-314.67" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="ZHfwzhUWT4mv" width="307" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="iM3srr45G7G7" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4130.93" showattsigs="601" showstereotype="1" y="-517.169" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="oXt0qau4yFWq" width="232" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="vyhTKRg79oTW" showscope="1" height="85" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4053.86" showattsigs="601" showstereotype="1" y="-836.81" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="Ryu37OTZsFvO" width="217" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="VN5eRHb01FyS" showscope="1" height="142" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4171.47" showattsigs="601" showstereotype="1" y="-642.716" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="QegC8HHSNRnp" width="396" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="1LeoRYjVz9EH" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4037.45" showattsigs="601" showstereotype="1" y="-934.07" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="4MZRcTVYAPQO" width="217" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="7hkt2sgV4c79" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4294.04" showattsigs="601" showstereotype="1" y="-1085.61" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="f50SHdb2Pcdg" width="295" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="5velIAZikFXL" showscope="1" height="123" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4518.57" showattsigs="601" showstereotype="1" y="-1071.94" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="BOAW4oLldizL" width="149" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="hwWcgs7Y6yql" showscope="1" height="66" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4481.37" showattsigs="601" showstereotype="1" y="-677.272" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="iRAfQH2eQZ7A" width="293" isinstance="0" usefillcolor="1" fillcolor="#8ae234" xmi.id="WtDGMKKRIsv8" showscope="1" height="104" showopsigs="601"/>
+         <boxwidget width="1000" showstereotype="1" x="-2834.57" usesdiagramusefillcolor="0" y="-2490" usesdiagramfillcolor="0" isinstance="0" localid="pl6YnXtovwUK" fillcolor="#ffff00" height="453.019" linecolor="#000000" xmi.id="vBNyXEyzPgrS" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-3111.48" showstereotype="1" y="-1029.39" text="اطلاعات شخصی" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="TRidwhvPW9eN" pretext="" role="700" width="161" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
+         <boxwidget width="100" showstereotype="1" x="-1612.74" usesdiagramusefillcolor="0" y="-1708.68" usesdiagramfillcolor="0" isinstance="0" localid="WoTXMW71cQIF" fillcolor="#ffff00" height="80" linecolor="#000000" xmi.id="3qlJqlFfjAej" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <boxwidget width="951.936" showstereotype="1" x="-3839.46" usesdiagramusefillcolor="0" y="-1874.71" usesdiagramfillcolor="0" isinstance="0" localid="icjeQvVY6OxZ" fillcolor="#ffff00" height="730.123" linecolor="#000000" xmi.id="74ZTYDPEkFEp" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-2467.08" showstereotype="1" y="-2572.16" text="مجوز دسترسی به سیستم" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="6Ef9qWdPNRqQ" pretext="" role="700" width="234" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
+         <boxwidget width="1000" showstereotype="1" x="-900.422" usesdiagramusefillcolor="0" y="-1851.31" usesdiagramfillcolor="0" isinstance="0" localid="vDxLv5WG4y5g" fillcolor="#ffff00" height="966.521" linecolor="#000000" xmi.id="74ZTYDPEkFEp" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-4275.51" showstereotype="1" y="-1194.75" text="اطلاعات خوابگاه" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="6ywvCTT2iVdK" pretext="" role="700" width="168" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
+         <boxwidget width="748.386" showstereotype="1" x="-3388.86" usesdiagramusefillcolor="0" y="-979.529" usesdiagramfillcolor="0" isinstance="0" localid="PUsHeMQ0JpRw" fillcolor="#ffff00" height="808.227" linecolor="#000000" xmi.id="74ZTYDPEkFEp" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-492.419" showstereotype="1" y="-1929.56" text="اطلاعات گیت" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="erNgNehjnb9t" pretext="" role="700" width="134" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
+         <boxwidget width="933.912" showstereotype="1" x="-4653.54" usesdiagramusefillcolor="0" y="-1111.7" usesdiagramfillcolor="0" isinstance="0" localid="HmdV4as6pjnK" fillcolor="#ffff00" height="1042.54" linecolor="#000000" xmi.id="74ZTYDPEkFEp" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-3529.07" showstereotype="1" y="-2203.88" text="اطلاعات اساتید" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="sJ2BrHFluZ2Y" pretext="" role="700" width="152" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
+         <boxwidget width="515.749" showstereotype="1" x="-1869.77" usesdiagramusefillcolor="0" y="-1883.09" usesdiagramfillcolor="0" isinstance="0" localid="VyV67LRJeGti" fillcolor="#ffff00" height="358.689" linecolor="#000000" xmi.id="74ZTYDPEkFEp" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-1708.08" showstereotype="1" y="-1945.45" text="مشخصات کارت تردد" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="BUKgtP1yeQ1r" pretext="" role="700" width="201" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
+         <boxwidget width="338.365" showstereotype="1" x="-3639.05" usesdiagramusefillcolor="0" y="-2153.23" usesdiagramfillcolor="0" isinstance="0" localid="kQO36bpOWfMl" fillcolor="#ffff00" height="183.292" linecolor="#000000" xmi.id="UxA4J0uRsBR9" textcolor="#000000" usefillcolor="1" linewidth="0" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
+         <floatingtext linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-3477.42" showstereotype="1" y="-1933.73" text="اطلاعات دانشجویی" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" localid="TKxUjuepywhe" pretext="" role="700" width="191" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="gWmqsizSTFiC" height="51"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1221.34" showattsigs="601" showstereotype="1" y="-716.316" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="FMPzVzlXTuOm" width="148" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="gPQTN4GkBVYh" showscope="1" height="47" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1159.74" showattsigs="601" showstereotype="1" y="-642.857" showattributes="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" localid="y0X4g3gaGlpV" width="208" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="DfbsQp0hpMjY" showscope="1" height="66" showopsigs="601"/>
+=======
          <boxwidget showstereotype="1" usefillcolor="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" linecolor="#000000" usesdiagramusefillcolor="0" isinstance="0" linewidth="0" height="358.689" fillcolor="#ffff00" autoresize="1" xmi.id="74ZTYDPEkFEp" y="-1883.09" x="-1869.77" localid="VyV67LRJeGti" textcolor="#000000" usesdiagramfillcolor="0" width="515.749"/>
          <classwidget textcolor="#000000" width="143" showoperations="1" showattributes="1" usesdiagramfillcolor="0" showscope="1" usefillcolor="1" linewidth="0" showattsigs="601" linecolor="#ff0000" isinstance="0" fillcolor="#8ae234" showpackage="1" y="-942.6" height="66" usesdiagramusefillcolor="0" showopsigs="601" xmi.id="uZMkgyKsiKw3M" showpubliconly="0" autoresize="1" showstereotype="1" localid="uzuhDtT2RkaBn" x="-3271" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
          <floatingtext textcolor="#000000" width="197" usesdiagramfillcolor="0" usefillcolor="1" linewidth="0" linecolor="#ff0000" isinstance="0" fillcolor="#ffff00" text="اطلاعات شخصی" y="-1054.02" posttext="" height="35" usesdiagramusefillcolor="0" xmi.id="gWmqsizSTFiC" autoresize="1" pretext="" showstereotype="1" localid="TRidwhvPW9eN" x="-2812.46" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" role="700"/>
@@ -1027,6 +1136,7 @@
          <floatingtext textcolor="#000000" width="415" usesdiagramfillcolor="0" usefillcolor="1" linewidth="0" linecolor="#ff0000" isinstance="0" fillcolor="#ffff00" text="درخواست مرخصی(روزانه - ساعتی)" y="-1088.94" posttext="" height="35" usesdiagramusefillcolor="0" xmi.id="gWmqsizSTFiC" autoresize="1" pretext="" showstereotype="1" localid="u2p48KkSBRuOE" x="-1876.77" font="0 Titr Bold,20,-1,5,50,0,0,0,0,0" role="700"/>
          <classwidget textcolor="#000000" width="440" showoperations="1" showattributes="1" usesdiagramfillcolor="0" showscope="1" usefillcolor="1" linewidth="0" showattsigs="601" linecolor="#ff0000" isinstance="0" fillcolor="#ffff00" showpackage="1" y="-988.466" height="256" usesdiagramusefillcolor="0" showopsigs="601" xmi.id="uNBcN1GdRhMP0" showpubliconly="0" autoresize="1" showstereotype="1" localid="uGLX9YcB1bFRK" x="-1966.92" font="Sans Serif,12,-1,5,50,0,0,0,0,0"/>
          <boxwidget showstereotype="1" usefillcolor="1" font="Sans Serif,12,-1,5,50,0,0,0,0,0" linecolor="#000000" usesdiagramusefillcolor="0" isinstance="0" linewidth="0" height="535.547" fillcolor="#ffff00" autoresize="0" xmi.id="uU5AC9QkIMZH8" y="-1015.13" x="-2010.85" localid="u5HvsuF2HT7QN" textcolor="#000000" usesdiagramfillcolor="0" width="683.971"/>
+>>>>>>> 6a88f0b033417f4b845a252f66f54194f6328b3e
         </widgets>
         <messages/>
         <associations>
@@ -1839,6 +1949,539 @@
      <listitem id="zZXRDk7GC7Or" type="832" open="1"/>
      <listitem id="bOSsCLvCuQd6" type="832" open="1"/>
     </listitem>
+<<<<<<< HEAD
+    <listitem open="1" type="801" id="Logical View">
+     <listitem open="0" type="807" id="kZ4WNF0DxzFf" label="A- class diagram"/>
+     <listitem open="1" type="813" id="uSyWgeJYx1JgL"/>
+     <listitem open="1" type="813" id="y8yTuWvmzsbW">
+      <listitem open="0" type="814" id="8t9WZJ9VoEr1"/>
+      <listitem open="0" type="814" id="ccnhge4Yw4bx"/>
+     </listitem>
+     <listitem open="1" type="813" id="pwk3PdQzJsmj"/>
+     <listitem open="1" type="813" id="FpQZqLHIYLp4">
+      <listitem open="0" type="814" id="ICUfw5yG4si6"/>
+      <listitem open="0" type="814" id="Natyua0mGn02"/>
+      <listitem open="0" type="814" id="WZQeijOV0VFm"/>
+      <listitem open="0" type="814" id="1tzEJdOLqP1Z"/>
+      <listitem open="0" type="814" id="Fr6qd0IyHaIT"/>
+      <listitem open="0" type="814" id="j9CuvUAb2tam"/>
+      <listitem open="0" type="814" id="BNNWJVEw87bQ"/>
+     </listitem>
+     <listitem open="1" type="813" id="7hkt2sgV4c79">
+      <listitem open="0" type="814" id="6O62U3GDIKNC"/>
+      <listitem open="0" type="814" id="az4SRrnwTUSG"/>
+     </listitem>
+     <listitem open="1" type="813" id="WtDGMKKRIsv8">
+      <listitem open="0" type="814" id="R4GfFsh9tQQK"/>
+      <listitem open="0" type="814" id="wiQ2KoPaR8nD"/>
+      <listitem open="0" type="814" id="XpRui6CadInB"/>
+      <listitem open="0" type="814" id="thInzNtKpmDy"/>
+     </listitem>
+     <listitem open="1" type="813" id="5velIAZikFXL">
+      <listitem open="0" type="814" id="L34tQjIZjjD4"/>
+      <listitem open="0" type="814" id="pT6f2CUMdfM2"/>
+      <listitem open="0" type="814" id="3bQFobinoy5e"/>
+      <listitem open="0" type="814" id="yWzWEOLL0Jci"/>
+      <listitem open="0" type="814" id="X26RYBTJIVPt"/>
+     </listitem>
+     <listitem open="1" type="813" id="YSgTFROva5hE">
+      <listitem open="0" type="814" id="qf2YlxTwttW6"/>
+      <listitem open="0" type="814" id="EWB2CeXwS9fV"/>
+     </listitem>
+     <listitem open="0" type="813" id="eoZdpvpatNQz">
+      <listitem open="0" type="814" id="Awll605Xdn0C"/>
+      <listitem open="0" type="814" id="soSj9riFRLLd"/>
+      <listitem open="0" type="814" id="QckVZiLRUo8d"/>
+      <listitem open="0" type="814" id="oQb9lGPN5x0s"/>
+      <listitem open="0" type="814" id="IBK0JCa8bAFM"/>
+      <listitem open="0" type="814" id="fpt4AChQMzOf"/>
+     </listitem>
+     <listitem open="0" type="813" id="ukFwJ5Jn87qL6">
+      <listitem open="0" type="814" id="uW9GZWtShQkAH"/>
+      <listitem open="0" type="814" id="uGwY9mKLbLFx0"/>
+     </listitem>
+     <listitem open="0" type="813" id="u5lqqYFICGiHW">
+      <listitem open="0" type="814" id="uBcZ3ygtPJ01I"/>
+      <listitem open="0" type="814" id="uosdzQ6Af06Jc"/>
+     </listitem>
+     <listitem open="0" type="813" id="QhOlJnFxzZLc">
+      <listitem open="0" type="815" id="Fsc3a3lzGtan"/>
+      <listitem open="0" type="814" id="V3CulRYB9uuS"/>
+      <listitem open="0" type="814" id="f7NefiHW6sRZ"/>
+      <listitem open="0" type="814" id="JFn0xLYqImZW"/>
+      <listitem open="0" type="815" id="7pwNbI3o8frg"/>
+      <listitem open="0" type="815" id="etgFAUKMRwwx"/>
+     </listitem>
+     <listitem open="1" type="813" id="u2QrQjnHMvYPM">
+      <listitem open="0" type="814" id="u7nzaDPhaJvmD"/>
+      <listitem open="0" type="814" id="uAiX4U3qsiblA"/>
+     </listitem>
+     <listitem open="1" type="813" id="uJC8FvO4TBc5i">
+      <listitem open="0" type="814" id="u7D5yoUHvoLQg"/>
+      <listitem open="0" type="814" id="u4nQ8qy3WvCOx"/>
+     </listitem>
+     <listitem open="1" type="813" id="uRUrhltJ5vbTQ">
+      <listitem open="0" type="814" id="u3fRos3xG8M2E"/>
+      <listitem open="0" type="814" id="u28QqAViZFIzK"/>
+     </listitem>
+     <listitem open="1" type="813" id="uFUz4xgvGOtMf">
+      <listitem open="0" type="814" id="uSXn1VB7ud89S"/>
+      <listitem open="0" type="814" id="uIgUhbtVknvLu"/>
+      <listitem open="0" type="814" id="u0WXHMp7SChDF"/>
+      <listitem open="0" type="814" id="uDc6dQwQKaao7"/>
+      <listitem open="0" type="814" id="uldf45SK1BJBF"/>
+     </listitem>
+     <listitem open="0" type="813" id="ABL9AohgiTQ7">
+      <listitem open="0" type="814" id="hvSRgHn3yM49"/>
+      <listitem open="0" type="814" id="kTwfAFveOgBk"/>
+     </listitem>
+     <listitem open="0" type="830" id="Datatypes">
+      <listitem open="1" type="829" id="CRtFgYHFyrAn"/>
+      <listitem open="1" type="829" id="TXruQhhaVjgJ"/>
+      <listitem open="1" type="829" id="UW6dUa33k6zg"/>
+      <listitem open="1" type="829" id="OwG92EpDvZeX"/>
+      <listitem open="1" type="829" id="Aq25nFkHlovD"/>
+      <listitem open="1" type="829" id="ZPZxp02YKVW6"/>
+      <listitem open="1" type="829" id="DjlTcusKTvqo"/>
+      <listitem open="0" type="829" id="gZVbo688HAbH"/>
+      <listitem open="1" type="829" id="cRtFEWzz1hVe"/>
+      <listitem open="1" type="829" id="c1FVAzmZcnfm"/>
+      <listitem open="1" type="829" id="u1tHuQf7BPXL"/>
+      <listitem open="0" type="829" id="KtkY2mnfLXl2"/>
+      <listitem open="1" type="829" id="wYBiCbgIsBkJ"/>
+      <listitem open="1" type="829" id="J5mpmQ6imeQx"/>
+      <listitem open="1" type="829" id="nlGaNdmfgWUT"/>
+      <listitem open="1" type="829" id="nViYcBfKQRlB"/>
+      <listitem open="1" type="829" id="kFoQlGrfo3Ny"/>
+      <listitem open="1" type="829" id="jLUzmr6aIupc"/>
+      <listitem open="1" type="829" id="yOYhDTtZQ9iQ"/>
+      <listitem open="1" type="829" id="nTpHK5EcQbZB"/>
+      <listitem open="0" type="829" id="RKEswYz9rj5u"/>
+      <listitem open="1" type="829" id="LWeH3ImWncOD"/>
+      <listitem open="1" type="829" id="6JXUQDumjW1m"/>
+      <listitem open="0" type="829" id="GNypEtYKrZw0"/>
+      <listitem open="1" type="829" id="haqTdCQEBfhK"/>
+      <listitem open="0" type="829" id="3jqSbWUi8G1g"/>
+      <listitem open="1" type="829" id="Of3892swl7V9"/>
+      <listitem open="1" type="829" id="rByHchRIGFjt"/>
+     </listitem>
+     <listitem open="1" type="813" id="u70H6BPnCRGol"/>
+     <listitem open="1" type="813" id="IbofyXtCV3ff"/>
+     <listitem open="1" type="813" id="ui1PIbTFmEPfh"/>
+     <listitem open="0" type="813" id="4hweTwaKWKJp">
+      <listitem open="0" type="815" id="Va65wIDWmn3j"/>
+      <listitem open="0" type="814" id="bWaXyq21Xydy"/>
+      <listitem open="0" type="814" id="uBJPWcCMhT0Z"/>
+      <listitem open="0" type="815" id="d6k92N7vZQK5"/>
+      <listitem open="0" type="815" id="EzeZWDv1FnLi"/>
+     </listitem>
+     <listitem open="0" type="813" id="Y2vR0aOZFwL5">
+      <listitem open="0" type="815" id="QTlNjS86ghZb"/>
+      <listitem open="0" type="814" id="NFbSxduTfnud"/>
+      <listitem open="0" type="814" id="OJCbDVhQSjf9"/>
+      <listitem open="0" type="815" id="KR4yDzbZGmAR"/>
+      <listitem open="0" type="815" id="HrriaUpzyaMh"/>
+     </listitem>
+     <listitem open="0" type="813" id="sWwj5U6Dh57i">
+      <listitem open="0" type="814" id="ahduXockjTAf"/>
+      <listitem open="0" type="814" id="QP2JLwJ2ZI2p"/>
+     </listitem>
+     <listitem open="0" type="813" id="9NRilllmGBRB">
+      <listitem open="0" type="815" id="MypqlVRHGxJe"/>
+      <listitem open="0" type="814" id="ArTedjAm6cTr"/>
+      <listitem open="0" type="814" id="LCcbN1lugPPb"/>
+      <listitem open="0" type="815" id="xv6hMy0gunUg"/>
+      <listitem open="0" type="814" id="7xELQ886cRQI"/>
+      <listitem open="0" type="815" id="seUhSILAw738"/>
+     </listitem>
+     <listitem open="1" type="813" id="uqs73T9ipvG2d">
+      <listitem open="0" type="814" id="uUimSQdJRDhOE"/>
+      <listitem open="0" type="814" id="uFywXOqpS8H13"/>
+      <listitem open="0" type="814" id="usVp6spSWicv4"/>
+      <listitem open="0" type="814" id="u6PHsGgp6C2MK"/>
+      <listitem open="0" type="814" id="uiKc9VHUsolnT"/>
+      <listitem open="0" type="814" id="unHrddVzI0x4j"/>
+     </listitem>
+     <listitem open="0" type="813" id="uUFQvwwflU8rS">
+      <listitem open="0" type="814" id="uY7TYOiE6NrQS"/>
+      <listitem open="0" type="814" id="uyOsAqkuzj8j4"/>
+      <listitem open="0" type="814" id="uIA1xPRPTxpT2"/>
+      <listitem open="0" type="814" id="ueyaj9VWE2DuW"/>
+      <listitem open="0" type="814" id="ukPACh2uEM4r5"/>
+      <listitem open="0" type="814" id="uiQzP88YD8tfd"/>
+      <listitem open="0" type="814" id="ut0nIGdCSmUDB"/>
+     </listitem>
+     <listitem open="0" type="813" id="DTOCOe2FKqUu">
+      <listitem open="0" type="815" id="SX0iqdy9gvXe"/>
+      <listitem open="0" type="814" id="AzAwSc8qPVBl"/>
+      <listitem open="0" type="814" id="7qRCmlJEWx10"/>
+      <listitem open="0" type="814" id="uR1xYpZEeOzZ2"/>
+      <listitem open="0" type="814" id="Ezxdr0E2RcCq"/>
+      <listitem open="0" type="814" id="r2ggvsi9pdkf"/>
+      <listitem open="0" type="814" id="EE5Z2ZTZMkkl"/>
+      <listitem open="0" type="814" id="fBx3g8oI1VHi"/>
+      <listitem open="0" type="814" id="KmBCX3GsHHb6"/>
+      <listitem open="0" type="815" id="TttVPABrfBZW"/>
+      <listitem open="0" type="814" id="dyh3Yutn6wK7"/>
+      <listitem open="0" type="814" id="tOzu6vk4j1CJ"/>
+      <listitem open="0" type="814" id="3DKnS4XSKbJb"/>
+      <listitem open="0" type="814" id="1wTI1wbzvU8T"/>
+      <listitem open="0" type="815" id="bPlHSoQ6xN7d"/>
+      <listitem open="0" type="814" id="Z333z23LYM5J"/>
+     </listitem>
+     <listitem open="0" type="813" id="W4Y0zzq7LwhY">
+      <listitem open="0" type="814" id="2Z98ti3pfyfq"/>
+      <listitem open="0" type="814" id="miYy7jOefCfI"/>
+     </listitem>
+     <listitem open="0" type="813" id="AJUucFETh03G">
+      <listitem open="0" type="814" id="MhjYhD5asD3x"/>
+      <listitem open="0" type="814" id="WwWy8kHsPNf0"/>
+     </listitem>
+     <listitem open="0" type="813" id="8ghO7lVfE71D">
+      <listitem open="0" type="814" id="WmTDB796NmUo"/>
+      <listitem open="0" type="814" id="YWUSqeDLDy29"/>
+     </listitem>
+     <listitem open="0" type="813" id="mEhE6sJ351oy">
+      <listitem open="0" type="814" id="Hrlw4jdqOWQ1"/>
+      <listitem open="0" type="814" id="jtg1B9fzuYZi"/>
+      <listitem open="0" type="814" id="mQZDeMDWaBMN"/>
+     </listitem>
+     <listitem open="0" type="813" id="EcTgMn5YP7lR">
+      <listitem open="0" type="814" id="MtAXxGeD7k0k"/>
+      <listitem open="0" type="814" id="71q8UVEAGspD"/>
+     </listitem>
+     <listitem open="0" type="813" id="uFKL2zIWCkz8">
+      <listitem open="0" type="814" id="wAFv0vuaRoC8"/>
+      <listitem open="0" type="814" id="ziCmB4JTLGWx"/>
+      <listitem open="0" type="814" id="1tdXvf0Cc0Wd"/>
+     </listitem>
+     <listitem open="0" type="813" id="jG0PoJM6MPJO">
+      <listitem open="0" type="814" id="y9iRLLQ87mNp"/>
+      <listitem open="0" type="814" id="UgPuVpvJ7FLq"/>
+     </listitem>
+     <listitem open="0" type="813" id="537guI2MCFv2">
+      <listitem open="0" type="814" id="vH274FwAH1o9"/>
+      <listitem open="0" type="814" id="HqVR4OUA1Bm6"/>
+     </listitem>
+     <listitem open="0" type="813" id="UCp1fGCegCHz">
+      <listitem open="0" type="814" id="g7y2Xx7HFpCs"/>
+      <listitem open="0" type="814" id="yXc2BrXluqxz"/>
+      <listitem open="0" type="814" id="p4u1DpUMhZlx"/>
+     </listitem>
+     <listitem open="0" type="813" id="No8dCxfnKd4H">
+      <listitem open="0" type="814" id="KGZYLAqhUbAg"/>
+      <listitem open="0" type="814" id="oaTsi8ld40yC"/>
+      <listitem open="0" type="814" id="qalg2mWp0wGW"/>
+      <listitem open="0" type="814" id="5UFr5uvcsS0p"/>
+      <listitem open="0" type="814" id="GtpF7IjS4s3G"/>
+      <listitem open="0" type="814" id="FrJFoXjJEpDp"/>
+      <listitem open="0" type="814" id="wwFN9MINF5cK"/>
+     </listitem>
+     <listitem open="0" type="813" id="nfRofIUKAPRK">
+      <listitem open="0" type="814" id="JsvMehhlVSMe"/>
+      <listitem open="0" type="814" id="jwPX7TTmmmO7"/>
+     </listitem>
+     <listitem open="0" type="813" id="fzE5Bp2CUdOz">
+      <listitem open="0" type="814" id="m6WaZmCVNHTm"/>
+      <listitem open="0" type="814" id="8BgTS9GgGE7K"/>
+     </listitem>
+     <listitem open="1" type="813" id="28JtEsnmqSFO"/>
+     <listitem open="1" type="813" id="hwWcgs7Y6yql">
+      <listitem open="0" type="814" id="3zWmzn0zqo87"/>
+      <listitem open="0" type="814" id="zUn7RLuujR0e"/>
+     </listitem>
+     <listitem open="0" type="831" id="doQIu5T0OraR">
+      <listitem open="0" type="839" id="JM7AWkxmqiRn"/>
+      <listitem open="0" type="839" id="I6nexL5JKmpG"/>
+     </listitem>
+     <listitem open="0" type="831" id="k0JVdYh46YK9">
+      <listitem open="0" type="839" id="dvQiRlrrgloK"/>
+      <listitem open="0" type="839" id="AHLtMWG0Pgiq"/>
+     </listitem>
+     <listitem open="1" type="813" id="B8GrHnL3JwWh">
+      <listitem open="0" type="814" id="bljvj43gaCkX"/>
+      <listitem open="0" type="814" id="7AgDyIOh6erl"/>
+      <listitem open="0" type="814" id="2d2iCU2BKyBZ"/>
+      <listitem open="0" type="814" id="GqODCvv7AvEF"/>
+      <listitem open="0" type="814" id="jmGtPVquPq9y"/>
+      <listitem open="0" type="814" id="lHEX86SwtVse"/>
+      <listitem open="0" type="814" id="ln3lo0B08RpN"/>
+      <listitem open="0" type="815" id="UdBh82ptmRzf"/>
+      <listitem open="0" type="814" id="DAQW6vB8Vriv"/>
+     </listitem>
+     <listitem open="0" type="813" id="2cXkjaFayCU2">
+      <listitem open="0" type="814" id="JMcVMhVc6Pev"/>
+      <listitem open="0" type="814" id="fIb6jazC6JxB"/>
+      <listitem open="0" type="814" id="ulpfJtfxKK3v"/>
+      <listitem open="0" type="814" id="9Y8Ep6PhNilY"/>
+      <listitem open="0" type="814" id="OFKw6bj0KYee"/>
+      <listitem open="0" type="814" id="TWJn7cM7Crrv"/>
+      <listitem open="0" type="814" id="UNmbpyxUGZZy"/>
+      <listitem open="0" type="814" id="tJI6B7zaCVyR"/>
+      <listitem open="0" type="814" id="GPt2r1dOYtJn"/>
+      <listitem open="0" type="814" id="XXIvF3T4la41"/>
+      <listitem open="0" type="814" id="fSh6dzJjE160"/>
+      <listitem open="0" type="814" id="oIu8oYkCpLuQ"/>
+      <listitem open="0" type="814" id="R4WNHyPN9TCM"/>
+     </listitem>
+     <listitem open="0" type="813" id="8zGsgaBmUkLX">
+      <listitem open="0" type="815" id="sa6MuTboeX23"/>
+      <listitem open="0" type="814" id="ueQTqRnzQ1p4"/>
+      <listitem open="0" type="814" id="Zyp4j8ZYo8Yk"/>
+      <listitem open="0" type="815" id="Cf6ACZL59RR1"/>
+      <listitem open="0" type="815" id="yR8shIFFC5VD"/>
+     </listitem>
+     <listitem open="0" type="831" id="OrhsXqgLO9E5">
+      <listitem open="0" type="839" id="s8jGHxLXu1qp"/>
+      <listitem open="0" type="839" id="fYEVagsQobe3"/>
+      <listitem open="0" type="839" id="8rWaTjD8HRbp"/>
+     </listitem>
+     <listitem open="1" type="813" id="uDzLX5lbqcpQT"/>
+     <listitem open="1" type="813" id="uZMkgyKsiKw3M">
+      <listitem open="0" type="814" id="u8fk4BxCrghAJ"/>
+      <listitem open="0" type="814" id="ul0Fk21wViroo"/>
+     </listitem>
+     <listitem open="0" type="813" id="opWhnWbqlPHK">
+      <listitem open="0" type="814" id="dVVm0yBV0EsJ"/>
+      <listitem open="0" type="814" id="iHRyAD0cbtmK"/>
+     </listitem>
+     <listitem open="0" type="813" id="xLv1TCICbt30">
+      <listitem open="0" type="814" id="nrpWj3ceMWfp"/>
+      <listitem open="0" type="814" id="gy2Hp3FCHgh1"/>
+      <listitem open="0" type="814" id="BZmz438ehxsm"/>
+     </listitem>
+     <listitem open="0" type="813" id="9Su2q7Im5dQx">
+      <listitem open="0" type="814" id="D8j7UBqywKVI"/>
+      <listitem open="0" type="814" id="aRNfITVSvOUj"/>
+     </listitem>
+     <listitem open="0" type="813" id="H2slIbRl9Kdl">
+      <listitem open="0" type="814" id="5J2uThaFttCD"/>
+      <listitem open="0" type="814" id="4PZ4a14zHo8w"/>
+      <listitem open="0" type="814" id="9wZA8ohDDEHo"/>
+      <listitem open="0" type="814" id="hXmA2Uw3DFQ9"/>
+      <listitem open="0" type="814" id="mBLyKHkN1EHZ"/>
+      <listitem open="0" type="814" id="RGm9gHB6rChg"/>
+      <listitem open="0" type="814" id="zpeCahSogjGs"/>
+      <listitem open="0" type="814" id="ZYr0QbzsIrs9"/>
+      <listitem open="0" type="814" id="Gu9UOF9Xt1aN"/>
+      <listitem open="0" type="814" id="3jVwaq9z2BUz"/>
+      <listitem open="0" type="814" id="h7DenZ1iVxFT"/>
+     </listitem>
+     <listitem open="0" type="831" id="8qfg7UQ6K5Gs">
+      <listitem open="0" type="839" id="P6eLLVN2mS26"/>
+      <listitem open="0" type="839" id="jH61KNt44YSS"/>
+     </listitem>
+     <listitem open="1" type="813" id="ulV435UCb6EH2"/>
+     <listitem open="1" type="813" id="u5Ml5zf6sSa6s">
+      <listitem open="0" type="814" id="uyy3IrsZhYCRJ"/>
+      <listitem open="0" type="814" id="uJWLt5SqV05Nv"/>
+     </listitem>
+     <listitem open="0" type="831" id="k7pkxuCtVZwy">
+      <listitem open="0" type="839" id="cfLCTK2qOpcd"/>
+      <listitem open="0" type="839" id="jQB6ogl1B9ty"/>
+      <listitem open="0" type="839" id="A1ZKWkd8NyJq"/>
+      <listitem open="0" type="839" id="N6poE7hxVs1J"/>
+     </listitem>
+     <listitem open="0" type="813" id="dm448tVtA7Xg">
+      <listitem open="0" type="814" id="blilqDPzDZFD"/>
+      <listitem open="0" type="814" id="85vFaxgDjkHp"/>
+      <listitem open="0" type="814" id="DjGpOXHEDiFS"/>
+      <listitem open="0" type="815" id="sgR3FgE4TcGg"/>
+      <listitem open="0" type="814" id="Qo1GIajhoKnl"/>
+      <listitem open="0" type="814" id="6RSslFdxzskL"/>
+      <listitem open="0" type="814" id="MRUq3iWTXWkn"/>
+     </listitem>
+     <listitem open="1" type="813" id="iM3srr45G7G7">
+      <listitem open="0" type="814" id="1UjrAYcdiEb8"/>
+      <listitem open="0" type="814" id="hRJ6dTtyMiD6"/>
+      <listitem open="0" type="814" id="E9qL3CYHJnTm"/>
+     </listitem>
+     <listitem open="1" type="813" id="1LeoRYjVz9EH">
+      <listitem open="0" type="814" id="58GXTPJ2ng45"/>
+      <listitem open="0" type="814" id="pTYW6tzmmPFr"/>
+     </listitem>
+     <listitem open="1" type="813" id="vyhTKRg79oTW">
+      <listitem open="0" type="814" id="hTYusryi9ldU"/>
+      <listitem open="0" type="814" id="0kS1C2f1Dtfk"/>
+      <listitem open="0" type="814" id="mlK9QmzKvqCE"/>
+     </listitem>
+     <listitem open="1" type="813" id="NLcrR6PtwLsM">
+      <listitem open="0" type="814" id="DnntKSxwEAPJ"/>
+      <listitem open="0" type="814" id="B6KFDEFal6RA"/>
+     </listitem>
+     <listitem open="0" type="813" id="SDSVprpJvBZj">
+      <listitem open="0" type="814" id="C18PAGKaUm6J"/>
+      <listitem open="0" type="814" id="dtcW2AFWm1u2"/>
+     </listitem>
+     <listitem open="1" type="831" id="dH8bdCQih4mT">
+      <listitem open="0" type="839" id="fL0vg7NWRjHT"/>
+      <listitem open="0" type="839" id="uAkMBoQ8uxW2"/>
+     </listitem>
+     <listitem open="1" type="813" id="FzWxmG4XgqKk">
+      <listitem open="0" type="814" id="xvKzgdHIoxgz"/>
+      <listitem open="0" type="814" id="KmgEdFXgtX87"/>
+     </listitem>
+     <listitem open="0" type="813" id="P2Zcim25DXvE">
+      <listitem open="0" type="814" id="DRVCJEXiG4Ky"/>
+      <listitem open="0" type="814" id="oN1zsuD5ItoB"/>
+     </listitem>
+     <listitem open="0" type="813" id="bgHLsYfmxknz">
+      <listitem open="0" type="815" id="HtvXrE9hqdPI"/>
+      <listitem open="0" type="814" id="PDcYwZAVDRq5"/>
+      <listitem open="0" type="814" id="xUrvEdsXDCWF"/>
+      <listitem open="0" type="815" id="auqI09CtxXVD"/>
+      <listitem open="0" type="815" id="wBwGQRP7uGBP"/>
+     </listitem>
+     <listitem open="0" type="813" id="V9zn1nwK55RM">
+      <listitem open="0" type="814" id="bGmKAxsFoRsU"/>
+      <listitem open="0" type="814" id="ETBqSMCsJZUd"/>
+      <listitem open="0" type="814" id="c0Cp97OfojyK"/>
+      <listitem open="0" type="815" id="w0mjhi3SARQq"/>
+      <listitem open="0" type="814" id="aPS3ZTj8czDL"/>
+      <listitem open="0" type="814" id="IkdMLZIogGZh"/>
+      <listitem open="0" type="814" id="teHasqFuKDyr"/>
+      <listitem open="0" type="814" id="PCknA4ebaZm1"/>
+      <listitem open="0" type="814" id="wUttNPmmmqhD"/>
+      <listitem open="0" type="814" id="aBG5lSl1CMOV"/>
+      <listitem open="0" type="814" id="yTDZszdqh9Zx"/>
+      <listitem open="0" type="814" id="4rZfiQhuSaO2"/>
+      <listitem open="0" type="814" id="E3tVaN6sxuWv"/>
+      <listitem open="0" type="815" id="BVw8KWFFUzyB"/>
+      <listitem open="0" type="815" id="EpiIqa1KxFpA"/>
+     </listitem>
+     <listitem open="1" type="813" id="Uz5TDbAL70sL">
+      <listitem open="0" type="814" id="wO3VX3iwjcLg"/>
+      <listitem open="0" type="814" id="1tsTN75p6AGH"/>
+      <listitem open="0" type="814" id="TehDWHjkuqJd"/>
+      <listitem open="0" type="814" id="lRdrPVCUAaQ9"/>
+     </listitem>
+     <listitem open="0" type="813" id="Gv0CFVTTVF2V">
+      <listitem open="0" type="814" id="wNmWTsYjnZu0"/>
+      <listitem open="0" type="814" id="cTWN2OO5jpcJ"/>
+     </listitem>
+     <listitem open="0" type="813" id="Rb5RcWW2yqce">
+      <listitem open="0" type="815" id="5SO0yyWYrQZC"/>
+      <listitem open="0" type="814" id="sUH0YqQyRVN1"/>
+      <listitem open="0" type="814" id="zt1xhdavtv03"/>
+      <listitem open="0" type="815" id="YVTEW8DIXexH"/>
+      <listitem open="0" type="815" id="WQCUskqRDIdh"/>
+     </listitem>
+     <listitem open="1" type="813" id="gPQTN4GkBVYh">
+      <listitem open="0" type="814" id="sAIh5kWttkZb"/>
+     </listitem>
+     <listitem open="1" type="813" id="DfbsQp0hpMjY">
+      <listitem open="0" type="814" id="HK4cunw6E0Ui"/>
+      <listitem open="0" type="814" id="zMqf9ogXDUHu"/>
+     </listitem>
+     <listitem open="0" type="831" id="pt8rRaHsIZ4L">
+      <listitem open="0" type="839" id="B5yaSEbac1LE"/>
+      <listitem open="0" type="839" id="pWw530OMqC3x"/>
+      <listitem open="0" type="839" id="9NQlcfpPBlUE"/>
+      <listitem open="0" type="839" id="GiU0etknxgNN"/>
+     </listitem>
+     <listitem open="1" type="813" id="AqsRxc7FJBPO">
+      <listitem open="0" type="814" id="ueEN2xnpBi3fw"/>
+      <listitem open="0" type="814" id="EIHNgulhsWYD"/>
+      <listitem open="0" type="814" id="0uDvSMpDE5bh"/>
+      <listitem open="0" type="814" id="uGvMygSvkizBr"/>
+      <listitem open="0" type="814" id="u3y4copC0LSym"/>
+      <listitem open="0" type="814" id="ud2t5ScoexvCl"/>
+      <listitem open="0" type="814" id="DChh0CWhxYAu"/>
+      <listitem open="0" type="814" id="uI8bnGrxvpMj8"/>
+     </listitem>
+     <listitem open="0" type="831" id="6o25ZpC8IVvz">
+      <listitem open="0" type="839" id="JxBbQ5YTXQOM"/>
+      <listitem open="0" type="839" id="MimsPN2rSsk1"/>
+      <listitem open="0" type="839" id="R5svbdysYATx"/>
+     </listitem>
+     <listitem open="1" type="813" id="oqURDt9HLMJn">
+      <listitem open="0" type="814" id="wXyIhUBpFjpy"/>
+      <listitem open="0" type="814" id="8WsYG4p2uHT6"/>
+      <listitem open="0" type="814" id="BaNUueHbUVFe"/>
+      <listitem open="0" type="814" id="jPsIIF3cQqHp"/>
+     </listitem>
+     <listitem open="0" type="813" id="XLAoFzs1riXY">
+      <listitem open="0" type="814" id="UPTIlGK4vNFG"/>
+      <listitem open="0" type="814" id="xooCTVE0oOo4"/>
+     </listitem>
+     <listitem open="1" type="813" id="VN5eRHb01FyS">
+      <listitem open="0" type="814" id="1oywahXI7FeQ"/>
+      <listitem open="0" type="814" id="I4PLju1Oon29"/>
+      <listitem open="0" type="814" id="9jBRcdvE8Ai0"/>
+      <listitem open="0" type="814" id="ItGpX14jaW4c"/>
+      <listitem open="0" type="814" id="TLIXu6YopxnX"/>
+      <listitem open="0" type="814" id="f3Wrl4MnAL8K"/>
+     </listitem>
+     <listitem open="1" type="813" id="uFI3uUFHbszV6">
+      <listitem open="0" type="814" id="uFoPsDgA7ODwt"/>
+      <listitem open="0" type="814" id="usk4btHSNp7yx"/>
+     </listitem>
+     <listitem open="0" type="813" id="NPcY19EvLKVJ">
+      <listitem open="0" type="814" id="Mwir9WLUvy2u"/>
+      <listitem open="0" type="814" id="5EnRZIisyGnu"/>
+      <listitem open="0" type="814" id="xD3HIyccuKT1"/>
+     </listitem>
+     <listitem open="0" type="813" id="KuOoJGsVfljJ">
+      <listitem open="0" type="814" id="a2cfnDfqpsbQ"/>
+      <listitem open="0" type="814" id="8AZYy4YB455w"/>
+      <listitem open="0" type="814" id="TdcbUV0YJsHr"/>
+      <listitem open="0" type="814" id="FONaRIQwMy5x"/>
+     </listitem>
+     <listitem open="0" type="813" id="LpIs9oi34yFo">
+      <listitem open="0" type="814" id="Reg64xsJugcn"/>
+      <listitem open="0" type="814" id="uBzmpaXXIfap"/>
+      <listitem open="0" type="814" id="7cfE2sAOfSGm"/>
+      <listitem open="0" type="814" id="1Kt7mZN8sAlg"/>
+      <listitem open="0" type="814" id="Shy65Ofb9jxe"/>
+      <listitem open="0" type="814" id="222xhNyFQLVE"/>
+      <listitem open="0" type="814" id="vM7BzfzB0fWK"/>
+      <listitem open="0" type="814" id="uRCxG6OG8nqFA"/>
+      <listitem open="0" type="814" id="9ZN4yL1Ehy5q"/>
+     </listitem>
+     <listitem open="0" type="831" id="aa3OCWY7pzR6">
+      <listitem open="0" type="839" id="IDX8DwCcCRIr"/>
+      <listitem open="0" type="839" id="0ENBLQ67BFAm"/>
+     </listitem>
+     <listitem open="0" type="813" id="i4FeJ2dCslEM">
+      <listitem open="0" type="814" id="KLkHiDoER0D0"/>
+      <listitem open="0" type="814" id="BDyMI6XFg2Ig"/>
+     </listitem>
+     <listitem open="0" type="813" id="5TF2SMaSzIn8">
+      <listitem open="0" type="814" id="VQGY2cJwl3oF"/>
+      <listitem open="0" type="814" id="unSCiJcq3hMT"/>
+      <listitem open="0" type="814" id="5o7lHCCw5eMl"/>
+     </listitem>
+     <listitem open="0" type="813" id="uZFxijkgvhcDa">
+      <listitem open="0" type="814" id="uavnwpbVmJE8a"/>
+      <listitem open="0" type="814" id="u8941Ty8CiCNZ"/>
+      <listitem open="0" type="814" id="uYuu85v67ZgjS"/>
+      <listitem open="0" type="814" id="uwnPxvYlKE3oo"/>
+      <listitem open="0" type="814" id="uxL9uaALwTe0f"/>
+     </listitem>
+     <listitem open="0" type="813" id="16vPCWsUYRwL">
+      <listitem open="0" type="815" id="bvu1M6r00UYM"/>
+      <listitem open="0" type="814" id="8wbY26N4BGRN"/>
+      <listitem open="0" type="814" id="mJpJikeUaE3K"/>
+      <listitem open="0" type="815" id="OX0Sa5MQSRCr"/>
+      <listitem open="0" type="815" id="oRTglQV9xWZV"/>
+     </listitem>
+     <listitem open="0" type="813" id="s34yvOY0TE9t">
+      <listitem open="0" type="814" id="ui6DzrNRcCzcZ"/>
+      <listitem open="0" type="815" id="5J3kXaHBenEu"/>
+      <listitem open="0" type="814" id="L74y6zNKu6Sp"/>
+      <listitem open="0" type="814" id="dNlahbDZeGXZ"/>
+      <listitem open="0" type="814" id="oBkLwSlZpU7W"/>
+      <listitem open="0" type="814" id="OUS7h5tomXbP"/>
+      <listitem open="0" type="815" id="Z6DOaKuedvMA"/>
+      <listitem open="0" type="814" id="eObhlG2Mv0KR"/>
+      <listitem open="0" type="814" id="ueACTrsGyQI77"/>
+      <listitem open="0" type="815" id="T8NhFZP3l9Nf"/>
+      <listitem open="0" type="814" id="e6Y5IfwSE6Ek"/>
+     </listitem>
+     <listitem open="1" type="813" id="W5Fi8LPHjzEh">
+      <listitem open="0" type="814" id="EpqI6chud7vA"/>
+      <listitem open="0" type="814" id="3EvCy6cPT3tc"/>
+=======
     <listitem id="Logical View" type="801" open="1">
      <listitem id="kZ4WNF0DxzFf" type="807" label="A- class diagram" open="0"/>
      <listitem id="uSyWgeJYx1JgL" type="813" open="1"/>
@@ -2423,6 +3066,7 @@
      <listitem id="W5Fi8LPHjzEh" type="813" open="1">
       <listitem id="EpqI6chud7vA" type="814" open="0"/>
       <listitem id="3EvCy6cPT3tc" type="814" open="0"/>
+>>>>>>> 6a88f0b033417f4b845a252f66f54194f6328b3e
      </listitem>
     </listitem>
     <listitem id="Use Case View" type="802" open="1">

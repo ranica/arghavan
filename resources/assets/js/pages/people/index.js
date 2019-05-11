@@ -12,6 +12,8 @@ window.v = new Vue({
     },
 
     data: {
+        wizardSelectedButton:'',
+        userCodeExists: false,
         searchWord: null,
         currentTabIndex: 0,
         lastGroupId: 0,
@@ -19,7 +21,7 @@ window.v = new Vue({
         parent: false,
         term: false,
         gateGroup: false,
-        fingerPrint:false,
+        fingerPrint: false,
         modalMode: Enums.FormMode.normalModal,
 
         formMode: Enums.FormMode.normal,
@@ -31,18 +33,18 @@ window.v = new Vue({
         file: null,
         url: '',
         fingers_right: [
-            {index: 0, name: 'شست'},
-            {index: 1, name: 'اشاره'},
-            {index: 2, name: 'سبابه'},
-            {index: 3, name: 'انگشتری'},
-            {index: 4, name: 'کوچک'},
+            { index: 0, name: 'شست' },
+            { index: 1, name: 'اشاره' },
+            { index: 2, name: 'سبابه' },
+            { index: 3, name: 'انگشتری' },
+            { index: 4, name: 'کوچک' },
         ],
         fingers_left: [
-            {index: 5, name: 'شست'},
-            {index: 6, name: 'اشاره'},
-            {index: 7, name: 'سبابه'},
-            {index: 8, name: 'انگشتری'},
-            {index: 9, name: 'کوچک'},
+            { index: 5, name: 'شست' },
+            { index: 6, name: 'اشاره' },
+            { index: 7, name: 'سبابه' },
+            { index: 8, name: 'انگشتری' },
+            { index: 9, name: 'کوچک' },
         ],
         finger_index: 0,
 
@@ -59,17 +61,17 @@ window.v = new Vue({
         lastTimerId: -1,
     },
 
-    watch:{
+    watch: {
         /**
          * Search word watcher
          */
         searchWord(oldWord, newWord) {
             clearTimeout(this.lastTimerId);
 
-            this.lastTimerId = setTimeout (() => {
+            this.lastTimerId = setTimeout(() => {
                 this.loadRecords(1,
-                                 this.lastGroupId,
-                                 this.searchWord);
+                    this.lastGroupId,
+                    this.searchWord);
             }, 500);
         }
     },
@@ -87,17 +89,24 @@ window.v = new Vue({
     },
 
     mounted() {
-        this.filterUsers (document.pageData.people.group_students);
+        this.filterUsers(document.pageData.people.group_students);
         this.setImageLoader();
 
         var base = this;
-        document.querySelector ('[name="nationalId"]')
-                .addEventListener ('blur', () => { base.getNationalId (); })
+        document.querySelector('[name="nationalId"]')
+            .addEventListener('blur', () => {
+                base.existsNationalId();
+            });
+
+        document.querySelector('[name="code"]')
+            .addEventListener('blur', () => {
+                base.existCode();
+            });
     },
 
     computed: {
-        tempRecordPeopleFullName(){
-            if (this.tempRecord == null){
+        tempRecordPeopleFullName() {
+            if (this.tempRecord == null) {
                 return '';
             }
 
@@ -135,6 +144,7 @@ window.v = new Vue({
         universities: state => state.$store.getters.baseInformation.universities,
         cities: state => state.$store.getters.cities,
         fieldData: state => state.$store.getters.fieldData,
+        peopleData: state => state.$store.getters.peopleData,
         /*
         Staff Info
         */
@@ -155,138 +165,238 @@ window.v = new Vue({
         allData: state => state.$store.getters.allData,
         hasRow: state => (0 < state.records.length),
 
-        /**
-         * Generate new Empty record
-         */
-        emptyRecord: () => {
-            return {
-                id: 0,
-                user: {
-                    id: 0,
-                    code: '',
-                    password: '',
-                    email: '',
-                    state: 0,
-                    group: {
-                        id: 0
-                    },
-                    people: {
-                        id: 0
-                    },
-                },
+        emptyRecord: () => { return {
+                                     id: 0,
+                                    user: {
+                                        id: 0,
+                                        code: '',
+                                        email: '',
+                                        password: '',
+                                        state: 0,
+                                        group:{
+                                            id:0
+                                        },
+                                        people: {
+                                            id: 0
+                                        },
+                                        level:{
+                                            id :0
+                                        },
 
-                people: {
-                    id: 0,
-                    name: '',
-                    lastname: '',
-                    nationalId: '',
-                    birthdate: '',
-                    // father    : '',
-                    phone: '',
-                    mobile: '',
-                    address: '',
-                    pictureUrl: '',
-                    file: null,
+                                    },
+                                    people: {
+                                        id: 0,
+                                        name: '',
+                                        lastname: '',
+                                        nationalId: '',
+                                        birthdate: '',
+                                        // father    : '',
+                                        phone: '',
+                                        mobile: '',
+                                        address: '',
+                                        pictureUrl: '',
+                                        file: null,
 
-                    melliat: {
-                        id: 0
-                    },
-                    gender: {
-                        id: 0
-                    },
-                    province: {
-                        id: 0
-                    },
-                    city: {
-                        id: 0
-                    },
-                },
+                                        melliat: {
+                                            id: 0
+                                        },
+                                        gender: {
+                                            id: 0
+                                        },
+                                        province: {
+                                            id: 0
+                                        },
+                                        city: {
+                                            id: 0
+                                        },
+                                    },
 
-                student: {
-                    id: 0,
-                    term: {
-                        id: 0,
-                        semester: {
-                            id: 0,
-                        }
-                    },
-                    native: 0,
-                    suit: 0,
-                    situation: {
-                        id: 0
-                    },
-                    degree: {
-                        id: 0
-                    },
-                    part: {
-                        id: 0
-                    },
-                    field: {
-                        id: 0
-                    },
-                    university: {
-                        id: 0
-                    },
-                },
+                                    student: {
+                                        id: 0,
+                                        term: {
+                                            id: 0,
+                                            semester: {
+                                                id: 0,
+                                            }
+                                        },
+                                        native: 0,
+                                        suit: 0,
+                                        situation: {
+                                            id: 0
+                                        },
+                                        degree: {
+                                            id: 0
+                                        },
+                                        part: {
+                                            id: 0
+                                        },
+                                        field: {
+                                            id: 0
+                                        },
+                                        university: {
+                                            id: 0
+                                        },
+                                    },
 
-                teacher: {
-                    id: 0,
-                    semat: '',
-                },
-                staff: {
-                    id: 0,
-                    contract: {
-                        id: 0
-                    },
-                    department: {
-                        id: 0
-                    }
-                },
+                                    teacher: {
+                                        id: 0,
+                                        semat: '',
+                                    },
+                                    staff: {
+                                        id: 0,
+                                        contract: {
+                                            id: 0
+                                        },
+                                        department: {
+                                            id: 0
+                                        }
+                                    },
 
-                card: {
-                    id: 0,
-                    cdn: '',
-                    state: 0,
-                    startDate: '',
-                    endDate: '',
-                    user: {
-                        id: 0,
-                    },
-                    group: {
-                        id: 0
-                    },
-                    cardtype: {
-                        id: 0
-                    },
-                },
+                                    card: {
+                                        id: 0,
+                                        cdn: '',
+                                        state: 0,
+                                        startDate: '',
+                                        endDate: '',
+                                        user: {
+                                            id: 0,
+                                        },
+                                        group: {
+                                            id: 0
+                                        },
+                                        cardtype: {
+                                            id: 0
+                                        },
+                                    },
 
-                parent: {
-                    id: 0,
-                    name: '',
-                    lastname: '',
-                    phone: '',
-                    mobile: '',
-                    address: '',
-                    kintype: {
-                        id: 0,
-                    },
-                    people: {
-                        id: 0,
-                    },
-                },
-            };
-        },
-
+                                    parent: {
+                                        id: 0,
+                                        name: '',
+                                        lastname: '',
+                                        phone: '',
+                                        mobile: '',
+                                        address: '',
+                                        kintype: {
+                                            id: 0,
+                                        },
+                                        people: {
+                                            id: 0,
+                                        },
+                                    },
+                                }
+                        },
     },
 
+
     methods: {
-        selectFinger(finger){
-          this.finger_index = finger.index;
+         /**
+         * Generate new Empty record
+         */
+        clearRecord(){
+             this.tempRecord.id = 0;
+
+            this.tempRecord.user.id = 0;
+            this.tempRecord.user.code = '';
+            this.tempRecord.user.password = '';
+            this.tempRecord.user.email = '';
+            this.tempRecord.user.state = 0;
+            this.tempRecord.user.group.id = 0;
+            this.tempRecord.user.group.name = '';
+            this.tempRecord.user.people.id = 0;
+
+            this.tempRecord.people.id =  0;
+            this.tempRecord.people.name = '';
+            this.tempRecord.people.lastname = '';
+            this.tempRecord.people.nationalId = '';
+            this.tempRecord.people.birthdate = '';
+            this.tempRecord.people.phone = '';
+            this.tempRecord.people.mobile =  '';
+            this.tempRecord.people.address = '';
+            this.tempRecord.people.pictureUrl= '',
+            this.tempRecord.people.file =  null;
+            this.tempRecord.people.melliat.id = 0;
+            this.tempRecord.people.gender.id = 0;
+            this.tempRecord.people.province.id = 0;
+            this.tempRecord.people.city.id = 0;
+
+            this.tempRecord.student.id = 0;
+            this.tempRecord.student.term.id = 0;
+            this.tempRecord.student.term.semester.id = 0;
+            this.tempRecord.student.native = 0;
+            this.tempRecord.student.suit = 0;
+            this.tempRecord.student.situation.id = 0;
+            this.tempRecord.student.degree.id = 0;
+            this.tempRecord.student.part.id = 0;
+            this.tempRecord.student.field.id = 0;
+            this.tempRecord.student.university.id = 0;
+
+            this.tempRecord.teacher.id = 0;
+            this.tempRecord.teacher.semat = '';
+
+            this.tempRecord.staff.id = 0;
+            this.tempRecord.staff.contract.id = 0;
+            this.tempRecord.staff.department.id = 0;
+
+            this.tempRecord.card.id = 0;
+            this.tempRecord.card.cdn = '';
+            this.tempRecord.card.state = 0;
+            this.tempRecord.card.startDate = '';
+            this.tempRecord.card.endDate = '';
+            this.tempRecord.card.user.id = 0;
+            this.tempRecord.card.group.id = 0;
+            this.tempRecord.card.cardtype.id = 0;
+
+            this.tempRecord.parent.id = 0;
+            this.tempRecord.parent.name = '';
+            this.tempRecord.parent.lastname = '';
+            this.tempRecord.parent.phone = '';
+            this.tempRecord.parent.mobile = '';
+            this.tempRecord.parent.address = '';
+            this.tempRecord.parent.kintype.id = 0;
+            this.tempRecord.parent.people.id = 0;
         },
 
-       getNationalId(){
-            alert ('ok');
+        selectFinger(finger) {
+            this.finger_index = finger.index;
         },
+        /**
+         * Gets the national identifier.
+         */
+        existsNationalId() {
+            if (null != this.tempRecord.people.nationalId) {
+                // this.tempRecord.people.mobile = '09120472018';
+                this.existsNationalUser(this.tempRecord.people.nationalId)
+                    .then (
+                           // res => this.userCodeExists = false
+                           )
+                    .catch(err =>{
+                        $("#reloadRecordModal").modal()
+                         // this.userCodeExists = true
+                     });
+                       // .catch(err => this.userCodeExists = true);
+            } else {
+                console.log('empty national code');
+            }
+
+        },
+        /**
+         * Check Code person
+         */
+        existCode() {
+            if (null != this.tempRecord.user.code) {
+                // this.tempRecord.people.mobile = '09120472018';
+                this.existsCodeUser(this.tempRecord.user.code)
+                       .then (res => this.userCodeExists = false)
+                       .catch(err =>{
+                         demo.showNotification('شماره دانشجویی یا کد پرسنلی  قبلا ثبت شده است', 'warning');
+                         this.userCodeExists = true
+                     });
+                       // .catch(err => this.userCodeExists = true);
+            }
+        },
+        /**
+         * Sets the image loader.
+         */
         setImageLoader() {
             let baseVue = this;
 
@@ -305,14 +415,114 @@ window.v = new Vue({
                 }
             });
         },
-
         /**
-         * Wizard tab changed
+         * Determines if it exists code user.
+         *
+         * @param      {<type>}   code    The code
+         * @return     {Promise}  True if exists code user, False otherwise.
          */
-        // wizardTabChange (prev, current){
-        //     this.currentTabIndex = current;
-        // },
+        existsCodeUser(code) {
+            return new Promise((resolve, reject) => {
+                let url = document.pageData.people.check_user;
 
+                let data = {
+                    url: url,
+                    code: code
+                };
+
+                this.$store.dispatch('existsCodeUser', data)
+                    .then(res => {
+                        if (res.data.exists == false) {
+                            resolve(true);
+                        } else {
+                            reject(false);
+                        }
+                    })
+                    .catch(err => {
+                        reject(err);
+                    });
+            });
+        },
+        /**
+         * Determines if it exists national user.
+         *
+         * @param      {<type>}   data    The data
+         * @return     {Promise}  True if exists national user, False otherwise.
+         */
+        existsNationalUser(nationalCode) {
+            return new Promise((resolve, reject) => {
+                let url = document.pageData.people.check_national_people;
+
+                let data = {
+                    url: url,
+                    nationalId: nationalCode
+                };
+
+                this.$store.dispatch('existsNationalUser', data)
+                    .then(res => {
+                        if (res.data.exists == false) {
+                            resolve(true);
+                        } else {
+                            reject(false);
+                        }
+                    })
+                    .catch(err => {
+                        reject(err);
+                    });
+            });
+        },
+        /**
+         * Loads a data by nationa identifier.
+         */
+        loadRecordByNationalCode(nationalId) {
+            let url = document.pageData.people.load_by_national_code;
+
+            let data = {
+                url: url,
+                nationalId: this.tempRecord.people.nationalId
+            };
+            this.$store.dispatch('loadDataByNationaId', data)
+                .then(res => {
+                    let myData = res.data[0];
+                    // console.log('mydata', mydata);
+                    this.tempRecord.people = {
+                        id: myData.people.id,
+                        name: myData.people.name,
+                        lastname: myData.people.lastname,
+                        nationalId: myData.people.nationalId,
+                        birthdate: Helper.gregorianToJalaali(myData.people.birthdate),
+                        // // father    : myData.people.father,
+                        phone: myData.people.phone,
+                        mobile: myData.people.mobile,
+                        address: myData.people.address,
+                        pictureUrl: myData.people.pictureUrl,
+                        melliat: {
+                            id: myData.people.melliat.id,
+                            name: myData.people.melliat.name
+                        },
+                        gender: {
+                            id: myData.people.gender.id,
+                            gender: myData.people.gender.gender
+                        },
+                        province: {
+                            id: myData.people.city.province.id,
+                            name: myData.people.city.province.name
+                        },
+                        city: {
+                            id: myData.people.city.id,
+                            name: myData.people.city.name
+                        },
+                    };
+                })
+                .catch(err => {
+
+                })
+
+
+        },
+        /**
+         * Prepare
+         */
         prepare() {
             // console.log('prepare');
             this.page = 1;
@@ -340,20 +550,20 @@ window.v = new Vue({
         /**
          * Enroll Fingerprint
          */
-        enroll(){
-           console.log('enroll');
-           SocketClient.connect('172.20.20.143', 20000,
-                                 (e) => {
-                                    console.log (e);
-                                 });
-            SocketClient.send ( '[enroll]');
+        enroll() {
+            console.log('enroll');
+            SocketClient.connect('172.20.20.143', 20000,
+                (e) => {
+                    console.log(e);
+                });
+            SocketClient.send('[enroll]');
             SocketClient.disconnect()
         },
         /**
          * Identify Fingerprint
          */
-        identify(){
-           console.log('identify');
+        identify() {
+            console.log('identify');
         },
         /**
          * Filter users
@@ -361,20 +571,19 @@ window.v = new Vue({
          * @return {[type]}    [description]
          */
         filterUsers(groupId) {
+            console.log( 'filter user');
             this.fingerPrint = true;
             if (groupId == document.pageData.people.group_students) {
                 this.parent = true;
                 this.term = true;
-            }
-            else {
+            } else {
                 this.parent = false;
                 this.term = false;
             }
 
-             if (groupId == document.pageData.people.group_staffs) {
+            if (groupId == document.pageData.people.group_staffs) {
                 this.gateGroup = true;
-            }
-            else {
+            } else {
                 this.gateGroup = false;
             }
 
@@ -444,7 +653,7 @@ window.v = new Vue({
         loadTerms(callback) {
             this.$store.dispatch('loadTerms')
                 .then(res => {
-                   this.isLoading = false;
+                    this.isLoading = false;
                 })
                 .catch(err => {
                     this.isLoading = false;
@@ -492,6 +701,7 @@ window.v = new Vue({
                 searchWord: searchWord
             };
 
+            console.log('index -> load records');
             this.$store.dispatch('loadRecords', data)
                 .then(res => {
                     this.isLoading = false;
@@ -505,7 +715,7 @@ window.v = new Vue({
                 });
         },
 
-         /**
+        /**
          * Prepare to delete
          */
         readyToDelete(record) {
@@ -561,10 +771,11 @@ window.v = new Vue({
          */
         newRecord() {
             this.clearErrors();
-            this.tempRecord = $.extend(true, {}, this.emptyRecord);
+            this.userCodeExists = false;
+
+            this.clearRecord();
             $('#wizard-picture').val('');
 
-            // this.insertMode = true;
             this.updateMode = false;
 
             setTimeout(() => {
@@ -595,11 +806,11 @@ window.v = new Vue({
          * Load first item comboBox
          */
         fillComoboxes() {
-             /**
+            /**
              * Group Combo
              */
-            if ( (undefined != this.$store.getters.baseInformation.groups[0]) ||
-                   (null != this.$store.getters.baseInformation.groups[0]) ){
+            if ((undefined != this.$store.getters.baseInformation.groups[0]) ||
+                (null != this.$store.getters.baseInformation.groups[0])) {
                 this.tempRecord.user.group.id = this.$store.getters.baseInformation.groups[0].id;
             } else {
                 this.tempRecord.user.group.id = 0;
@@ -607,8 +818,8 @@ window.v = new Vue({
             /**
              * Melliat Combo
              */
-            if ( (undefined != this.$store.getters.baseInformation.melliats[0]) ||
-                   (null != this.$store.getters.baseInformation.melliats[0]) ){
+            if ((undefined != this.$store.getters.baseInformation.melliats[0]) ||
+                (null != this.$store.getters.baseInformation.melliats[0])) {
                 this.tempRecord.people.melliat.id = this.$store.getters.baseInformation.melliats[0].id;
             } else {
                 this.tempRecord.people.melliat.id = 0;
@@ -617,8 +828,8 @@ window.v = new Vue({
             /**
              * Situation Combo
              */
-            if (( undefined != this.$store.getters.baseInformation.situations[0]) ||
-                ( null != this.$store.getters.baseInformation.situations[0])) {
+            if ((undefined != this.$store.getters.baseInformation.situations[0]) ||
+                (null != this.$store.getters.baseInformation.situations[0])) {
                 this.tempRecord.student.situation.id = this.$store.getters.baseInformation.situations[0].id;
             } else {
                 this.tempRecord.student.situation.id = 0;
@@ -627,21 +838,19 @@ window.v = new Vue({
             /**
              * Universities Combo
              */
-             if ((undefined != this.$store.getters.baseInformation.universities[0]) ||
-                 (null != this.$store.getters.baseInformation.universities[0]) ){
-                 this.tempRecord.student.university.id = this.$store.getters.baseInformation.universities[0].id;
-             }
-             else {
-                 this.tempRecord.student.university.id = 0;
-             }
+            if ((undefined != this.$store.getters.baseInformation.universities[0]) ||
+                (null != this.$store.getters.baseInformation.universities[0])) {
+                this.tempRecord.student.university.id = this.$store.getters.baseInformation.universities[0].id;
+            } else {
+                this.tempRecord.student.university.id = 0;
+            }
             /**
              * Fields Combo
              */
             if ((undefined != this.$store.getters.fieldData[0]) ||
-                (null != this.$store.getters.fieldData[0]) ){
+                (null != this.$store.getters.fieldData[0])) {
                 this.tempRecord.student.field.id = this.$store.getters.fieldData[0].id;
-            }
-            else {
+            } else {
                 this.tempRecord.student.field.id = 0;
             }
             /**
@@ -657,12 +866,12 @@ window.v = new Vue({
              * Part Combo
              */
             if ((undefined != this.$store.getters.baseInformation.parts[0]) ||
-                (null != this.$store.getters.baseInformation.parts[0]) ){
+                (null != this.$store.getters.baseInformation.parts[0])) {
                 this.tempRecord.student.part.id = this.$store.getters.baseInformation.parts[0].id;
             } else {
                 this.tempRecord.student.part.id = 0;
             }
-              /**
+            /**
              * Term Combo
              */
             if ((undefined != this.$store.getters.terms[0]) ||
@@ -675,10 +884,9 @@ window.v = new Vue({
              * Contracts Combo
              */
             if ((undefined != this.$store.getters.baseInformation.contracts[0]) ||
-                (null != this.$store.getters.baseInformation.contracts[0]) ){
+                (null != this.$store.getters.baseInformation.contracts[0])) {
                 this.tempRecord.staff.contract.id = this.$store.getters.baseInformation.contracts[0].id;
-            }
-            else {
+            } else {
                 this.tempRecord.staff.contract.id = 0;
             }
 
@@ -686,10 +894,9 @@ window.v = new Vue({
              * Department Combo
              */
             if ((undefined != this.$store.getters.baseInformation.departments[0]) ||
-                (null != this.$store.getters.baseInformation.departments[0]) ){
+                (null != this.$store.getters.baseInformation.departments[0])) {
                 this.tempRecord.staff.department.id = this.$store.getters.baseInformation.departments[0].id;
-            }
-            else {
+            } else {
                 this.tempRecord.staff.department.id = 0;
             }
 
@@ -716,7 +923,7 @@ window.v = new Vue({
             this.updateMode = true;
 
             this.tempRecord.id = record.id;
-            if(null != record.people){
+            if (null != record.people) {
                 this.tempRecord.people = {
                     id: record.people.id,
                     name: record.people.name,
@@ -781,67 +988,67 @@ window.v = new Vue({
             switch (this.grouptype) {
                 // Staff
                 case 1:
-                if(null != record.staff){
-                    this.tempRecord.staff = {
-                        id: record.staff.id,
-                        contract: {
-                            id: record.staff.contract.id,
-                            name: record.staff.contract.name
-                        },
-                        department: {
-                            id: record.staff.department.id,
-                            name: record.staff.department.name
-                        },
-                    };
-                }
-                break;
+                    if (null != record.staff) {
+                        this.tempRecord.staff = {
+                            id: record.staff.id,
+                            contract: {
+                                id: record.staff.contract.id,
+                                name: record.staff.contract.name
+                            },
+                            department: {
+                                id: record.staff.department.id,
+                                name: record.staff.department.name
+                            },
+                        };
+                    }
+                    break;
 
                     // Teacher
                 case 2:
-                if(null != record.teacher){
-                    this.tempRecord.teacher = {
-                        id: record.teacher.id,
-                        semat: record.teacher.semat
-                    };
-                }
+                    if (null != record.teacher) {
+                        this.tempRecord.teacher = {
+                            id: record.teacher.id,
+                            semat: record.teacher.semat
+                        };
+                    }
                     break;
 
                     // Student
                 case 3:
-                if(null != record.student){
-                    this.tempRecord.student = {
-                        id: record.student.id,
-                        term: {
-                            id : record.student.term.id,
-                        },
-                        native: record.student.native,
-                        suit: record.student.suit,
-                        situation: {
-                            id: record.student.situation.id,
-                            name: record.student.situation.name
-                        },
-                        degree: {
-                            id: record.student.degree.id,
-                            name: record.student.degree.name
-                        },
-                        field: {
-                            id: record.student.field.id,
-                            name: record.student.field.name
-                        },
+                    if (null != record.student) {
+                        this.tempRecord.student = {
+                            id: record.student.id,
+                            term: {
+                                id: record.student.term.id,
+                            },
+                            native: record.student.native,
+                            suit: record.student.suit,
+                            situation: {
+                                id: record.student.situation.id,
+                                name: record.student.situation.name
+                            },
+                            degree: {
+                                id: record.student.degree.id,
+                                name: record.student.degree.name
+                            },
+                            field: {
+                                id: record.student.field.id,
+                                name: record.student.field.name
+                            },
 
-                        university: {
-                            id: record.student.field.university.id,
-                            name: record.student.field.university.name,
-                        },
+                            university: {
+                                id: record.student.field.university.id,
+                                name: record.student.field.university.name,
+                            },
 
-                        part: {
-                            id: record.student.part.id,
-                            name: record.student.part.name
-                        },
-                    };
-                    this.loadFields(record.student.field.university.id, record.student.field.id);
-                }
-                break;
+                            part: {
+                                id: record.student.part.id,
+                                name: record.student.part.name
+                            },
+                        };
+                        this.loadFields(record.student.field.university.id, record.student.field.id);
+                    }
+                    break;
             } // /Switch
 
             // setTimeout(() => {
@@ -860,36 +1067,34 @@ window.v = new Vue({
         /**
          * Remove Class input
          */
-        removeClass(){
-            $('select').each(function (e) {
-                if ($(this).val() == null)
-                    {
-                        return;
-                    }
+        removeClass() {
+            $('select').each(function(e) {
+                if ($(this).val() == null) {
+                    return;
+                }
                 $(this).parent().removeClass('is-empty');
             })
 
 
-            $('input[type=text],input[type=email]').each(function (e) {
-                if ($(this).val() == null)
-                    {
-                        return;
-                    }
+            $('input[type=text],input[type=email]').each(function(e) {
+                if ($(this).val() == null) {
+                    return;
+                }
 
                 $(this).parent().removeClass('is-empty');
             })
 
         },
 
-    /**
-     * Hide insert/update modal
-     */
-    registerCancel() {
-        // this.tempRecord = this.emptyRecord;
-        this.tempRecord = Object.assign({}, this.emptyRecord);
+        /**
+         * Hide insert/update modal
+         */
+        registerCancel() {
+            // this.tempRecord = this.emptyRecord;
+            this.tempRecord = Object.assign({}, this.emptyRecord);
 
-        this.changeFormMode(Enums.FormMode.normal);
-    },
+            this.changeFormMode(Enums.FormMode.normal);
+        },
 
         /**
          * Delete a record
@@ -1049,7 +1254,7 @@ window.v = new Vue({
                         // Find proper people
                         let people = this.records.filter(el => el.people_id == peopleId)[0];
 
-                        if (null != people){
+                        if (null != people) {
                             people.people.pictureThumbUrl = res.data.pictureThumbUrl;
                             people.people.pictureUrl = res.data.pictureThumb;
                         }
@@ -1062,7 +1267,7 @@ window.v = new Vue({
             }
         },
 
-          /**
+        /**
          * Set Group_Permit to record
          */
         setTerm(record) {
@@ -1091,7 +1296,7 @@ window.v = new Vue({
             });
         },
 
-         /**
+        /**
          * Save Group permit Record
          */
         saveTermRecord(scope) {
@@ -1220,7 +1425,7 @@ window.v = new Vue({
                 });
         },
 
-         /**
+        /**
          * Set Gat Group to record
          */
         setGateGroup(record) {
@@ -1287,8 +1492,7 @@ window.v = new Vue({
 
                                 if (err.response.status) {
                                     demo.showNotification('ﺖﺳا ﻩﺪﺷ ﺖﺒﺛ ﻼﺒﻗ ﻡﺎﻧ ﻥیا', 'danger');
-                                }
-                                else {
+                                } else {
                                     demo.showNotification(err.message, 'danger');
                                 }
                             });
@@ -1304,8 +1508,8 @@ window.v = new Vue({
         /**
          * Sets the finger print.
          */
-        setFingerPrint(record){
-             this.formMode = Enums.FormMode.assignFingerPrint;
+        setFingerPrint(record) {
+            this.formMode = Enums.FormMode.assignFingerPrint;
 
             this.errors.clear();
             console.log('this.record', record);
@@ -1316,7 +1520,7 @@ window.v = new Vue({
                 group: record.group,
             };
 
-           if(null != record.people){
+            if (null != record.people) {
                 this.tempRecord.people = {
                     id: record.people.id,
                     name: record.people.name,
@@ -1511,48 +1715,50 @@ window.v = new Vue({
 
             this.$store.dispatch('uploadImageRecord')
                 .then(res => {
-
                     demo.showNotification('ﺪﺷ یﺭاﺫگﺭﺎﺑ ﺕیﻖﻓﻮﻣ ﺎﺑ ﺭیﻭﺎﺼﺗ', 'success');
-
                 })
                 .catch(err => {
                     demo.showNotification('ﺖﻓﺭگ ﺪﻫاﻮﺧ ﺭاﺮﻗ یﺱﺭﺮﺑ ﺩﺭﻮﻣ ﻭ ﺪﺷ ﻩﺭیﺥﺫ ﻪﻧﺎﻣﺎﺳ ﺭﺩ ﺎﻄﺧ ﻥیا !ﺭیﻭﺎﺼﺗ یﺭاﺫگﺭﺎﺑ ﺭﺩ ﺎﻄﺧ', 'danger');
                 });
         },
 
-         /**
+        /**
          * Tab Switch user
          */
-        tabSwitchUser (){
-            this.errors.clear ();
+        tabSwitchUser() {
+            this.errors.clear();
 
-             return  Promise.all([
+            return Promise.all([
                 this.$validator.validate('code'),
                 // this.$validator.validate('password'),
                 this.$validator.validate('email'),
-                this.$validator.validate('group_id')
-              ]).then ((resolve, reject) => {
-                  var hasErr = this.errors.any ();
+                this.$validator.validate('group_id'),
+                // this.existsCodeUser(this.tempRecord.user.code)
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
 
-                  if (! hasErr)
-                  {
-                      return true;
-                  }
+                if (!hasErr) {
+                    return true;
+                }
 
-                  let err = this.errors.all ();
+                let err = this.errors.all();
 
-                  err = err.join ('<br/>');
-                  demo.showNotification(err, 'warning');
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
 
                 return false;
-              });
+            });
         },
 
         /**
          * Tab Switch person
          */
-        tabSwitchPerson (){
-            this.errors.clear ();
+        tabSwitchPerson() {
+            this.errors.clear();
+
+            if (this.wizardSelectedButton == 'prev'){
+                return true;
+            }
 
             return Promise.all([
                 this.$validator.validate('name'),
@@ -1567,28 +1773,27 @@ window.v = new Vue({
                 this.$validator.validate('mobile'),
                 this.$validator.validate('address')
 
-              ]).then ((resolve, reject) => {
-                  var hasErr = this.errors.any ();
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
 
-                  if (! hasErr)
-                  {
-                      return true;
-                  }
+                if (!hasErr) {
+                    return true;
+                }
 
-                  let err = this.errors.all ();
+                let err = this.errors.all();
 
-                  err = err.join ('<br/>');
-                  demo.showNotification(err, 'warning');
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
 
                 return false;
-              });
+            });
         },
 
         /**
          * ُTab Switch Other
          */
-        tabSwitchOther (){
-            this.errors.clear ();
+        tabSwitchOther() {
+            this.errors.clear();
 
             switch (this.tempRecord.user.group.id) {
                 // Staff
@@ -1596,23 +1801,23 @@ window.v = new Vue({
                     return this.tabSwitchStaff();
                     break;
 
-                // Teacher
+                    // Teacher
                 case 2:
-                    return  this.tabSwitchTeacher();
+                    return this.tabSwitchTeacher();
                     break;
 
-                // Student
+                    // Student
                 case 3:
                     return this.tabSwitchStudent();
                     break;
             }
         },
 
-         /**
+        /**
          * Tab Switch Student
          */
-        tabSwitchStudent (){
-            this.errors.clear ();
+        tabSwitchStudent() {
+            this.errors.clear();
 
             return Promise.all([
                 this.$validator.validate('term_id'),
@@ -1622,81 +1827,89 @@ window.v = new Vue({
                 this.$validator.validate('degree_id'),
                 this.$validator.validate('part_id')
 
-              ]).then ((resolve, reject) => {
-                  var hasErr = this.errors.any ();
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
 
-                  if (! hasErr)
-                  {
-                      return true;
-                  }
+                if (!hasErr) {
+                    return true;
+                }
 
-                  let err = this.errors.all ();
+                let err = this.errors.all();
 
-                  err = err.join ('<br/>');
-                  demo.showNotification(err, 'warning');
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
 
                 return false;
-              });
+            });
         },
 
         /**
          * Tab Switch Teacher
          */
-        tabSwitchTeacher (){
-            this.errors.clear ();
+        tabSwitchTeacher() {
+            this.errors.clear();
 
             return Promise.all([
                 this.$validator.validate('semat'),
-              ]).then ((resolve, reject) => {
-                  var hasErr = this.errors.any ();
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
 
-                  if (! hasErr)
-                  {
-                      return true;
-                  }
+                if (!hasErr) {
+                    return true;
+                }
 
-                  let err = this.errors.all ();
+                let err = this.errors.all();
 
-                  err = err.join ('<br/>');
-                  demo.showNotification(err, 'warning');
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
 
                 return false;
-              });
+            });
         },
 
-         /**
+        /**
          * Tab Switch Staff
          */
-        tabSwitchStaff(){
-            this.errors.clear ();
+        tabSwitchStaff() {
+            this.errors.clear();
 
             return Promise.all([
                 this.$validator.validate('contract_id'),
-              ]).then ((resolve, reject) => {
-                  var hasErr = this.errors.any ();
+            ]).then((resolve, reject) => {
+                var hasErr = this.errors.any();
 
-                  if (! hasErr)
-                  {
-                      return true;
-                  }
+                if (!hasErr) {
+                    return true;
+                }
 
-                  let err = this.errors.all ();
+                let err = this.errors.all();
 
-                  err = err.join ('<br/>');
-                  demo.showNotification(err, 'warning');
+                err = err.join('<br/>');
+                demo.showNotification(err, 'warning');
 
                 return false;
-              });
+            });
         },
 
         listMode() {
             this.insertMode = false;
             this.updateMode = false;
+        },
+
+
+        changeTab(props, oper){
+            this.wizardSelectedButton = oper;
+
+            if (oper === 'next'){
+                props.nextTab();
+            } else if(oper === 'prev'){
+                props.prevTab();
+            }
         }
     }
 });
-$(document).ready (() =>
-{
+
+$(document).ready(() => {
     $(".toggle-password").click(function() {
         $(this).toggleClass("fa-eye fa-eye-slash");
         var input = $($(this).attr("toggle"));

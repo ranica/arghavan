@@ -14,7 +14,8 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_contract')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_contract')}">
                     <label class="control-label">نام قرارداد</label>
                     <input autofocus required class="form-control"
                         type="text"
@@ -22,15 +23,21 @@
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"
-                       v-validate="{ required: true, is_not:'null' }"
+                        v-validate="{ required: true, is_not:'null' }"
                         data-vv-delay="250"
                         data-vv-as ="نام قرارداد" />
                     <span class="material-input"></span>
                 </div>
                 <!-- /Name field -->
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveContractRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveContractRecord">
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
 
             </form>

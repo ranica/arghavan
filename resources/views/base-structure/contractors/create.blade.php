@@ -14,7 +14,8 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_contractor')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_contractor')}">
                     <label class="control-label">نام پیمانکار</label>
                     <input autofocus required class="form-control"
                         type="text"
@@ -30,7 +31,8 @@
                 <!-- /Name field -->
 
                 <!-- Start Date field -->
-                <div class="row" :class="{'has-error' : errors.has('startDate_contractor')}">
+                <div class="row"
+                    :class="{'has-error' : errors.has('startDate_contractor')}">
                     <persian-calendar color="#ec407a"
                                         placeholder= "تاریخ شروع قرارداد"
                                         name = "startDate_contractor"
@@ -43,7 +45,8 @@
                 <!-- /Start Date field -->
 
                 <!-- End Date field -->
-                 <div class="row" :class="{'has-error' : errors.has('endDate_contractor')}">
+                 <div class="row"
+                    :class="{'has-error' : errors.has('endDate_contractor')}">
                     <persian-calendar color="#ec407a"
                                         placeholder= "تاریخ پایان قرارداد"
                                         name = "endDate_contractor"
@@ -57,7 +60,8 @@
 
                 <!-- State field -->
                 <div class="row">
-                    <div class="input-group" :class="{'has-error' :errors.has('state')}">
+                    <div class="input-group"
+                        :class="{'has-error' :errors.has('state')}">
                         <div class="togglebutton">
                             <label>
                                 <input class="form-check-input"
@@ -73,8 +77,14 @@
                 </div>
                 <!-- /State field -->
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveContractorRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveContractorRecord">
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
 
             </form>

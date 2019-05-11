@@ -93,11 +93,14 @@
     document.pageData.people = {
         load_url: '{{ route('people.filter', '') }}',
         baseInformation: '{{ route('base.all_Information') }}',
+        load_by_national_code: '{{ route('people.load_by_national_code') }}',
+        check_user: '{{ route('user.check.exist') }}',
+        check_national_people: '{{ route('people.check.exist.national') }}',
         group_students: {{ \App\People::$GROUP_STUDENTS }},
         group_staffs: {{ \App\People::$GROUP_STAFFS }},
-        group_teachers: {{ \App\People::$GROUP_TEACHERS }}
-    };
+        group_teachers: {{ \App\People::$GROUP_TEACHERS }},
 
+    };
 </script>
 <script type="text/javascript" src="{{ mix('js/pages/people/index.js') }}" ></script>
 @endsection

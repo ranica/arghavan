@@ -49,7 +49,7 @@
                     {{ gateData.name }}
                     <br>
                     <small class="card-category">{{ gateData.zone.name }}</small>
-                    <small class="card-category">{{ gateData.deviceType.name }}</small>
+                    <small class="card-category">{{ gateData.device_type.name }}</small>
                 </h3>
             </div>
 

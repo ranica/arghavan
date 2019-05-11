@@ -17,7 +17,9 @@
                 <div class="form-group label-floating mrg-top-2em"
                     :class="{'has-error' : errors.has('name_block')}">
                     <label class="control-label">نام بلوک</label>
-                    <input autofocus required class="form-control"
+                    <input autofocus
+                        required
+                        class="form-control"
                         type="text"
                         name="name_block"
                         minlength="2"
@@ -34,13 +36,14 @@
                 <div class="form-group label-floating mrg-top-2em"
                     :class="{'has-error' : errors.has('code_block')}">
                     <label class="control-label">کد بلوک</label>
-                    <input autofocus required class="form-control"
+                    <input required
+                        class="form-control"
                         type="text"
                         name="code_block"
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.code"
-                       v-validate="{ required: true, is_not:'null' }"
+                        v-validate="{ required: true, is_not:'null' }"
                         data-vv-delay="250"
                         data-vv-as ="کد بلوک" />
                     <span class="material-input"></span>

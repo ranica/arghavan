@@ -62,20 +62,35 @@
                         {{-- /Register Form --}}
 
                         <!-- small modal -->
-                        <div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade"
+                            id="removeRecordModal"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="myModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog modal-small ">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close"
-                                            data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                                        <button type="button"
+                                                class="close"
+                                                data-dismiss="modal"
+                                                aria-hidden="true">
+                                                <i class="material-icons">clear</i>
+                                        </button>
                                     </div>
                                     <div class="modal-body text-center">
                                         <h5>برای حذف اطمینان دارید؟ </h5>
                                     </div>
                                     <div class="modal-footer text-center">
-                                        <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
-                                        <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                            @click.prevent="deleteRecord">بله</button>
+                                        <button type="button"
+                                                class="btn btn-simple"
+                                                data-dismiss="modal">خیر
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-success btn-simple"
+                                                data-dismiss="modal"
+                                                @click.prevent="deleteRecord">بله
+                                        </button>
                                     </div>
                                 </div>
                             </div>

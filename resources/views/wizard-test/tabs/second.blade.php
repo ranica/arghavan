@@ -10,14 +10,17 @@
                         <div class="text-center">
                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail">
-                                    <img :src="tempRecord.people.pictureUrl" alt="...">
+                                    <img src="" alt="...">
                                 </div>
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div>
                                     <span class="btn btn-rose btn-round btn-file">
                                         <span class="fileinput-new">انتخاب تصویر</span>
                                         <span class="fileinput-exists">ویرایش</span>
-                                        <input type="file" name="picture" @change="fileSelect" id="wizard-picture">
+                                        <input type="file"
+                                                name="picture"
+                                                @change="fileSelect"
+                                                id="wizard-picture">
                                     </span>
                                     <a href="#"
                                         class="btn btn-danger btn-round fileinput-exists"

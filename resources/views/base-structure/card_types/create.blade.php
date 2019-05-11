@@ -14,9 +14,11 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_card_type')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_card_type')}">
                     <label class="control-label">نام گروه</label>
-                    <input autofocus required class="form-control"
+                    <input autofocus required
+                        class="form-control"
                         type="text"
                         name="name_card_type"
                         minlength="2"
@@ -29,8 +31,14 @@
                 </div>
                 <!-- /Name field -->
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveCardTypeRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveCardTypeRecord">
+                    <input type="button"
+                        value="انصراف"
+                        class="btn btn-fill btn-round btn-default"
+                        @click.prevent="registerCancel">
                 </span>
 
             </form>

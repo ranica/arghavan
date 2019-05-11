@@ -14,7 +14,8 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_group')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_group')}">
                     <label class="control-label">نام گروه</label>
                     <input autofocus required class="form-control"
                         type="text"
@@ -29,8 +30,14 @@
                 </div>
                 <!-- /Name field -->
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveGroupRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveGroupRecord">
+                    <input type="button"
+                            value="انصراف" c
+                            lass="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
 
             </form>

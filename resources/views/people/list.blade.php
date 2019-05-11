@@ -186,7 +186,12 @@
             <!-- /Assign Finger Print dialog -->
 
             <!-- Parent modal -->
-            <div class="modal fade" id="ParentRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade"
+                id="ParentRecordModal"
+                tabindex="-1"
+                role="dialog"
+                 aria-labelledby="myModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-notice">
                     <div class="modal-content">
                         @include('people.assign-parent.index')
@@ -194,6 +199,37 @@
                 </div>
             </div>
             <!-- /Parent modal -->
+
+            <!-- relaod data modal -->
+            <div class="modal fade" id="reloadRecordModal" tabindex="-1" role="dialog"
+                aria-labelledby="reloadModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog modal-small ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                data-dismiss="modal" aria-hidden="true">
+                                <i class="material-icons">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <h5>مشخصات این کد ملی قبلا ثبت شده است. آیا فراخوانی گردد؟</h5>
+                        </div>
+                        <div class="modal-footer text-center">
+                            <button type="button"
+                                    class="btn btn-simple"
+                                    data-dismiss="modal">خیر
+                                </button>
+                            <button type="button"
+                            class="btn btn-success btn-simple"
+                            data-dismiss="modal"
+                                @click.prevent="loadRecordByNationalCode">بله
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /small modal -->
 
         </div>
     </div>

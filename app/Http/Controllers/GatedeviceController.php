@@ -131,7 +131,6 @@ class GatedeviceController extends Controller
                 'ip'             => $request->ip,
                 'state'          => $request->state,
                 // // 'netState' => $request->netState,
-                'device_type_id' => $request->deviceType_id,
                 'timepass'       => $request->timepass,
                 'timeserver'     => $request->timeserver,
                 'gategender_id'  => $request->gategender_id,

@@ -433,31 +433,7 @@ class PeopleController extends Controller
                     ->select(['users.id', 'code', 'email', 'state', 'level_id', 'people_id', 'group_id'])
                     ->paginate(Controller::C_PAGINATE_SIZE);
 
-    return $res;
-
-       //  if (is_null ($id))
-       //  {
-       //      $person = User::with(self::$relation)
-       //                      ->join('people', 'people.id', '=', 'users.people_id')
-       //                      ->where('users.group_id' , '=', $group_id);
-
-       //      if (! is_null ($search))
-       //      {
-       //          $person = $person->where('users.code', 'like', '%'. $search. '%')
-       //                            ->orwhere('people.name', 'like', "%$search%" )
-       //                            ->orwhere('people.lastname', 'like', "%$search%" )
-       //                            ->orwhere('people.nationalId', 'like', "%$search%" );
-       //      }
-
-       //      $person = $person->paginate(Controller::C_PAGINATE_SIZE);
-       //  }
-       //  else {
-       //     $person = User::find($id)
-       //                    ->with(self::$relation)
-       //                     ->where('users.group_id' , '=', $groupType)
-       //                    ->get();
-       // }
-       // return $person;
+        return $res;
     }
 
     public function loadParent(Request $request, People $people)
@@ -545,26 +521,189 @@ class PeopleController extends Controller
      /**
          * Load User By user.code
          */
-    // public function loaduser(Request $request)
-    // {
-    //     if ($request->ajax())
-    //     {
-    //         $items = \App\User::with('people')
-    //                         ->where(function ($query) use ($request){
-    //                                     if (! is_null ($request->code)){
-    //                                           $query->where('users.code', '=', $request->code);
-    //                                     }
+    public function loadPeopleByNationalCode(Request $request)
+    {
+        if ($request->ajax())
+        {
+           $data = $request->nationalId;
+            $fun = [
+                'group' => function($q) {
+                    $q->select([
+                        'id',
+                        'name'
+                    ]);
+                },
 
-    //                                     if (! is_null ($request->user_id)){
-    //                                           $query->where('users.id', '=', $request->user_id);
-    //                                     }
-    //                         })
-    //                         ->get();
+                'people' => function($q) {
+                    $q->select([
+                        'id',
+                        'name',
+                        'lastname',
+                        'nationalId',
+                        'birthdate',
+                        'mobile',
+                        'phone',
+                        'address',
+                        'gender_id',
+                        'city_id',
+                        'melliat_id'
+                    ]);
+                },
 
-    //        return $items;
-    //     }
-    // }
-    //
+                'people.gender' => function($query){
+                    $query->select([
+                        'id',
+                        'gender'
+                    ]);
+                },
+                'people.melliat' => function($query){
+                    $query->select([
+                        'id',
+                        'name'
+                    ]);
+                },
+                'people.city' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                        'province_id'
+                    ]);
+                },
+                'people.city.province' => function($query){
+                    $query->select([
+                        'id',
+                        'name'
+                    ]);
+                },
+
+                'terms.semester' => function ($query){
+                    $query->select([
+                        'id',
+                        'name'
+                    ]);
+                },
+                'student' => function($query){
+                    $query->select([
+                        'id',
+                        'user_id',
+                        'degree_id',
+                        'field_id',
+                        'part_id',
+                        'situation_id'
+                    ]);
+                },
+                'student.degree' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+                'student.field' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                        'university_id'
+                    ]);
+                },
+                'student.field.university' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+                'student.part' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+                'student.situation' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+                'teacher' => function($query){
+                    $query->select([
+                        'id',
+                        'user_id',
+                        'semat'
+                    ]);
+                },
+                'staff' => function($query){
+                    $query->select([
+                        'id',
+                        'user_id',
+                        'department_id',
+                        'contract_id'
+                    ]);
+                },
+                'staff.department' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+                'staff.contract' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+                'grouppermits' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+                'gategroups' => function($query){
+                    $query->select([
+                        'id',
+                        'name',
+                    ]);
+                },
+            ];
+            $res = \App\User::whereHas('people' , function($q) use($data) {
+                            if (! is_null($data)){
+                                $q->where ('people.nationalId', 'like' , "%$data%");
+                            }
+                        })
+                        ->WhereHas('grouppermits')
+                        ->orWhereHas('gategroups')
+                        ->leftjoin('students', 'students.user_id', 'users.id')
+                        ->leftjoin('teachers', 'teachers.user_id', 'users.id')
+                        ->leftjoin('staff', 'staff.user_id', 'users.id')
+                        ->with($fun)
+                        ->select(['users.id', 'code', 'email', 'state', 'level_id', 'people_id', 'group_id'])
+                        ->get();
+
+            return $res;
+        }
+    }
+
+    public function checkNationaExsit(Request $request)
+    {
+        if ($request->ajax())
+        {
+            $exsitPeople = \App\People::where('nationalId' , $request->nationalId)
+                            ->first();
+
+            if (! is_null($exsitPeople))
+            {
+                return [
+                    'exists' => true,
+                    'data'  => [
+                        'nationalId'=> $exsitPeople->nationalId
+                    ],
+                ];
+            }
+
+            return [
+                'exists' => false,
+                'data' => []
+            ];
+        }
+    }
 
 }
 

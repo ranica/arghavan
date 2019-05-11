@@ -58,7 +58,7 @@ window.v = new Vue({
                 zone: {
                     id: 0
                 },
-                deviceType: {
+                device_type: {
                     id: 0
                 },
                 editMode: false,
@@ -260,9 +260,9 @@ window.v = new Vue({
                     name: record.zone.name
                 },
 
-                deviceType: {
-                    id: record.deviceType.id,
-                    name: record.deviceType.name
+                device_type: {
+                    id: record.device_type.id,
+                    name: record.device_type.name
                 }
             };
             this.formMode = Enums.FormMode.register;

@@ -178,17 +178,29 @@
                                     <span class="input-group-addon">
                                         <i class="material-icons">phone_android</i>
                                     </span>
-                                    <div class="form-group label-floating" :class="{'has-error' : errors.has('mobile')}">
+                                    <div class="form-group label-floating"
+                                    :class="{'has-error' : errors.has('mobile')}">
                                         <label class="control-label">موبایل</label>
-                                        <input name="mobile"
-                                                type="number"
+                                        <!-- <input name="mobile"
+
                                                 class="form-control"
                                                 minlength="11" maxlength="11"
                                                 {{-- v-validate="{required: true}" --}}
                                                 v-validate="{ regex:/^09[0-9][0-9]{8}$/ }"
                                                 data-vv-delay="250"
-                                                data-vv-as ="موبایل"
-                                                v-model="tempRecord.people.mobile">
+                                                data-vv-as =
+                                                v-model="tempRecord.people.mobile"> -->
+
+                                          <input id="mobile"
+                                                 class="form-control transparent-input direction-rtl text-right"
+                                                 type="tel"
+                                                 name="mobile"
+                                                 placeholder="*********09"
+                                                 pattern="^09[0-9][0-9]{8}"
+                                                 v-validate="{ regex:/^09[0-9][0-9]{8}$/ }"
+                                                 data-vv-as="موبایل"
+                                                 v-model="tempRecord.people.mobile"
+                                                 required>
                                     </div>
                                 </div>
                             </div>
