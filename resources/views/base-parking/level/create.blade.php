@@ -10,20 +10,7 @@
         <!-- Card Content -->
         <div class="card-content f-BYekan">
             <form>
-                <h3 class="card-title f-BYekan">
-                    ثبت اطلاعات
-
-                    <span class="pull-left">
-                        <input type="submit" 
-                                value="ذخیره" 
-                                class="btn btn-fill btn-rose" 
-                                @click.prevent="saveLevelRecord()">
-                        <input type="button" 
-                                value="انصراف" 
-                                class="btn btn-fill btn-default" 
-                                @click.prevent="registerCancel">
-                    </span>
-                </h3>
+                <h3 class="card-title f-BYekan">ثبت اطلاعات</h3>
 
                 <!-- Name field -->
                 <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_level')}">
@@ -41,6 +28,17 @@
                 </div>
                 <!-- /Name field -->
 
+                <span class="pull-left">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveLevelRecord">
+
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
+                </span>
             </form>
         </div>
         <!-- /Card Content -->

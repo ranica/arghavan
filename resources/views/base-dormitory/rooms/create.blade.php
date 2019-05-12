@@ -17,7 +17,9 @@
                 <!-- building name field -->
                 <div class="form-group label-floating"
                     :class="{'has-error' : errors.has('room_building_id')}">
+
                     <label class="control-label">نام ساختمان</label>
+
                     <select class="form-control"
                         v-model="tempRecord.room.building.id"
                         name="room_building_id"

@@ -7,8 +7,21 @@
                 <span class="panel-heading">رنگ خودرو</span>
 
                 @can('command_insert')
-                    <span class="pull-left" v-show="isNormalMode">
-                        <a class="btn btn-rose" href="#" @click.prevent="newRecord">
+                    <!-- Pc size -->
+                    <span class="pull-left pc" v-show="isNormalMode">
+                        <a class="btn btn-rose btn-round"
+                            href="#"
+                            @click.prevent="newRecord">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            ثبت رکورد جدید
+                        </a>
+                    </span>
+
+                    <!--  mobile size -->
+                    <span class="mobile" v-show="isNormalMode">
+                        <a class="btn btn-round btn-rose"
+                            href="#"
+                            @click.prevent="newRecord">
                             <span class="glyphicon glyphicon-plus"></span>
                             ثبت رکورد جدید
                         </a>
@@ -50,8 +63,10 @@
                                     @endcan
 
                                     @can('command_delete')
-                                        <a href="#" class="btn btn-round btn-just-icon pull-center"
-                                            data-toggle="modal" data-target="#removeRecordModal"
+                                        <a href="#"
+                                            class="btn btn-round btn-just-icon pull-center"
+                                            data-toggle="modal"
+                                            data-target="#removeRecordModal"
                                             @click.prevent="readyToDelete(record)">
 
                                             <i class="material-icons">delete</i>
@@ -82,22 +97,38 @@
             {{-- /Register Form --}}
 
             <!-- small modal -->
-            <div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog"
-                aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade"
+                id="removeRecordModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myModalLabel"
+                aria-hidden="true">
 
                 <div class="modal-dialog modal-small ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close"
-                                data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+
+                            <button type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true">
+                                    <i class="material-icons">clear</i>
+                            </button>
                         </div>
                         <div class="modal-body text-center">
                             <h5>برای حذف اطمینان دارید؟ </h5>
                         </div>
                         <div class="modal-footer text-center">
-                            <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
-                            <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                @click.prevent="deleteRecord('carColors')">بله</button>
+                            <button type="button"
+                                    class="btn btn-simple"
+                                    data-dismiss="modal">خیر
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-success btn-simple"
+                                    data-dismiss="modal"
+                                    @click.prevent="deleteRecord('carColors')">بله
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@
 
                         @can('command_insert')
                             <!-- Pc size -->
-                            <span class="pull-left" v-show="isNormalMode">
+                            <span class="pull-left pc" v-show="isNormalMode">
                                 <a class="btn btn-round btn-rose"
                                     href="#"
                                     @click.prevent="newRecord">

@@ -11,12 +11,24 @@
                                 <span class="panel-heading">مقطع تحصیلی</span>
 
                                 @can('command_insert')
-                                <span class="pull-left" v-show="isNormalMode">
-                                    <a class="btn btn-rose" href="#" @click.prevent="newRecord">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                        ثبت رکورد جدید
-                                    </a>
-                                </span>
+                                    <!-- Pc size -->
+                                    <span class="pull-left pc" v-show="isNormalMode">
+                                        <a class="btn btn-rose btn-round"
+                                            href="#"
+                                            @click.prevent="newRecord">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                            ثبت رکورد جدید
+                                        </a>
+                                    </span>
+                                    <!--  mobile size -->
+                                    <span class="mobile" v-show="isNormalMode">
+                                        <a class="btn btn-round btn-rose"
+                                            href="#"
+                                            @click.prevent="newRecord">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                            ثبت رکورد جدید
+                                        </a>
+                                    </span>
                                 @endcan
 
                             </div>
@@ -36,7 +48,9 @@
                                 </div>
                                <!-- List Data Table -->
                                 <div class="table-responsive col-md-12 pc">
-                                    <table id="myTable" class="table table-striped table-hover " v-show="hasDegreeRows">
+                                    <table id="myTable"
+                                            class="table table-striped table-hover "
+                                            v-show="hasDegreeRows">
                                         <thead v-show="!isLoading">
                                             <td>نام مقطع</td>
                                             <td></td>
@@ -97,22 +111,34 @@
                            <!-- /Register Form -->
 
                             <!-- small modal -->
-                            <div class="modal fade" id="removeRecordModalDegree" tabindex="-1" role="dialog"
-                                aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade"
+                                id="removeRecordModalDegree"
+                                tabindex="-1"
+                                role="dialog"
+                                aria-labelledby="myModalLabel"
+                                aria-hidden="true">
 
                                 <div class="modal-dialog modal-small ">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close"
-                                                data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                                                data-dismiss="modal" aria-hidden="true">
+                                                <i class="material-icons">clear</i>
+                                            </button>
                                         </div>
                                         <div class="modal-body text-center">
                                             <h5>برای حذف اطمینان دارید؟ </h5>
                                         </div>
                                         <div class="modal-footer text-center">
-                                            <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
-                                            <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                                @click.prevent="deleteRecord('degrees')">بله</button>
+                                            <button type="button"
+                                                    class="btn btn-simple"
+                                                    data-dismiss="modal">خیر
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-success btn-simple"
+                                                    data-dismiss="modal"
+                                                    @click.prevent="deleteRecord('degrees')">بله
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -14,10 +14,14 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" 
+                <div class="form-group label-floating mrg-top-2em"
                     :class="{'has-error' : errors.has('name_material_type')}">
+
                     <label class="control-label">نام کالا</label>
-                    <input autofocus required class="form-control"
+
+                    <input autofocus
+                        required
+                        class="form-control"
                         type="text"
                         name="name_material_type"
                         minlength="2"
@@ -29,11 +33,13 @@
                     <span class="material-input"></span>
                 </div>
                 <!-- /Name field -->
+
                 <span class="pull-left">
                     <input type="submit"
                             value="ذخیره"
                             class="btn btn-fill btn-round btn-rose"
                             @click.prevent="saveMaterialTypeRecord">
+
                     <input type="button"
                             value="انصراف"
                             class="btn btn-fill btn-round btn-default"

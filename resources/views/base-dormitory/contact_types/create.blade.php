@@ -13,10 +13,11 @@
                     ثبت اطلاعات
                 </span>
 
-                <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" 
+                <!-- Type field -->
+                <div class="form-group label-floating mrg-top-2em"
                     :class="{'has-error' : errors.has('type_contact_type')}">
                     <label class="control-label">عنوان مخاطب</label>
+
                     <input autofocus required class="form-control"
                         type="text"
                         name="type_contact_type"
@@ -28,12 +29,14 @@
                         data-vv-as ="عنوان مخاطب" />
                     <span class="material-input"></span>
                 </div>
-                <!-- /Name field -->
+                <!-- /Type field -->
+
                 <span class="pull-left">
                     <input type="submit"
                             value="ذخیره"
                             class="btn btn-fill btn-round btn-rose"
                             @click.prevent="saveContactTypeRecord">
+
                     <input type="button"
                             value="انصراف"
                             class="btn btn-fill btn-round btn-default"

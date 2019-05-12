@@ -1,7 +1,8 @@
 <div class="form-horizontal f-BYekan pad-all-1em pad-rem-top" id="registerForm">
     <div class="card">
         <!-- Card Header -->
-        <div class="card-header card-header-icon" data-background-color="rose">
+        <div class="card-header card-header-icon"
+            data-background-color="rose">
             <i class="material-icons">assignment</i>
         </div>
         <!-- /Card Header -->
@@ -14,15 +15,18 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_university')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_university')}">
                     <label class="control-label">نام دانشکده</label>
-                    <input autofocus required class="form-control"
+                    <input autofocus
+                        required
+                        class="form-control"
                         type="text"
                         name="name_university"
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"
-                       v-validate="{ required: true, is_not:'null' }"
+                        v-validate="{ required: true, is_not:'null' }"
                         data-vv-delay="250"
                         data-vv-as ="نام  دانشکده" />
                     <span class="material-input"></span>

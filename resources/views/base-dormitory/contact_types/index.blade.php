@@ -11,12 +11,25 @@
                                 <span class="panel-heading">انواع مخاطبین</span>
 
                                 @can('command_insert')
-                                <span class="pull-left" v-show="isNormalMode">
-                                    <a class="btn btn-rose" href="#" @click.prevent="newRecord">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                        ثبت رکورد جدید
-                                    </a>
-                                </span>
+                                    <!-- Pc size -->
+                                    <span class="pull-left pc" v-show="isNormalMode">
+                                        <a class="btn btn-rose btn-round"
+                                            href="#"
+                                            @click.prevent="newRecord">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                            ثبت رکورد جدید
+                                        </a>
+                                    </span>
+
+                                    <!--  mobile size -->
+                                    <span class="mobile" v-show="isNormalMode">
+                                        <a class="btn btn-round btn-rose"
+                                            href="#"
+                                            @click.prevent="newRecord">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                            ثبت رکورد جدید
+                                        </a>
+                                    </span>
                                 @endcan
 
                             </div>
@@ -43,6 +56,7 @@
                                             <td>نام مخاطب</td>
                                             <td></td>
                                         </thead>
+
                                         <tbody>
                                             <tr v-if="isLoading">
                                                 <td colspan="2" class="text-center">در حال بارگذاری اطلاعات</td>
@@ -60,6 +74,7 @@
                                                             <div class="ripple-container"></div>
                                                         </a>
                                                     @endcan
+
                                                     @can('command_edit')
                                                         <a href="#" class="btn btn-round btn-info btn-just-icon pull-left"
                                                             @click.prevent="editRecord(record)">
@@ -123,6 +138,7 @@
                                                     class="btn btn-simple"
                                                     data-dismiss="modal">خیر
                                             </button>
+
                                             <button type="button"
                                                     class="btn btn-success btn-simple"
                                                     data-dismiss="modal"

@@ -9,13 +9,25 @@
                         <i class="fas fa-door-open fa-2x"></i>
                         <span class="panel-heading">تجهیزات</span>
 
-                        @can('command_insert')
-                        <span class="pull-left" v-show="isNormalMode">
-                            <a class="btn btn-rose" href="#" @click.prevent="newRecord">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                ثبت رکورد جدید
-                            </a>
-                        </span>
+                         @can('command_insert')
+                            <!-- Pc size -->
+                            <span class="pull-left pc" v-show="isNormalMode">
+                                <a class="btn btn-rose btn-round"
+                                    href="#"
+                                    @click.prevent="newRecord">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    ثبت رکورد جدید
+                                </a>
+                            </span>
+                            <!--  mobile size -->
+                            <span class="mobile" v-show="isNormalMode">
+                                <a class="btn btn-round btn-rose"
+                                    href="#"
+                                    @click.prevent="newRecord">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    ثبت رکورد جدید
+                                </a>
+                            </span>
                         @endcan
                     </div>
                 </h3>
@@ -63,6 +75,7 @@
                                                     <div class="ripple-container"></div>
                                                 </a>
                                             @endcan
+
                                             @can('command_edit')
                                                 <a href="#"
                                                     class="btn btn-round btn-info btn-just-icon pull-left"
@@ -71,6 +84,7 @@
                                                     <div class="ripple-container"></div>
                                                 </a>
                                             @endcan
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -119,14 +133,17 @@
                                             <i class="material-icons">clear</i>
                                     </button>
                                 </div>
+
                                 <div class="modal-body text-center">
                                     <h5>برای حذف اطمینان دارید؟ </h5>
                                 </div>
+
                                 <div class="modal-footer text-center">
                                     <button type="button"
                                             class="btn btn-simple"
                                             data-dismiss="modal">خیر
                                     </button>
+
                                     <button type="button"
                                             class="btn btn-success btn-simple"
                                             data-dismiss="modal"

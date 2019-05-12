@@ -14,7 +14,8 @@
                     <input type="submit"
                           value="ذخیره"
                           class="btn btn-fill btn-rose"
-                          @click.prevent="saveMaterialRoomRecord()">
+                          @click.prevent="saveMaterialRoomRecord">
+
                     <input type="button"
                           value="انصراف"
                           class="btn btn-fill btn-default"

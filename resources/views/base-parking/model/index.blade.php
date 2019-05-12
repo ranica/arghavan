@@ -5,10 +5,22 @@
             <div>
                 <i class="fas fa-car-side fa-2x"></i>
                 <span class="panel-heading">مدل خودرو</span>
-
                 @can('command_insert')
-                    <span class="pull-left" v-show="isNormalMode">
-                        <a class="btn btn-rose" href="#" @click.prevent="newRecord">
+                    <!-- Pc size -->
+                    <span class="pull-left pc" v-show="isNormalMode">
+                        <a class="btn btn-rose btn-round"
+                            href="#"
+                            @click.prevent="newRecord">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            ثبت رکورد جدید
+                        </a>
+                    </span>
+
+                    <!--  mobile size -->
+                    <span class="mobile" v-show="isNormalMode">
+                        <a class="btn btn-round btn-rose"
+                            href="#"
+                            @click.prevent="newRecord">
                             <span class="glyphicon glyphicon-plus"></span>
                             ثبت رکورد جدید
                         </a>
@@ -50,7 +62,8 @@
                                     @endcan
 
                                     @can('command_delete')
-                                        <a href="#" class="btn btn-round btn-just-icon pull-center"
+                                        <a href="#"
+                                            class="btn btn-round btn-just-icon pull-center"
                                             data-toggle="modal"
                                             data-target="#removeRecordModal_model"
                                             @click.prevent="readyToDelete(record)">

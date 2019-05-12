@@ -14,7 +14,8 @@
                 </span>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_degree')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_degree')}">
                     <label class="control-label">نام مقطع تحصیلی</label>
                     <input autofocus required class="form-control"
                         type="text"
@@ -22,15 +23,23 @@
                         minlength="2"
                         maxlength="50"
                         v-model="tempRecord.name"
-                       v-validate="{ required: true, is_not:'null' }"
+                        v-validate="{ required: true, is_not:'null' }"
                         data-vv-delay="250"
                         data-vv-as ="نام مقطع تحصیلی" />
                     <span class="material-input"></span>
                 </div>
                 <!-- /Name field -->
+
                 <span class="pull-left">
-                    <input type="submit" value="ذخیره" class="btn btn-fill btn-round btn-rose" @click.prevent="saveDegreeRecord">
-                    <input type="button" value="انصراف" class="btn btn-fill btn-round btn-default" @click.prevent="registerCancel">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveDegreeRecord">
+
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
 
             </form>
