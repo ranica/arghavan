@@ -19,8 +19,9 @@
                       @edit-data="showCard"
                       @selection-changed = "selectionChanged" v-show = "hasSearch">
                   </card-search>
-                   <!-- modal -->
-                    <div class="modal fade"
+
+                  <!-- modal -->
+                  <div class="modal fade"
                       id="cardModal"
                       tabindex="-1"
                       role="dialog"

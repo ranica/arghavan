@@ -16,11 +16,11 @@ class DeviceTypeSeeder extends Seeder
         ]);
 
         \App\DeviceType::create([
-            'name' => 'اثرانگشت'
+            'name' => 'دستگاه اثرانگشت '
         ]);
 
         \App\DeviceType::create([
-            'name' => 'آنت تردد'
+            'name' => 'آنتن تردد'
         ]);
     }
 }

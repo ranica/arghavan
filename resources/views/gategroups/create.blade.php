@@ -10,43 +10,56 @@
         {{-- Card Content --}}
         <div class="card-content f-BYekan">
         	<form>
-				<h3 class="card-title f-BYekan">
-				    ثبت اطلاعات
+				<h3 class="card-title f-BYekan">ثبت اطلاعات </h3>
 
-				    <span class="pull-left">
-                        <input type="submit" value="ذخیره" class="btn btn-fill btn-rose" @click.prevent="saveRecord">
-                        <input type="button" value="انصراف" class="btn btn-fill btn-default" @click.prevent="registerCancel">
-                    </span>
-                </h3>
-
-				<div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name')}">
+				<div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name')}">
 					<label class="control-label">نام گروه </label>
-					<input class="form-control" type="text"  name="name"
-                        minlength="2" maxlength="50" autofocus required
-						v-validate="'required|min:2|max:50'"
+
+					<input class="form-control"
+                        type="text"
+                        name="name"
+                        minlength="2"
+                        maxlength="50"
+                        required
+						v-validate="{ required: true, is_not: 'null' }"
                         data-vv-delay="250"
-                        data-vv-name="نام گروه"
-                        v-model="tempRecord.name"
-						/>
-					<i v-show="errors.has('name')" class="fa fa-warning"></i>
-                    <span v-show="errors.has('name')" class="help is-danger"> نام گروه نامعتبر است
+                        data-vv-as="نام گروه"
+                        v-model="tempRecord.name"/>
                     </span>
 					<span class="material-input"></span>
 				</div>
 
-				<div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('description')}">
+				<div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('description')}">
 					<label class="control-label"> شرح گروه </label>
-					<input class="form-control" type="text"  name="description"
-                        minlength="2" maxlength="50" autofocus required
-						v-validate="'required|min:2|max:50'"
+
+					<input class="form-control"
+                        type="text"
+                        name="description"
+                        minlength="2"
+                        maxlength="50"
+                        required
+						v-validate=" {required: true, is_not:'null'} "
                         data-vv-delay="250"
-                        data-vv-name="شرح گروه"
-                        v-model="tempRecord.description"
-						/>
-					<i v-show="errors.has('description')" class="fa fa-warning"></i>
-                    <span v-show="errors.has('description')" class="help is-danger">رح گروهشنامعتبر می باشد</span>
+                        data-vv-as="شرح گروه"
+                        v-model="tempRecord.description"/>
 					<span class="material-input"></span>
 				</div>
+
+                <!-- Button Save & Cancel -->
+                <span class="pull-left">
+                        <input type="submit"
+                                value="ذخیره"
+                                class="btn btn-fill btn-round btn-rose"
+                                @click.prevent="saveRecord">
+                        <input type="button"
+                                value="انصراف"
+                                class="btn btn-fill btn-round btn-default"
+                                @click.prevent="registerCancel">
+                    </span>
+                    <!-- /Button Save & Cancel -->
+
 
             </form>
         </div>

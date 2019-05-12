@@ -9,7 +9,7 @@
                         <i class="fas fa-door-open fa-2x"></i>
                         <span class="panel-heading">تجهیزات</span>
 
-                         @can('command_insert')
+                        @can('command_insert')
                             <!-- Pc size -->
                             <span class="pull-left pc" v-show="isNormalMode">
                                 <a class="btn btn-rose btn-round"

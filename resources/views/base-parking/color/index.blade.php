@@ -41,7 +41,7 @@
                     </h4>
                 </div>
 
-                <div v-for="record in car_colors">
+                 <div v-for="record in car_colors">
                     <div class="col-lg-2">
                         <div class="card">
                             <div class="card-header card-header-icon card-header-rose">
@@ -66,9 +66,8 @@
                                         <a href="#"
                                             class="btn btn-round btn-just-icon pull-center"
                                             data-toggle="modal"
-                                            data-target="#removeRecordModal"
+                                            data-target="#removeRecordModal_color"
                                             @click.prevent="readyToDelete(record)">
-
                                             <i class="material-icons">delete</i>
                                             <div class="ripple-container"></div>
                                         </a>

@@ -1,5 +1,6 @@
 import Store from './store';
 import SiteWidget from '../Components/SiteWidget';
+import CardMobile from '../Components/MobileWidget';
 // import BaseCarWidget from '../Components/BaseCarWidget';
 
 window.v = new Vue({
@@ -8,6 +9,7 @@ window.v = new Vue({
 
     components:{
         SiteWidget,
+        CardMobile,
         // BaseCarWidget
     },
 

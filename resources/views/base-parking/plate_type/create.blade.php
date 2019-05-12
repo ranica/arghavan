@@ -10,23 +10,11 @@
         <!-- Card Content -->
         <div class="card-content f-BYekan">
             <form>
-                <h3 class="card-title f-BYekan">
-                    ثبت اطلاعات
-
-                    <span class="pull-left">
-                        <input type="submit" 
-                                value="ذخیره" 
-                                class="btn btn-fill btn-rose" 
-                                @click.prevent="savePlateTypeRecord()">
-                        <input type="button" 
-                                value="انصراف" 
-                                class="btn btn-fill btn-default" 
-                                @click.prevent="registerCancel">
-                    </span>
-                </h3>
+                <h3 class="card-title f-BYekan">بت اطلاعات  </h3>
 
                 <!-- Name field -->
-                <div class="form-group label-floating mrg-top-2em" :class="{'has-error' : errors.has('name_plate_type')}">
+                <div class="form-group label-floating mrg-top-2em"
+                    :class="{'has-error' : errors.has('name_plate_type')}">
                     <label class="control-label">نوع پلاک خودرو</label>
                     <input autofocus required class="form-control"
                         type="text"
@@ -40,6 +28,18 @@
                     <span class="material-input"></span>
                 </div>
                 <!-- /Name field -->
+
+                <span class="pull-left">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="savePlateTypeRecord">
+
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
+                </span>
 
             </form>
         </div>

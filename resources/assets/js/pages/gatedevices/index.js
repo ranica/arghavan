@@ -313,7 +313,8 @@ window.v = new Vue({
                             gatepass_id: this.tempRecord.gatepass.id,
                             gatedirect_id: this.tempRecord.gatedirect.id,
                             zone_id: this.tempRecord.zone.id,
-                            device_type_id: this.tempRecord.device_type.id,
+                            device_type_id: 1,
+
                         };
 
                         this.isLoading = true;

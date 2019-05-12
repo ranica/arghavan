@@ -61,8 +61,7 @@
                     :class="{'has-error' : errors.has('material_code')}">
                     <label class="control-label">کد اموال</label>
 
-                    <input autofocus
-                        required
+                    <input required
                         class="form-control"
                         type="text"
                         min="0"

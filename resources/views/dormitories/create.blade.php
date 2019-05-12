@@ -8,18 +8,7 @@
 
         {{-- Card Content --}}
 		<div class="card-content f-BYekan">
-			<h3 class="card-title f-BYekan">ثبت اطلاعات
-				<div class="pull-left">
-                    <input type="submit"
-                            value="ذخیره"
-                            class="btn btn-fill btn-rose"
-                            @click.prevent="saveRecord">
-                    <input type="button"
-                            value="انصراف"
-                            class="btn btn-fill btn-default"
-                            @click.prevent="registerCancel">
-                </div>
-            </h3>
+			<h3 class="card-title f-BYekan">ثبت اطلاعات </h3>
 
 			<div class="col-md-12">
 				<form>
@@ -111,6 +100,17 @@
                         </div>
                     </div>
                     <!-- /gate_plan name field -->
+
+                    <div class="pull-left">
+                        <input type="submit"
+                                value="ذخیره"
+                                class="btn btn-round btn-fill btn-rose"
+                                @click.prevent="saveRecord">
+                        <input type="button"
+                                value="انصراف"
+                                class="btn btn-round btn-fill btn-default"
+                                @click.prevent="registerCancel">
+                    </div>
 
 	            </form>
 	        </div>

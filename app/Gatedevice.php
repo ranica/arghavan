@@ -155,9 +155,9 @@ class Gatedevice extends Model
                         'gatedirect_id' => $request->gatedirect_id,
                         'zone_id'       => $request->zone_id,
                         'type'          => $request->type,
-                        'device_type_id' => $request->deviceType_id,
+                        'device_type_id' => $request->device_type_id,
 
-                        ]);
+                    ]);
 
             return $newGatedevice;
         }
