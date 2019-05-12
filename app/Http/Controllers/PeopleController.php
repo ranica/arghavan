@@ -65,9 +65,12 @@ class PeopleController extends Controller
         if ($request->hasFile('image'))
         {
             $image = $request->file('image');
+
+            $ext = $image->getClientOriginalExtension();
+
             $fullSizeImageAddr = $image->store('');
 
-            $th_name = str_replace('.jpeg', '-t.jpeg', $fullSizeImageAddr);
+            $th_name = str_replace(".$ext", "-t.$ext", $fullSizeImageAddr);
             $th_name = \Storage::path($th_name);
             $thumbnailImage = Image::make($image);
             $thumbnailImage->fit(320, 320)
@@ -292,7 +295,8 @@ class PeopleController extends Controller
                     'address',
                     'gender_id',
                     'city_id',
-                    'melliat_id'
+                    'melliat_id',
+                    'picture'
                 ]);
             },
             'people.gender' => function($query){
@@ -497,8 +501,7 @@ class PeopleController extends Controller
 
             // Save resized image
             $image_resize = Image::make(file_get_contents($filename));
-            //dd($image_resize);
-            // $image_resize = \Image::make($filename);
+
             $image_resize->resize (300, 300);
             $image_resize->save ($savePath);
 

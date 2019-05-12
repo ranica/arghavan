@@ -52,7 +52,7 @@ class People extends Model
      * @param  [type] $value [description]
      * @return [type]        [description]
      */
-    public static function getPictureUrl($value)
+    public static function generatePictureUrl($value)
     {
         if (is_null($value) || ($value == ''))
         {
@@ -67,7 +67,7 @@ class People extends Model
      * @param  [type] $value [description]
      * @return [type]        [description]
      */
-    public static function getPictureThumbUrl($value)
+    public static function generatePictureThumbUrl($value)
     {
         if (is_null($value) || ($value == ''))
         {
@@ -84,7 +84,7 @@ class People extends Model
      * @return [type] [description]
      */
     public function getPictureUrlAttribute(){
-        return static::getPictureUrl($this->picture);
+        return static::generatePictureUrl($this->picture);
     }
 
     /**
@@ -92,7 +92,7 @@ class People extends Model
      * @return [type] [description]
      */
     public function getPictureThumbUrlAttribute(){
-        return static::getPictureThumbUrl($this->picture);
+        return static::generatePictureThumbUrl($this->picture);
     }
 
     /**
