@@ -526,162 +526,166 @@ class PeopleController extends Controller
          */
     public function loadPeopleByNationalCode(Request $request)
     {
-        if ($request->ajax())
+        if (!$request->ajax())
         {
-           $data = $request->nationalId;
-            $fun = [
-                'group' => function($q) {
-                    $q->select([
-                        'id',
-                        'name'
-                    ]);
-                },
-
-                'people' => function($q) {
-                    $q->select([
-                        'id',
-                        'name',
-                        'lastname',
-                        'nationalId',
-                        'birthdate',
-                        'mobile',
-                        'phone',
-                        'address',
-                        'gender_id',
-                        'city_id',
-                        'melliat_id'
-                    ]);
-                },
-
-                'people.gender' => function($query){
-                    $query->select([
-                        'id',
-                        'gender'
-                    ]);
-                },
-                'people.melliat' => function($query){
-                    $query->select([
-                        'id',
-                        'name'
-                    ]);
-                },
-                'people.city' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                        'province_id'
-                    ]);
-                },
-                'people.city.province' => function($query){
-                    $query->select([
-                        'id',
-                        'name'
-                    ]);
-                },
-
-                'terms.semester' => function ($query){
-                    $query->select([
-                        'id',
-                        'name'
-                    ]);
-                },
-                'student' => function($query){
-                    $query->select([
-                        'id',
-                        'user_id',
-                        'degree_id',
-                        'field_id',
-                        'part_id',
-                        'situation_id'
-                    ]);
-                },
-                'student.degree' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-                'student.field' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                        'university_id'
-                    ]);
-                },
-                'student.field.university' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-                'student.part' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-                'student.situation' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-                'teacher' => function($query){
-                    $query->select([
-                        'id',
-                        'user_id',
-                        'semat'
-                    ]);
-                },
-                'staff' => function($query){
-                    $query->select([
-                        'id',
-                        'user_id',
-                        'department_id',
-                        'contract_id'
-                    ]);
-                },
-                'staff.department' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-                'staff.contract' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-                'grouppermits' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-                'gategroups' => function($query){
-                    $query->select([
-                        'id',
-                        'name',
-                    ]);
-                },
-            ];
-            $res = \App\User::whereHas('people' , function($q) use($data) {
-                            if (! is_null($data)){
-                                $q->where ('people.nationalId', 'like' , "%$data%");
-                            }
-                        })
-                        ->WhereHas('grouppermits')
-                        ->orWhereHas('gategroups')
-                        ->leftjoin('students', 'students.user_id', 'users.id')
-                        ->leftjoin('teachers', 'teachers.user_id', 'users.id')
-                        ->leftjoin('staff', 'staff.user_id', 'users.id')
-                        ->with($fun)
-                        ->select(['users.id', 'code', 'email', 'state', 'level_id', 'people_id', 'group_id'])
-                        ->get();
-
-            return $res;
+            return;
         }
+
+       $data = $request->nationalId;
+        $fun = [
+            'group' => function($q) {
+                $q->select([
+                    'id',
+                    'name'
+                ]);
+            },
+
+            'people' => function($q) {
+                $q->select([
+                    'id',
+                    'name',
+                    'lastname',
+                    'nationalId',
+                    'birthdate',
+                    'mobile',
+                    'phone',
+                    'address',
+                    'gender_id',
+                    'city_id',
+                    'melliat_id'
+                ]);
+            },
+
+            'people.gender' => function($query){
+                $query->select([
+                    'id',
+                    'gender'
+                ]);
+            },
+            'people.melliat' => function($query){
+                $query->select([
+                    'id',
+                    'name'
+                ]);
+            },
+            'people.city' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                    'province_id'
+                ]);
+            },
+            'people.city.province' => function($query){
+                $query->select([
+                    'id',
+                    'name'
+                ]);
+            },
+
+            'terms.semester' => function ($query){
+                $query->select([
+                    'id',
+                    'name'
+                ]);
+            },
+            'student' => function($query){
+                $query->select([
+                    'id',
+                    'user_id',
+                    'degree_id',
+                    'field_id',
+                    'part_id',
+                    'situation_id'
+                ]);
+            },
+            'student.degree' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+            'student.field' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                    'university_id'
+                ]);
+            },
+            'student.field.university' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+            'student.part' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+            'student.situation' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+            'teacher' => function($query){
+                $query->select([
+                    'id',
+                    'user_id',
+                    'semat'
+                ]);
+            },
+            'staff' => function($query){
+                $query->select([
+                    'id',
+                    'user_id',
+                    'department_id',
+                    'contract_id'
+                ]);
+            },
+            'staff.department' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+            'staff.contract' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+            'grouppermits' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+            'gategroups' => function($query){
+                $query->select([
+                    'id',
+                    'name',
+                ]);
+            },
+        ];
+        $res = \App\User::whereHas('people' , function($q) use($data) {
+                        if (! is_null($data)){
+                            $q->where ('people.nationalId', 'like' , "%$data%");
+                        }
+                    })
+                    ->WhereHas('grouppermits')
+                    ->orWhereHas('gategroups')
+                    ->leftjoin('students', 'students.user_id', 'users.id')
+                    ->leftjoin('teachers', 'teachers.user_id', 'users.id')
+                    ->leftjoin('staff', 'staff.user_id', 'users.id')
+                    ->with($fun)
+                    ->select(['users.id', 'code', 'email', 'state', 'level_id', 'people_id', 'group_id'])
+                    ->first();
+
+        $res->cities = $res->people->city->province->cities;
+
+        return $res;
     }
 
     public function checkNationaExsit(Request $request)

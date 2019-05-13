@@ -359,26 +359,21 @@ window.v = new Vue({
         selectFinger(finger) {
             this.finger_index = finger.index;
         },
+
         /**
          * Gets the national identifier.
          */
         existsNationalId() {
-            if (null != this.tempRecord.people.nationalId) {
-                // this.tempRecord.people.mobile = '09120472018';
-                this.existsNationalUser(this.tempRecord.people.nationalId)
-                    .then (
-                           // res => this.userCodeExists = false
-                           )
-                    .catch(err =>{
-                        $("#reloadRecordModal").modal()
-                         // this.userCodeExists = true
-                     });
-                       // .catch(err => this.userCodeExists = true);
-            } else {
-                console.log('empty national code');
+            if (null == this.tempRecord.people.nationalId) {
+                return;
             }
 
+            // this.tempRecord.people.mobile = '09120472018';
+            this.existsNationalUser(this.tempRecord.people.nationalId)
+                .then (res => {})
+                .catch(err => $("#reloadRecordModal").modal());
         },
+
         /**
          * Check Code person
          */
@@ -483,7 +478,7 @@ window.v = new Vue({
             };
             this.$store.dispatch('loadDataByNationaId', data)
                 .then(res => {
-                    let myData = res.data[0];
+                    let myData = res.data;
 
                     this.tempRecord.people = {
                         id: myData.people.id,

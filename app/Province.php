@@ -31,17 +31,6 @@ class Province extends Model
      * List of related Cities
      * @return [type] [description]
      */
-    public function city()
-    {
-        dd('City abused!!');
-        
-        return $this->belongsTo(City::class);
-    }
-
-    /**
-     * List of related Cities
-     * @return [type] [description]
-     */
     public function cities()
     {
     	return $this->hasMany(City::class);
@@ -51,7 +40,7 @@ class Province extends Model
     /**
      * Create new province
      * 	but before create check conflicts
-     * @param  Request $request 
+     * @param  Request $request
      * @return Province         created instance or null if exists
      */
     public static function createIfNotExists($request)
@@ -65,18 +54,18 @@ class Province extends Model
             $newProvince = Province::create(
                 [
                     'name' => $request->name,
-                ]                
+                ]
             );
 
             return $newProvince;
         }
-        else 
+        else
         {
             $province->restore();
 
             return $province;
         }
-        
+
         return null;
 
     }

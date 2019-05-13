@@ -50,10 +50,12 @@ const getters =
 	 * Terms
 	 */
 	terms: state => state._terms,
+
 	/**
 	 * Return cities
 	 */
 	cities: state => state._cities,
+
 	/**
 	 * Return fields
 	 */
@@ -110,6 +112,7 @@ const mutations =
 	 */
 	setPeopleData: (state, data) => {
 		state._peopleData = data;
+		state._cities = data.cities;
 	},
 	/**
 	 * Set Parent
@@ -346,6 +349,7 @@ const actions = {
 			axios.get(url, data)
 				.then(res => {
 					context.commit('setPeopleData', res.data);
+
 					resolve(res);
 				})
 				.catch(res => reject(res));
