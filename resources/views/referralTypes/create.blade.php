@@ -9,25 +9,35 @@
         <!--  Card Content  -->
 		<div class="card-content f-BYekan">
 			<form>
-				<h3 class="card-title f-BYekan">
-					ثبت اطلاعات
-					<span class="pull-left">
-                        <input type="submit" value="ذخیره" class="btn btn-fill btn-rose" @click.prevent="saveRecord">
-                        <input type="button" value="انصراف" class="btn btn-fill btn-default" @click.prevent="registerCancel">
-	                </span>
-	            </h3>
+				<h3 class="card-title f-BYekan"> ثبت اطلاعات </h3>
 
-				<div class="form-group label-floating" :class="{'has-error' : errors.has('name')}">
+				<div class="form-group label-floating"
+					:class="{'has-error' : errors.has('name')}">
 					<label class="control-label">نوع مراجعه کننده</label>
-					<input class="form-control" type="text"  name="name" minlength="2" maxlength="50" autofocus required
-						v-validate="'required|min:2|max:50'"
-						data-vv-delay="250"
-						data-vv-name= "نوع مراجعه کننده"
-						v-model="tempRecord.name"/>
-					<i v-show="errors.has('name')" class="fa fa-warning"></i>
-                    <span v-show="errors.has('name')" class="help is-danger">نوع مراجعه کننده نامعتبر می باشد</span>
+					<input class="form-control"
+							type="text"
+							name="name"
+							minlength="2"
+							maxlength="50"
+							autofocus
+							required
+							v-validate="{ required: true, is_not: 'null' }"
+							data-vv-delay="250"
+							data-vv-as= "نوع مراجعه کننده"
+							v-model="tempRecord.name"/>
 					<span class="material-input"></span>
 				</div>
+
+				<span class="pull-left">
+                        <input type="submit"
+                        		value="ذخیره"
+                        		class="btn btn-fill btn-round btn-rose"
+                        		@click.prevent="saveRecord">
+                        <input type="button"
+                        		value="انصراف"
+                        		class="btn btn-fill btn-round btn-default"
+                        		@click.prevent="registerCancel">
+	                </span>
 			</form>
 		</div>
 		<!--  /Card Content  -->

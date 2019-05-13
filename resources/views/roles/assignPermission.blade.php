@@ -10,10 +10,7 @@
      {{-- Card Content --}}
      <div class="card-content f-BYekan">
      	<h3 class="card-title f-BYekan">
-     		<span class="pull-left">
-     			<input type="submit" value="ذخیره" class="btn btn-fill btn-rose" @click.prevent="savePermissionRecord">
-     			<input type="button" value="انصراف" class="btn btn-fill btn-default" @click.prevent="registerCancel">
-     		</span>
+
      	</h3>
 
      	<form class="pd-top-35em pd-bottom-2em">
@@ -42,6 +39,11 @@
      			</span>
      		</div>
      		{{-- /List Permissions --}}
+
+            <span class="pull-left">
+                <input type="submit" value="ذخیره" class="btn btn-fill btn-rose" @click.prevent="savePermissionRecord">
+                <input type="button" value="انصراف" class="btn btn-fill btn-default" @click.prevent="registerCancel">
+            </span>
      	</form>
 
      </div>

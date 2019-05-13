@@ -54,25 +54,34 @@
                                             <td>@{{ record.created_at }}</td>
                                             <td>
                                                 @can('command_edit')
-                                                   <a href="#" class="btn btn-simple btn-info btn-just-icon pull-left"
-                                                        data-toggle="modal" data-target="#RequestRecordModal" title = "بررسی درخواست رسیده"
+                                                   <a href="#"
+                                                        class="btn btn-simple btn-info btn-just-icon pull-left"
+                                                        data-toggle="modal"
+                                                        data-target="#RequestRecordModal"
+                                                        title = "بررسی درخواست رسیده"
                                                         @click.prevent="checkRequest(record)">
                                                         <i v-show="record.seen_at == null" class="fa fa-eye" title="خوانده نشده"> </i>
                                                         <i v-show="record.seen_at != null" class="fa fa-eye-slash" title="خوانده نشده"> </i>
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                 @endcan
-                                                <i v-show="record.vacation_status.id == 2" class="fa fa-check-circle fa-2x text-success" title="موافقت شد"></i>
-                                                <i v-show="record.vacation_status.id == 3" class="fa fa-minus-circle  fa-2x text-danger" title="مخالفت شد"></i>
+                                                <i v-show="record.vacation_status.id == 2"
+                                                    class="fa fa-check-circle fa-2x text-success"
+                                                    title="موافقت شد">
+                                                </i>
+                                                <i v-show="record.vacation_status.id == 3"
+                                                    class="fa fa-minus-circle  fa-2x text-danger"
+                                                    title="مخالفت شد">
+                                                </i>
                                                 @{{ record.vacation_status.name }}
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    <pagination :data="allData" 
-                                                v-on:pagination-change-page="loadRecords" 
-                                                :limit= {{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }} 
+                                    <pagination :data="allData"
+                                                v-on:pagination-change-page="loadRecords"
+                                                :limit= {{ \App\Http\Controllers\Controller::C_PAGINATION_LIMIT }}
                                                 :show-disable= true>
                                     </pagination>
                                 </div>
@@ -80,20 +89,35 @@
                             <!-- /Data List -->
 
                             <!-- small modal -->
-                            <div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade"
+                                id="removeRecordModal"
+                                tabindex="-1"
+                                role="dialog"
+                                aria-labelledby="myModalLabel"
+                                aria-hidden="true">
                                 <div class="modal-dialog modal-small ">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close"
-                                                data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                                            <button type="button"
+                                                    class="close"
+                                                    data-dismiss="modal"
+                                                    aria-hidden="true">
+                                                    <i class="material-icons">clear</i>
+                                            </button>
                                         </div>
                                         <div class="modal-body text-center">
                                             <h5>برای حذف اطمینان دارید؟ </h5>
                                         </div>
                                         <div class="modal-footer text-center">
-                                            <button type="button" class="btn btn-simple" data-dismiss="modal">خیر</button>
-                                            <button type="button" class="btn btn-success btn-simple"  data-dismiss="modal"
-                                                @click.prevent="deleteRecord">بله</button>
+                                            <button type="button"
+                                                    class="btn btn-simple"
+                                                    data-dismiss="modal">خیر
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-success btn-simple"
+                                                    data-dismiss="modal"
+                                                    @click.prevent="deleteRecord">بله
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +125,13 @@
                             <!--    end small modal -->
 
                             <!-- Show Request modal -->
-                            <div class="modal fade" id="RequestRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade"
+                                id="RequestRecordModal"
+                                tabindex="-1"
+                                role="dialog"
+                                aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+
                                 <div class="modal-dialog modal-notice">
                                     <div class="modal-content">
                                         @include('vacationManagment.create')

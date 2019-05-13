@@ -7,34 +7,48 @@
           </div>
      <!--  /Card Header -->
 
-     <!--  Card Content  -->
-     <div class="card-content f-BYekan">
-        <h3 class="card-title f-BYekan">
-            <span class="pull-left">
-                <input type="submit" value="ذخیره" class="btn btn-fill btn-rose" @click.prevent="saveGateDeviceRecord">
-                <input type="button" value="انصراف" class="btn btn-fill btn-default" @click.prevent="registerCancel">
-            </span>
-        </h3>
+        <!--  Card Content  -->
+        <div class="card-content f-BYekan">
+            <h3 class="card-title f-BYekan">
 
-        <form class="pd-top-35em pd-bottom-2em">
+            </h3>
 
-            <!--  List Gatedevice  -->
-            <div v-for = "gatedevice in gatedevices" class="form-check col-md-3">
-                <label :title="gatedevice.description" class="upper-case">
-                    <input class="form-check-input" v-model="gatedevice.checked" type="checkbox" name="groupDevice">
-                    @{{ gatedevice.name }}
-                </label>
-                <span class="form-check-sign">
-                    <span class="check"></span>
+            <form class="pd-top-35em pd-bottom-2em">
+
+                <!--  List Gatedevice  -->
+                <div v-for = "gatedevice in gatedevices" class="form-check col-md-3">
+                    <label :title="gatedevice.description" class="upper-case">
+                        <input class="form-check-input"
+                                v-model="gatedevice.checked"
+                                type="checkbox"
+                                name="groupDevice">
+                        @{{ gatedevice.name }}
+                    </label>
+
+                    <span class="form-check-sign">
+                        <span class="check"></span>
+                    </span>
+
+                </div>
+                <!--  /List Gatedevice  -->
+
+                <span class="pull-left">
+                    <input type="submit"
+                            value="ذخیره"
+                            class="btn btn-fill btn-round btn-rose"
+                            @click.prevent="saveGateDeviceRecord">
+
+                    <input type="button"
+                            value="انصراف"
+                            class="btn btn-fill btn-round btn-default"
+                            @click.prevent="registerCancel">
                 </span>
-            </div>
-            <!--  /List Gatedevice  -->
-        </form>
+            </form>
 
-     </div>
-     <!--  /Card Content  -->
+        </div>
+        <!--  /Card Content  -->
 
- </div>
+    </div>
 </div>
 
 

@@ -76,10 +76,23 @@
                         <div class="modal-footer justify-content-center">
                             <span class="pull-left">
 
-                                <button v-show="tempRecord.responsed_at == null" type="button" class="btn btn-info btn-round"  @click.prevent="acceptRecord(tempRecord)">پذیرش درخواست</button>
-                                <button v-show="tempRecord.responsed_at == null" type="button" class="btn btn-info btn-round"  @click.prevent="rejectRecord(tempRecord)">رد درخواست</button>
+                                <button v-show="tempRecord.responsed_at == null"
+                                        type="button"
+                                        class="btn btn-info btn-round"
+                                        @click.prevent="acceptRecord(tempRecord)">پذیرش درخواست
+                                </button>
 
-                                 <button type="button" class="btn btn-info btn-round"  @click.prevent="hideModal" data-dismiss="modal">انصراف</button>
+                                <button v-show="tempRecord.responsed_at == null"
+                                        type="button"
+                                        class="btn btn-info btn-round"
+                                        @click.prevent="rejectRecord(tempRecord)">رد درخواست
+                                </button>
+
+                                 <button type="button"
+                                        class="btn btn-info btn-round"
+                                        @click.prevent="hideModal"
+                                        data-dismiss="modal">انصراف
+                                </button>
                             </span>
                         </div>
                         {{-- /Modal Footer --}}

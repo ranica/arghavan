@@ -31,14 +31,14 @@ class VacationRequestController extends Controller
 
             return $vacationRequest;
         }
-        return view('vacationRequests.text');
+        return view('vacationRequests.index');
     }
     /**
      * Managment Vacation
      */
     public function managment(Request $request)
     {
-        return view('vacationManagment.index');
+        return view('vacationManagment.managment');
     }
     /**
      * Show the form for creating a new resource.

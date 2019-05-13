@@ -41,7 +41,7 @@
 					<!--  /end date field  -->
 
 
-					{{-- Start date field --}}
+					<!-- Start date field -->
 					<div class="row">
 						<div class="input-group">
 	                        <span class="input-group-addon">
@@ -55,7 +55,7 @@
 	                            		minlength="2"
 	                            		maxlength="50"
 	                                	required
-	                                	v-validate="{required: true, is_not:'null'}"
+	                                	v-validate="{ required: true, is_not:'null' }"
 	                                	data-vv-delay="250"
 	                                	data-vv-as="شماره پورت"
 	                                	v-model="tempRecord.port">
@@ -92,7 +92,7 @@
 					{{-- /Gate zone female field --}}
 
 
-					{{-- Gate zone male field --}}
+					<!-- Gate zone male field -->
 					<div class="row">
 						<div class="input-group">
 	                        <span class="input-group-addon">
