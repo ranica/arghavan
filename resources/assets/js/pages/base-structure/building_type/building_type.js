@@ -115,12 +115,10 @@ const actions = {
      * Create Record
      */
     createRecords(context, data) {
-        console.log('building_type -> create Record -> data', data);
         return new Promise((resolve, reject) => {
             context.dispatch('createModule/createRecords', data)
                 .then(res => {
                     if (res.data.status == 0) {
-                            console.log('buiding_type -> create Record -> res.data', res.data);
 
                         context.commit('createRecord', res.data.building_type);
                     }

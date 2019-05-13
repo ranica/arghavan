@@ -34,12 +34,10 @@ const actions = {
     //     return axios.post('/login', loginData);
     // },
      login(context, data) {
-        console.log('store -> login -> data', data);
         return new Promise((resolve, reject) => {
             let url = document.pageData.lock.unlock_url;
             axios.post(url, data)
                 .then(res => {
-                    console.log('store home -> res', res);
                     let allData = res.data;
 
                     resolve(res);

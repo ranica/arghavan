@@ -74,7 +74,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             context.dispatch('GenderModule/loadRecords', data)
                 .then(res =>  {
-                    console.log('loadGenders -> res', res);
+
                   resolve(res);
                 } )
                 .catch(err => reject(err));

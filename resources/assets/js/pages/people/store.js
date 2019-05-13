@@ -94,7 +94,6 @@ const mutations =
 	 * Sets the image url.
 	 */
 	setImageUrl(state, data){
-		//console.log(data.record);
 		// data.people.pictureUrl = data.thumb_url;
 		// data.people.people.pictureThumbUrl = data.thumb_url;
 	},
@@ -206,7 +205,6 @@ const actions = {
 	 * Load all base information
 	 */
 	loadBaseInformation(context, data) {
-		// console.log('store -> load base information -> data', data);
 		let url = data.url;
 		return new Promise((resolve, reject) => {
 			axios.get(url)
@@ -541,7 +539,6 @@ const actions = {
 
 			axios.get(url)
 				.then(res => {
-					console.log('people -> store -> res', res);
 					// Add "selected" property to items
 					let allData = res.data;
 					// let rowData = allData.data;
@@ -658,7 +655,6 @@ const actions = {
 
 				return;
 			}
-			console.log('store -> id ', id);
 			// Try to delete
 			axios.delete('/registration/' + id)
 				.then(res => {
@@ -719,7 +715,6 @@ const actions = {
 			let data = {
 				terms: record.terms
 			};
-			console.log('save term store -> data', data);
 			axios.put(url, data)
 				.then(res => {
 

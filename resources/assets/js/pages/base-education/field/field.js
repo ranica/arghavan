@@ -45,7 +45,6 @@ const mutations = {
      */
     setData: (state, data) => {
         state._data = data.data;
-        console.log('state._data', state._data.data);
     },
     /**
      * Insert a Record
@@ -76,7 +75,6 @@ const mutations = {
 
         state._data.data.splice(index, 1);
     },
-
 };
 
 const actions = {
@@ -87,7 +85,6 @@ const actions = {
         return new Promise((response, reject) => {
             context.dispatch('loadModule/loadRecords', data)
                 .then(res => {
-                    console.log('res.data', res);
                     context.commit('setData', res);
                     response(res);
                 })

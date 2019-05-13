@@ -45,7 +45,6 @@ const mutations = {
      * Set dormitory Information
      */
     setDormitoryInformation: (state, data) =>{
-        console.log('store -> set Dormitory information-> data ', data);
         state._dormitoryInformation = {
             groups: data.groups,
             buildings: data.buildings,
@@ -90,13 +89,11 @@ const actions = {
      * Load all base information
      */
     loadDormitoryInformation(context, data) {
-        console.log('store -> load Dormitory information -> data', data);
         let url = data.url;
         return new Promise((resolve, reject) => {
             axios.get(url)
                 .then(res => {
 
-                    console.log('res.data', res.data);
                     context.commit('setDormitoryInformation', res.data);
 
                     resolve(res);

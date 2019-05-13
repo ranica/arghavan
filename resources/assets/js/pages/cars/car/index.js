@@ -615,7 +615,6 @@ window.v = new Vue({
         * Edit record from modal
         */
         editDataCar(data){
-            console.log('data', data);
             let record = {
                 id: data.id,
                 editMode : true,
@@ -676,7 +675,6 @@ window.v = new Vue({
             };
 
             $("#carModal").removeClass('show');
-            console.log('record -> modal ::', record);
             this.editRecord(record);
         },
         /**
@@ -751,7 +749,6 @@ window.v = new Vue({
          * Edit a record
          */
         editRecord(record) {
-            console.log('record', record);
             this.clearErrors();
             this.insertMode = true;
 
@@ -810,7 +807,6 @@ window.v = new Vue({
                     },
                 },
             };
-            console.log('this.tempRecord', this.tempRecord);
 
             // Show register mode
             this.formMode = Enums.FormMode.register;

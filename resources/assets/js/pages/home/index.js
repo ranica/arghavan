@@ -139,7 +139,6 @@ window.v = new Vue({
 
                    this.$store.dispatch('login', data)
                         .then(res => {
-                            console.log('res', res);
                             if (res.data.status) {
                                 window.location = "/home";
 

@@ -359,7 +359,6 @@ window.v = new Vue({
         newRecord() {
             this.errors.clear();
             this.tempRecord = $.extend(true, {}, this.emptyRecord);
-            console.log('newRecord -> this.tempRecord', this.tempRecord);
             this.changeFormMode(Enums.FormMode.register);
         },
         /**
@@ -989,19 +988,13 @@ window.v = new Vue({
                 record: this.tempRecord
             };
 
-            console.log('deleteRecord -> data', data);
-
             this.$store.dispatch(funName, data)
                 .then(res => {
                     this.isLoading = false;
 
                     demo.showNotification('حذف رکورد با موفقیت انجام شد', 'success');
                     this.tempRecord = $.extend(true, {}, this.emptyRecord);
-
-                    console.log('deleteRecord -> this.emptyRecord', this.emptyRecord);
-                    // this.tempRecord = {};
                     this.emptyRecord.id = 0;
-                    console.log('deleteRecord -> this.TempRecord', this.tempRecord);
                 })
                 .catch(err => {
                     demo.showNotification('خطا در حذف رکورد! این خطا در سامانه ذخیره شد و مورد بررسی قرار خواهد گرفت', 'danger');

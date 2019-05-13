@@ -455,8 +455,6 @@ window.v = new Vue({
 
             this.isLoading = true;
 
-            console.log('data', data);
-
             // Try to save
             this.$store.dispatch('saveRecord', data)
                 .then(res => {

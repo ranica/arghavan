@@ -484,7 +484,7 @@ window.v = new Vue({
             this.$store.dispatch('loadDataByNationaId', data)
                 .then(res => {
                     let myData = res.data[0];
-                    // console.log('mydata', mydata);
+
                     this.tempRecord.people = {
                         id: myData.people.id,
                         name: myData.people.name,
@@ -524,7 +524,6 @@ window.v = new Vue({
          * Prepare
          */
         prepare() {
-            // console.log('prepare');
             this.page = 1;
             this.isLoading = true;
             // this.loadRecords(page, 1);
@@ -571,7 +570,6 @@ window.v = new Vue({
          * @return {[type]}    [description]
          */
         filterUsers(groupId) {
-            console.log( 'filter user');
             this.fingerPrint = true;
             if (groupId == document.pageData.people.group_students) {
                 this.parent = true;
@@ -701,7 +699,6 @@ window.v = new Vue({
                 searchWord: searchWord
             };
 
-            console.log('index -> load records');
             this.$store.dispatch('loadRecords', data)
                 .then(res => {
                     this.isLoading = false;
@@ -1350,7 +1347,6 @@ window.v = new Vue({
          * Set Group_Permit to record
          */
         setGroupPermit(record) {
-            console.log('set grouppermits -> record', record);
             this.formMode = Enums.FormMode.assignGrouppermit;
 
             this.errors.clear();
@@ -1512,7 +1508,6 @@ window.v = new Vue({
             this.formMode = Enums.FormMode.assignFingerPrint;
 
             this.errors.clear();
-            console.log('this.record', record);
             // this.tempRecord = $.extend(true, {}, this.emptyRecord);
             this.tempRecord.user = {
                 id: record.id,

@@ -198,7 +198,6 @@ window.v = new Vue({
         loadDepartments(callback) {
             this.$store.dispatch('loadDepartments')
                 .then(res => {
-                    console,log('departments', res);
                     callback();
                 })
                 .catch(err => {
@@ -212,7 +211,6 @@ window.v = new Vue({
         loadGenders(callback) {
             this.$store.dispatch('loadGenders')
                 .then(res => {
-                    console,log('gender', res);
                     callback();
                 })
                 .catch(err => {

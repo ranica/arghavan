@@ -83,9 +83,7 @@ const mutations = {
      * Set ReferralTypes
      */
     setReferralTypes: (state, data) => {
-        console.log('set referral type',data);
         state.referralTypes = data;
-        console.log(state.referralTypes);
     },
 
     /**
@@ -176,11 +174,9 @@ const actions = {
      * Load all genders
      */
     loadReferralTypes(context) {
-        console.log('Store -> referral');
         return new Promise((resolve, reject) => {
             axios.get('/referralTypes')
                 .then(res => {
-                    console.log('load referral', res.data);
                     context.commit('setReferralTypes', res.data.data);
 
                     resolve(res);

@@ -97,7 +97,7 @@
 
             <!-- small modal -->
             <div class="modal fade"
-                id="removeRecordModal"
+                id="removeRecordModal_color"
                 tabindex="-1"
                 role="dialog"
                 aria-labelledby="myModalLabel"

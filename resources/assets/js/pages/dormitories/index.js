@@ -179,7 +179,6 @@ window.v = new Vue({
 		 */
 		editRecord(record) {
 			this.clearErrors();
-            console.log('edit record-> record', record);
 
 			this.tempRecord = {
 					id       : record.id,
@@ -245,8 +244,6 @@ window.v = new Vue({
 						};
 
 						this.isLoading = true;
-
-                        console.log('save record->data', data);
 
 						// Try to save
 						this.$store.dispatch('saveRecord', data)

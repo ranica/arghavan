@@ -119,7 +119,6 @@ const mutations = {
 	 * Sets the gate active report.
 	 */
 	setReportGateActiveData:(state, data) =>{
-		console.log('setReportGateActiveData -> data', data);
 		state._gateActiveData = data.data;
 	},
 

@@ -137,7 +137,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             context.dispatch('SiteModule/loadRecords', data)
                 .then(res => {
-                    console.log('LoadCarSite -> res', res);
+
                     resolve(res)
                 })
                 .catch(err => reject(err));

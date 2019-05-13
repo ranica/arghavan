@@ -234,10 +234,8 @@ const actions = {
                 axios.put('/cards/' + record.id, record)
                     .then(res => {
 
-                    	console.log('res', res);
                         let status = (0 == res.data.status);
                         let updatedRecord = res.data.card;
-                        console.log('updatedRecord', updatedRecord)
 
                         if (null != updatedRecord) {
 
@@ -301,8 +299,6 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			axios.post('/card/search', data)
 				.then(res => {
-
-					console.log('res', res);
 
 					let allData = res.data;
 					let rowData = allData.data;

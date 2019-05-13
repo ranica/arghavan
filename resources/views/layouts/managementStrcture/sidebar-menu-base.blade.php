@@ -43,8 +43,8 @@
                 @endisUniversity
                 <!-- /Base Dormitory  -->
 
-                 <!-- Base Parking  -->
-                @isUniversity
+                <!-- Base Parking  -->
+             
                 <li>
                     <a href= "{{ route('base.parking') }}">
                         <span class="sidebar-normal">
@@ -52,7 +52,7 @@
                         </span>
                     </a>
                 </li>
-                @endisUniversity
+               
                 <!-- /Base Parking  -->
             </ul>
         </div>

@@ -77,7 +77,7 @@ window.v = new Vue({
         receiveCount(){
             this.getLenght(this.tempRecord.to);
         },
-        //     var format = /[\n\r,]/; 
+        //     var format = /[\n\r,]/;
         //     var str = [this.tempRecord.to];
         //     var m;
         //     var result = new Array();
@@ -95,7 +95,6 @@ window.v = new Vue({
         //       }
         //     }
 
-        //     console.log(result [0]);
         // },
 
         getLenght(str)
@@ -119,25 +118,22 @@ window.v = new Vue({
                     count = 1;
                 }
             }
-         
+
         },
 
 
         //     var format = /[\n\r,]/;
-        //     console.log('this.Recevie', this.cReceive);
         //         let str = this.tempRecord.to;
         //         if (0 != this.tempRecord.to.length)
-        //         {   
+        //         {
         //             for (var i = 0; i < this.tempRecord.to.length; i++) {
-                        
+
         //                     this.cReceive  =  str.toLowerCase().split("").sort().join("").match(format).length;
-                        
-        //                 console.log('this.tempRecord.to.match(format)', this.tempRecord.to.match(format));
-        //                 console.log('this.tempRecord.to.match(format).length', this.tempRecord.to.match(format).length);
+
         //             }
         //     }
         // },
-      
+
         init() {
             $('#smartwizard')
                 .smartWizard({

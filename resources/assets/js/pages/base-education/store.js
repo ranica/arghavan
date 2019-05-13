@@ -159,7 +159,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             context.dispatch('FieldModule/loadRecords', data)
                 .then(res =>{
-                      console.log('sotre -> loadFields -> res', res);
+
                       resolve(res);
                       })
                 .catch(err => reject(err));

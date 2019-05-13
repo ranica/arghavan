@@ -242,7 +242,6 @@ window.v = new Vue({
          * Edit record Main
          */
         editRecord(record) {
-            console.log('record', record);
             this.errors.clear();
 
             this.tempRecord = {
@@ -268,8 +267,6 @@ window.v = new Vue({
          */
         editMaterialRecord(record) {
             this.errors.clear();
-
-            console.log('edit material record', record);
 
             this.tempRecord = {
                 id: record.id,
@@ -366,8 +363,6 @@ window.v = new Vue({
                 function: 'createRooms',
 			};
 
-            console.log('save data room -> data', data);
-
             this.isLoading = true;
             if (0 == data.id) {
                 this.createRecord(data);
@@ -420,8 +415,6 @@ window.v = new Vue({
                 url: '/materials',
                 function: 'createMaterials',
             };
-
-            console.log('save data Material  -> data', data);
 
             this.isLoading = true;
             if (0 == data.id) {
@@ -644,7 +637,6 @@ window.v = new Vue({
          * Set material_room to record
          */
         setMaterial(record) {
-            console.log('set material -> record', record);
             this.formMode = Enums.FormMode.assignMaterial;
             this.tempRecord.id = record.id;
 
@@ -673,8 +665,6 @@ window.v = new Vue({
                 .map(el => el.id);
 
             this.isLoading = true;
-
-            console.log('saveMaterialRoomRecord -> data', data);
 
             // Try to save
             this.$store.dispatch('saveMaterialRoomRecord', data)

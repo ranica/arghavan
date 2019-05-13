@@ -459,7 +459,6 @@ window.v = new Vue({
         hideModal() {
             this.tempRecord = $.extend(true, {}, this.emptyRecord);
             $('#RequestRecordModal').modal('hide');
-            //console.log('REPORT/INDEX/HIND MANULAL TRAFFIC MODAL', this.tempRecord.traffic);
         },
     },
 })

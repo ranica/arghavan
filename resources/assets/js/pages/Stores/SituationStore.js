@@ -73,7 +73,7 @@ const mutations =
 };
 
 const actions =
-{	
+{
 	/**
 	 * Load records data
 	 */
@@ -120,8 +120,6 @@ const actions =
 			// New record
 			if (0 == record.id)
 			{
-				// console.debug(record.state);
-				// console.debug(record.name);
 				axios.post('/situations', record)
 					.then(res => {
 						let status    = (0 == res.data.status);
