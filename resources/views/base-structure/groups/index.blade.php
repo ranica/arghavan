@@ -67,7 +67,7 @@
                                                     <a href="#" class="btn btn-round btn-just-icon pull-left"
                                                         data-toggle="modal"
                                                         data-target="#removeRecordModalGroup"
-                                                        @click.prevent="readyToDelete(record)">
+                                                        @click.prevent="readyToDelete(record, 'Group')">
                                                         <i class="material-icons">delete</i>
                                                         <div class="ripple-container"></div>
                                                     </a>
@@ -90,7 +90,7 @@
                                         :key= "record.id"
                                         :my-data="record"
                                         @edit-data="editRecord"
-                                        @delete-data="readyToDelete(record)"
+                                        @delete-data="readyToDelete(record, 'Group')"
                                         title="نام گروه">
                             </card-mobile>
 
