@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Illuminate\Http\Request;
 use Elibyy\TCPDF\Facades\TCPDF;
 
+
 class ReportTrafficPDFExport implements FromCollection
 {
     use Exportable;
@@ -34,21 +35,28 @@ class ReportTrafficPDFExport implements FromCollection
     {
        $this->createPDF();
     }
+
     /**
      * create pdf
      */
     public function createPDF()
     {
+        $image_logo = public_path() . DIRECTORY_SEPARATOR . 'images' .
+                                DIRECTORY_SEPARATOR . 'logo.jpg';
+
+        define ('PDF_HEADER_STRING', "گزارشات ورود و خروج \n دانشگاه فرهنگیان ");
+        define ('PDF_HEADER_TITLE', "گزارش تردد های کاربران ");
+        define ('PDF_FONT_NAME_MAIN', 'dejavusans');
+        define ('PDF_FONT_SIZE_MAIN', 10);
+
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetFont('dejavusans', 'B', 12);
+        // $pdf->SetFont('dejavusans', 'B', 12);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('IPASS');
         $pdf->SetTitle('گزارشات تردد');
-        $pdf->SetSubject('TCPDF Tutorial');
-        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
         $pdf->SetHeaderData(PDF_HEADER_LOGO,
                             PDF_HEADER_LOGO_WIDTH,
-                            ' گزارش تردد',
+                            PDF_HEADER_TITLE.' 001',
                             PDF_HEADER_STRING,
                             array(0,64,255),
                             array(0,64,128));
@@ -57,7 +65,8 @@ class ReportTrafficPDFExport implements FromCollection
         $pdf->Cell(0, 15, 'گزارشات ورود و خروج', 0, false, 'R', 0, '', 0, false, 'M', 'M');
         $pdf->Cell(30, 0, 'Descent-Center', 1, $ln=0, 'C', 0, '', 0, false, 'D', 'C');
         $pdf->setFooterData(array(0,64,0), array(0,64,128));
-        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        // $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+       $pdf->setHeaderFont( Array('dejavusans', '', 8));
         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -88,19 +97,6 @@ class ReportTrafficPDFExport implements FromCollection
         // close and output PDF document
         $pdf->Output('report.pdf', 'I');
     }
-     //Page header
-    // public function Header($pdf) {
-    //     // Logo
-    //     $image_file = K_PATH_IMAGES.'logo_example.jpg';
-    //     $pdf->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, 'R', false, false, 0, false, false, false);
-    //    $this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, 'R', false, false, 0,     false, false, false);
-    //     // Set font
-    //     $pdf->SetFont('dejavusans', 'B', 20);
-    //     // Title
-    //     $pdf->Cell(0, 15, 'گزارشات ورود و خروج', 0, false, 'R', 0, '', 0, false, 'M', 'M');
-    //     Cell(30, 0, 'Descent-Center', 1, $ln=0, 'C', 0, '', 0, false, 'D', 'C');
-    // }
-
      // Colored table
     public function ColoredTableExport($pdf, $header,$data) {
         // Colors, line width and bold font
@@ -207,3 +203,31 @@ class ReportTrafficPDFExport implements FromCollection
       return $res;
     }
 }
+
+/**
+ * Dont use class
+ */
+  class MYPDF extends TCPDF {
+
+        //Page header
+        public function Header() {
+            // Logo
+            $image_file = K_PATH_IMAGES.'logo_example.jpg';
+            $this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+            // Set font
+            $this->SetFont('helvetica', 'B', 20);
+            // Title
+            $this->Cell(0, 15, '<< TCPDF Example 003 >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        }
+
+        // Page footer
+        public function Footer() {
+            // Position at 15 mm from bottom
+            $this->SetY(-15);
+            // Set font
+            $this->SetFont('helvetica', 'I', 8);
+            // Page number
+            $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        }
+    }
+
