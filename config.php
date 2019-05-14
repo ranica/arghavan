@@ -1,18 +1,18 @@
 <?php return array (
-  'app' => 
+  'app' =>
   array (
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost:8000',
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Tehran'),
     'locale' => 'en',
     'fallback_locale' => 'en',
     'key' => 'base64:+dJLeN2dkTK3IgQoWPW9yo1f672AEfjvIr10//0oDbI=',
     'cipher' => 'AES-256-CBC',
     'log' => 'single',
     'log_level' => 'debug',
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Illuminate\\Auth\\AuthServiceProvider',
       1 => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
@@ -45,7 +45,7 @@
       28 => 'phplusir\\smsir\\SmsirServiceProvider',
       29 => 'Elibyy\\TCPDF\\ServiceProvider',
     ),
-    'aliases' => 
+    'aliases' =>
     array (
       'App' => 'Illuminate\\Support\\Facades\\App',
       'Artisan' => 'Illuminate\\Support\\Facades\\Artisan',
@@ -87,37 +87,37 @@
       'PDF' => 'Elibyy\\TCPDF\\Facades\\TCPDF',
     ),
   ),
-  'auth' => 
+  'auth' =>
   array (
-    'defaults' => 
+    'defaults' =>
     array (
       'guard' => 'web',
       'passwords' => 'users',
     ),
-    'guards' => 
+    'guards' =>
     array (
-      'web' => 
+      'web' =>
       array (
         'driver' => 'session',
         'provider' => 'users',
       ),
-      'api' => 
+      'api' =>
       array (
         'driver' => 'token',
         'provider' => 'users',
       ),
     ),
-    'providers' => 
+    'providers' =>
     array (
-      'users' => 
+      'users' =>
       array (
         'driver' => 'eloquent',
         'model' => 'App\\User',
       ),
     ),
-    'passwords' => 
+    'passwords' =>
     array (
-      'users' => 
+      'users' =>
       array (
         'provider' => 'users',
         'table' => 'password_resets',
@@ -125,75 +125,75 @@
       ),
     ),
   ),
-  'broadcasting' => 
+  'broadcasting' =>
   array (
     'default' => 'log',
-    'connections' => 
+    'connections' =>
     array (
-      'pusher' => 
+      'pusher' =>
       array (
         'driver' => 'pusher',
         'key' => '',
         'secret' => '',
         'app_id' => '',
-        'options' => 
+        'options' =>
         array (
         ),
       ),
-      'redis' => 
+      'redis' =>
       array (
         'driver' => 'redis',
         'connection' => 'default',
       ),
-      'log' => 
+      'log' =>
       array (
         'driver' => 'log',
       ),
-      'null' => 
+      'null' =>
       array (
         'driver' => 'null',
       ),
     ),
   ),
-  'cache' => 
+  'cache' =>
   array (
     'default' => 'file',
-    'stores' => 
+    'stores' =>
     array (
-      'apc' => 
+      'apc' =>
       array (
         'driver' => 'apc',
       ),
-      'array' => 
+      'array' =>
       array (
         'driver' => 'array',
       ),
-      'database' => 
+      'database' =>
       array (
         'driver' => 'database',
         'table' => 'cache',
         'connection' => NULL,
       ),
-      'file' => 
+      'file' =>
       array (
         'driver' => 'file',
         'path' => '/home/marjan/WebSites/iauahvazSoft/storage/framework/cache/data',
       ),
-      'memcached' => 
+      'memcached' =>
       array (
         'driver' => 'memcached',
         'persistent_id' => NULL,
-        'sasl' => 
+        'sasl' =>
         array (
           0 => NULL,
           1 => NULL,
         ),
-        'options' => 
+        'options' =>
         array (
         ),
-        'servers' => 
+        'servers' =>
         array (
-          0 => 
+          0 =>
           array (
             'host' => '127.0.0.1',
             'port' => 11211,
@@ -201,7 +201,7 @@
           ),
         ),
       ),
-      'redis' => 
+      'redis' =>
       array (
         'driver' => 'redis',
         'connection' => 'default',
@@ -209,18 +209,18 @@
     ),
     'prefix' => 'laravel_cache',
   ),
-  'database' => 
+  'database' =>
   array (
     'default' => 'mysql',
-    'connections' => 
+    'connections' =>
     array (
-      'sqlite' => 
+      'sqlite' =>
       array (
         'driver' => 'sqlite',
         'database' => 'iauahvaz',
         'prefix' => '',
       ),
-      'mysql' => 
+      'mysql' =>
       array (
         'driver' => 'mysql',
         'host' => '127.0.0.1',
@@ -235,7 +235,7 @@
         'strict' => false,
         'engine' => NULL,
       ),
-      'pgsql' => 
+      'pgsql' =>
       array (
         'driver' => 'pgsql',
         'host' => '127.0.0.1',
@@ -248,7 +248,7 @@
         'schema' => 'public',
         'sslmode' => 'prefer',
       ),
-      'sqlsrv' => 
+      'sqlsrv' =>
       array (
         'driver' => 'sqlsrv',
         'host' => '127.0.0.1',
@@ -261,10 +261,10 @@
       ),
     ),
     'migrations' => 'migrations',
-    'redis' => 
+    'redis' =>
     array (
       'client' => 'predis',
-      'default' => 
+      'default' =>
       array (
         'host' => '127.0.0.1',
         'password' => NULL,
@@ -273,25 +273,25 @@
       ),
     ),
   ),
-  'filesystems' => 
+  'filesystems' =>
   array (
     'default' => 'public',
     'cloud' => 's3',
-    'disks' => 
+    'disks' =>
     array (
-      'local' => 
+      'local' =>
       array (
         'driver' => 'local',
         'root' => '/home/marjan/WebSites/iauahvazSoft/storage/app',
       ),
-      'public' => 
+      'public' =>
       array (
         'driver' => 'local',
         'root' => '/home/marjan/WebSites/iauahvazSoft/storage/app/public',
         'url' => 'http://localhost:8000/storage',
         'visibility' => 'public',
       ),
-      's3' => 
+      's3' =>
       array (
         'driver' => 's3',
         'key' => NULL,
@@ -301,16 +301,16 @@
       ),
     ),
   ),
-  'image' => 
+  'image' =>
   array (
     'driver' => 'gd',
   ),
-  'mail' => 
+  'mail' =>
   array (
     'driver' => 'smtp',
     'host' => 'at2.datacenterland.com',
     'port' => '465',
-    'from' => 
+    'from' =>
     array (
       'address' => 'noreply@riratech.ir',
       'name' => 'Recovery Password',
@@ -319,39 +319,39 @@
     'username' => 'noreply@riratech.ir',
     'password' => 'abc123!@#',
     'sendmail' => '/usr/sbin/sendmail -bs',
-    'markdown' => 
+    'markdown' =>
     array (
       'theme' => 'default',
-      'paths' => 
+      'paths' =>
       array (
         0 => '/home/marjan/WebSites/iauahvazSoft/resources/views/vendor/mail',
       ),
     ),
   ),
-  'queue' => 
+  'queue' =>
   array (
     'default' => 'database',
-    'connections' => 
+    'connections' =>
     array (
-      'sync' => 
+      'sync' =>
       array (
         'driver' => 'sync',
       ),
-      'database' => 
+      'database' =>
       array (
         'driver' => 'database',
         'table' => 'jobs',
         'queue' => 'default',
         'retry_after' => 90,
       ),
-      'beanstalkd' => 
+      'beanstalkd' =>
       array (
         'driver' => 'beanstalkd',
         'host' => 'localhost',
         'queue' => 'default',
         'retry_after' => 90,
       ),
-      'sqs' => 
+      'sqs' =>
       array (
         'driver' => 'sqs',
         'key' => 'your-public-key',
@@ -360,7 +360,7 @@
         'queue' => 'your-queue-name',
         'region' => 'us-east-1',
       ),
-      'redis' => 
+      'redis' =>
       array (
         'driver' => 'redis',
         'connection' => 'default',
@@ -368,37 +368,37 @@
         'retry_after' => 90,
       ),
     ),
-    'failed' => 
+    'failed' =>
     array (
       'database' => 'mysql',
       'table' => 'failed_jobs',
     ),
   ),
-  'services' => 
+  'services' =>
   array (
-    'mailgun' => 
+    'mailgun' =>
     array (
       'domain' => NULL,
       'secret' => NULL,
     ),
-    'ses' => 
+    'ses' =>
     array (
       'key' => NULL,
       'secret' => NULL,
       'region' => 'us-east-1',
     ),
-    'sparkpost' => 
+    'sparkpost' =>
     array (
       'secret' => NULL,
     ),
-    'stripe' => 
+    'stripe' =>
     array (
       'model' => 'App\\User',
       'key' => NULL,
       'secret' => NULL,
     ),
   ),
-  'session' => 
+  'session' =>
   array (
     'driver' => 'file',
     'lifetime' => 120,
@@ -408,7 +408,7 @@
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
-    'lottery' => 
+    'lottery' =>
     array (
       0 => 2,
       1 => 100,
@@ -420,9 +420,9 @@
     'http_only' => true,
     'same_site' => NULL,
   ),
-  'smsir' => 
+  'smsir' =>
   array (
-    'middlewares' => 
+    'middlewares' =>
     array (
       0 => 'web',
     ),
@@ -435,36 +435,36 @@
     'title' => 'مدیریت پیامک ها',
     'in-page' => '15',
   ),
-  'tinker' => 
+  'tinker' =>
   array (
-    'dont_alias' => 
+    'dont_alias' =>
     array (
     ),
   ),
-  'trustedproxy' => 
+  'trustedproxy' =>
   array (
-    'proxies' => 
+    'proxies' =>
     array (
       0 => '192.168.1.10',
     ),
-    'headers' => 
+    'headers' =>
     array (
       1 => 'FORWARDED',
     ),
   ),
-  'view' => 
+  'view' =>
   array (
-    'paths' => 
+    'paths' =>
     array (
       0 => '/home/marjan/WebSites/iauahvazSoft/resources/views',
     ),
     'compiled' => '/home/marjan/WebSites/iauahvazSoft/storage/framework/views',
   ),
-  'dompdf' => 
+  'dompdf' =>
   array (
     'show_warnings' => false,
     'orientation' => 'portrait',
-    'defines' => 
+    'defines' =>
     array (
       'font_dir' => '/home/marjan/WebSites/iauahvazSoft/storage/fonts/',
       'font_cache' => '/home/marjan/WebSites/iauahvazSoft/storage/fonts/',
@@ -483,7 +483,7 @@
       'enable_html5_parser' => false,
     ),
   ),
-  'tcpdf' => 
+  'tcpdf' =>
   array (
     'page_format' => 'A4',
     'page_orientation' => 'P',

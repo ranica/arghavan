@@ -51,7 +51,15 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        return $this->authenticated($request, $this->guard()->user()) ?: $data;
+
+        $user = $this->guard()
+                    ->user();
+
+        $result = $this->authenticated($request,
+                                       $user);
+        $result = $result ?: $data;
+
+        return $result;
     }
 
     /**
@@ -65,4 +73,25 @@ class LoginController extends Controller
 
         return $data;
     }
+
+
+    /**
+     * Save user login history
+     *
+     * @param      \Illuminate\Http\Request  $request  The request
+     * @param      <type>                    $user     The user
+     */
+    function authenticated(Request $request,
+                          $user)
+    {
+        $date = \Carbon\Carbon::now();
+        $date->setTimeZone('Asia/Tehran');
+        $date = $date->toDateTimeString();
+
+        $ip = $request->getClientIp();
+
+        $user->setLastLoginInfo($date,
+                                $ip);
+    }
 }
+
