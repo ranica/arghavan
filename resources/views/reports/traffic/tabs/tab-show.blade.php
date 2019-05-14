@@ -55,7 +55,10 @@
                             title="خروجی اکسل">
                           <i class="fas fa-file-excel fa-2x"></i>
                         </a>
-                        <a class="btn btn-rose confg" href="#" @click.prevent="exportTrafficPDF" title="خروجی پی دی اف">
+                        <a class="btn btn-rose confg"
+                            href="#"
+                            @click.prevent="exportTrafficPDF"
+                            title="خروجی پی دی اف">
                           <i class="fas fa-file-pdf fa-2x"></i>
                       </a>
                     </span>

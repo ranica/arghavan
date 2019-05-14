@@ -40,16 +40,22 @@ class ReportTrafficPDFExport implements FromCollection
     public function createPDF()
     {
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Nicola Asuni');
-        $pdf->SetTitle('TCPDF Example 001');
+        $pdf->SetAuthor('IPASS');
+        $pdf->SetTitle('گزارشات تردد');
         $pdf->SetSubject('TCPDF Tutorial');
         $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
-        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
-         $pdf->SetFont('dejavusans', 'B', 20);
+        $pdf->SetHeaderData(PDF_HEADER_LOGO,
+                            PDF_HEADER_LOGO_WIDTH,
+                            ' گزارش تردد',
+                            PDF_HEADER_STRING,
+                            array(0,64,255),
+                            array(0,64,128));
+
         // Title
         $pdf->Cell(0, 15, 'گزارشات ورود و خروج', 0, false, 'R', 0, '', 0, false, 'M', 'M');
-        Cell(30, 0, 'Descent-Center', 1, $ln=0, 'C', 0, '', 0, false, 'D', 'C');
+        $pdf->Cell(30, 0, 'Descent-Center', 1, $ln=0, 'C', 0, '', 0, false, 'D', 'C');
         $pdf->setFooterData(array(0,64,0), array(0,64,128));
         $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
@@ -64,7 +70,7 @@ class ReportTrafficPDFExport implements FromCollection
             $pdf->setLanguageArray($l);
         }
         $pdf->setFontSubsetting(true);
-        $pdf->SetFont('dejavusans', '', 14, '', true);
+        $pdf->SetFont('dejavusans', '', 8, '', true);
         $lg = Array();
         $lg['a_meta_charset'] = 'UTF-8';
         $lg['a_meta_dir'] = 'rtl';
@@ -75,7 +81,7 @@ class ReportTrafficPDFExport implements FromCollection
         $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 
         // column titles
-        $header = array('مسیر تردد', 'پیام', 'تاریخ تردد', 'نام خانوادگی', 'نام','کد' );
+        $header = array('کد کاربری', 'نام', 'نام خانوادگی', 'تاریخ تردد', 'پیام', 'مسیر تردد');
         $traffic = $this->reportGateTraffic();
         // print colored table
         $this->ColoredTableExport($pdf, $header, $traffic);
@@ -83,17 +89,17 @@ class ReportTrafficPDFExport implements FromCollection
         $pdf->Output('report.pdf', 'I');
     }
      //Page header
-    public function Header($pdf) {
-        // Logo
-        $image_file = K_PATH_IMAGES.'logo_example.jpg';
-        $pdf->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, 'R', false, false, 0, false, false, false);
-       $this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, 'R', false, false, 0,     false, false, false);
-        // Set font
-        $pdf->SetFont('dejavusans', 'B', 20);
-        // Title
-        $pdf->Cell(0, 15, 'گزارشات ورود و خروج', 0, false, 'R', 0, '', 0, false, 'M', 'M');
-        Cell(30, 0, 'Descent-Center', 1, $ln=0, 'C', 0, '', 0, false, 'D', 'C');
-    }
+    // public function Header($pdf) {
+    //     // Logo
+    //     $image_file = K_PATH_IMAGES.'logo_example.jpg';
+    //     $pdf->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, 'R', false, false, 0, false, false, false);
+    //    $this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, 'R', false, false, 0,     false, false, false);
+    //     // Set font
+    //     $pdf->SetFont('dejavusans', 'B', 20);
+    //     // Title
+    //     $pdf->Cell(0, 15, 'گزارشات ورود و خروج', 0, false, 'R', 0, '', 0, false, 'M', 'M');
+    //     Cell(30, 0, 'Descent-Center', 1, $ln=0, 'C', 0, '', 0, false, 'D', 'C');
+    // }
 
      // Colored table
     public function ColoredTableExport($pdf, $header,$data) {
@@ -104,7 +110,7 @@ class ReportTrafficPDFExport implements FromCollection
         $pdf->SetLineWidth(0.3);
         $pdf->SetFont('dejavusans', 'B');
         // Header
-        $w = array(20, 20, 25, 20, 30, 35);
+        $w = array(30, 30, 35, 40, 30, 20);
         $num_headers = count($header);
         for($i = 0; $i < $num_headers; ++$i) {
             $pdf->Cell($w[$i], 6, $header[$i], 1, 0, 'C', 1);
@@ -120,9 +126,9 @@ class ReportTrafficPDFExport implements FromCollection
             $pdf->Cell($w[0], 6, $row->code, 'LR', 0, 'C', $fill);
             $pdf->Cell($w[1], 6, $row->name, 'LR', 0, 'C', $fill);
             $pdf->Cell($w[2], 6, $row->lastname, 'LR', 0, 'C', $fill);
-            $pdf->Cell($w[3], 6, $row->message, 'LR', 0, 'C', $fill);
-            $pdf->Cell($w[4], 6, $row->direct, 'LR', 0, 'C', $fill);
-            $pdf->Cell($w[5], 6, miladiToPersianDateTime($row->gatedate), 'LR', 0, 'C', $fill);
+            $pdf->Cell($w[3], 6, miladiToPersianDateTime($row->gatedate), 'LR', 0, 'C', $fill);
+            $pdf->Cell($w[4], 6, $row->message, 'LR', 0, 'C', $fill);
+            $pdf->Cell($w[5], 6, $row->direct, 'LR', 0, 'C', $fill);
             $pdf->Ln();
             $fill=!$fill;
         }
