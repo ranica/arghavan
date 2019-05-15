@@ -15,6 +15,8 @@ class User extends Authenticatable
 
     public static $C_STR_DEACTIVE = "غیر فعال";
     public static $C_STR_ACTIVE   = "فعال";
+
+
     /**
      * @var Defined State
      */
@@ -28,7 +30,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'code', 'name', 'email', 'password','state', 'group_id','people_id','api_token',
+        'code',
+        'name',
+        'email',
+        'password',
+        'state',
+        'group_id',
+        'people_id',
+        'api_token',
+        'last_login_at',
+        'last_login_at'
     ];
 
     /**
@@ -37,7 +48,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'api_token'
+        'password',
+        'remember_token',
+        'api_token'
     ];
 
     /**
@@ -48,6 +61,7 @@ class User extends Authenticatable
     protected $dates = [
         'deleted_at'
     ];
+
 
     /**
      * List of related sms
@@ -313,5 +327,29 @@ class User extends Authenticatable
         $people = $this->people;
 
         $people->removePicture ();
+    }
+
+
+    /**
+     * Set Last-Login Information
+     *
+     * @param      <type>  $loginDate  The login date
+     * @param      <type>  $deviceIP   The device ip
+     */
+    public function setLastLoginInfo($loginDate,
+                                     $deviceIP){
+        // Save on Users table
+        $this->last_login_at = $loginDate;
+        $this->last_login_ip = $deviceIP;
+
+        $this->save();
+
+
+        // Insert new record in history-table
+        \App\LoginHistory::create([
+            "user_id"       => $this->id,
+            "last_login_at" => $loginDate,
+            "last_login_ip" => $deviceIP
+        ]);
     }
 }

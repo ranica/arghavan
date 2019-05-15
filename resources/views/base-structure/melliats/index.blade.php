@@ -68,7 +68,7 @@
                                                             class="btn btn-round btn-just-icon pull-left"
                                                             data-toggle="modal"
                                                             data-target="#removeRecordModalMelliat"
-                                                            @click.prevent="readyToDelete(record)">
+                                                            @click.prevent="readyToDelete(record, 'Melliat')">
                                                             <i class="material-icons">delete</i>
                                                             <div class="ripple-container"></div>
                                                         </a>
@@ -91,7 +91,7 @@
                                          :key= "record.id"
                                          :my-data="record"
                                          @edit-data="editRecord"
-                                         @delete-data="readyToDelete(record)"
+                                         @delete-data="readyToDelete(record, 'Melliat')"
                                          title="نام ملیت">
                                 </card-mobile>
 
@@ -129,16 +129,19 @@
                                                 <i class="material-icons">clear</i>
                                             </button>
                                         </div>
+
                                         <div class="modal-body text-center">
                                             <h5>برای حذف اطمینان دارید؟ </h5>
                                         </div>
+
                                         <div class="modal-footer text-center">
                                             <button type="button"
-                                                    class="btn btn-simple"
+                                                    class="btn btn-primary"
                                                     data-dismiss="modal">خیر
                                             </button>
+
                                             <button type="button"
-                                                    class="btn btn-success btn-simple"
+                                                    class="btn btn-danger"
                                                     data-dismiss="modal"
                                                     @click.prevent="deleteRecord('melliats')">بله
                                             </button>

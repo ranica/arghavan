@@ -972,10 +972,14 @@ window.v = new Vue({
         /**
          * Prepare to delete
          */
-        readyToDelete(record) {
+        readyToDelete(record, type) {
             this.tempRecord.id = record.id;
-            // $('#removeRecordModal').modal();
+
+            console.log(type, $(`#removeRecordModal${type}`));
+
+            $(`#removeRecordModal${type}`).modal().show();
         },
+
         /**
          * Delete a record
          */
