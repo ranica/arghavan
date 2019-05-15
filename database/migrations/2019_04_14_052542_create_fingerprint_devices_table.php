@@ -21,7 +21,7 @@ class CreateFingerprintDevicesTable extends Migration
             $table->string('name');
             $table->boolean('net_state');
             $table->boolean('enabled');
-            $table->json('extra');
+            $table->json('extra')->nullable();
             $table->softDeletes();
         });
     }
