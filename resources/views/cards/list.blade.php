@@ -50,14 +50,29 @@
                                             class="btn btn-round btn-danger btn-just-icon pull-left"
                                             data-toggle="modal"
                                             data-target="#removeRecordModal"
+                                            title= "حذف رکورد"
                                             @click.prevent="readyToDelete(record)">
                                             <i class="material-icons">delete</i>
                                             <div class="ripple-container"></div>
                                         </a>
                                     @endcan
+
                                     @can('command_edit')
-                                        <a href="#" class="btn btn-round btn-info btn-just-icon pull-left" @click.prevent="prepareEdit(record)">
+                                        <a href="#"
+                                            class="btn btn-round btn-info btn-just-icon pull-left"
+                                            title= "ویرایش رکورد"
+                                            @click.prevent="prepareEdit(record)">
                                             <i class="material-icons">create</i>
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    @endcan
+
+                                    @can('command_permission')
+                                        <a href="#"
+                                            class="btn btn-round btn-info btn-just-icon pull-left"
+                                            @click.prevent="setGatedeviceRecord(record)"
+                                            title="مجوز گیت تردد">
+                                            <i class="material-icons">person</i>
                                             <div class="ripple-container"></div>
                                         </a>
                                     @endcan
@@ -82,6 +97,12 @@
             <!--  Register Form  -->
             <div v-show="isRegisterMode">
                 @include('cards.create')
+            </div>
+            <!--  /Register Form  -->
+
+             <!--  Assign GateDevice Form  -->
+            <div v-if="isAssignGatedevice">
+                @include('cards.assign-gate-device')
             </div>
             <!--  /Register Form  -->
 

@@ -17,7 +17,8 @@ class CardController extends Controller
         'cardtype',
         'users',
         'users.people',
-        'users.group'
+        'users.group',
+        'gatedevices'
     ];
 
     /**
@@ -176,6 +177,14 @@ class CardController extends Controller
         $search = $request->search;
 
         $fnc = [
+                    'gatedevices' => function($q){
+                        $q->select([
+                                'id',
+                                'name',
+                                'ip'
+
+                        ]);
+                    },
                     'cardtype' => function($q){
                         $q->select([
                                         'id',
@@ -225,91 +234,6 @@ class CardController extends Controller
         // $mydata = \DB::select($res);
         // return $mydata;
     }
-     /**
-     * Load people by groupType_id in index Card Page
-      */
-  /*  public function filterCard(Request $request, $groupType, $id = null)
-    {
-        $group_id = $groupType;
-        $cardtype_id = 5;
-        $search = $request->search;
-
-        $fnc = [
-                'users' => function ($q) use ($group_id) {
-                    $q->where('group_id', '=', $group_id)
-                      ->select([
-                                    'id',
-                                    'code',
-                                    'group_id',
-                                    'people_id'
-                                ]);
-                },
-
-                'users.people' => function ($q){
-                    $q->select([
-                                    'id',
-                                    'name',
-                                    'lastname'
-                                ]);
-                },
-             ];
-    $result = \App\Card::with ($fnc);
-    $result = $result->get();
-
-
-        $groupWhere = [
-            ['cards.cardtype_id', '<>', $cardtype_id],
-        ];
-
-        if (is_null ($id)){
-            $res = \App\Card::where ($groupWhere)
-                            // ->with(['users' => function($query){
-                            //         $query->select(['id', 'code']);
-                            //         }])
-                            // ->select('id', 'cdn')
-                            ->get();
-
-
-
-            $res = $res //->join ('users', 'cards.user_id', 'users.id')
-                       ->join ('people', 'people.id', 'users.people_id')
-                       // ->join ('groups', 'groups.id', 'users.group_id')
-                       ->join ('cardtypes', 'cards.cardtype_id', 'cardtypes.id');
-
-            if (!is_null ($search))
-            {
-                $res = $res->where ('users.code', 'like' , "%$search%");
-                $res = $res->orWhere ('people.name', 'like', "%$search%");
-                $res = $res->orWhere ('people.lastname', 'like', "%$search%");
-                $res = $res->orWhere ('people.nationalId', 'like', "%$search%");
-            }
-
-            $res = $res->select (['cards.id as card_id',
-                                 'cards.cdn as card_cdn',
-                                 'cards.startDate as card_startDate',
-                                 'cards.endDate as card_endDate',
-                                 'cardtypes.id as cardtype_id',
-                                 'cardtypes.name as cardtype_name',
-                                 'groups.id as group_id',
-                                 'groups.name as group_name',
-                                  'users.id as user_id',
-                                  'users.code as user_code',
-                                  'people.name as people_name',
-                                  'people.lastname as people_lastname',
-                                  'people.nationalId as people_nationalId',
-                                ])
-                        ->paginate(Controller::C_PAGINATE_SIZE);
-        }
-        else{
-            $res = Card::find($id)
-                           ->with(self::$relation)
-                           ->where($groupWhere)
-                            ->paginate(Controller::C_PAGINATE_SIZE);
-        }
-
-         return new CardFilterCollection($res);
-
-    }*/
 
     /**
      * Display a listing of the resource.
@@ -370,42 +294,6 @@ class CardController extends Controller
                         ->paginate(Controller::C_PAGINATE_SIZE);
         // return new CardFilterCollection($res);
         return $res;
-
-
-       /* $groupWhere = [
-            ['users.group_id', '=', $group_id],
-        ];
-
-        $res = \App\User::where ($groupWhere);
-
-        $res = $res->join ('people', 'people.id', 'users.people_id')
-                   ->join ('groups', 'groups.id', 'users.group_id')
-                   ->leftJoin ('cards', 'cards.user_id', 'users.id')
-                   ->leftjoin ('cardtypes', 'cardtypes.id', 'cards.cardtype_id');
-
-        if (!is_null ($search))
-        {
-            $res = $res->where ('users.code', 'like', "%$search%");
-            $res = $res->orWhere ('people.name', 'like', "%$search%");
-            $res = $res->orWhere ('people.lastname', 'like', "%$search%");
-            $res = $res->orWhere ('people.nationalId', 'like', "%$search%");
-        }
-
-        $res = $res->select ('cards.cdn',
-                             'cards.startDate as card_startDate',
-                             'cards.endDate as card_endDate',
-                             'cardtypes.name as cardtype_name',
-                             'groups.id as group_id',
-                             'groups.name as group_name',
-                              'users.id as user_id',
-                              'users.code as user_code',
-                              'people.id as people_id',
-                              'people.name as people_name',
-                              'people.lastname as people_lastname',
-                              'people.nationalId as people_nationalId')
-                    ->paginate(Controller::C_PAGINATE_SIZE);
-
-        return new CardFilterCollection($res);*/
     }
 
     /**
@@ -471,5 +359,24 @@ class CardController extends Controller
                     ->paginate(Controller::C_PAGINATE_SIZE);
 
         return new CardCollection($items);
+    }
+
+     /**
+     * Set Gatedevice to Card
+     */
+    public function setGatedevice(Request $request, Card $card)
+    {
+        $gatedevices = $request->gatedevices;
+
+        if ($request->ajax())
+        {
+            $card->giveGatedeviceTo($gatedevices);
+            $card->load(self::$relation);
+
+            return [
+                'status'   => is_null($card) ? 1 : 0,
+                'card'     => $card
+            ];
+        }
     }
 }

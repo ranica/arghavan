@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Suprema.SFM_SDK_NET;
+using System.Drawing;
 
 namespace FingerPrintController.Agents
 {
@@ -104,6 +105,8 @@ namespace FingerPrintController.Agents
         {
             uint regUserId = 0;
             uint imageQuality = 0;
+            
+            
 
             UF_RET_CODE result = deviceAgent.enroll (userId,
                                                      (UF_ENROLL_OPTION)options,
@@ -112,6 +115,21 @@ namespace FingerPrintController.Agents
 
             callback?.Invoke (regUserId,
                               imageQuality);
+
+            return result;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m_image"></param>
+        /// <returns></returns>
+        public Bitmap 
+        readImage(Action<UFImage> callback)
+        {
+            UFImage m_image = new UFImage();
+            Bitmap result = deviceAgent.readImage(ref m_image);
+
+            callback?.Invoke(m_image);
 
             return result;
         }
@@ -213,7 +231,8 @@ namespace FingerPrintController.Agents
                 case AgentsManager.EnumCommands.Enroll:
                     if (data.Length == 3)
                     {
-                        UF_ENROLL_OPTION options = UF_ENROLL_OPTION.UF_ENROLL_NONE;
+                       // UF_ENROLL_OPTION options = UF_ENROLL_OPTION.UF_ENROLL_NONE;
+                        UF_ENROLL_OPTION options = UF_ENROLL_OPTION.UF_ENROLL_AUTO_ID;
 
                         return enroll (Convert.ToUInt32 (data[0]),
                                        options,
@@ -221,6 +240,16 @@ namespace FingerPrintController.Agents
                     }
 
                     return -1;
+
+
+                case AgentsManager.EnumCommands.ReadImage:
+                    if (data.Length == 1)
+                    {
+                        return readImage((Action<UFImage>)data[0]);
+                    }
+
+                    return -1;
+
 
 
                 case AgentsManager.EnumCommands.EnrollTemplate:

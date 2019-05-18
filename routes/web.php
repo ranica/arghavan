@@ -354,7 +354,9 @@ Route::get('teacher-chart', 'TeacherController@teacherChart')
         ->name('report.user.teacher.count.all');
 
 Route::put('/room/{room}/setMaterial', 'RoomController@setMaterial');
+Route::put('/cards/{card}/setGatedevice', 'CardController@setGatedevice');
 
 
-
-Route::get('accesscontrol/{code}/{ip}', 'API\PassportController@webService');
+Route::get('accessControl/{code}/{ip}', 'API\PassportController@webService');
+Route::get('gatResponse/{code}/{ip}', 'API\PassportController@getResponseWebService');
+Route::get('getAllowGateDevice/{ip}', 'AmoebaController@getAllowGateDevice');

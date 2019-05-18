@@ -61,6 +61,8 @@ class DatabaseSeeder extends Seeder
             SystemInfoSeeder::class,
             CommonRangeSeeder::class,
 
+            AmoebaSeeder::class,
+
     ]);
 
 

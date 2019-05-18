@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BaseDAL">
+      <HintPath>DLL\BaseDAL.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -79,6 +82,7 @@
     <Compile Include="Helper\Extensions\StringExtension.cs" />
     <Compile Include="Helper\HttpClientData.cs" />
     <Compile Include="Helper\RestfulHelper.cs" />
+    <Compile Include="Model\ComboDataModal.cs" />
     <Compile Include="Model\LoginResponseModel.cs" />
     <Compile Include="Model\PersonModel.cs" />
     <Compile Include="Program.cs" />

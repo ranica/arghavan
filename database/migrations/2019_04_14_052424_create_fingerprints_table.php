@@ -15,13 +15,13 @@ class CreateFingerprintsTable extends Migration
     {
         Schema::create('fingerprints', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('fingerprint_user_id');
             $table->tinyInteger('fingerprint_sub_id');
             $table->string('image_url');
             $table->binary('template');
             $table->softDeletes();
+            $table->timestamps();
 
             $table->foreign('user_id')
                     ->references('id')

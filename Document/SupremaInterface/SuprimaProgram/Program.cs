@@ -16,7 +16,7 @@ namespace SuprimaProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.PrimaryForm());
+            Application.Run(new Forms.LoginForm());
         }
     }
 }

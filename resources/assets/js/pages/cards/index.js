@@ -55,6 +55,8 @@ window.v = new Vue({
         isNormalMode: state => state.formMode == Enums.FormMode.normal,
         isRegisterMode: state => state.formMode == Enums.FormMode.register,
         isSearchMode: state => state.formMode == Enums.FormMode.search,
+        isAssignGatedevice: state => state.formMode == Enums.FormMode.assignGatedevice,
+
 
         records: state => state.$store.getters.records,
         allData: state => state.$store.getters.allData,
@@ -68,6 +70,8 @@ window.v = new Vue({
         hasSearch: state => (0 < state.searchdata.length),
 
         carddata: state => state.$store.getters.carddata,
+        gatedevices: state => state.$store.getters.gatedevices,
+
         emptyRecord() {
             return {
                 id: 0,
@@ -139,6 +143,7 @@ window.v = new Vue({
                 this.searchCard(page);
                 return;
             }
+            this.$store.dispatch('loadGatedevices');
 
             let data = {
                 page: page,
@@ -487,6 +492,81 @@ window.v = new Vue({
         readyToDelete(record) {
             this.tempRecord.id = record.id;
         },
+
+        /**
+         * Set Gatedevice to record
+         */
+        setGatedeviceRecord(record) {
+            console.log(' setGateDEvice -> record', record);
+            this.formMode = Enums.FormMode.assignGatedevice;
+
+            this.errors.clear();
+            this.tempRecord.id = record.id;
+            // this.tempRecord = Object.assign({}, record);
+            // this.tempRecord.group.id =0;
+            // this.tempRecord.user.id = 0;
+            // this.tempRecord.cardtype.id = 0;
+
+            // Update Gatedevices checked state
+            this.gatedevices.forEach(gatedevice => {
+                gatedevice.checked = false;
+
+                let res = record.gatedevices.filter(groupDevice => groupDevice.id == gatedevice.id);
+
+                gatedevice.checked = (res.length > 0);
+            });
+        },
+
+        /**
+         * Save Gatedevice Record
+         */
+        saveGatedeviceRecord(){
+            console.log('saveGatedeviceRecord');
+            // this.$validator.validateAll()
+            //     .then(result => {
+            //         if (result) {
+
+                        // Prepare data
+                        let data = {
+                            card_id: this.tempRecord.id,
+                            gatedevices: []
+                        };
+
+                        data.gatedevices = this.gatedevices.filter(el => el.checked == true)
+                                                           .map(el => el.id);
+                        this.isLoading = true;
+
+                        // Try to save
+
+                        console.log('save gate device -> data', data);
+                        this.$store.dispatch('saveGatedeviceRecord', data)
+                            .then(res => {
+                                this.isLoading = false;
+
+                                if (res) {
+                                    demo.showNotification('ثبت اطلاعات با موفقیت انجام شد', 'success');
+
+                                    this.registerCancel();
+                                }
+                                else {
+                                    demo.showNotification('این نام قبلا ثبت شده است', 'warning');
+                                }
+                            })
+                            .catch(err => {
+                                this.isLoading = false;
+
+                                if (err.response.status) {
+                                    demo.showNotification('این نام قبلا ثبت شده است', 'danger');
+                                }
+                                else {
+                                    demo.showNotification(err.message, 'danger');
+                                }
+                            });
+                        return;
+                    // }
+                    // demo.showNotification('خطا', 'خطاها را بر طرف نمایید');
+                // });
+        }
 
 
     }

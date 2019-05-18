@@ -56,6 +56,15 @@ class Card extends Model
     	return $this->belongsTo(\App\Group::class);
     }
 
+     /**
+     * Get assigned Gatedevice
+     * @return [type] [description]
+     */
+    public function gatedevices()
+    {
+        return $this->belongsToMany (\App\Gatedevice::class);
+    }
+
     public function scopeViwTest($query)
     {
         return $query->from('viwTest');
@@ -67,6 +76,14 @@ class Card extends Model
     public function giveUserTo($user)
     {
         $this->users()->sync($user);
+    }
+
+     /**
+     * Give Gate device
+     */
+    public function giveGatedeviceTo($gatedevice)
+    {
+        $this->gatedevices()->sync($gatedevice);
     }
 
     public function takeUserFrom($user)

@@ -31,6 +31,8 @@ namespace FingerPrintController
 
         public const string C_READ_TEMPLATE = "READ_TEMPLATE";
 
+        public const string C_READ_IMAGE = "READ_IMAGE";
+
 
         public const char C_SEPARATOR = '\n';
         #endregion
@@ -137,6 +139,8 @@ namespace FingerPrintController
                                          sender);
             }
 
+
+
             else if (dataStr[0] == C_READ_TEMPLATE)
             {
                 doCommandReadTemplate (dataStr,
@@ -159,6 +163,12 @@ namespace FingerPrintController
             {
                 doCommandIdentify (dataStr,
                                    sender);
+            }
+
+            else if (dataStr[0] == C_READ_IMAGE)
+            {
+                doCommandReadImage(dataStr,
+                                         sender);
             }
         }
 
@@ -337,6 +347,7 @@ namespace FingerPrintController
 
             agent.runCommand (AgentsManager.EnumCommands.Enroll,
                               obj);
+
         }
 
 
@@ -371,6 +382,41 @@ namespace FingerPrintController
                 };
 
             agent.runCommand (AgentsManager.EnumCommands.Identify,
+                              obj);
+        }
+
+        /// <summary>
+        /// Do Command - Identify
+        /// </summary>
+        /// <param name="dataStr"></param>
+        private static void
+        doCommandReadImage(string[] dataStr, 
+                            NetServerClient sender)
+        {
+            if (dataStr.Length != 2)
+            {
+                return;
+            }
+
+
+            string str = dataStr[1];
+
+            FingerPrintAgent agent = agentManger.getAgetns()
+                                                .Where(x => x.deviceModel.name == str)
+                                                .FirstOrDefault();
+
+            Action<UFImage> action = (m_image) =>
+            {
+                sender.write($"{C_READ_IMAGE}\n{m_image}");
+            };
+
+
+            object[] obj = new object[]
+                {
+                       action
+                };
+
+            agent.runCommand(AgentsManager.EnumCommands.ReadImage,
                               obj);
         }
         #endregion

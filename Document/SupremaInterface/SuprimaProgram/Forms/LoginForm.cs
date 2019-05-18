@@ -93,7 +93,18 @@ namespace SuprimaProgram.Forms
                     string url = "api/login";
 
 
-                    HttpClientData.token = await resfulhelper.connect(user, pass, resfulhelper.baseUrl + url);
+                    try
+                    {
+                        HttpClientData.token = await resfulhelper.connect(user, pass, resfulhelper.baseUrl + url);
+                    }
+                    catch (Exception ex)
+                    {
+                        LoggerExtensions.log(ex);
+
+                        MessageBox.Show("اتصال با سرور را بررسی نمایید", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+
 
 
                     if (null != HttpClientData.token)
@@ -103,11 +114,7 @@ namespace SuprimaProgram.Forms
                         form.ShowDialog();
 
                     }
-                    else
-                    {
-                        MessageBox.Show("اتصال بانک اطلاعاتی برقرار نمی باشد", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    }
+                    
 
                 }
                 else

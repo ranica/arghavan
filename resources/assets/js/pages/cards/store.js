@@ -6,6 +6,8 @@ const state = {
     _searchdata: [],
     _searchDataCard: [],
     _carddata: [],
+    _gatedevices: [],
+
 
     _data: {
         data         : [],
@@ -48,12 +50,25 @@ const getters = {
     searchDataCard: state => state._searchDataCard,
 
     /**
+     * Gate devices
+     */
+    gatedevices: state => state._gatedevices,
+
+    /**
      * Return Card Data
      */
     carddata: state => state._carddata,
 };
 
 const mutations = {
+
+    /**
+     * Set Gate device
+     */
+    setGatedevices: (state, data) => {
+        state._gatedevices = data;
+    },
+
     /**
      * Set Search Data
      */
@@ -132,6 +147,24 @@ const mutations = {
 };
 
 const actions = {
+
+    /**
+     * Load Gatedevices
+     */
+    loadGatedevices(context){
+        return new Promise((resolve, reject) => {
+            axios.get('/gatedevices/data/all')
+                .then(res => {
+
+                    context.commit ('setGatedevices', res.data);
+
+                    resolve(res);
+                })
+                .catch(err => reject(err) );
+        });
+    },
+
+
     /**
      * Load all groups
      */
@@ -390,6 +423,32 @@ const actions = {
                     resolve(res);
                 })
                 .catch(res => reject(res));
+        });
+    },
+
+    /**
+     * save Gate device
+     */
+    saveGatedeviceRecord: (context, record) => {
+        return new Promise((resolve, reject) => {
+            let url = '/cards/' + record.card_id + '/setGatedevice';
+            let data = { gatedevices: record.gatedevices };
+
+            axios.put(url, data)
+                .then(res => {
+                    let status = (0 == res.data.status);
+                    let record = res.data.card;
+
+                    if (null != record) {
+                        context.commit ('updateRecord', {
+                                    getters: context.getters,
+                                    record : record
+                                });
+                    }
+
+                    resolve(status);
+                })
+                .catch(err => reject(err));
         });
     },
 

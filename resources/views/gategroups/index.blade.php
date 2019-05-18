@@ -90,12 +90,16 @@
                                                             <div class="ripple-container"></div>
                                                         </a>
                                                     @endcan
+
                                                     @can('command_permission')
-                                                        <a href="#" class="btn btn-round btn-info btn-just-icon pull-left" @click.prevent="setGatedeviceRecord(record)">
+                                                        <a href="#" 
+                                                            class="btn btn-round btn-info btn-just-icon pull-left" 
+                                                            @click.prevent="setGatedeviceRecord(record)">
                                                             <i class="material-icons">person</i>
                                                             <div class="ripple-container"></div>
                                                         </a>
                                                     @endcan
+
                                                 </td>
                                             </tr>
                                         </tbody>

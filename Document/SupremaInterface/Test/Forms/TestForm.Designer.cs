@@ -41,7 +41,10 @@
             this.userIdUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.identifyTemplateButton = new System.Windows.Forms.Button();
+            this.picFinger = new System.Windows.Forms.PictureBox();
+            this.imageButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.userIdUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFinger)).BeginInit();
             this.SuspendLayout();
             // 
             // startButton
@@ -168,11 +171,30 @@
             this.identifyTemplateButton.Text = "Identiy Template";
             this.identifyTemplateButton.UseVisualStyleBackColor = true;
             // 
+            // picFinger
+            // 
+            this.picFinger.Location = new System.Drawing.Point(169, 341);
+            this.picFinger.Name = "picFinger";
+            this.picFinger.Size = new System.Drawing.Size(121, 109);
+            this.picFinger.TabIndex = 5;
+            this.picFinger.TabStop = false;
+            // 
+            // imageButton
+            // 
+            this.imageButton.Location = new System.Drawing.Point(26, 341);
+            this.imageButton.Name = "imageButton";
+            this.imageButton.Size = new System.Drawing.Size(137, 43);
+            this.imageButton.TabIndex = 6;
+            this.imageButton.Text = "Load Image";
+            this.imageButton.UseVisualStyleBackColor = true;
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 455);
+            this.Controls.Add(this.imageButton);
+            this.Controls.Add(this.picFinger);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.userIdUpDown);
             this.Controls.Add(this.logListBox);
@@ -189,6 +211,7 @@
             this.Name = "TestForm";
             this.Text = "TestForm";
             ((System.ComponentModel.ISupportInitialize)(this.userIdUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFinger)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,5 +232,7 @@
         private System.Windows.Forms.NumericUpDown userIdUpDown;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button identifyTemplateButton;
+        private System.Windows.Forms.PictureBox picFinger;
+        private System.Windows.Forms.Button imageButton;
     }
 }

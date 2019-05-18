@@ -64,15 +64,19 @@
                                     @endcan
 
                                     @can('command_edit')
-                                        <a href="#" class="btn btn-round btn-info btn-just-icon like pull-left" title="ویرایش"
-                                        @click.prevent="editRecord(record)">
+                                        <a href="#"
+                                            class="btn btn-round btn-info btn-just-icon like pull-left"
+                                            title="ویرایش"
+                                            @click.prevent="editRecord(record)">
                                             <i class="fas fa-pen"></i>
                                             <div class="ripple-container"></div>
                                         </a>
                                     @endcan
 
                                     @can('command_permission')
-                                        <a href="#" class="btn btn-round btn-info btn-just-icon pull-left" title="اختصاص مجوز"
+                                        <a href="#"
+                                            class="btn btn-round btn-info btn-just-icon pull-left"
+                                            title="اختصاص مجوز"
                                             @click.prevent="setGroupPermit(record)">
                                             <i class="fas fa-key"></i>
                                             <div class="ripple-container"></div>

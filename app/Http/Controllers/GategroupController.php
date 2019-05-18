@@ -122,7 +122,7 @@ class GategroupController extends Controller
     }
 
      /**
-     * Set Gatedevice to role
+     * Set Gatedevice to GateGroup
      */
     public function setGatedevice(Request $request, Gategroup $gategroup)
     {
@@ -141,42 +141,42 @@ class GategroupController extends Controller
     }
 
      /**
-         * Get all Gate Group
-         */
-        public function allGateGroup()
+     * Get all Gate Group
+     */
+    public function allGateGroup()
+    {
+        $list  = Gategroup::select('id', 'name', 'description')
+                                ->get();
+
+        return $list;
+    }
+
+    /**
+     * Load Gate Group for search user
+     * @param  Request $request [description]
+     * @param  User    $user    [description]
+     * @return [type]           [description]
+     */
+    public function loadGateGroup(Request $request, User $user)
+    {
+        if ($request->ajax())
         {
-            $list  = Gategroup::select('id', 'name', 'description')
-                                    ->get();
 
-            return $list;
+            $gategroups = 'SELECT  DISTINCT
+                                    gategroups.id,
+                                    gategroups.name,
+                                    IF((SELECT gategroup_user.gategroup_id  FROM gategroup_user
+                                         WHERE
+                                            (gategroup_user.user_id =:userId
+                                                and
+                                            gategroup_user.gategroup_id = gategroups.id)),true, false) as permit
+                            FROM
+                                gategroups
+                            LEFT JOIN gategroup_user ON gategroups.id = gategroup_user.gategroup_id';
+            $data = ['userId' => $user->id];
+            $query = \DB::select($gategroups, $data);
+
+            return $query;
         }
-
-        /**
-         * Load Gate Group for search user
-         * @param  Request $request [description]
-         * @param  User    $user    [description]
-         * @return [type]           [description]
-         */
-        public function loadGateGroup(Request $request, User $user)
-        {
-            if ($request->ajax())
-            {
-
-                $gategroups = 'SELECT  DISTINCT
-                                        gategroups.id,
-                                        gategroups.name,
-                                        IF((SELECT gategroup_user.gategroup_id  FROM gategroup_user
-                                             WHERE
-                                                (gategroup_user.user_id =:userId
-                                                    and
-                                                gategroup_user.gategroup_id = gategroups.id)),true, false) as permit
-                                FROM
-                                    gategroups
-                                LEFT JOIN gategroup_user ON gategroups.id = gategroup_user.gategroup_id';
-                $data = ['userId' => $user->id];
-                $query = \DB::select($gategroups, $data);
-
-                return $query;
-            }
-        }
+    }
 }

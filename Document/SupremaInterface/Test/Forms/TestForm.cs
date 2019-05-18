@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
@@ -46,9 +47,11 @@ namespace Test.Forms
 
             enrollTemplateButton.Click += EnrollTemplateButton_Click;
 
-            identifyTemplateButton.Click += IdentifyTemplateButton_Click; ;
+            identifyTemplateButton.Click += IdentifyTemplateButton_Click;
+            imageButton.Click += ImageButton_Click;
         }
 
+      
         private void IdentifyTemplateButton_Click (object sender, EventArgs e)
         {
             string msg =
@@ -71,6 +74,8 @@ namespace Test.Forms
 
             write (client,
                    msg);
+
+           
         }
 
         private void ReadTemplateButton_Click (object sender, EventArgs e)
@@ -99,10 +104,21 @@ namespace Test.Forms
             string msg =
                 $"{FP.FingerPrintController.C_ENROLL}" +
                     $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}" +
-                    $"{FP.FingerPrintController.C_SEPARATOR}{userId}" +
+                    $"{FP.FingerPrintController.C_SEPARATOR}{0}" +
                     $"{FP.FingerPrintController.C_SEPARATOR}{subId}";
 
             write (client,
+                   msg);
+
+           
+        }
+
+        private void ImageButton_Click(object sender, EventArgs e)
+        {
+           string msg = $"{FP.FingerPrintController.C_READ_IMAGE}" +
+                   $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}";
+
+            write(client,
                    msg);
         }
 
@@ -173,6 +189,13 @@ namespace Test.Forms
                 }
                 else if (data[0] == FingerPrintController.FingerPrintController.C_IDENTIFY_TEMPLATE)
                 {
+                }
+
+                else if (data[0] == FingerPrintController.FingerPrintController.C_READ_IMAGE)
+                {
+
+                    //picFinger.Image = Image.FromHbitmap(data[1]);
+
                 }
             }));
         }

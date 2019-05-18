@@ -36,8 +36,11 @@
                                 <!--  /Tab Staff  -->
 
                                 <!-- Tab Teacher -->
-                               <li class="nav-item" :class="{'active':lastGroupId == {{ \App\People::$GROUP_TEACHERS }}}">
-                                    <a class="nav-link" href="#" @click="filterUsers({{ \App\People::$GROUP_TEACHERS }})">
+                               <li class="nav-item" 
+                                    :class="{'active':lastGroupId == {{ \App\People::$GROUP_TEACHERS }}}">
+                                    <a class="nav-link" 
+                                        href="#" 
+                                        @click="filterUsers({{ \App\People::$GROUP_TEACHERS }})">
                                         <i class="fa fa-book fa-2x"></i>
                                         <strong> اساتید</strong>
                                         <div class="ripple-container"></div>

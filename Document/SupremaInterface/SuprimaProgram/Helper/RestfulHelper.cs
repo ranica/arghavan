@@ -104,8 +104,49 @@ namespace SuprimaProgram.Helper
             return resultContent;
         }
 
-        
+        /// <summary>
+        /// Request Search Data
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public async Task<PersonModel> requestSearch(string code,
+                                                string url)
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(C_HEADER_VALUE_APP_JSON));
 
-        
+            client.DefaultRequestHeaders.Add(C_HEADER_ACCEPT, C_HEADER_VALUE_APP_JSON);
+
+            client.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
+
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("code", code),
+            });
+
+            var result = await client.PostAsync(url, content);
+
+            string resultContent = await result.Content.ReadAsStringAsync();
+
+            PersonModel responseResult = null;
+
+            try
+            {
+                if (null != resultContent)
+                {
+                    responseResult = JsonConvert.DeserializeObject<Model.PersonModel>(resultContent);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerExtensions.log(ex);
+            }
+
+            return responseResult;
+        }
+
+
     }
 }

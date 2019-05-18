@@ -306,8 +306,9 @@ class PassportController extends Controller
 
 
     }
+    
     /**
-     * test webservice
+     * Send Response  webservice [53011] | [54011]
      *
      * @param      <type>  $code   The code
      * @param      <type>  $ip     { parameter_description }
@@ -320,14 +321,29 @@ class PassportController extends Controller
             'ip' => $ip,
             'code' => $code
         ];
+
         $data = [
             'ip' => $ip,
             'data' => '53011'
         ];
 
-       return response()->json ($data,
+        return response()->json ($data,
                                      $this->successStatus);
-        return $result;
+    }
+
+    /**
+    * Get Response Web Service [63011] | [64011]
+    */
+
+    public function getResponseWebService($code, $ip)
+    {
+        $fields= [
+            'ip' => $ip,
+            'code' => $code
+        ];
+       
+       return response()->json ($fields,
+                                     $this->successStatus);
     }
 
 }

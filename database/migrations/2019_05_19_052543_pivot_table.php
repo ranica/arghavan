@@ -192,6 +192,49 @@ class PivotTable extends Migration
             $table->primary(['material_id', 'room_id']);
         });
 
+        /**
+         * Migrate card to gate
+         */
+        Schema::create('card_gatedevice', function (Blueprint $table) {
+            $table->unsignedInteger('card_id');
+            $table->unsignedInteger('gatedevice_id');
+
+            $table->foreign('card_id')
+                    ->references('id')
+                    ->on('cards')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->foreign('gatedevice_id')
+                    ->references('id')
+                    ->on('gatedevices')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->primary(['card_id', 'gatedevice_id']);
+        });
+
+        /**
+         * Migrate amoeba gate
+         */
+        Schema::create('amoeba_gatedevice', function (Blueprint $table) {
+            $table->unsignedInteger('amoeba_id');
+            $table->unsignedInteger('gatedevice_id');
+
+            $table->foreign('amoeba_id')
+                    ->references('id')
+                    ->on('amoebas')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->foreign('gatedevice_id')
+                    ->references('id')
+                    ->on('gatedevices')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->primary(['amoeba_id', 'gatedevice_id']);
+        });
 
     }
     /**
@@ -210,5 +253,8 @@ class PivotTable extends Migration
         Schema::dropIfExists('term_user');
         Schema::dropIfExists('material_room');
         Schema::dropIfExists('dormitory_manager');
+        Schema::dropIfExists('amoeba_gatedevice');
+        Schema::dropIfExists('card_gatedevice');
+
     }
 }

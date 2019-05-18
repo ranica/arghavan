@@ -72,6 +72,13 @@ class Gatedevice extends Model
     	return $this->belongsTo(\App\Gatedirect::class);
     }
 
+    public function cards()
+    {
+        return $this->belongsToMany(\App\Card::class);
+    }
+
+
+
     /**
      * Get Zone
      */

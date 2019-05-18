@@ -1,10 +1,10 @@
-    <?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ImportTable extends Migration
+class CreateAmoebasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class ImportTable extends Migration
      */
     public function up()
     {
-        Schema::create('import_table', function (Blueprint $table) {
+        Schema::create('amoebas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
             $table->string('name');
-            $table->string('lastname');
-            $table->string('gender');
-            $table->string('suit');
-            $table->softDeletes();
-        });  
+            $table->string('ip');
+            $table->tinyInteger('enabled');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -31,6 +29,6 @@ class ImportTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('import_table');
+        Schema::dropIfExists('amoebas');
     }
 }

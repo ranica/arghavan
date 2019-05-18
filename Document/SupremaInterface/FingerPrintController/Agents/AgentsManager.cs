@@ -21,6 +21,7 @@ namespace FingerPrintController.Agents
             IdentifyTemplate,
 
             ReadTemplate,
+            ReadImage,
 
             Start,
             Finish

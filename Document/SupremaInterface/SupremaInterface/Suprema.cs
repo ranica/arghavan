@@ -1,6 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Suprema.SFM_SDK_NET;
+using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace SupremaInterface
 {
@@ -130,6 +132,8 @@ namespace SupremaInterface
             UF_RET_CODE result;
 
 
+            supremaEngine.UF_Cancel(true);
+
             result = supremaEngine.UF_Enroll (userId,
                                               option,
                                               ref enrolledUserId,
@@ -138,6 +142,31 @@ namespace SupremaInterface
             return result;
         }
 
+        /// <summary>
+        /// Read Image
+        /// </summary>
+        /// <param name="m_image"></param>
+        /// <returns></returns>
+        public Bitmap
+        readImage(ref UFImage m_image)
+        {
+            //m_Image = Marshal.AllocHGlobal(256 * 1024);
+
+            var result = supremaEngine.UF_ReadImage(ref m_image);
+         
+            if (result == 0)
+            {
+                var hbitmap = supremaEngine.UF_ConvertToBitmap(m_image);
+                return hbitmap;
+            }
+            else
+                return null;
+        }
+
+        private IntPtr dd(Bitmap hbitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Enroll a user fingerPrint (by template)
