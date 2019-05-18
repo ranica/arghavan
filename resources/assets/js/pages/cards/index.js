@@ -537,7 +537,6 @@ window.v = new Vue({
                         this.isLoading = true;
 
                         // Try to save
-
                         console.log('save gate device -> data', data);
                         this.$store.dispatch('saveGatedeviceRecord', data)
                             .then(res => {

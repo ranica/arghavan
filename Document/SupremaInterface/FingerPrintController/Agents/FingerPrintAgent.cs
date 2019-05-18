@@ -124,12 +124,13 @@ namespace FingerPrintController.Agents
         /// <param name="m_image"></param>
         /// <returns></returns>
         public Bitmap 
-        readImage(Action<UFImage> callback)
+        readImage(Action<Bitmap> callback)
         {
             UFImage m_image = new UFImage();
+
             Bitmap result = deviceAgent.readImage(ref m_image);
 
-            callback?.Invoke(m_image);
+            callback?.Invoke(result);
 
             return result;
         }
@@ -245,7 +246,7 @@ namespace FingerPrintController.Agents
                 case AgentsManager.EnumCommands.ReadImage:
                     if (data.Length == 1)
                     {
-                        return readImage((Action<UFImage>)data[0]);
+                        return readImage((Action<Bitmap>)data[0]);
                     }
 
                     return -1;

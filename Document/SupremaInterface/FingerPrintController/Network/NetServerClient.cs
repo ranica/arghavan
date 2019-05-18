@@ -105,10 +105,17 @@ namespace FingerPrintController.Network
         {
             try
             {
-                client?.GetStream ()
-                       .Write (data,
-                               0,
-                               data.Length);
+                NetworkStream stream = client?.GetStream();
+
+
+                if (null != stream)
+                {
+                    stream.Write(data,
+                                   0,
+                                   data.Length);
+
+                    stream.Flush();
+                }
             }
             catch (Exception)
             {

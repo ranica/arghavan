@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\DB;
 
 Route::view('wizard', 'wizard-test.index');
 Route::get('upload', 'PeopleController@upload');
+Route::get('test', 'AmoebaController@listAllowTraffic');
 /* TEST */
 
 
@@ -11,58 +12,35 @@ Route::get('ipass', function () {
                                          'name'])
                                 ->get ();
 
-            $terms = \App\Term::with('semester')
-                                ->select (['id',
-                                            'semester_id',
-                                            'year',
-                                            'startDate',
-                                            'endDate'])
-                                  ->get ();
-            $degrees = \App\Degree::select (['id',
-                                            'name'])
-                                     ->get ();
-            $gatePlans = \App\GatePlan::select (['id',
-                                                'name'])
-                                     ->get ();
+    $terms = \App\Term::with('semester')
+                        ->select (['id',
+                                    'semester_id',
+                                    'year',
+                                    'startDate',
+                                    'endDate'])
+                          ->get ();
+    $degrees = \App\Degree::select (['id',
+                                    'name'])
+                             ->get ();
+    $gatePlans = \App\GatePlan::select (['id',
+                                        'name'])
+                             ->get ();
 
 
-            $result = [
-                        'degrees'        => $degrees,
-                        'buildings'      => $buildings,
-                        'gatePlans'      => $gatePlans,
-                        'terms'           => $terms,
-                   ];
+    $result = [
+                'degrees'        => $degrees,
+                'buildings'      => $buildings,
+                'gatePlans'      => $gatePlans,
+                'terms'           => $terms,
+           ];
 
-            return $result;
+    return $result;
 });
 
 Route::get('allow', function(){
 
-    $ip = '192.168.1.10';
-    $fun = [
-        'gatedevices' => function($q) {
-                $q->select([
-                    'id',
-                    'name',
-                    'ip'
-                ]);
-            },
-
-            'gatedevices.cards' => function($q) {
-                $q->select([
-                    'cards.id',
-                    'cards.cdn',
-                ]);
-            },
-    ];
-
-    $result = App\Amoeba::where('ip', $ip)
-                            ->whereHas('gatedevices', function($query){
-                                $query->whereHas('cards');
-                            })
-                            ->with($fun)
-                            ->select('id', 'name')
-                            ->get();
+    
+   
 
        //  $fields= [
        //      'ip' => $result-,
@@ -71,47 +49,12 @@ Route::get('allow', function(){
 
        // return response()->json ($fields,
 
-    return $result;
+    return $res;
 });
 
 Route::get('getData', function(){
-    $card = '2047437529';
-
-    $fun = [
-        'users' => function($q) {
-                $q->select([
-                    'id',
-                    'code',
-                    'people_id',
-                    'state',
-                ]);
-            },
-          'users.people' => function($q) {
-                $q->select([
-                    'id',
-                    'name',
-                    'lastname'
-                ]);
-            },
-    ];
-    $res = App\Card::where('cdn', $card)
-                    ->whereHas('users.people')
-                    ->with($fun)
-                    ->select('id', 'cdn', 'state')
-                    ->first();
-
-    $fields = [
-        'code' => $res->users[0]->code,
-        'enabled_user' => $res->users[0]->state,
-        'name' => $res->users[0]->people->name,
-        'lastname' => $res->users[0]->people->lastname,
-        'cart' => $res->cdn,
-        'enabled_cart' => $res->state,
-    ];
-
-    return response()->json [ $fields, 200];
-    return  $fields;
-;});
+    
+});
 
 Route::get('pic', function(){
 

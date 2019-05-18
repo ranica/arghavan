@@ -173,9 +173,10 @@
             // 
             // picFinger
             // 
-            this.picFinger.Location = new System.Drawing.Point(169, 341);
+            this.picFinger.Location = new System.Drawing.Point(185, 341);
             this.picFinger.Name = "picFinger";
-            this.picFinger.Size = new System.Drawing.Size(121, 109);
+            this.picFinger.Size = new System.Drawing.Size(106, 109);
+            this.picFinger.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picFinger.TabIndex = 5;
             this.picFinger.TabStop = false;
             // 

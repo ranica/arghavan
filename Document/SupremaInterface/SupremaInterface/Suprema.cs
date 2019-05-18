@@ -21,24 +21,24 @@ namespace SupremaInterface
         /// Ctr
         /// </summary>
         public
-        Suprema (string path = null)
+        Suprema(string path = null)
         {
             if (null == path)
             {
-                supremaEngine = new SFM_SDK_NET ();
+                supremaEngine = new SFM_SDK_NET();
             }
             else
             {
-                supremaEngine = new SFM_SDK_NET (path);
+                supremaEngine = new SFM_SDK_NET(path);
             }
         }
 
         /// <summary>
         /// DCtr
         /// </summary>
-        ~Suprema ()
+        ~Suprema()
         {
-            close ();
+            close();
         }
         #endregion
 
@@ -48,11 +48,11 @@ namespace SupremaInterface
         /// Get template size
         /// </summary>
         public uint
-        getTemplateSize ()
+        getTemplateSize()
         {
             uint result = 0;
 
-            supremaEngine.UF_GetSysParameter (UF_SYS_PARAM.UF_SYS_TEMPLATE_SIZE,
+            supremaEngine.UF_GetSysParameter(UF_SYS_PARAM.UF_SYS_TEMPLATE_SIZE,
                                               ref result);
 
             return result;
@@ -66,11 +66,11 @@ namespace SupremaInterface
         /// </summary>
         /// <returns></returns>
         public UF_RET_CODE
-        connect (string commPort,
+        connect(string commPort,
                  int baudRate,
                  bool asciiMode = false)
         {
-            UF_RET_CODE result = supremaEngine.UF_InitCommPort (commPort,
+            UF_RET_CODE result = supremaEngine.UF_InitCommPort(commPort,
                                                                 baudRate,
                                                                 asciiMode);
 
@@ -83,10 +83,10 @@ namespace SupremaInterface
         /// </summary>
         /// <returns></returns>
         public UF_RET_CODE
-        connect (string ip,
+        connect(string ip,
                  int port)
         {
-            UF_RET_CODE result = supremaEngine.UF_InitSocket (ip,
+            UF_RET_CODE result = supremaEngine.UF_InitSocket(ip,
                                                               port,
                                                               false);
 
@@ -98,15 +98,15 @@ namespace SupremaInterface
         /// Clsoe
         /// </summary>
         public UF_RET_CODE
-        close ()
+        close()
         {
             UF_RET_CODE result;
 
             try
             {
-                result = supremaEngine.UF_CloseCommPort ();
+                result = supremaEngine.UF_CloseCommPort();
 
-                result = supremaEngine.UF_CloseSocket ();
+                result = supremaEngine.UF_CloseSocket();
             }
             catch (Exception)
             {
@@ -124,7 +124,7 @@ namespace SupremaInterface
         /// Enroll a user fingerPrint
         /// </summary>
         public UF_RET_CODE
-        enroll (uint userId,
+        enroll(uint userId,
                 UF_ENROLL_OPTION option,
                 ref uint enrolledUserId,
                 ref uint imageQuality)
@@ -134,7 +134,7 @@ namespace SupremaInterface
 
             supremaEngine.UF_Cancel(true);
 
-            result = supremaEngine.UF_Enroll (userId,
+            result = supremaEngine.UF_Enroll(userId,
                                               option,
                                               ref enrolledUserId,
                                               ref imageQuality);
@@ -150,29 +150,25 @@ namespace SupremaInterface
         public Bitmap
         readImage(ref UFImage m_image)
         {
-            //m_Image = Marshal.AllocHGlobal(256 * 1024);
+            UF_RET_CODE result = supremaEngine.UF_ReadImage(ref m_image);
 
-            var result = supremaEngine.UF_ReadImage(ref m_image);
-         
+
             if (result == 0)
             {
-                var hbitmap = supremaEngine.UF_ConvertToBitmap(m_image);
+                Bitmap hbitmap = supremaEngine.UF_ConvertToBitmap(m_image);
+
                 return hbitmap;
             }
-            else
-                return null;
-        }
 
-        private IntPtr dd(Bitmap hbitmap)
-        {
-            throw new NotImplementedException();
+
+            return null;
         }
 
         /// <summary>
         /// Enroll a user fingerPrint (by template)
         /// </summary>
         public UF_RET_CODE
-        enroll (uint userId,
+        enroll(uint userId,
                 UF_ENROLL_OPTION option,
                 uint templateSize,
                 byte[] templateData,
@@ -181,7 +177,7 @@ namespace SupremaInterface
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_EnrollTemplate (userId,
+            result = supremaEngine.UF_EnrollTemplate(userId,
                                                       option,
                                                       templateSize,
                                                       templateData,
@@ -197,13 +193,13 @@ namespace SupremaInterface
         /// Identify a user fingerPrint
         /// </summary>
         public UF_RET_CODE
-        identify (ref uint userId,
+        identify(ref uint userId,
                   ref byte userSubId)
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_Identify (ref userId,
+            result = supremaEngine.UF_Identify(ref userId,
                                                 ref userSubId);
 
             return result;
@@ -214,7 +210,7 @@ namespace SupremaInterface
         /// Identify a user fingerPrint (by template)
         /// </summary>
         public UF_RET_CODE
-        identify (uint templateSize,
+        identify(uint templateSize,
                   byte[] templateData,
                   ref uint userId,
                   ref byte userSubId)
@@ -222,7 +218,7 @@ namespace SupremaInterface
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_IdentifyTemplate (templateSize,
+            result = supremaEngine.UF_IdentifyTemplate(templateSize,
                                                         templateData,
                                                         ref userId,
                                                         ref userSubId);
@@ -237,12 +233,12 @@ namespace SupremaInterface
         /// Delete a user
         /// </summary>
         public UF_RET_CODE
-        delete (uint userId)
+        delete(uint userId)
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_Delete (userId);
+            result = supremaEngine.UF_Delete(userId);
 
 
             return result;
@@ -254,12 +250,12 @@ namespace SupremaInterface
         /// Delete all users
         /// </summary>
         public UF_RET_CODE
-        deleteAll ()
+        deleteAll()
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_DeleteAll ();
+            result = supremaEngine.UF_DeleteAll();
 
 
             return result;
@@ -272,14 +268,14 @@ namespace SupremaInterface
         /// Read user template
         /// </summary>
         public UF_RET_CODE
-        readTemplate (uint userId,
+        readTemplate(uint userId,
                       ref uint numOfTemplate,
                       byte[] data)
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_ReadTemplate (userId,
+            result = supremaEngine.UF_ReadTemplate(userId,
                                                     ref numOfTemplate,
                                                     data);
 
@@ -292,14 +288,14 @@ namespace SupremaInterface
         /// Scan user fingerprint as template
         /// </summary>
         public UF_RET_CODE
-        scanTemplate (byte[] data,
+        scanTemplate(byte[] data,
                       ref uint templateSize,
                       ref uint imageQuality)
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_ScanTemplate (data,
+            result = supremaEngine.UF_ScanTemplate(data,
                                                     ref templateSize,
                                                     ref imageQuality);
 
@@ -312,13 +308,13 @@ namespace SupremaInterface
         /// Check if user has template or not
         /// </summary>
         public UF_RET_CODE
-        checkTemplate (uint userId,
+        checkTemplate(uint userId,
                        ref uint numOfTemplate)
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_CheckTemplate (userId,
+            result = supremaEngine.UF_CheckTemplate(userId,
                                                      ref numOfTemplate);
 
 
@@ -332,12 +328,12 @@ namespace SupremaInterface
         /// Save database into a file
         /// </summary>
         public UF_RET_CODE
-        saveDB (string fileName)
+        saveDB(string fileName)
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_SaveDB (fileName);
+            result = supremaEngine.UF_SaveDB(fileName);
 
 
             return result;
@@ -348,12 +344,12 @@ namespace SupremaInterface
         /// Load database from file
         /// </summary>
         public UF_RET_CODE
-        loadDB (string fileName)
+        loadDB(string fileName)
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_LoadDB (fileName);
+            result = supremaEngine.UF_LoadDB(fileName);
 
 
             return result;
@@ -367,12 +363,12 @@ namespace SupremaInterface
         /// </summary>
         /// <returns></returns>
         public UF_RET_CODE
-        reset ()
+        reset()
         {
             UF_RET_CODE result;
 
 
-            result = supremaEngine.UF_Reset ();
+            result = supremaEngine.UF_Reset();
 
 
             return result;
@@ -430,17 +426,17 @@ namespace SupremaInterface
             /// Parse config
             /// </summary>
             public static DeviceConfigModel
-            loadConfig (string data)
+            loadConfig(string data)
             {
                 DeviceConfigModel result;
 
                 try
                 {
-                    result = JsonConvert.DeserializeObject<DeviceConfigModel> (data);
+                    result = JsonConvert.DeserializeObject<DeviceConfigModel>(data);
                 }
                 catch (Exception)
                 {
-                    result = new DeviceConfigModel ();
+                    result = new DeviceConfigModel();
                 }
 
                 return result;
@@ -451,9 +447,9 @@ namespace SupremaInterface
             /// Serialize in json format
             /// </summary>
             public string
-            toJson (DeviceConfigModel model)
+            toJson(DeviceConfigModel model)
             {
-                return JsonConvert.SerializeObject (model);
+                return JsonConvert.SerializeObject(model);
             }
             #endregion
         }

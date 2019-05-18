@@ -358,5 +358,17 @@ Route::put('/cards/{card}/setGatedevice', 'CardController@setGatedevice');
 
 
 Route::get('accessControl/{code}/{ip}', 'API\PassportController@webService');
-Route::get('gatResponse/{code}/{ip}', 'API\PassportController@getResponseWebService');
-Route::get('getAllowGateDevice/{ip}', 'AmoebaController@getAllowGateDevice');
+Route::get('sendResponse/{code}/{ip}', 'API\PassportController@sendResponseWebService');
+
+/**
+ * get IP Amoeba ->  send [cdn, gatedevice_ip]
+ */
+Route::get('listAllowTraffic/{amoeba_ip}', 'AmoebaController@listAllowTraffic');
+/**
+ * get cdn -> send user picture
+ */
+Route::get('getPictureUserByCDN/{cdn}', 'CardController@getPictureUserByCDN');
+/**
+ * get cdn -> send Data user:(name, lastname, code, enabled_card, enabled_user)
+ */
+Route::get('getDataUserByCDN/{cdn}', 'CardController@getDataUserByCDN');
