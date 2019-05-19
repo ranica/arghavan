@@ -39,8 +39,8 @@ Route::get('ipass', function () {
 
 Route::get('allow', function(){
 
-    
-   
+
+
 
        //  $fields= [
        //      'ip' => $result-,
@@ -53,7 +53,7 @@ Route::get('allow', function(){
 });
 
 Route::get('getData', function(){
-    
+
 });
 
 Route::get('pic', function(){
@@ -85,20 +85,20 @@ Route::get('pic', function(){
 // ;    // $localFileName  = public_path().'/uploads/php.png';
 
 //
-    $th_name = $res->users[0]->people->picture;
-    $localFileName = \Storage::path($th_name);
-    $fileData = file_get_contents($localFileName);
-    $ImgfileEncode = base64_encode($fileData);
+    $th_name = $res;
+    // $localFileName = \Storage::path($th_name);
+    // $fileData = file_get_contents($localFileName);
+    // $ImgfileEncode = base64_encode($fileData);
 
-    $fields = [
-        'cdn' => $cdn,
-        'picture' => $ImgfileEncode
-    ];
+    // $fields = [
+    //     'cdn' => $cdn,
+    //     'picture' => $ImgfileEncode
+    // ];
 
-    return response()->json ($fields,
-                                    200);
+    // return response()->json ($fields,
+    //                                 200);
 
-    return $ImgfileEncode;
+    return $th_name;
 
 
 });

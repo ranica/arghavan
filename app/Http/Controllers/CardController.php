@@ -382,9 +382,10 @@ class CardController extends Controller
             ];
         }
     }
-  
+
     public function getPictureUserByCDN($cdn)
     {
+        dd($cdn);
         $card = $cdn;
         $fun = [
         'users' => function($q) {
@@ -413,18 +414,24 @@ class CardController extends Controller
 
         // $th_name = $res->users[0]->people->picture;
         // dd($th_name);
-        $th_name = 'JZh9tc8Dc5ycELsxCn9JpRJLTLME0kW9p7dTOCBK-t.png';
-        $localFileName = \Storage::path($th_name);
-        $fileData = file_get_contents($localFileName);
-        $ImgfileEncode = base64_encode($fileData);
+        $th_name = 'xbHsuVeiqBst2YY4puL0C4pzApWvB5ORprYAoEoE.jpeg';
 
-        $fields = [
-            'cdn' => $cdn,
-            'picture' => $ImgfileEncode
-        ];
+        $response = Response::make($th_name, 200);
+        $response->header('Content-Type', 'image/jpeg');
+        return $response;
 
-        return response()->json ($fields,
-                                        $this->successStatus);
+        // $localFileName = \Storage::path($th_name);
+        // $fileData = file_get_contents($localFileName);
+        // $ImgfileEncode = base64_encode($fileData);
+
+
+        // $fields = [
+        //     'cdn' => $cdn,
+        //     'picture' => $ImgfileEncode
+        // ];
+
+        // return response()->json ($fields,
+        //                                 $this->successStatus);
     }
     /**
      * Gets the data user by cdn.
@@ -470,7 +477,7 @@ class CardController extends Controller
             'enabled_card' => $res->state
         ];
 
-        return response()->json($fields, 
+        return response()->json($fields,
                                 $this->successStatus);
     }
 }
