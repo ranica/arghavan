@@ -568,27 +568,15 @@ namespace SuprimaProgram.Forms
 
                     personModel.success[0].fingerprint_template = "00";
 
-                   
-
-                   
-                    personModel.success[0].people_name =
-                                nameTextBox.Text.Trim();
-
-                    personModel.success[0].people_lastname =
-                                lastnameTextBox.Text.Trim();
-
+                  
                     personModel.success[0].people_nationalId =
                                 natioalcodeTextBox.Text.Trim();
 
                     personModel.success[0].user_code =
                                 codeTextBox.Text.Trim();
 
-                   
 
-                    //personModel.success[0].group_id =
-                    //            Convert.ToInt16(groupComboBox.SelectedValue);
-
-                    string url = "api/update-user";
+                    string url = "api/store-fingerprint-user";
 
 
                     RestfulHelper restfulHelper = new RestfulHelper(HttpClientData.baseUrl);
