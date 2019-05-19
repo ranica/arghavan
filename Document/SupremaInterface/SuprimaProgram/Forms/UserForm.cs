@@ -1,4 +1,5 @@
-﻿using BaseDAL.Model;
+﻿using BaseDAL.Base;
+using BaseDAL.Model;
 using Newtonsoft.Json;
 using SuprimaProgram.Helper;
 using SuprimaProgram.Model;
@@ -24,8 +25,14 @@ namespace SuprimaProgram.Forms
         #region Variable
 
         private TcpClient client = null;
+
         private PersonModel personResult = null;
+
         private ComboDataModel dataResult = null;
+
+        private ImageLoader imageLoader;
+
+        private EnumReceiveMode receiveMode = EnumReceiveMode.TEXT;
 
         //private uint userId
         //{
@@ -71,9 +78,13 @@ namespace SuprimaProgram.Forms
         private void bindEvents()
         {
             enrollButton.Click                  += enrollButton_Click;
+
             nextButton.Click                    += nextButton_Click;
+
             previousButton.Click                += previousButton_Click;
+
             finishButton.Click                  += finishButton_Click;
+
             mainTabControl.SelectedIndexChanged += MainTabControl_SelectedIndexChanged;
         }
 
@@ -122,10 +133,74 @@ namespace SuprimaProgram.Forms
         /// Load Combo fingerprint device 
         /// </summary>
         /// <param name="msg"></param>
+        private void log(byte[] data)
+        {
+            // Parse data
+            string str = System.Text.Encoding.UTF8.GetString(data);
+
+
+            if (str.StartsWith(FP.FingerPrintController.C_BEGIN_IMAGE))
+            {
+                receiveMode = EnumReceiveMode.IMAGE;
+
+                string[] subData = str.Split('\t');
+
+                int size = Convert.ToInt32(subData[1]);
+
+                imageLoader = new ImageLoader(size);
+            }
+            else if (str.StartsWith(FP.FingerPrintController.C_END_IMAGE))
+            {
+                enrollPictureBox.Image = imageLoader?.toBitmap();
+
+                receiveMode = EnumReceiveMode.TEXT;
+            }
+            else
+            {
+                if (receiveMode == EnumReceiveMode.IMAGE)
+                {
+                    imageLoader?.addBytes(data);
+                }
+                else
+                {
+                    log(str);
+                }
+            }
+
+            //this.Invoke(new Action(() =>
+            //{
+
+            //    string[] data = msg.Split(FP.FingerPrintController.C_SEPARATOR);
+
+            //    if (data[0] == FingerPrintController.FingerPrintController.C_DEVICES_LIST)
+            //    {
+            //        devicesComboBox.Items.Clear();
+
+            //        devicesComboBox.Items.AddRange(data);
+
+            //        reloadGroupCombo();
+
+            //    }
+            //    else if (data[0] == FingerPrintController.FingerPrintController.C_READ_TEMPLATE)
+            //    {
+            //        //tData = data[3];
+            //    }
+            //    else if (data[0] == FingerPrintController.FingerPrintController.C_IDENTIFY_TEMPLATE)
+            //    {
+            //    }
+            //}));
+        }
+
+        /// <summary>
+        /// Log Message
+        /// </summary>
+        /// <param name="msg"></param>
         private void log(string msg)
         {
             this.Invoke(new Action(() =>
             {
+                //logListBox.Items.Insert(0,
+                //                        msg);
 
                 string[] data = msg.Split(FP.FingerPrintController.C_SEPARATOR);
 
@@ -134,19 +209,22 @@ namespace SuprimaProgram.Forms
                     devicesComboBox.Items.Clear();
 
                     devicesComboBox.Items.AddRange(data);
-
-                    reloadGroupCombo();
-
                 }
                 else if (data[0] == FingerPrintController.FingerPrintController.C_READ_TEMPLATE)
                 {
-                    //tData = data[3];
+                    tData = data[3];
                 }
                 else if (data[0] == FingerPrintController.FingerPrintController.C_IDENTIFY_TEMPLATE)
                 {
                 }
+
+                else if (data[0] == FingerPrintController.FingerPrintController.C_READ_IMAGE)
+                {
+                    //picFinger.Image = Image.FromHbitmap(data[1]);
+                }
             }));
         }
+
 
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -389,6 +467,7 @@ namespace SuprimaProgram.Forms
         private CommandResult validate(int step)
         {
             CommandResult result;
+
             string data = searchTextBox.Text.Trim();
 
             if (data.isNullOrEmptyOrWhiteSpaceOrLen(10))
@@ -406,6 +485,23 @@ namespace SuprimaProgram.Forms
         /// <param name="e"></param>
         private void enrollButton_Click(object sender, EventArgs e)
         {
+            enroll();
+
+            readdImage();
+
+            saveDB();
+            
+        }
+        
+
+        /// <summary>
+        /// Enroll 
+        /// </summary>
+
+        private void enroll()
+        {
+            receiveMode = EnumReceiveMode.TEXT;
+
             string msg =
                 $"{FP.FingerPrintController.C_ENROLL}" +
                     $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}" +
@@ -415,8 +511,21 @@ namespace SuprimaProgram.Forms
             write(client,
                    msg);
         }
+        /// <summary>
+        /// Read Image
+        /// </summary>
+        private void readdImage()
+        {
+            receiveMode = EnumReceiveMode.TEXT;
 
-      
+            string msg = $"{FP.FingerPrintController.C_READ_IMAGE}" +
+                    $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}";
+
+            write(client,
+                   msg);
+        }
+
+
         /// <summary>
         /// Write to TCPClient
         /// </summary>
@@ -430,6 +539,140 @@ namespace SuprimaProgram.Forms
                 .Write(data,
                         0,
                         data.Length);
+        }
+
+        /// <summary>
+        /// Save DB
+        /// </summary>
+        private void saveDB()
+        {
+            try
+            {
+                CommandResult opResult = null;
+
+                opResult = validateData();
+
+                if (opResult.status == EnumCommandStatus.success)
+                {
+
+                    PersonModel personModel = new PersonModel();
+
+                    personModel.success = new PersonResponseData[1];
+
+                    personModel.success[0] = new PersonResponseData();
+
+                    personModel.success[0].fingerprint_user_id = 00;
+
+
+                    personModel.success[0].fingerprint_sub_id = 00;
+
+                    personModel.success[0].fingerprint_template = "00";
+
+                   
+
+                   
+                    personModel.success[0].people_name =
+                                nameTextBox.Text.Trim();
+
+                    personModel.success[0].people_lastname =
+                                lastnameTextBox.Text.Trim();
+
+                    personModel.success[0].people_nationalId =
+                                natioalcodeTextBox.Text.Trim();
+
+                    personModel.success[0].user_code =
+                                codeTextBox.Text.Trim();
+
+                   
+
+                    //personModel.success[0].group_id =
+                    //            Convert.ToInt16(groupComboBox.SelectedValue);
+
+                    string url = "api/update-user";
+
+
+                    RestfulHelper restfulHelper = new RestfulHelper(HttpClientData.baseUrl);
+
+                    string resultContent = await restfulHelper.requestUpdate(personModel,
+                                                                             restfulHelper.baseUrl + url);
+
+                    if (null != resultContent)
+                    {
+                        if ("OK" == resultContent)
+                        {
+                            messageLabel.Text = " اطلاعات با موفقیت ثبت شد ";
+                            ClearPanels(dataGroupBox);
+                            cdnTextBox.Clear();
+                            dateTextBox.Text = ExtensionsDateTime.toPersianDate(DateTime.Now.AddYears(1));
+                        }
+                        else if ("Unauthorized" == resultContent)
+                        {
+                            MessageBox.Show("سریال کارت متعلق به شخص دیگری می باشد");
+                        }
+                        else
+                        {
+                            messageLabel.Text = "خطا در ذخیره داده";
+                        }
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show(opResult.model.ToString(), "اخطار", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerExtensions.log(ex);
+            }
+        }
+
+        /// <summary>
+        /// Validate data
+        /// </summary>
+        /// <returns></returns>
+        private CommandResult validateData()
+        {
+            CommandResult result;
+
+            List<string> err = new List<string>();
+            string name = nameTextBox.Text.Trim();
+            string lastName = lastnameTextBox.Text.Trim();
+            string nationalCode = natioalcodeTextBox.Text.Trim();
+            string code = codeTextBox.Text.Trim();
+            string endDate = dateTextBox.Text;
+            string cdn = cdnTextBox.Text.Trim();
+            string cardType = cardTypeComboBox.Text.Trim();
+
+            #region Validate
+            if (name.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("نام وارد شده نامعتبر می باشد");
+            if (lastName.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("نام خانوادگی وارد شده نامعتبر می باشد");
+            if (nationalCode.isNullOrEmptyOrWhiteSpaceOrLen(10))
+                err.Add("کد ملی وارد شده نامعتبر می باشد");
+            if (code.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("کد پرسنلی / دانشجویی وارد شده نامعتبر می باشد");
+            if (cdn.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("شماره سریال وارد شده نامعتبر می باشد");
+            else if (cardType.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("نوع کارت وارد شده نامعتبر می باشد");
+
+            if (null != endDate)
+            {
+                if (!endDate.isBirthDate(10))
+                    err.Add("تاریخ وارد شده نامعتبر است");
+            }
+
+            #endregion
+
+            // Check for errors
+            if (err.Count > 0)
+                result = CommandResult.makeErrorResult("ERROR", String.Join("\r\n", err.ToArray()));
+            else
+                result = CommandResult.makeSuccessResult("OK");
+
+            return result;
         }
 
         #endregion

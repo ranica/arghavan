@@ -76,11 +76,15 @@
     <Compile Include="Forms\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Enum\Class1.cs" />
+    <Compile Include="Helper\Enum\EnumReceiveMode.cs" />
+    <Compile Include="Helper\Enum\EnumCommandStatus.cs" />
     <Compile Include="Helper\Extensions\DateExtension.cs" />
     <Compile Include="Helper\Extensions\DateTimeExtension.cs" />
     <Compile Include="Helper\Extensions\LoggerExtensions.cs" />
     <Compile Include="Helper\Extensions\StringExtension.cs" />
     <Compile Include="Helper\HttpClientData.cs" />
+    <Compile Include="Helper\ImageLoader.cs" />
     <Compile Include="Helper\RestfulHelper.cs" />
     <Compile Include="Model\ComboDataModal.cs" />
     <Compile Include="Model\LoginResponseModel.cs" />

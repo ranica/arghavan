@@ -52,28 +52,24 @@ namespace SuprimaProgram.Model
         }
 
 
-        public string card_cdn
+        public int? fingerprint_user_id
         {
             get;
             set;
         }
 
-        public int? card_type_id
+        public int? fingerprint_sub_id
         {
             get;
             set;
         }
 
-        public int? card_state
+        public string fingerprint_template
         {
             get;
             set;
         }
-        public DateTime? card_endDate
-        {
-            get;
-            set;
-        }
+       
 
         public int? group_id
         {

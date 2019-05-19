@@ -10,6 +10,8 @@ use App\Http\Requests\CardRequest;
 use App\Http\Resources\CardCollection;
 use App\Http\Resources\CardFilterCollection;
 use Carbon\Carbon;
+use Response;
+use Image;
 
 class CardController extends Controller
 {
@@ -382,7 +384,7 @@ class CardController extends Controller
             ];
         }
     }
-  
+
     public function getPictureUserByCDN($cdn)
     {
         $card = $cdn;
@@ -394,7 +396,7 @@ class CardController extends Controller
                     'people_id'
                 ]);
             },
-          'users.people' => function($q) {
+        'users.people' => function($q) {
                 $q->select([
                     'id',
                     'name',
@@ -408,23 +410,12 @@ class CardController extends Controller
                         ->with($fun)
                         ->first();
 
-
-          // $localFileName  = public_path().'/uploads/php.png';
-
         // $th_name = $res->users[0]->people->picture;
         // dd($th_name);
-        $th_name = 'JZh9tc8Dc5ycELsxCn9JpRJLTLME0kW9p7dTOCBK-t.png';
+        $th_name = 'xbHsuVeiqBst2YY4puL0C4pzApWvB5ORprYAoEoE.jpeg';
         $localFileName = \Storage::path($th_name);
-        $fileData = file_get_contents($localFileName);
-        $ImgfileEncode = base64_encode($fileData);
 
-        $fields = [
-            'cdn' => $cdn,
-            'picture' => $ImgfileEncode
-        ];
-
-        return response()->json ($fields,
-                                        $this->successStatus);
+        return Image::make($localFileName)->response();
     }
     /**
      * Gets the data user by cdn.
@@ -463,14 +454,14 @@ class CardController extends Controller
 
         $fields = [
             'code' => $res->users[0]->code,
-            'enabled_user' => $res->users[0]->state,
+            // 'enabled_user' => $res->users[0]->state,
             'name' => $res->users[0]->people->name,
             'lastname' => $res->users[0]->people->lastname,
             'card' => $res->cdn,
-            'enabled_card' => $res->state
+            // 'enabled_card' => $res->state
         ];
 
-        return response()->json($fields, 
+        return response()->json($fields,
                                 $this->successStatus);
     }
 }

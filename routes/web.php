@@ -364,11 +364,13 @@ Route::get('sendResponse/{code}/{ip}', 'API\PassportController@sendResponseWebSe
  * get IP Amoeba ->  send [cdn, gatedevice_ip]
  */
 Route::get('listAllowTraffic/{amoeba_ip}', 'AmoebaController@listAllowTraffic');
+
 /**
  * get cdn -> send user picture
  */
-Route::get('getPictureUserByCDN/{cdn}', 'CardController@getPictureUserByCDN');
+Route::get('getUserCDN/{cdn}/image', 'CardController@getPictureUserByCDN');
+
 /**
  * get cdn -> send Data user:(name, lastname, code, enabled_card, enabled_user)
  */
-Route::get('getDataUserByCDN/{cdn}', 'CardController@getDataUserByCDN');
+Route::get('getDataUser/{cdn}/listdata', 'CardController@getDataUserByCDN');

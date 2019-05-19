@@ -147,6 +147,82 @@ namespace SuprimaProgram.Helper
             return responseResult;
         }
 
+        /// <summary>
+        /// Request Update
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public async Task<string> requestSave(PersonModel data,
+                                                      string url)
+        {
+            string responseResult = null;
+
+            try
+            {
+
+                client.DefaultRequestHeaders.Accept.Clear();
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(C_HEADER_VALUE_APP_JSON));
+
+                client.DefaultRequestHeaders.Add(C_HEADER_ACCEPT, C_HEADER_VALUE_APP_JSON);
+
+                client.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
+
+              
+                           
+
+                var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("user_code", 
+                                                    data.success[0].user_code),
+
+                    new KeyValuePair<string, string>("user_id", 
+                                                        data.success[0].user_id.ToString()),
+
+                    new KeyValuePair<string, string>("people_name", 
+                                                    data.success[0].people_name),
+
+                    new KeyValuePair<string, string>("people_lastname", 
+                                                    data.success[0].people_lastname),
+
+                    new KeyValuePair<string, string>("people_nationalId", 
+                                                    data.success[0].people_nationalId),
+
+                    new KeyValuePair<string, string>("people_nationalId", 
+                                                    data.success[0].people_nationalId),
+
+                    new KeyValuePair<string, string>("fingerprint_user_id", 
+                                                    data.success[0].fingerprint_user_id.ToString()),
+
+                    new KeyValuePair<string, string>("fingerprint_sub_id", 
+                                                    data.success[0].fingerprint_sub_id.ToString()),
+
+                    new KeyValuePair<string, string>("fingerprint_template", 
+                                                    data.success[0].fingerprint_template),
+
+                    new KeyValuePair<string, string>("group_id", 
+                                                    data.success[0].group_id.ToString()),
+                });
+
+                var result = await client.PostAsync(url, content);
+
+                string resultContent = await result.Content.ReadAsStringAsync();
+
+
+
+                responseResult = result.StatusCode.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                LoggerExtensions.log(ex);
+            }
+
+            return responseResult;
+        }
+
 
     }
 }

@@ -212,6 +212,11 @@ namespace Test.Forms
 
                     devicesComboBox.Items.AddRange(data);
                 }
+
+                else if (data[0] == FingerPrintController.FingerPrintController.C_ENROLL)
+                {
+                    // check data[0] -> userid , subid
+                }
                 else if (data[0] == FingerPrintController.FingerPrintController.C_READ_TEMPLATE)
                 {
                     tData = data[3];
@@ -219,11 +224,7 @@ namespace Test.Forms
                 else if (data[0] == FingerPrintController.FingerPrintController.C_IDENTIFY_TEMPLATE)
                 {
                 }
-
-                else if (data[0] == FingerPrintController.FingerPrintController.C_READ_IMAGE)
-                {
-                    //picFinger.Image = Image.FromHbitmap(data[1]);
-                }
+                               
             }));
         }
 
