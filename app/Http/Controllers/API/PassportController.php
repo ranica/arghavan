@@ -93,8 +93,6 @@ class PassportController extends Controller
             return response()->json($fiedls,
                                     401);
         }
-
-
         $input             = $request->all ();
         $input['password'] = bcrypt ($input['password']);
         $user              = User::create ($input);
@@ -139,7 +137,6 @@ class PassportController extends Controller
 
         // Try to logout
         $user = \Auth::user();
-
         $id   = $user->id;
         $name = $user->name;
 
@@ -185,11 +182,12 @@ class PassportController extends Controller
      */
     public function searchUser(Request $request)
     {
+        $code = $request->code;
         $items = User::join('people','people.id', '=', 'users.people_id')
                 ->join('groups', 'groups.id', '=', 'users.group_id')
                 ->leftJoin('cards', 'cards.user_id', '=', 'users.id')
-                ->orWhere('users.code', '=', $request->code)
-                ->orWhere('people.nationalId', '=', $request->code)
+                ->orWhere('users.code', '=', $code)
+                ->orWhere('people.nationalId', '=', $code)
                 ->select([
                     'groups.name as group_name',
                     'groups.id as group_id',
@@ -214,9 +212,8 @@ class PassportController extends Controller
                 $result = response()->json($fields,
                                    $this->successStatus);
 
-            return ($result);
+        return ($result);
     }
-
 
     /**
      * Update/ Create user
@@ -232,7 +229,6 @@ class PassportController extends Controller
         if (! is_null ($card))
         {
             $user_id = $request->user_id;
-
             // Card is assigned to user
             if ($card->user_id == $user_id)
             {
@@ -252,7 +248,7 @@ class PassportController extends Controller
                 ];
 
 
-                 return response()->json($fieldsError,
+                return response()->json($fieldsError,
                                     $this->failedStatus);
             }
         }
@@ -303,48 +299,76 @@ class PassportController extends Controller
         //                            $this->successStatus);
 
         return ($result);
-
-
     }
-    
+
     /**
-     * Send Response  webservice [53011] | [54011]
+     * Gets the data fingerprint.
      *
-     * @param      <type>  $code   The code
-     * @param      <type>  $ip     { parameter_description }
+     * @param      \Illuminate\Http\Request  $request  The request
      *
-     * @return     <type>  ( description_of_the_return_value )
+     * @return     <type>                    The data fingerprint.
      */
-    public function webService($code, $ip)
+    public function getFingerprintUser(Request $request)
     {
-        $fields= [
-            'ip' => $ip,
-            'code' => $code
-        ];
+       $code = $request->code;
+        $fun = [
+            'people' => function($query){
+                 $query->select([
+                    'id',
+                    'name',
+                    'lastname',
+                    'nationalId'
+                    ]);
+                },
+            ];
 
-        $data = [
-            'ip' => $ip,
-            'data' => '53011'
-        ];
+        $items = \App\User::wherehas('people',function($query) use($code){
+                    $query->Where('users.code', $code);
+                    $query->orWhere('people.nationalId', $code);
+                })
+                ->join('groups', 'groups.id', '=', 'users.group_id')
+                ->leftJoin('fingerprints', 'fingerprints.user_id', 'users.id')
+                ->with($fun)
+                ->select(['users.id as user_id',
+                            'users.code as user_code',
+                            'groups.name as group_name',
+                            'groups.id as group_id',
+                            'people_id as people_id',
+                            'fingerprints.id as fingerprint_id',
+                            'fingerprints.fingerprint_user_id as fingerprint_user_id',
+                            'fingerprints.image as fingerprint_image',
+                            'fingerprints.template as fingerprint_template',
+                        ])
+                ->get();
 
-        return response()->json ($data,
-                                     $this->successStatus);
+                $resultUser = \App\Http\Resources\FingerprintDataResource::collection ($items);
+                $fields = ['success' => $resultUser];
+
+                $result = response()->json($fields,
+                                   $this->successStatus);
+        return $result;
     }
-
     /**
-    * Get Response Web Service [63011] | [64011]
-    */
-
-    public function getResponseWebService($code, $ip)
+     * Stores a fingerprint.
+     *
+     * @param      \Illuminate\Http\Request  $request  The request
+     */
+    public function storeFingerprintUser(Request $request)
     {
-        $fields= [
-            'ip' => $ip,
-            'code' => $code
-        ];
-       
-       return response()->json ($fields,
-                                     $this->successStatus);
-    }
+        $newFingerprint = \App\Fingerprint::create([
+                    'user_id'               => $request->user_id,
+                    'fingerprint_user_id'   => $request->fingerprint_user_id,
+                    'image'                 => $request->fingerprint_image,
+                    'image_quality'         => $request->fingerprint_quality,
+                    'template'              => $request->fingerprint_template,
+                ]);
 
+        $fieldsError = [
+                    'success' => ['success' => $newFingerprint->id]
+                ];
+
+        return response()->json($fieldsError,
+                                $this->successStatus);
+    }
 }
 

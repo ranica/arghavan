@@ -104,6 +104,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(\App\People::class);
     }
+
+    public function fingerprint()
+    {
+        return $this->belongsTo(\App\Fingerprint::class);
+    }
+
     /**
      * List of related student
      */

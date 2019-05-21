@@ -147,6 +147,71 @@ namespace SuprimaProgram.Helper
             return responseResult;
         }
 
+        /// <summary>
+        /// Request Update
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public async Task<string> requestSave(PersonModel data,
+                                                      string url)
+        {
+            string responseResult = null;
+
+            try
+            {
+
+                client.DefaultRequestHeaders.Accept.Clear();
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(C_HEADER_VALUE_APP_JSON));
+
+                client.DefaultRequestHeaders.Add(C_HEADER_ACCEPT, C_HEADER_VALUE_APP_JSON);
+
+                client.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
+
+
+                ByteArrayContent byteContent = new ByteArrayContent(data.success[0].fingerprint_image);
+
+                var content = new FormUrlEncodedContent(new[]
+                {
+
+                    new KeyValuePair<string, string>("user_id",
+                                                        data.success[0].user_id.ToString()),
+
+                    new KeyValuePair<string, string>("fingerprint_user_id",
+                                                    data.success[0].fingerprint_user_id.ToString()),
+
+                    new KeyValuePair<string, string>("fingerprint_image",
+                                                        data.success[0].fingerprint_image.ToString()),
+
+
+                    new KeyValuePair<string, string>("fingerprint_quality",
+                                                    data.success[0].fingerprint_quality.ToString()),
+
+                    new KeyValuePair<string, string>("fingerprint_template", 
+                                                    data.success[0].fingerprint_template),
+
+                });
+
+
+                var result = await client.PostAsync(url, content);
+
+                string resultContent = await result.Content.ReadAsStringAsync();
+
+
+
+                responseResult = result.StatusCode.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                LoggerExtensions.log(ex);
+            }
+
+            return responseResult;
+        }
+
 
     }
 }

@@ -17,9 +17,10 @@ class CreateFingerprintsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('fingerprint_user_id');
-            $table->tinyInteger('fingerprint_sub_id');
-            $table->string('image_url');
-            $table->binary('template');
+            // $table->tinyInteger('fingerprint_sub_id')->nullable;
+            $table->binary('image')->nullable();
+            $table->unsignedInteger('image_quality')->nullable();
+            $table->binary('template')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

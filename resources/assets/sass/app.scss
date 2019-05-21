@@ -1591,5 +1591,14 @@ body {
     background-color: #fff3;
     border-radius: 5px;
 }
+.card-login
+.image--cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
 
+  object-fit: cover;
+  object-position: center right;
+}
 

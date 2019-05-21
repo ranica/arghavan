@@ -3,15 +3,15 @@
 @section('content')
 <form id="app" class="f-BYekan direction-rtl">
 	{{ csrf_field() }}
-
 	<div class="card card-login card-hidden">
 		<div class="card-header text-center" data-background-color="rose">
-			<h4 class="card-title f-BTitrTGEBold">
-				ورود به سامانه
-			</h4>
+			<img class="image--cover"  src="{{ asset("theme/img/logo/logo-farhangi.jpg") }}" />
 		</div>
 
 		<div class="card-content">
+		<!-- 	<h4 class="card-title f-BTitrTGEBold">
+				<p class="card-description text-center">ورود به سامانه </p>
+			</h4> -->
 			<div class="input-group">
 				<span class="input-group-addon">
 					<i class="material-icons">person</i>

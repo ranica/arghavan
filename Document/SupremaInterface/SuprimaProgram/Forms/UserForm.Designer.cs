@@ -30,13 +30,16 @@
         {
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.searchTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.viewTabPage = new System.Windows.Forms.TabPage();
             this.detailGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.natioalcodeTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.stateFingerTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.fingerprintUserPictureBox = new System.Windows.Forms.PictureBox();
             this.codeTextBox = new System.Windows.Forms.TextBox();
             this.groupComboBox = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -46,26 +49,28 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.fingerprintTabPage = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.devicesComboBox = new System.Windows.Forms.ComboBox();
-            this.enrollButton = new System.Windows.Forms.Button();
-            this.finishButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.natioalcodeTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.saveFingerprintButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.qualityTextBox = new System.Windows.Forms.TextBox();
+            this.fingerprintUserIdTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.enrollButton = new System.Windows.Forms.Button();
+            this.enrollPictureBox = new System.Windows.Forms.PictureBox();
+            this.devicesComboBox = new System.Windows.Forms.ComboBox();
+            this.finishButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.nextButton = new System.Windows.Forms.Button();
             this.mainTabControl.SuspendLayout();
             this.searchTabPage.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.viewTabPage.SuspendLayout();
             this.detailGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fingerprintUserPictureBox)).BeginInit();
             this.fingerprintTabPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.enrollPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // mainTabControl
@@ -94,6 +99,19 @@
             this.searchTabPage.Text = "جستجوی کاربر";
             this.searchTabPage.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.searchTextBox);
+            this.groupBox2.Location = new System.Drawing.Point(9, 8);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Size = new System.Drawing.Size(617, 212);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "جستجوی کاربر";
+            // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -102,7 +120,7 @@
             this.label8.Location = new System.Drawing.Point(331, 59);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(271, 21);
-            this.label8.TabIndex = 5;
+            this.label8.TabIndex = 0;
             this.label8.Text = " شماره پرسنلی / دانشجویی / کدملی را وارد نمایید";
             // 
             // searchTextBox
@@ -113,7 +131,7 @@
             this.searchTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(267, 30);
-            this.searchTextBox.TabIndex = 1;
+            this.searchTextBox.TabIndex = 0;
             this.searchTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // viewTabPage
@@ -134,9 +152,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.detailGroupBox.Controls.Add(this.natioalcodeTextBox);
             this.detailGroupBox.Controls.Add(this.label6);
-            this.detailGroupBox.Controls.Add(this.textBox1);
+            this.detailGroupBox.Controls.Add(this.stateFingerTextBox);
             this.detailGroupBox.Controls.Add(this.label1);
-            this.detailGroupBox.Controls.Add(this.pictureBox1);
+            this.detailGroupBox.Controls.Add(this.fingerprintUserPictureBox);
             this.detailGroupBox.Controls.Add(this.codeTextBox);
             this.detailGroupBox.Controls.Add(this.groupComboBox);
             this.detailGroupBox.Controls.Add(this.label15);
@@ -151,20 +169,44 @@
             this.detailGroupBox.Name = "detailGroupBox";
             this.detailGroupBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.detailGroupBox.Size = new System.Drawing.Size(620, 241);
-            this.detailGroupBox.TabIndex = 29;
+            this.detailGroupBox.TabIndex = 0;
             this.detailGroupBox.TabStop = false;
             this.detailGroupBox.Text = "مشخصات";
             // 
-            // textBox1
+            // natioalcodeTextBox
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(262, 189);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(211, 27);
-            this.textBox1.TabIndex = 25;
-            this.textBox1.Tag = "fam";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.natioalcodeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.natioalcodeTextBox.Location = new System.Drawing.Point(262, 96);
+            this.natioalcodeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.natioalcodeTextBox.Name = "natioalcodeTextBox";
+            this.natioalcodeTextBox.Size = new System.Drawing.Size(211, 27);
+            this.natioalcodeTextBox.TabIndex = 3;
+            this.natioalcodeTextBox.Tag = "pn";
+            this.natioalcodeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(484, 101);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 21);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "کد ملی:";
+            // 
+            // stateFingerTextBox
+            // 
+            this.stateFingerTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.stateFingerTextBox.Enabled = false;
+            this.stateFingerTextBox.Font = new System.Drawing.Font("B Yekan", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.stateFingerTextBox.Location = new System.Drawing.Point(262, 189);
+            this.stateFingerTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.stateFingerTextBox.Name = "stateFingerTextBox";
+            this.stateFingerTextBox.Size = new System.Drawing.Size(211, 29);
+            this.stateFingerTextBox.TabIndex = 6;
+            this.stateFingerTextBox.Tag = "fam";
+            this.stateFingerTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -174,17 +216,20 @@
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 21);
-            this.label1.TabIndex = 24;
+            this.label1.TabIndex = 0;
             this.label1.Text = "وضعیت اثرانگشت:";
             // 
-            // pictureBox1
+            // fingerprintUserPictureBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(55, 22);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(155, 197);
-            this.pictureBox1.TabIndex = 23;
-            this.pictureBox1.TabStop = false;
+            this.fingerprintUserPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.fingerprintUserPictureBox.Image = global::SuprimaProgram.Properties.Resources.image_placeholder;
+            this.fingerprintUserPictureBox.Location = new System.Drawing.Point(55, 22);
+            this.fingerprintUserPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.fingerprintUserPictureBox.Name = "fingerprintUserPictureBox";
+            this.fingerprintUserPictureBox.Size = new System.Drawing.Size(155, 197);
+            this.fingerprintUserPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.fingerprintUserPictureBox.TabIndex = 23;
+            this.fingerprintUserPictureBox.TabStop = false;
             // 
             // codeTextBox
             // 
@@ -193,7 +238,7 @@
             this.codeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.codeTextBox.Name = "codeTextBox";
             this.codeTextBox.Size = new System.Drawing.Size(211, 27);
-            this.codeTextBox.TabIndex = 20;
+            this.codeTextBox.TabIndex = 2;
             this.codeTextBox.Tag = "pn";
             this.codeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -206,7 +251,7 @@
             this.groupComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupComboBox.Name = "groupComboBox";
             this.groupComboBox.Size = new System.Drawing.Size(211, 28);
-            this.groupComboBox.TabIndex = 22;
+            this.groupComboBox.TabIndex = 1;
             this.groupComboBox.Tag = "grp";
             // 
             // label15
@@ -217,7 +262,7 @@
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(38, 21);
-            this.label15.TabIndex = 11;
+            this.label15.TabIndex = 0;
             this.label15.Text = "گروه:";
             // 
             // label5
@@ -228,7 +273,7 @@
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(130, 21);
-            this.label5.TabIndex = 13;
+            this.label5.TabIndex = 0;
             this.label5.Text = "کد پرسنلی/دانشجویی:";
             // 
             // lastnameTextBox
@@ -238,7 +283,7 @@
             this.lastnameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lastnameTextBox.Name = "lastnameTextBox";
             this.lastnameTextBox.Size = new System.Drawing.Size(211, 27);
-            this.lastnameTextBox.TabIndex = 18;
+            this.lastnameTextBox.TabIndex = 5;
             this.lastnameTextBox.Tag = "fam";
             this.lastnameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -250,7 +295,7 @@
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 21);
-            this.label3.TabIndex = 15;
+            this.label3.TabIndex = 0;
             this.label3.Text = "نام خانوادگی:";
             // 
             // nameTextBox
@@ -260,7 +305,7 @@
             this.nameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(211, 27);
-            this.nameTextBox.TabIndex = 17;
+            this.nameTextBox.TabIndex = 4;
             this.nameTextBox.Tag = "nam";
             this.nameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -272,7 +317,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 21);
-            this.label2.TabIndex = 16;
+            this.label2.TabIndex = 0;
             this.label2.Text = "نام:";
             // 
             // fingerprintTabPage
@@ -286,6 +331,76 @@
             this.fingerprintTabPage.Text = "ثبت اثر انگشت";
             this.fingerprintTabPage.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.saveFingerprintButton);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.qualityTextBox);
+            this.groupBox1.Controls.Add(this.fingerprintUserIdTextBox);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.enrollButton);
+            this.groupBox1.Controls.Add(this.enrollPictureBox);
+            this.groupBox1.Controls.Add(this.devicesComboBox);
+            this.groupBox1.Location = new System.Drawing.Point(18, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(606, 243);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "ثبت اثر انگشت";
+            // 
+            // saveFingerprintButton
+            // 
+            this.saveFingerprintButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveFingerprintButton.Location = new System.Drawing.Point(369, 160);
+            this.saveFingerprintButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.saveFingerprintButton.Name = "saveFingerprintButton";
+            this.saveFingerprintButton.Size = new System.Drawing.Size(189, 41);
+            this.saveFingerprintButton.TabIndex = 38;
+            this.saveFingerprintButton.Text = "ذخیره اثرانگشت";
+            this.saveFingerprintButton.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(83, 63);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 21);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "کیفیت:";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(83, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(106, 21);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "کد اثرانگشت شما:";
+            // 
+            // qualityTextBox
+            // 
+            this.qualityTextBox.Font = new System.Drawing.Font("B Yekan", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.qualityTextBox.Location = new System.Drawing.Point(19, 56);
+            this.qualityTextBox.Name = "qualityTextBox";
+            this.qualityTextBox.Size = new System.Drawing.Size(59, 34);
+            this.qualityTextBox.TabIndex = 35;
+            this.qualityTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // fingerprintUserIdTextBox
+            // 
+            this.fingerprintUserIdTextBox.Enabled = false;
+            this.fingerprintUserIdTextBox.Font = new System.Drawing.Font("B Yekan", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.fingerprintUserIdTextBox.Location = new System.Drawing.Point(19, 19);
+            this.fingerprintUserIdTextBox.Name = "fingerprintUserIdTextBox";
+            this.fingerprintUserIdTextBox.Size = new System.Drawing.Size(59, 34);
+            this.fingerprintUserIdTextBox.TabIndex = 34;
+            this.fingerprintUserIdTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -293,28 +408,40 @@
             this.label4.Location = new System.Drawing.Point(442, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(150, 21);
-            this.label4.TabIndex = 32;
+            this.label4.TabIndex = 0;
             this.label4.Text = "نام دستگاه را انتخاب نمایید";
-            // 
-            // devicesComboBox
-            // 
-            this.devicesComboBox.FormattingEnabled = true;
-            this.devicesComboBox.Location = new System.Drawing.Point(312, 80);
-            this.devicesComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.devicesComboBox.Name = "devicesComboBox";
-            this.devicesComboBox.Size = new System.Drawing.Size(276, 28);
-            this.devicesComboBox.TabIndex = 31;
             // 
             // enrollButton
             // 
             this.enrollButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.enrollButton.Location = new System.Drawing.Point(369, 139);
+            this.enrollButton.Location = new System.Drawing.Point(369, 115);
             this.enrollButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.enrollButton.Name = "enrollButton";
             this.enrollButton.Size = new System.Drawing.Size(189, 41);
-            this.enrollButton.TabIndex = 20;
+            this.enrollButton.TabIndex = 2;
             this.enrollButton.Text = "ثبت اثر انگشت";
             this.enrollButton.UseVisualStyleBackColor = true;
+            // 
+            // enrollPictureBox
+            // 
+            this.enrollPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.enrollPictureBox.Image = global::SuprimaProgram.Properties.Resources.image_placeholder;
+            this.enrollPictureBox.Location = new System.Drawing.Point(19, 92);
+            this.enrollPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.enrollPictureBox.Name = "enrollPictureBox";
+            this.enrollPictureBox.Size = new System.Drawing.Size(120, 142);
+            this.enrollPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.enrollPictureBox.TabIndex = 33;
+            this.enrollPictureBox.TabStop = false;
+            // 
+            // devicesComboBox
+            // 
+            this.devicesComboBox.FormattingEnabled = true;
+            this.devicesComboBox.Location = new System.Drawing.Point(334, 80);
+            this.devicesComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.devicesComboBox.Name = "devicesComboBox";
+            this.devicesComboBox.Size = new System.Drawing.Size(254, 28);
+            this.devicesComboBox.TabIndex = 1;
             // 
             // finishButton
             // 
@@ -326,74 +453,15 @@
             this.finishButton.Text = "پایان";
             this.finishButton.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.pictureBox2);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.enrollButton);
-            this.groupBox1.Controls.Add(this.devicesComboBox);
-            this.groupBox1.Location = new System.Drawing.Point(18, 12);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(606, 231);
-            this.groupBox1.TabIndex = 33;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "ثبت اثر انگشت";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.searchTextBox);
-            this.groupBox2.Location = new System.Drawing.Point(9, 8);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(617, 212);
-            this.groupBox2.TabIndex = 30;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "جستجوی کاربر";
-            // 
-            // natioalcodeTextBox
-            // 
-            this.natioalcodeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.natioalcodeTextBox.Location = new System.Drawing.Point(262, 96);
-            this.natioalcodeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.natioalcodeTextBox.Name = "natioalcodeTextBox";
-            this.natioalcodeTextBox.Size = new System.Drawing.Size(211, 27);
-            this.natioalcodeTextBox.TabIndex = 27;
-            this.natioalcodeTextBox.Tag = "pn";
-            this.natioalcodeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(484, 101);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 21);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "کد ملی:";
-            // 
             // previousButton
             // 
             this.previousButton.Location = new System.Drawing.Point(553, 309);
             this.previousButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.previousButton.Name = "previousButton";
             this.previousButton.Size = new System.Drawing.Size(100, 39);
-            this.previousButton.TabIndex = 31;
+            this.previousButton.TabIndex = 0;
             this.previousButton.Text = "قبلی";
             this.previousButton.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(31, 25);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(155, 197);
-            this.pictureBox2.TabIndex = 33;
-            this.pictureBox2.TabStop = false;
             // 
             // nextButton
             // 
@@ -401,7 +469,7 @@
             this.nextButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(100, 39);
-            this.nextButton.TabIndex = 32;
+            this.nextButton.TabIndex = 1;
             this.nextButton.Text = "بعدی";
             this.nextButton.UseVisualStyleBackColor = true;
             // 
@@ -424,16 +492,16 @@
             this.Text = "ثبت اثرانگشت";
             this.mainTabControl.ResumeLayout(false);
             this.searchTabPage.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.viewTabPage.ResumeLayout(false);
             this.detailGroupBox.ResumeLayout(false);
             this.detailGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fingerprintUserPictureBox)).EndInit();
             this.fingerprintTabPage.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.enrollPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -447,9 +515,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.GroupBox detailGroupBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox stateFingerTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox fingerprintUserPictureBox;
         private System.Windows.Forms.TextBox codeTextBox;
         private System.Windows.Forms.ComboBox groupComboBox;
         private System.Windows.Forms.Label label15;
@@ -466,8 +534,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox natioalcodeTextBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox enrollPictureBox;
         private System.Windows.Forms.Button previousButton;
         private System.Windows.Forms.Button nextButton;
+        private System.Windows.Forms.TextBox qualityTextBox;
+        private System.Windows.Forms.TextBox fingerprintUserIdTextBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button saveFingerprintButton;
     }
 }

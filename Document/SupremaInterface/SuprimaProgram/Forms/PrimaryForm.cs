@@ -40,14 +40,13 @@ namespace SuprimaProgram.Forms
         private void bindEvent()
         {
             
-            connectButton.Click += connectButton_Click;
-            enrollButton.Click += enrollButton_Click;
-            this.FormClosing += primaryForm_FormClosing;
+            connectButton.Click     += connectButton_Click;
+            enrollButton.Click      += enrollButton_Click;
+            this.FormClosing        += primaryForm_FormClosing;
         }
 
         private void primaryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("close form");
             FP.FingerPrintController.stop();
         }
 
@@ -86,7 +85,7 @@ namespace SuprimaProgram.Forms
             catch (Exception ex)
             {
 
-                throw;
+                
             }
         }
 

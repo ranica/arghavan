@@ -13,4 +13,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('search-user', 'API\PassportController@searchUser');
 	Route::post('update-user', 'API\PassportController@UpdateUser');
 	Route::post('logout', 'API\PassportController@logout');
+	Route::post('get-fingerprint-user', 'API\PassportController@getFingerprintUser');
+	Route::post('store-fingerprint-user', 'API\PassportController@storeFingerprintUser');
+
+
 });

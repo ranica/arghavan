@@ -176,6 +176,8 @@ namespace SupremaInterface
         {
             UF_RET_CODE result;
 
+            supremaEngine.UF_Cancel(true);
+
 
             result = supremaEngine.UF_EnrollTemplate(userId,
                                                       option,
@@ -274,6 +276,7 @@ namespace SupremaInterface
         {
             UF_RET_CODE result;
 
+            supremaEngine.UF_Cancel(true);
 
             result = supremaEngine.UF_ReadTemplate(userId,
                                                     ref numOfTemplate,
@@ -293,6 +296,7 @@ namespace SupremaInterface
                       ref uint imageQuality)
         {
             UF_RET_CODE result;
+            supremaEngine.UF_Cancel(true);
 
 
             result = supremaEngine.UF_ScanTemplate(data,

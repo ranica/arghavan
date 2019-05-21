@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Amoeba;
 use App\Http\Resources\AmoebaCollection;
+use App\Http\Resources\ListDataCollection;
 use Illuminate\Http\Request;
 
 class AmoebaController extends Controller
 {
-
+    public function __construct ()
+    {
+    }
+    /**
+     * List Gate device with card data
+     *
+     * @param      <type>            $amoeba_ip  The amoeba ip
+     *
+     * @return     AmoebaCollection  ( description_of_the_return_value )
+     */
     public function listAllowTraffic($amoeba_ip)
     {
         $ip = $amoeba_ip;
@@ -38,6 +48,56 @@ class AmoebaController extends Controller
                                 ->get();
 
         return new AmoebaCollection($result);
+    }
+
+    public function listDataUser($amoeba_ip)
+    {
+        $ip = $amoeba_ip;
+        $fun = [
+            'gatedevices' => function($q) {
+                    $q->select([
+                        'id',
+                        'name',
+                        'ip'
+                    ]);
+                },
+
+                'gatedevices.cards' => function($q) {
+                    $q->select([
+                        'cards.id',
+                        'cards.cdn',
+                    ]);
+                },
+
+                'gatedevices.cards.users' => function($q) {
+                    $q->select([
+                        'users.id',
+                        'users.code',
+                        'users.people_id'
+                    ]);
+                },
+
+                'gatedevices.cards.users.people' => function($q) {
+                    $q->select([
+                        'people.id',
+                        'people.name',
+                        'people.lastname'
+                    ]);
+                },
+        ];
+        $result = Amoeba::where('ip', $ip)
+                                ->whereHas('gatedevices', function($query){
+                                    $query->whereHas('cards', function($query){
+                                        $query->whereHas('users',function($query){
+                                            $query->whereHas('people');
+                                        } );
+                                    });
+                                })
+                                ->with($fun)
+                                ->select('id', 'name')
+                                ->get();
+
+        return new ListDataCollection($result);
     }
     /**
      * Display a listing of the resource.

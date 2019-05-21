@@ -17,6 +17,7 @@ namespace SuprimaProgram.Model
 
     public class PersonResponseData
     {
+         
         public string people_name
         {
             get;
@@ -45,35 +46,37 @@ namespace SuprimaProgram.Model
             set;
         }
 
-        public int? user_state
+       
+        public int? fingerprint_user_id
         {
             get;
             set;
         }
 
-
-        public string card_cdn
+        public int? fingerprint_id
         {
             get;
             set;
         }
 
-        public int? card_type_id
+        public string fingerprint_template
         {
             get;
             set;
         }
 
-        public int? card_state
+        public int? fingerprint_quality
         {
             get;
             set;
         }
-        public DateTime? card_endDate
+
+        public byte[] fingerprint_image
         {
             get;
             set;
         }
+
 
         public int? group_id
         {

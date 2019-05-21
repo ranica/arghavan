@@ -42,9 +42,9 @@ namespace FingerPrintController.Network
                                                   port);
 
 
-            listener = new TcpListener (endPoint);
+            listener = new TcpListener(endPoint);
 
-            startListening ();
+            startListening();
         }
 
 

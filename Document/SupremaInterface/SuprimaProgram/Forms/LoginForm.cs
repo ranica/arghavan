@@ -105,15 +105,16 @@ namespace SuprimaProgram.Forms
 
                     }
 
+                    //TODO: check value token
+                    //var t = HttpClientData.token.isEmptyDate();
 
-
-                    if (null != HttpClientData.token)
-                    {
+                    //if (! HttpClientData.token.isEmptyDate())
+                    //{
                         PrimaryForm form = new PrimaryForm();
                         this.Hide();
                         form.ShowDialog();
 
-                    }
+                    //}
                     
 
                 }

@@ -135,7 +135,7 @@ namespace FingerPrintController.Network
 
             if (client != null)
             {
-                client.GetStream ()?.Close ();
+                //client.GetStream ()?.Close ();
 
                 client.Close ();
             }

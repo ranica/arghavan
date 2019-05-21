@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
             CommonRangeSeeder::class,
 
             AmoebaSeeder::class,
+            FingerprintDeviceSeeder::class,
 
     ]);
 

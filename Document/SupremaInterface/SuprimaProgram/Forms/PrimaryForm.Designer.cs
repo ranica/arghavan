@@ -79,7 +79,7 @@
             this.Name = "PrimaryForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ثبت و بررسی اطلاعات اثرانگشت";
+            this.Text = "1";
             this.ResumeLayout(false);
 
         }

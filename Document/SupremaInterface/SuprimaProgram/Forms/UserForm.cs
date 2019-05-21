@@ -1,12 +1,16 @@
-﻿using BaseDAL.Model;
+﻿using BaseDAL.Base;
+using BaseDAL.Model;
 using Newtonsoft.Json;
 using SuprimaProgram.Helper;
+using SuprimaProgram.Helper.Enum;
 using SuprimaProgram.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -24,8 +28,19 @@ namespace SuprimaProgram.Forms
         #region Variable
 
         private TcpClient client = null;
+
         private PersonModel personResult = null;
+
         private ComboDataModel dataResult = null;
+        private int finger_image_quality = 0;
+        private int finger_user_id = 0;
+        private int? user_id = 0;
+
+        private ImageLoader imageLoader;
+
+        private EnumReceiveMode receiveMode = EnumReceiveMode.TEXT;
+
+        private Thread connectThread = null;
 
         //private uint userId
         //{
@@ -71,48 +86,77 @@ namespace SuprimaProgram.Forms
         private void bindEvents()
         {
             enrollButton.Click                  += enrollButton_Click;
+
             nextButton.Click                    += nextButton_Click;
+
             previousButton.Click                += previousButton_Click;
+
             finishButton.Click                  += finishButton_Click;
+
+            saveFingerprintButton.Click         += saveFingerprintButton_Click;
+
             mainTabControl.SelectedIndexChanged += MainTabControl_SelectedIndexChanged;
         }
 
+       
         /// <summary>
         /// Prepare
         /// </summary>
         private void prepare()
         {
+            reloadCombo();
+
+            try
+            {
+                connectThread?.Abort();
+              
+            }
+            finally
+            {
+                connectThread = null;
+            }
+
             client = new TcpClient();
             client.Connect("127.0.0.1", 10000);
 
-            Thread thread = new Thread(() =>
+            
+
+            connectThread = new Thread(() =>
             {
                 while (client?.Connected == true)
                 {
                     byte[] data = new byte[1024];
 
-                    int len = client.GetStream()
-                                    .Read(data,
-                                           0,
-                                           data.Length);
-
-                    if (len == 0)
+                    try
                     {
-                        return;
+                        int len = client.GetStream()
+                                        .Read(data,
+                                               0,
+                                               data.Length);
+
+                        if (len == 0)
+                        {
+                            return;
+                        }
+
+                        byte[] pureData = new byte[len];
+
+
+                        Array.Copy(data,
+                                    pureData,
+                                    len);
+
+                        log(pureData);
                     }
-
-                    byte[] pureData = new byte[len];
-
-
-                    Array.Copy(data,
-                                pureData,
-                                len);
-
-                    log(System.Text.Encoding.UTF8.GetString(pureData));
+                    catch (Exception ex)
+                    {
+                        log(ex.Message);
+                    }
                 }
+            
             });
 
-            thread.Start();
+            connectThread.Start();
 
             write(client, FP.FingerPrintController.C_DEVICES_LIST);
         }
@@ -122,10 +166,53 @@ namespace SuprimaProgram.Forms
         /// Load Combo fingerprint device 
         /// </summary>
         /// <param name="msg"></param>
+        private void log(byte[] data)
+        {
+            // Parse data
+            string str = System.Text.Encoding.UTF8.GetString(data);
+
+
+            if (str.StartsWith(FP.FingerPrintController.C_BEGIN_IMAGE))
+            {
+                receiveMode = EnumReceiveMode.IMAGE;
+
+                string[] subData = str.Split('\t');
+
+                int size = Convert.ToInt32(subData[1]);
+
+                imageLoader = new ImageLoader(size);
+            }
+            else if (str.StartsWith(FP.FingerPrintController.C_END_IMAGE))
+            {
+                //enrollPictureBox.Image = null;
+                enrollPictureBox.Image = imageLoader?.toBitmap();
+
+                receiveMode = EnumReceiveMode.TEXT;
+            }
+            else
+            {
+                if (receiveMode == EnumReceiveMode.IMAGE)
+                {
+                    imageLoader?.addBytes(data);
+                }
+                else
+                {
+                    log(str);
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Log Message
+        /// </summary>
+        /// <param name="msg"></param>
         private void log(string msg)
         {
-            this.Invoke(new Action(() =>
-            {
+            //this.Invoke(new Action(() =>
+            //{
+            //    //logListBox.Items.Insert(0,
+                //                        msg);
 
                 string[] data = msg.Split(FP.FingerPrintController.C_SEPARATOR);
 
@@ -135,18 +222,38 @@ namespace SuprimaProgram.Forms
 
                     devicesComboBox.Items.AddRange(data);
 
-                    reloadGroupCombo();
-
+                    devicesComboBox.SelectedIndex = 1;
                 }
+
                 else if (data[0] == FingerPrintController.FingerPrintController.C_READ_TEMPLATE)
                 {
-                    //tData = data[3];
+                    tData = data[3];
                 }
+
                 else if (data[0] == FingerPrintController.FingerPrintController.C_IDENTIFY_TEMPLATE)
                 {
                 }
-            }));
+
+                else if (data[0] == FingerPrintController.FingerPrintController.C_READ_IMAGE)
+                {
+                    //picFinger.Image = Image.FromHbitmap(data[1]);
+                }
+
+                else if (data[0] == FingerPrintController.FingerPrintController.C_ENROLL)
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        finger_user_id = Convert.ToInt32(data[1]);
+                        finger_image_quality = Convert.ToInt32(data[2]);
+                        fingerprintUserIdTextBox.Text = data[1];
+                        qualityTextBox.Text = data[2] + "%";
+
+                        readTemplate();
+
+                    }));
+                }
         }
+
 
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -167,30 +274,25 @@ namespace SuprimaProgram.Forms
             finishButton.Visible = (step == count - 1);
         }
 
-        /// <summary>
-        /// Reload Group ComboBox 
+        /// Reload ComboBox 
         /// </summary>
-        private async void reloadGroupCombo()
+        private async void reloadCombo()
         {
-            #region ComboBox GroupComboBox
-           
+            #region ComboBox CardType && GroupComboBox
+
             RestfulHelper restfulHelper = new RestfulHelper(HttpClientData.baseUrl);
             string resultContent = await restfulHelper.request("/api/get-data");
 
 
             dataResult = JsonConvert.DeserializeObject<Model.ComboDataModel>(resultContent);
 
-            this.Invoke(new Action(() =>
-            {
-                groupComboBox.DisplayMember = "name";
-                groupComboBox.ValueMember = "id";
-                groupComboBox.DataSource = dataResult.successGroup;
-
-            }));
-
+            groupComboBox.DisplayMember = "name";
+            groupComboBox.ValueMember = "id";
+            groupComboBox.DataSource = dataResult.successGroup;
 
             #endregion
         }
+
 
         /// <summary>
         /// Previous Button
@@ -247,7 +349,9 @@ namespace SuprimaProgram.Forms
                     case 1:
                         {
                             // view info usr
+                          
                             enableTab(fingerprintTabPage, true);
+
                         }
                         break;
 
@@ -276,20 +380,13 @@ namespace SuprimaProgram.Forms
 
                 RestfulHelper restfulHelper = new RestfulHelper(HttpClientData.baseUrl);
 
-                personResult = await restfulHelper.requestSearch(searchTextBox.Text.Trim(), "/api/search-user");
+                personResult = await restfulHelper.requestSearch(searchTextBox.Text.Trim(), "/api/get-fingerprint-user");
 
                 if (personResult.success.Length > 0)
                 {
                     PersonResponseData personResponseData = personResult.success[0] ?? null;
 
-
-                    if (personResponseData.card_endDate.HasValue)
-                    {
-                        nextYear = personResponseData.card_endDate.Value;
-                    }
-
-                    String cardDate = ExtensionsDateTime.toPersianDate(nextYear);
-
+                    user_id = personResponseData.user_id;
 
                     //codeTextBox.Text =
                     //    personResponseData.user_id.ToString();
@@ -308,6 +405,18 @@ namespace SuprimaProgram.Forms
 
                     codeTextBox.Text =
                         personResponseData.user_code;
+
+                    stateFingerTextBox.Text = (personResponseData.fingerprint_id != null) ? "دارد" : "ندارد";
+
+                    if (personResponseData.fingerprint_image != null)
+                    {
+
+                        fingerprintUserPictureBox.Image = null;
+                        MemoryStream mem = new MemoryStream(personResponseData.fingerprint_image);
+                        fingerprintUserPictureBox.Image = Image.FromStream(mem);
+                    }
+                    else
+                        fingerprintUserPictureBox.Image = SuprimaProgram.Properties.Resources.image_placeholder;
 
                     groupComboBox.SelectedValue =
                         personResponseData.group_id;
@@ -331,7 +440,32 @@ namespace SuprimaProgram.Forms
         /// <param name="e"></param>
         private void finishButton_Click(object sender, EventArgs e)
         {
-            CloseSuccess();
+            try
+            {
+                if (null != client)
+                {
+                    try
+                    {
+                        client.Close();
+                        client = null;
+                       
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+                }
+
+                connectThread?.Abort();
+                CloseSuccess();
+            }
+            catch (Exception)
+            {
+
+                connectThread = null;
+                
+            }
+           
         }
 
         /// <summary>
@@ -389,6 +523,7 @@ namespace SuprimaProgram.Forms
         private CommandResult validate(int step)
         {
             CommandResult result;
+
             string data = searchTextBox.Text.Trim();
 
             if (data.isNullOrEmptyOrWhiteSpaceOrLen(10))
@@ -406,6 +541,32 @@ namespace SuprimaProgram.Forms
         /// <param name="e"></param>
         private void enrollButton_Click(object sender, EventArgs e)
         {
+            if (devicesComboBox.Text != null)
+            {
+                enroll();
+
+                readImage();
+
+               
+
+            }
+            else
+            {
+                MessageBox.Show("لطفا نام دستگاه را انتخاب نمایید", "خطا", MessageBoxButtons.OK);
+            }
+            
+        }
+
+      
+
+        /// <summary>
+        /// Enroll 
+        /// </summary>
+
+        private void enroll()
+        {
+            receiveMode = EnumReceiveMode.TEXT;
+
             string msg =
                 $"{FP.FingerPrintController.C_ENROLL}" +
                     $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}" +
@@ -415,8 +576,35 @@ namespace SuprimaProgram.Forms
             write(client,
                    msg);
         }
+        /// <summary>
+        /// Read Image
+        /// </summary>
+        private void readImage()
+        {
+            receiveMode = EnumReceiveMode.TEXT;
 
-      
+            string msg = $"{FP.FingerPrintController.C_READ_IMAGE}" +
+                         $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}";
+
+            write(client,
+                   msg);
+        }
+
+        private void readTemplate()
+        {
+            receiveMode = EnumReceiveMode.TEXT;
+
+            string msg =
+                $"{FP.FingerPrintController.C_READ_TEMPLATE}" +
+                   $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}" +
+                   $"{FP.FingerPrintController.C_SEPARATOR}{finger_user_id}";
+
+
+            write(client,
+                   msg);
+        }
+
+
         /// <summary>
         /// Write to TCPClient
         /// </summary>
@@ -431,6 +619,144 @@ namespace SuprimaProgram.Forms
                         0,
                         data.Length);
         }
+        
+     
+        /// <summary>
+        /// Validate data
+        /// </summary>
+        /// <returns></returns>
+        private CommandResult validateData()
+        {
+            CommandResult result;
+
+            List<string> err = new List<string>();
+            string name = nameTextBox.Text.Trim();
+            string lastName = lastnameTextBox.Text.Trim();
+            string nationalCode = natioalcodeTextBox.Text.Trim();
+            string code = codeTextBox.Text.Trim();
+          
+
+            #region Validate
+            if (name.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("نام وارد شده نامعتبر می باشد");
+            if (lastName.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("نام خانوادگی وارد شده نامعتبر می باشد");
+            if (nationalCode.isNullOrEmptyOrWhiteSpaceOrLen(10))
+                err.Add("کد ملی وارد شده نامعتبر می باشد");
+            if (code.isNullOrEmptyOrWhiteSpaceOrLen(50))
+                err.Add("کد پرسنلی / دانشجویی وارد شده نامعتبر می باشد");
+           
+
+            #endregion
+
+            // Check for errors
+            if (err.Count > 0)
+                result = CommandResult.makeErrorResult("ERROR", String.Join("\r\n", err.ToArray()));
+            else
+                result = CommandResult.makeSuccessResult("OK");
+
+            return result;
+        }
+
+        private void saveFingerprintButton_Click(object sender, EventArgs e)
+        {
+            saveDB();
+        }
+
+        /// <summary>
+        /// Save DB
+        /// </summary>
+        private async void saveDB()
+        {
+            try
+            {
+                CommandResult opResult = null;
+
+                opResult = validateData();
+
+                if (opResult.status == BaseDAL.Base.EnumCommandStatus.success)
+                {
+                    prepareData();
+
+                }
+                else
+                {
+                    MessageBox.Show(opResult.model.ToString(), "اخطار", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerExtensions.log(ex);
+            }
+        }
+
+        private async void prepareData()
+        {
+
+            Image image_fingerprint = enrollPictureBox.Image;
+            
+            PersonModel personModel = new PersonModel();
+
+            personModel.success = new PersonResponseData[1];
+
+            personModel.success[0] = new PersonResponseData();
+
+            personModel.success[0].user_id = user_id;
+
+            personModel.success[0].fingerprint_user_id = finger_user_id;
+
+            personModel.success[0].fingerprint_quality = finger_image_quality;
+
+            personModel.success[0].fingerprint_template = tData;
+
+            //personModel.success[0].people_nationalId =
+            //            natioalcodeTextBox.Text.Trim();
+
+            //personModel.success[0].user_code =
+            //            codeTextBox.Text.Trim();
+
+            if (image_fingerprint != null)
+            {
+                MemoryStream ms = new MemoryStream();
+                image_fingerprint.Save(ms, ImageFormat.Jpeg);
+                byte[] photo = new byte[ms.Length];
+                ms.Position = 0;
+                ms.Read(photo, 0, photo.Length);
+                personModel.success[0].fingerprint_image = photo;
+            }
+
+
+            string url = "api/store-fingerprint-user";
+
+
+            RestfulHelper restfulHelper = new RestfulHelper(HttpClientData.baseUrl);
+
+            string resultContent = await restfulHelper.requestSave(personModel,
+                                                                     restfulHelper.baseUrl + url);
+
+            if (null != resultContent)
+            {
+
+                MessageBox.Show("result : " + resultContent);
+                if ("OK" == resultContent)
+                {
+                    MessageBox.Show(" اطلاعات با موفقیت ثبت شد ");
+                    //ClearPanels(dataGroupBox);
+                    //s.Clear();
+                    //dateTextBox.Text = ExtensionsDateTime.toPersianDate(DateTime.Now.AddYears(1));
+                }
+                else if ("Unauthorized" == resultContent)
+                {
+                    //MessageBox.Show("");
+                }
+                else
+                {
+                    //messageLabel.Text = "خطا در ذخیره داده";
+                }
+            }
+
+        }
+
 
         #endregion
     }

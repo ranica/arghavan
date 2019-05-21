@@ -11,7 +11,7 @@ class FieldSeeder extends Seeder
      */
     public function run()
     {
-         \App\Field::create([
+        \App\Field::create([
             'name' => 'نرم افزار',
             'university_id' => 1,
         ]);

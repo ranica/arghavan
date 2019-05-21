@@ -63,6 +63,3 @@ D:\2.Utility\WebSites\arghavan\Document\SupremaInterface\Test\obj\Debug\Test.For
 D:\2.Utility\WebSites\arghavan\Document\SupremaInterface\Test\obj\Debug\Test.csproj.GenerateResource.Cache
 D:\2.Utility\WebSites\arghavan\Document\SupremaInterface\Test\obj\Debug\Test.exe
 D:\2.Utility\WebSites\arghavan\Document\SupremaInterface\Test\obj\Debug\Test.pdb
-D:\2.Utility\WebSites\arghavan\Document\SupremaInterface\Test\bin\Debug\DLL\SFM_SDK.dll
-D:\2.Utility\WebSites\arghavan\Document\SupremaInterface\Test\bin\Debug\DLL\SFM_SDK_NET.dll
-D:\2.Utility\WebSites\arghavan\Document\SupremaInterface\Test\bin\Debug\DLL\SFM_SDK_NET.XML

@@ -114,6 +114,26 @@ namespace Test.Forms
 
         private void EnrollComboBox_Click(object sender, EventArgs e)
         {
+            
+            enroll();
+
+            readImage();
+
+        }
+
+        private void readImage()
+        {
+            receiveMode = EnumReceiveMode.TEXT;
+
+            string msg = $"{FP.FingerPrintController.C_READ_IMAGE}" +
+                    $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}";
+
+            write(client,
+                   msg);
+        }
+
+        private void enroll()
+        {
             receiveMode = EnumReceiveMode.TEXT;
 
             string msg =
@@ -124,19 +144,11 @@ namespace Test.Forms
 
             write(client,
                    msg);
-
-
         }
 
         private void ImageButton_Click(object sender, EventArgs e)
         {
-            receiveMode = EnumReceiveMode.TEXT;
-
-            string msg = $"{FP.FingerPrintController.C_READ_IMAGE}" +
-                    $"{FP.FingerPrintController.C_SEPARATOR}{devicesComboBox.Text}";
-
-            write(client,
-                   msg);
+            readImage();
         }
 
 
@@ -212,6 +224,13 @@ namespace Test.Forms
 
                     devicesComboBox.Items.AddRange(data);
                 }
+
+                else if (data[0] == FingerPrintController.FingerPrintController.C_ENROLL)
+                {
+                    // check data[0] -> userid , subid
+                    logListBox.Items.Insert(0, "userId" + data[1]);
+                    logListBox.Items.Insert(0, "Image Qulity" + data[2]);
+                }
                 else if (data[0] == FingerPrintController.FingerPrintController.C_READ_TEMPLATE)
                 {
                     tData = data[3];
@@ -219,11 +238,7 @@ namespace Test.Forms
                 else if (data[0] == FingerPrintController.FingerPrintController.C_IDENTIFY_TEMPLATE)
                 {
                 }
-
-                else if (data[0] == FingerPrintController.FingerPrintController.C_READ_IMAGE)
-                {
-                    //picFinger.Image = Image.FromHbitmap(data[1]);
-                }
+                               
             }));
         }
 
