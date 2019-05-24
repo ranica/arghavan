@@ -374,4 +374,6 @@ Route::get('listAllowTraffic/{amoeba_ip}', 'AmoebaController@listAllowTraffic');
 
 Route::get('listDataUser/{amoeba_ip}', 'AmoebaController@listDataUser');
 
+Route::get('myData', 'RaspberryController@routin_check_data');
 
+Route::get('load_gate_device/{cdn}/{ip}/{command}', 'RaspberryController@routin_check_data');

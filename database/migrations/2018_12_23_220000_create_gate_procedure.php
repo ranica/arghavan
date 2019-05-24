@@ -69,7 +69,7 @@ class CreateGateProcedure extends Migration
 
 
         #geoip_region_by_name(Procedure Register Traffic)
-        $spRegisterTraffic = "CREATE DEFINER=`root`@`localhost` PROCEDURE `spRegisterTraffic`(IN `USER_ID` INT, IN `GATEDEVICE_ID` INT, IN `GATEPASS_ID` INT, IN `GATEDIRECT_ID` INT, IN `GATEMESSAGE_ID` INT, IN `GATEOPERATOR_ID` INT)
+        $spRegisterTraffic = "CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_register_traffic`(IN `USER_ID` INT, IN `GATEDEVICE_ID` INT, IN `GATEPASS_ID` INT, IN `GATEDIRECT_ID` INT, IN `GATEMESSAGE_ID` INT, IN `GATEOPERATOR_ID` INT)
              BEGIN
                 SET @user_id = USER_ID;
                 SET @gatedevice_id = GATEDEVICE_ID;
@@ -110,24 +110,23 @@ class CreateGateProcedure extends Migration
 
        #geoip_region_by_name(Procedure Load GateDevice)
 
-        $spLoadGateDevice = "CREATE DEFINER=`root`@`localhost` PROCEDURE `spLoadGateDevice`(IN `IP` VARCHAR(191) CHARSET utf8)
+        $spLoadGateDevice = "CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_load_gate_device_by_ip`(IN `IP` VARCHAR(191) CHARSET utf8)
             BEGIN
             SET @ip = IP;
 
             SELECT
                 gatedevices.id AS gatedevice_id,
                 gatedevices.ip,
-                gatedevices.state AS stateGate,
-                gateoptions.startDate AS optionStart,
-                gateoptions.endDate AS optionEnd,
+                gatedevices.state AS gate_state,
+                gateoptions.startDate AS gate_option_start,
+                gateoptions.endDate AS gate_option_end,
                 gateoptions.genzonew_id AS genZoneWoman,
                 gateoptions.genzonem_id AS genZoneMan,
                 gatedirects.id AS gatedirect_id,
                 gategenders.id AS gender_id,
                 gatepasses.id AS gatepass_id,
                 zones.id AS zone_id,
-                zones.name AS zone_name
-
+               
 
             FROM gatedevices
             INNER JOIN gatedevice_gateoption ON gatedevice_gateoption.gatedevice_id = gatedevices.id
@@ -157,27 +156,30 @@ class CreateGateProcedure extends Migration
             END";
 
 #geoip_region_by_name(Procedure Load User)
-        $spLoadUser = "CREATE DEFINER=`root`@`localhost` PROCEDURE `spLoadUser`(IN `CDN` VARCHAR(191) CHARSET utf8)
+        $spLoadUser = "CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_load_user_by_cdn`(IN `CDN` VARCHAR(191) CHARSET utf8)
             BEGIN
             SET @cdn = CDN;
 
-            SELECT users.id AS user_id,
+            BEGIN
+            SET @cdn = CDN;
+
+           SELECT users.id AS user_id,
                     users.code,
-                    users.state as userState,
+                    users.state as user_state,
                     cards.cdn
                     ,people.name
                     ,people.lastname
                     ,genders.id as gender_id
-                    ,cards.state as cardState
-                    ,cards.startDate as cardBegin
-                    ,cards.endDate as cardEnd
+                    ,cards.state as card_state
+                    ,cards.startDate as card_start
+                    ,cards.endDate as card_end
                     ,gatedirects.id as direct_id
                     ,gatedirects.name as direct
                     ,gatemessages.id as message_id
                     ,gatemessages.message
             FROM cards
-                    inner join users on users.id = cards.user_id
-                    inner join groups on groups.id = cards.group_id
+                    inner join card_user on card_user.card_id = cards.id
+                    inner join users on users.id = card_user.user_id
                     inner join people on people.id = users.people_id
                     inner join genders on genders.id = people.gender_id
                     left  join gatetraffics on gatetraffics.user_id = users.id
@@ -302,14 +304,14 @@ class CreateGateProcedure extends Migration
 
 
 
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_register_traffic');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_load_gate_device_by_ip');
         DB::unprepared('DROP PROCEDURE IF EXISTS spUpdateStatusGateDevice');
         DB::unprepared('DROP PROCEDURE IF EXISTS spDisconnectGateDevice');
         DB::unprepared('DROP PROCEDURE IF EXISTS spGetUserGate');
         DB::unprepared('DROP PROCEDURE IF EXISTS spInsertService');
-        DB::unprepared('DROP PROCEDURE IF EXISTS spRegisterTraffic');
         DB::unprepared('DROP PROCEDURE IF EXISTS spUpdateResponseTraffic');
-        DB::unprepared('DROP PROCEDURE IF EXISTS spLoadGateDevice');
-        DB::unprepared('DROP PROCEDURE IF EXISTS spLoadUser');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_load_user_by_cdn');
         DB::unprepared('DROP PROCEDURE IF EXISTS spInsertLog');
         DB::unprepared('DROP PROCEDURE IF EXISTS spLoadGateDeviceById');
         DB::unprepared('DROP PROCEDURE IF EXISTS spPresentReport');
@@ -339,14 +341,14 @@ class CreateGateProcedure extends Migration
     public function down()
     {
          //DB::unprepared('DROP PROCEDURE IF EXISTS spLogTraffic');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_register_traffic');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_load_gate_device_by_ip');
         DB::unprepared('DROP PROCEDURE IF EXISTS spUpdateStatusGateDevice');
         DB::unprepared('DROP PROCEDURE IF EXISTS spDisconnectGateDevice');
         DB::unprepared('DROP PROCEDURE IF EXISTS spGetUserGate');
         DB::unprepared('DROP PROCEDURE IF EXISTS spInsertService');
-        DB::unprepared('DROP PROCEDURE IF EXISTS spRegisterTraffic');
         DB::unprepared('DROP PROCEDURE IF EXISTS spUpdateResponseTraffic');
-        DB::unprepared('DROP PROCEDURE IF EXISTS spLoadGateDevice');
-        DB::unprepared('DROP PROCEDURE IF EXISTS spLoadUser');
+        DB::unprepared('DROP PROCEDURE IF EXISTS sp_load_user_by_cdn');
         DB::unprepared('DROP PROCEDURE IF EXISTS spInsertLog');
         DB::unprepared('DROP PROCEDURE IF EXISTS spLoadGateDeviceById');
         DB::unprepared('DROP PROCEDURE IF EXISTS spPresentReport');

@@ -187,12 +187,18 @@ return [
          */
         phplusir\smsir\SmsirServiceProvider::class,
 
+        /**
+         * Enum class
+         */
+        BenSampo\Enum\EnumServiceProvider::class,
+
         /*
         * Pakage TCPDF
          */
         Elibyy\TCPDF\ServiceProvider::class,
 
         Laravel\Passport\PassportServiceProvider::class,
+
     ],
 
     /*
