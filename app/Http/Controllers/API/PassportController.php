@@ -310,6 +310,7 @@ class PassportController extends Controller
      */
     public function getFingerprintUser(Request $request)
     {
+
        $code = $request->code;
         $fun = [
             'people' => function($query){
@@ -346,6 +347,7 @@ class PassportController extends Controller
 
                 $result = response()->json($fields,
                                    $this->successStatus);
+                // ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE
         return $result;
     }
     /**
@@ -370,5 +372,29 @@ class PassportController extends Controller
         return response()->json($fieldsError,
                                 $this->successStatus);
     }
+
+    public function updateImageFingerprint(Request $request)
+    {
+        // dd($request->fingerprint_image);
+        $fingerprint = \App\Fingerprint::where('user_id', $request->user_id)
+                                    ->first();
+
+         // Card Exists
+        if (! is_null ($fingerprint))
+        {
+            $fingerprint->update([
+                'image' => $request->fingerprint_image
+            ]);
+        }
+
+        $fields = [
+                    'success' => ['success' => $fingerprint->id]
+                ];
+
+        return response()->json($fields,
+                                $this->successStatus);
+    }
+
+
 }
 

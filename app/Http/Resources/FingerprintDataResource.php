@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Resources;
+use Image;
+use Response;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +16,10 @@ class FingerprintDataResource extends JsonResource
      */
     public function toArray($request)
     {
+        // $pic = Image::make($this->fingerprint_image) ;
+
+        // // $response = Response::make($pic->encode('jpeg'));
+        //  dd($pic);
         return [
             'user_id'   => $this->user_id,
             'user_code' =>$this->user_code,
@@ -27,7 +33,10 @@ class FingerprintDataResource extends JsonResource
 
             'fingerprint_id' => $this->fingerprint_id,
             'fingerprnt_user_id' => $this->fingerprint_user_id,
-            'fingerprint_image' => $this->fingerprint_image
+
+
+            'fingerprint_image' => base64_encode($this->fingerprint_image)
+            // 'fingerprint_image' => utf8_encode($this->fingerprint_image)
         ];
 
 

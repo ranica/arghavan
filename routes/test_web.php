@@ -15,7 +15,7 @@ Route::get('ipass', function () {
     // $index = \array_search($card, $list_card);
     // if(0 == $index)
         // array_push($list_card, ["cdn"=>$card,"ip"=> $ip]);
-        array_push($list_card, ["cdn"=>"ali","ip"=> $ip]);
+        // array_push($list_card, ["cdn"=>"ali","ip"=> $ip]);
         // array_push($list_card, ["cdn"=>"reza","ip"=> $ip]);
 
     $top = sizeof($list_card) - 1;

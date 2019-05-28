@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Enums\MessageGate;
+use DateTime;
 
 
 
@@ -17,79 +18,140 @@ class RaspberryController extends Controller
     public function __construct ()
     {
     }
-
+    /**
+     * Check Data gate
+     *
+     * @param      <type>  $cdn      The cdn
+     * @param      <type>  $ip       ip gate
+     * @param      <type>  $command  The command
+     *
+     * @return     <type>  ( description_of_the_return_value )
+     */
     public function routin_check_data($cdn, $ip, $command)
     {
         // $command = "5308";
         // $ip = '192.168.0.2';
         // $cdn = '2047437529';
-        array_push($this->list_card, $cdn);
-        dd($this->list_card);
-        
-
-        switch ($command) {
+        $direct_input = 1;
+        $direct_output = 2;
+        switch ($command) 
+        {
             case '5308':
-            {
-                $direct = 1;
-                $response = $this->Cmd5308($cdn, $ip); 
-                // return ($response, $ip); //json
-                return $this->sendResponseWebService($response, $ip, $direct);
-            }
-                break;
+                        {
+                            $response = $this->Cmd5308($cdn, $ip, $direct_input);
+                            return $this->sendResponseWebService($response, $ip, $direct_input);
+                        }
+                        break;
 
             case '63011':
-                $this->Cmd63011($cdn); 
-                break;
+                        $this->Cmd63011($cdn, $direct_input);
+                        break;
 
             case '63010':
-                $this->Cmd63010(); 
-                break;
+                        $this->Cmd63010($cdn, $direct_input);
+                        break;
 
             case '5408':
-                $this->Cmd5408(); 
-                break;
+                        {
+                            $response = $this->Cmd5408($cdn, $ip, $direct_output);
+                            return $this->sendResponseWebService($response, $ip, $direct_output);
+                        }
+                        break;
 
             case '64011':
-                $this->Cmd64011(); 
-                break;
+                        $this->Cmd64011($cdn, $direct_output);
+                        break;
 
             case '64010':
-                $this->Cmd640101(); 
-                break;
+                        $this->Cmd64010($cdn, $direct_output);
+                        break;
         }
-        
-
-        // if (0 == $this->check_gate_option())
-        //     return '53010'; // Dont allow organization
-
-      
-
-        // // if(0 == $this->check_expired_card($card))
 
     }
-   
-    public function Cmd5308($cdn, $ip)
+    /**
+     * Command 5308
+     *
+     * @param      <type>  $cdn     The cdn
+     * @param      <type>  $ip      gate ip
+     * @param      <type>  $direct  The direct
+     *
+     * @return     <type>  ( description_of_the_return_value )
+     */
+    public function Cmd5308($cdn, $ip, $direct)
     {
-        $direct = 1;
         $result =  $this->main_check($cdn, $ip, $direct);
         return $result;
-        
     }
-
-    public function Cmd63011($cdn)
+    /**
+     * Command 63011
+     *
+     * @param      <type>  $cdn     The cdn
+     * @param      <type>  $direct  The direct
+     */
+    public function Cmd63011($cdn, $direct)
     {
-        $this->check_list_card_unset($cdn, MessageGate::pass); 
+        $this->update_traffic_db($cdn, MessageGate::pass, $direct);
+    }
+    /**
+     * Command 63010
+     *
+     * @param      <type>  $cdn     The cdn
+     * @param      <type>  $direct  The direct
+     */
+    public function Cmd63010($cdn, $direct)
+    {
+        $this->update_traffic_db($cdn, MessageGate::dontPass, $direct);
     }
 
+    /**
+     * Command 5408
+     *
+     * @param      <type>  $cdn     The cdn
+     * @param      <type>  $ip      ip gate
+     * @param      <type>  $direct  The direct
+     *
+     * @return     <type>  ( description_of_the_return_value )
+     */
+    public function Cmd5408($cdn, $ip, $direct)
+    {
+        $result =  $this->main_check($cdn, $ip, $direct);
+        return $result;
+    }
 
+    /**
+     * Command 64011
+     *
+     * @param      <type>  $cdn     The cdn
+     * @param      <type>  $direct  The direct
+     */
+    public function Cmd64011($cdn, $direct)
+    {
+        $this->update_traffic_db($cdn, MessageGate::pass, $direct);
+    }
+
+    /**
+     * Command 64010
+     *
+     * @param      <type>  $cdn     The cdn
+     * @param      <type>  $direct  The direct
+     */
+    public function Cmd64010($cdn, $direct)
+    {
+        $this->update_traffic_db($cdn, MessageGate::dontPass, $direct);
+    }
+
+    /**
+     * Main check data
+     *
+     * @param      <type>  $cdn     The cdn
+     * @param      <type>  $ip      ip gate
+     * @param      <type>  $direct  The direct
+     *
+     * @return     string  ( description_of_the_return_value )
+     */
     public function main_check($cdn, $ip, $direct)
     {
-        // $direct = 2; // or 2 output
-
-        // $ip = '192.168.0.2';
-        // $cdn = '2047437529';
-       
-        $current_date = \Carbon\Carbon::now();
+        $current_date = \Carbon\Carbon::now()->setTimeZone('Asia/Tehran');
 
         $raw_base_gate = \DB::raw ("CALL sp_load_gate_device_by_ip('$ip');");
         $opResult_base_gate = \DB::select ($raw_base_gate);
@@ -97,11 +159,11 @@ class RaspberryController extends Controller
         $raw_traffic_last_user= \DB::raw ("CALL sp_load_user_by_cdn('$cdn');");
         $opResult_traffic_last_user = \DB::select ($raw_traffic_last_user);
 
-         if (!isset($opResult_base_gate) || 
+         if (!isset($opResult_base_gate) ||
              empty($opResult_base_gate))
             return 'unkown device';
 
-        if (!isset($opResult_traffic_last_user) || 
+        if (!isset($opResult_traffic_last_user) ||
             empty($opResult_traffic_last_user))
         {
             // save traffic unkown card;
@@ -111,11 +173,8 @@ class RaspberryController extends Controller
 
         $gate_device = $opResult_base_gate[0];
         $user_data =  $opResult_traffic_last_user[0];
-      
-        if(!$this->check_list_card_push($cdn, $user_data->user_id, $ip))
-            return MessageGate::duplicat_pass; // Duplicate pass
 
-        // prepare data array
+         // prepare data array
         $list_traffic = array();
         $list_traffic["user_id"] = $user_data->user_id ;
         $list_traffic["gate_id"] = $gate_device->gatedevice_id ;
@@ -123,16 +182,22 @@ class RaspberryController extends Controller
         $list_traffic["gate_direct_id"] = $direct;
         $list_traffic["gate_operator_id"] = 1;
 
+        if($user_data->gatedate >= $current_date->modify('-15 seconds') and
+            MessageGate::allow == $user_data->message_id)
+        {
+            $list_traffic["gate_message_id"] = MessageGate::duplicat_pass;
+            $this->register_traffic_DB($list_traffic);
+            return MessageGate::duplicat_pass; // Duplicate pass
+        }
 
 
-        if (!($gate_device->gate_option_start <= $current_date and 
+        if (!($gate_device->gate_option_start <= $current_date and
             $gate_device->gate_option_end >= $current_date))
         {
             $list_traffic["gate_message_id"] = MessageGate::expaired_department;
             $this->register_traffic_DB($list_traffic);
             return MessageGate::expaired_department;
         }
-            
 
         if (!$user_data->user_state)
         {
@@ -141,7 +206,7 @@ class RaspberryController extends Controller
             return MessageGate::disable_user;
         }
 
-        if (!($user_data->card_start <= $current_date and 
+        if (!($user_data->card_start <= $current_date and
                 $user_data->card_end >= $current_date))
         {
             $list_traffic["gate_message_id"] = MessageGate::expaired_card;
@@ -150,7 +215,7 @@ class RaspberryController extends Controller
         }
 
         $gender_gate_device = $gate_device->gender_id;
-           
+
         if (!($gender_gate_device == $user_data->gender_id or
             $gender_gate_device == 2 ))
         {
@@ -177,7 +242,7 @@ class RaspberryController extends Controller
                 $this->register_traffic_DB($list_traffic);
                 return MessageGate::allow;
                 break;
-            
+
             case '2':
                 if (!is_null($user_data->direct_id))
                 {
@@ -202,14 +267,14 @@ class RaspberryController extends Controller
                             case MessageGate::dontPass:
                             case  MessageGate::licensed_by_user:
                             case  MessageGate::store_by_auto:
-                                //save traffic 
+                                //save traffic
                             {
                                 $list_traffic["gate_message_id"] = MessageGate::allow;
                                 $this->register_traffic_DB($list_traffic);
                                 return MessageGate::allow;
                                 break;
                             }
-                            
+
                         }
                     }
                     $list_traffic["gate_message_id"] = MessageGate::allow;
@@ -226,7 +291,11 @@ class RaspberryController extends Controller
         }
     }
 
-
+    /**
+     * Register Traffic in DB
+     *
+     * @param      <type>  $list   The list
+     */
     public function register_traffic_DB($list)
     {
         $userId = $list["user_id"];
@@ -242,17 +311,22 @@ class RaspberryController extends Controller
                                                                 '$gatedirectId',
                                                                 '$gatemessageId',
                                                                 '$gateoperatorId');");
+    }
 
-      
+    /**
+     * Update traffic in DB
+     *
+     * @param      <type>  $cdn             The cdn
+     * @param      <type>  $gatemessage_id  The gatemessage identifier
+     * @param      <type>  $direct          The direct
+     */
+    public function update_traffic_DB($cdn, $gatemessage_id, $direct)
+    {
+        $raw_base_gate = \DB::select ("CALL sp_update_traffic('$cdn', '$gatemessage_id', '$direct');");
     }
 
     public function prepare_db_unknown_card($ip, $direct)
     {
-        // $result_card = \App\Card::where('cdn', $card)
-        //                             ->count();
-        
-        // if (0 == $result_card)
-        // {
             // Save unknown card
             $gatedevice_id = $this->load_gate_device_by_ip($ip);
             $array_data = array();
@@ -263,8 +337,6 @@ class RaspberryController extends Controller
             $array_data["gate_operator_id"] = 1;
             $array_data["gate_message_id"] = MessageGate::unknown_card;
             $this->register_traffic_DB($array_data);
-        // }   
-        // return $result_card;
 
     }
 
@@ -299,8 +371,6 @@ class RaspberryController extends Controller
 
     public function check_list_card_push($card, $userId, $ip)
     {
-        $top = sizeof($this->list_card) - 1;
-        echo "list".$top;
         $bottom = 0;
         $elem = $card;
         while($bottom <= $top)
@@ -309,9 +379,9 @@ class RaspberryController extends Controller
                 // dd($this->list_card);
                 return false;
             }
-            
+
             $bottom++;
-        }       
+        }
         array_push($this->list_card, ["cdn"=>$card, "ip"=> $ip, "userId"=>$userId]);
         return true;
     }
@@ -330,13 +400,13 @@ class RaspberryController extends Controller
             }
 
             $bottom++;
-        }       
+        }
     }
 
     public function check_amoeba_allow($card, $ip)
     {
         $current_date = \Carbon\Carbon::now();
-         $fun = [         
+         $fun = [
             'cards' => function($q) {
                 $q->select([
                     'cards.id',
@@ -376,27 +446,27 @@ class RaspberryController extends Controller
                                 ->select('id', 'name', 'ip')
                                 ->first();
 
-      
+
         if (! isset($result[0]->cards))
             return 10;
         $card_data = $result[0]->cards;
         $user_data = $result[0]->cards[0]->users;
         $people_data = $result[0]->cards[0]->users[0]->people;
-        
+
         // شماره کارت برمی گردد
-      
+
         if(!($card_data->startDate <= $current_date and $card_data->endDate >= $current_date))
             return 11; // expired card;
-                     
+
                     // if($card->user[0])
         if(0 ==  $user_data->state)
             return 12; // disable user
-                       
+
         // $res_gender_people = $people_data->gender_id;
         $gate_option_data = \App\Gateoption::select(['genzonew_id', 'genzonem_id'])
                                 ->get();
 
-        switch ($people_data->gender_id) 
+        switch ($people_data->gender_id)
         {
             case '1':
                 $res_gender = $gate_option_data->genzonem_id;
@@ -411,13 +481,13 @@ class RaspberryController extends Controller
                 return '53011';
                 // save traffic
                 break;
-            
+
             // default:
             //     # code...
             //     break;
         }
 
-        
+
     }
 
     public function check_expired_card()
@@ -432,7 +502,7 @@ class RaspberryController extends Controller
     */
     public function sendResponseWebService($response, $ip, $direct)
     {
-         
+
         $command = "5000";
         switch ($response)
         {
@@ -452,7 +522,7 @@ class RaspberryController extends Controller
         }
 
         $fields= [
-            'response' => $response,
+            // 'response' => $response,
             'ip' => $ip,
             'command' => $command
         ];

@@ -96,9 +96,11 @@ namespace SuprimaProgram.Forms
             saveFingerprintButton.Click         += saveFingerprintButton_Click;
 
             mainTabControl.SelectedIndexChanged += MainTabControl_SelectedIndexChanged;
+
         }
 
-       
+      
+
         /// <summary>
         /// Prepare
         /// </summary>
@@ -410,10 +412,11 @@ namespace SuprimaProgram.Forms
 
                     if (personResponseData.fingerprint_image != null)
                     {
+                        fingerprintUserPictureBox.Image = byteArrayToImage(personResponseData.fingerprint_image);
 
-                        fingerprintUserPictureBox.Image = null;
-                        MemoryStream mem = new MemoryStream(personResponseData.fingerprint_image);
-                        fingerprintUserPictureBox.Image = Image.FromStream(mem);
+                        //fingerprintUserPictureBox.Image = null;
+                        //MemoryStream mem = new MemoryStream(personResponseData.fingerprint_image);
+                        //fingerprintUserPictureBox.Image = Image.FromStream(mem);
                     }
                     else
                         fingerprintUserPictureBox.Image = SuprimaProgram.Properties.Resources.image_placeholder;
@@ -719,10 +722,14 @@ namespace SuprimaProgram.Forms
             {
                 MemoryStream ms = new MemoryStream();
                 image_fingerprint.Save(ms, ImageFormat.Jpeg);
-                byte[] photo = new byte[ms.Length];
-                ms.Position = 0;
-                ms.Read(photo, 0, photo.Length);
-                personModel.success[0].fingerprint_image = photo;
+                //byte[] photo = new byte[ms.Length];
+                //ms.Position = 0;
+                //ms.Read(photo, 0, photo.Length);
+
+                image_fingerprint.Save(ms, image_fingerprint.RawFormat);
+
+                byte[] img = ms.GetBuffer();
+                personModel.success[0].fingerprint_image = img;
             }
 
 
@@ -759,5 +766,67 @@ namespace SuprimaProgram.Forms
 
 
         #endregion
+
+        private async void testButton_Click(object sender, EventArgs e)
+        {
+            Image image_fingerprint = enrollPictureBox.Image;
+
+
+            PersonModel personModel = new PersonModel();
+
+            personModel.success = new PersonResponseData[1];
+
+            personModel.success[0] = new PersonResponseData();
+
+            personModel.success[0].user_id = 2;
+
+            //personModel.success[0].fingerprint_user_id = 501;
+
+            //personModel.success[0].fingerprint_quality = 98;
+
+            //personModel.success[0].fingerprint_template = "454654654654654656ds";
+
+            //////byte[] byteArray = ImageManipulation.ImgToByte(image_fingerprint);
+
+            if (image_fingerprint != null)
+            {
+                personModel.success[0].fingerprint_image = imageToByteArray(image_fingerprint);
+                //MemoryStream ms = new MemoryStream();
+                //image_fingerprint.Save(ms, ImageFormat.Jpeg);
+                ////byte[] photo = new byte[ms.Length];
+                ////ms.Position = 0;
+                ////ms.Read(photo, 0, photo.Length);
+
+                //image_fingerprint.Save(ms, image_fingerprint.RawFormat);
+
+                //byte[] img = ms.GetBuffer();
+                //byte[] data = img.ToArray();
+
+                //personModel.success[0].fingerprint_image = img.ToArray();
+            }
+            
+
+            string url = "api/update-image-fingerprint";
+
+
+            RestfulHelper restfulHelper = new RestfulHelper(HttpClientData.baseUrl);
+
+            string resultContent = await restfulHelper.requestSaveImage(personModel,
+                                                                     restfulHelper.baseUrl + url);
+        }
+
+        public byte[] imageToByteArray(System.Drawing.Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
+
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
     }
 }

@@ -131,6 +131,9 @@
     <Content Include="DLL\SFM_SDK.dll" />
     <Content Include="DLL\SFM_SDK_NET.dll" />
     <Content Include="DLL\SFM_SDK_NET.XML" />
+    <None Include="Resources\pexels-photo-50524.jpg" />
+    <None Include="Resources\cute-animals-easter-chicken.jpg" />
+    <None Include="Resources\beautiful_yellow_flowers-wallpaper-1920x1080.jpg" />
     <None Include="Resources\image_placeholder.jpg" />
     <None Include="Resources\home.png" />
   </ItemGroup>

@@ -356,8 +356,6 @@ Route::get('teacher-chart', 'TeacherController@teacherChart')
 Route::put('/room/{room}/setMaterial', 'RoomController@setMaterial');
 Route::put('/cards/{card}/setGatedevice', 'CardController@setGatedevice');
 
-Route::get('accessControl/{code}/{ip}', 'RaspberryController@webService');
-Route::get('sendResponse/{code}/{ip}', 'RaspberryController@sendResponseWebService');
 /**
  * get cdn -> send user picture
  */
@@ -376,4 +374,7 @@ Route::get('listDataUser/{amoeba_ip}', 'AmoebaController@listDataUser');
 
 Route::get('myData', 'RaspberryController@routin_check_data');
 
-Route::get('load_gate_device/{cdn}/{ip}/{command}', 'RaspberryController@routin_check_data');
+Route::get('accesscontrol/{code}/{ip}/{command}', 'RaspberryController@routin_check_data');
+// Route::get('accesscontrol/{code}/{ip}', 'RaspberryController@webService');
+// Route::get('gateresponse/{code}/{ip}', 'RaspberryController@sendResponseWebService');
+Route::get('sendresponse/{code}/{ip}', 'RaspberryController@sendResponseWebService');
