@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.searchTabPage = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -48,9 +47,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.fingerprintUserPictureBox = new System.Windows.Forms.PictureBox();
             this.fingerprintTabPage = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.testButton = new System.Windows.Forms.Button();
             this.saveFingerprintButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,19 +58,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.enrollButton = new System.Windows.Forms.Button();
             this.devicesComboBox = new System.Windows.Forms.ComboBox();
+            this.enrollPictureBox = new System.Windows.Forms.PictureBox();
             this.finishButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
-            this.fingerprintUserPictureBox = new System.Windows.Forms.PictureBox();
-            this.enrollPictureBox = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.fingerUserIdTextBox = new System.Windows.Forms.TextBox();
             this.mainTabControl.SuspendLayout();
             this.searchTabPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.viewTabPage.SuspendLayout();
             this.detailGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fingerprintUserPictureBox)).BeginInit();
             this.fingerprintTabPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fingerprintUserPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.enrollPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,6 +103,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.searchTextBox);
             this.groupBox2.Location = new System.Drawing.Point(9, 8);
@@ -119,7 +120,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("B Yekan", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label8.Location = new System.Drawing.Point(331, 59);
+            this.label8.Location = new System.Drawing.Point(382, 67);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(219, 17);
             this.label8.TabIndex = 0;
@@ -152,6 +153,8 @@
             // 
             this.detailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.detailGroupBox.Controls.Add(this.label10);
+            this.detailGroupBox.Controls.Add(this.fingerUserIdTextBox);
             this.detailGroupBox.Controls.Add(this.natioalcodeTextBox);
             this.detailGroupBox.Controls.Add(this.label6);
             this.detailGroupBox.Controls.Add(this.stateFingerTextBox);
@@ -310,6 +313,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "نام:";
             // 
+            // fingerprintUserPictureBox
+            // 
+            this.fingerprintUserPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.fingerprintUserPictureBox.Location = new System.Drawing.Point(55, 61);
+            this.fingerprintUserPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.fingerprintUserPictureBox.Name = "fingerprintUserPictureBox";
+            this.fingerprintUserPictureBox.Size = new System.Drawing.Size(155, 168);
+            this.fingerprintUserPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.fingerprintUserPictureBox.TabIndex = 23;
+            this.fingerprintUserPictureBox.TabStop = false;
+            // 
             // fingerprintTabPage
             // 
             this.fingerprintTabPage.Controls.Add(this.groupBox1);
@@ -323,7 +337,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.testButton);
             this.groupBox1.Controls.Add(this.saveFingerprintButton);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label7);
@@ -342,21 +355,10 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ثبت اثر انگشت";
             // 
-            // testButton
-            // 
-            this.testButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.testButton.Location = new System.Drawing.Point(188, 128);
-            this.testButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(87, 41);
-            this.testButton.TabIndex = 39;
-            this.testButton.Text = "تست";
-            this.testButton.UseVisualStyleBackColor = true;
-            this.testButton.Click += new System.EventHandler(this.testButton_Click);
-            // 
             // saveFingerprintButton
             // 
             this.saveFingerprintButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveFingerprintButton.Font = new System.Drawing.Font("B Yekan", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.saveFingerprintButton.Location = new System.Drawing.Point(369, 160);
             this.saveFingerprintButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveFingerprintButton.Name = "saveFingerprintButton";
@@ -367,7 +369,6 @@
             // 
             // label9
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(83, 63);
             this.label9.Name = "label9";
@@ -377,7 +378,6 @@
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(83, 23);
             this.label7.Name = "label7";
@@ -387,6 +387,7 @@
             // 
             // qualityTextBox
             // 
+            this.qualityTextBox.Enabled = false;
             this.qualityTextBox.Font = new System.Drawing.Font("B Yekan", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.qualityTextBox.Location = new System.Drawing.Point(19, 56);
             this.qualityTextBox.Name = "qualityTextBox";
@@ -408,7 +409,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(442, 43);
+            this.label4.Location = new System.Drawing.Point(468, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 17);
             this.label4.TabIndex = 0;
@@ -417,22 +418,36 @@
             // enrollButton
             // 
             this.enrollButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.enrollButton.Font = new System.Drawing.Font("B Yekan", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.enrollButton.Location = new System.Drawing.Point(369, 115);
             this.enrollButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.enrollButton.Name = "enrollButton";
             this.enrollButton.Size = new System.Drawing.Size(189, 41);
             this.enrollButton.TabIndex = 2;
-            this.enrollButton.Text = "ثبت اثر انگشت";
+            this.enrollButton.Text = "دریافت اثر انگشت";
             this.enrollButton.UseVisualStyleBackColor = true;
             // 
             // devicesComboBox
             // 
+            this.devicesComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.devicesComboBox.FormattingEnabled = true;
             this.devicesComboBox.Location = new System.Drawing.Point(334, 80);
             this.devicesComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.devicesComboBox.Name = "devicesComboBox";
             this.devicesComboBox.Size = new System.Drawing.Size(254, 23);
             this.devicesComboBox.TabIndex = 1;
+            // 
+            // enrollPictureBox
+            // 
+            this.enrollPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.enrollPictureBox.Image = global::SuprimaProgram.Properties.Resources.image_placeholder;
+            this.enrollPictureBox.Location = new System.Drawing.Point(19, 92);
+            this.enrollPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.enrollPictureBox.Name = "enrollPictureBox";
+            this.enrollPictureBox.Size = new System.Drawing.Size(146, 142);
+            this.enrollPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.enrollPictureBox.TabIndex = 33;
+            this.enrollPictureBox.TabStop = false;
             // 
             // finishButton
             // 
@@ -464,28 +479,24 @@
             this.nextButton.Text = "بعدی";
             this.nextButton.UseVisualStyleBackColor = true;
             // 
-            // fingerprintUserPictureBox
+            // label10
             // 
-            this.fingerprintUserPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.fingerprintUserPictureBox.Location = new System.Drawing.Point(55, 22);
-            this.fingerprintUserPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.fingerprintUserPictureBox.Name = "fingerprintUserPictureBox";
-            this.fingerprintUserPictureBox.Size = new System.Drawing.Size(155, 197);
-            this.fingerprintUserPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.fingerprintUserPictureBox.TabIndex = 23;
-            this.fingerprintUserPictureBox.TabStop = false;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(119, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(85, 17);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "کد اثرانگشت شما:";
             // 
-            // enrollPictureBox
+            // fingerUserIdTextBox
             // 
-            this.enrollPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.enrollPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("enrollPictureBox.Image")));
-            this.enrollPictureBox.Location = new System.Drawing.Point(19, 92);
-            this.enrollPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.enrollPictureBox.Name = "enrollPictureBox";
-            this.enrollPictureBox.Size = new System.Drawing.Size(146, 142);
-            this.enrollPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.enrollPictureBox.TabIndex = 33;
-            this.enrollPictureBox.TabStop = false;
+            this.fingerUserIdTextBox.Enabled = false;
+            this.fingerUserIdTextBox.Font = new System.Drawing.Font("B Yekan", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.fingerUserIdTextBox.Location = new System.Drawing.Point(55, 21);
+            this.fingerUserIdTextBox.Name = "fingerUserIdTextBox";
+            this.fingerUserIdTextBox.Size = new System.Drawing.Size(59, 28);
+            this.fingerUserIdTextBox.TabIndex = 37;
+            this.fingerUserIdTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // UserForm
             // 
@@ -511,10 +522,10 @@
             this.viewTabPage.ResumeLayout(false);
             this.detailGroupBox.ResumeLayout(false);
             this.detailGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fingerprintUserPictureBox)).EndInit();
             this.fingerprintTabPage.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fingerprintUserPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.enrollPictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -556,6 +567,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button saveFingerprintButton;
-        private System.Windows.Forms.Button testButton;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox fingerUserIdTextBox;
     }
 }

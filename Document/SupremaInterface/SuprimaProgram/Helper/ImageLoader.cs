@@ -49,5 +49,31 @@ namespace SuprimaProgram.Helper
 
             return bitamp;
         }
+
+        /// <summary>
+        /// Convert Image to byteArray
+        /// </summary>
+        /// <param name="imageIn"></param>
+        /// <returns></returns>
+        public byte[] imageToByteArray(System.Drawing.Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
+
+        /// <summary>
+        /// Convert ByteArray to image
+        /// </summary>
+        /// <param name="byteArrayIn"></param>
+        /// <returns></returns>
+
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
+
     }
 }

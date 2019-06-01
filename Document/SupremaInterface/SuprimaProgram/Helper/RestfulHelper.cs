@@ -106,12 +106,12 @@ namespace SuprimaProgram.Helper
         }
 
         /// <summary>
-        /// Request Search Data
+        /// Request Load Data
         /// </summary>
         /// <param name="code"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public async Task<PersonModel> requestSearch(string code,
+        public async Task<PersonModel> requestLoad(string code,
                                                 string url)
         {
             client.DefaultRequestHeaders.Accept.Clear();
@@ -147,6 +147,7 @@ namespace SuprimaProgram.Helper
 
             return responseResult;
         }
+        
 
         /// <summary>
         /// Request Update
@@ -172,36 +173,27 @@ namespace SuprimaProgram.Helper
                                 new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
 
 
-               
+                var multipartContent = new MultipartFormDataContent();
 
-                var content = new FormUrlEncodedContent(new[]
-                {
+                multipartContent.Add(new StringContent( 
+                                            data.success[0].user_id.ToString()), "user_id");
 
-                    new KeyValuePair<string, string>("user_id",
-                                                        data.success[0].user_id.ToString()),
+                multipartContent.Add(new StringContent(
+                                           data.success[0].fingerprint_user_id.ToString()), "fingerprint_user_id");
 
-                    new KeyValuePair<string, string>("fingerprint_user_id",
-                                                    data.success[0].fingerprint_user_id.ToString()),
+                multipartContent.Add(new StringContent(
+                                           data.success[0].fingerprint_quality.ToString()), "fingerprint_quality");
 
-                    new KeyValuePair<string, string>("fingerprint_image",
-                                                        data.success[0].fingerprint_image.ToString()),
+                multipartContent.Add(new StringContent(
+                                          data.success[0].fingerprint_quality.ToString()), "fingerprint_quality");
+
+                multipartContent.Add(new ByteArrayContent(
+                                            data.success[0].fingerprint_image), "fingerprint_image");
 
 
-                    new KeyValuePair<string, string>("fingerprint_quality",
-                                                    data.success[0].fingerprint_quality.ToString()),
+                var result = await client.PostAsync(url, multipartContent);
 
-                    new KeyValuePair<string, string>("fingerprint_template", 
-                                                    data.success[0].fingerprint_template),
-
-                });
-               
-
-                var result = await client.PostAsync(url, content);
-
-                ByteArrayContent byteContent = new ByteArrayContent(data.success[0].fingerprint_image);
-
-                var reponse = await client.PostAsync(url, byteContent);
-
+          
 
                 string resultContent = await result.Content.ReadAsStringAsync();
 
@@ -219,78 +211,39 @@ namespace SuprimaProgram.Helper
         }
 
         /// <summary>
-        /// Request Update
+        /// Request Load Data
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="code"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public async Task<string> requestSaveImage(PersonModel data,
-                                                      string url)
+        public async Task<PersonModel> requestLoadByFingerprintById(int fp_user_id,
+                                                                    string url)
         {
-            string responseResult = null;
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(C_HEADER_VALUE_APP_JSON));
+
+            client.DefaultRequestHeaders.Add(C_HEADER_ACCEPT, C_HEADER_VALUE_APP_JSON);
+
+            client.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
+
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("fp_user_id", fp_user_id.ToString()),
+            });
+
+            var result = await client.PostAsync(url, content);
+
+            string resultContent = await result.Content.ReadAsStringAsync();
+
+            PersonModel responseResult = null;
 
             try
             {
-
-                client.DefaultRequestHeaders.Accept.Clear();
-
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(C_HEADER_VALUE_APP_JSON));
-
-                client.DefaultRequestHeaders.Add(C_HEADER_ACCEPT, C_HEADER_VALUE_APP_JSON);
-
-                client.DefaultRequestHeaders.Authorization =
-                                new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
-
-
-                var multipartContent = new MultipartFormDataContent();
-
-                multipartContent.Add(new StringContent(data.success[0].user_id.ToString()), "user_id");
-                multipartContent.Add(new ByteArrayContent(data.success[0].fingerprint_image), "fingerprint_image");
-
-               
-
-               // ByteArrayContent byteContent = new ByteArrayContent(data.success[0].fingerprint_image);
-               // StringContent stringContent = new StringContent(data.success[0].user_id.ToString());
-
-               // multipartContent.Add(byteContent);
-               // multipartContent.Add(stringContent);
-
-               //// var result = await client.PostAsync(url, content);
-
-
-                var reponse = await client.PostAsync(url, multipartContent);
-
-
-                string resultContent = await reponse.Content.ReadAsStringAsync();
-
-
-
-                responseResult = reponse.StatusCode.ToString();
-
-
-
-                //var stringContent = new StringContent(JsonConvert.SerializeObject(request));
-                //stringContent.Headers.Add("Content-Disposition", "form-data; name=\"json\"");
-                //content.Add(stringContent, "json");
-
-                //string path = @"E:\8.Picture\JPG-Images (8)\164.jpg";
-                //FileStream fs = File.OpenRead(path);
-
-                //var streamContent = new StreamContent(fs);
-                //streamContent.Headers.Add("Content-Type", "application/octet-stream");
-                ////Content-Disposition: form-data; name="file"; filename="C:\B2BAssetRoot\files\596090\596090.1.mp4";
-                //streamContent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + Path.GetFileName(path) + "\"");
-                //content.Add(streamContent, "file", Path.GetFileName(path));
-
-                //content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-
-
-
-                //Task<HttpResponseMessage> message = client.PostAsync("http://api.brightcove.com/services/post", content);
-
-                //var input = message.Result.Content.ReadAsStringAsync();
-                //Console.WriteLine(input.Result);
-
+                if (null != resultContent)
+                {
+                    responseResult = JsonConvert.DeserializeObject<Model.PersonModel>(resultContent);
+                }
             }
             catch (Exception ex)
             {
@@ -299,6 +252,67 @@ namespace SuprimaProgram.Helper
 
             return responseResult;
         }
+
+        /// <summary>
+        /// Request Update
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        //public async Task<string> requestSaveImage(PersonModel data,
+        //                                              string url)
+        //{
+        //    string responseResult = null;
+
+        //    try
+        //    {
+
+        //        client.DefaultRequestHeaders.Accept.Clear();
+
+        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(C_HEADER_VALUE_APP_JSON));
+
+        //        client.DefaultRequestHeaders.Add(C_HEADER_ACCEPT, C_HEADER_VALUE_APP_JSON);
+
+        //        client.DefaultRequestHeaders.Authorization =
+        //                        new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
+
+
+        //        var multipartContent = new MultipartFormDataContent();
+
+        //        multipartContent.Add(new StringContent(data.success[0].user_id.ToString()), "user_id");
+        //        multipartContent.Add(new ByteArrayContent(data.success[0].fingerprint_image), "fingerprint_image");
+
+
+
+        //       // ByteArrayContent byteContent = new ByteArrayContent(data.success[0].fingerprint_image);
+        //       // StringContent stringContent = new StringContent(data.success[0].user_id.ToString());
+
+        //       // multipartContent.Add(byteContent);
+        //       // multipartContent.Add(stringContent);
+
+        //       //// var result = await client.PostAsync(url, content);
+
+
+        //        var reponse = await client.PostAsync(url, multipartContent);
+
+
+        //        string resultContent = await reponse.Content.ReadAsStringAsync();
+
+
+
+        //        responseResult = reponse.StatusCode.ToString();
+
+
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LoggerExtensions.log(ex);
+        //    }
+
+        //    return responseResult;
+        //}
 
 
         //public async Task<PersonModel> requestSearch(string code,
@@ -339,87 +353,6 @@ namespace SuprimaProgram.Helper
         //}
 
 
-        /// <summary>
-        /// Request Update
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public async Task<string> requestLoadImage(PersonModel data,
-                                                      string url)
-        {
-            string responseResult = null;
-
-            try
-            {
-
-                client.DefaultRequestHeaders.Accept.Clear();
-
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(C_HEADER_VALUE_APP_JSON));
-
-                client.DefaultRequestHeaders.Add(C_HEADER_ACCEPT, C_HEADER_VALUE_APP_JSON);
-
-                client.DefaultRequestHeaders.Authorization =
-                                new AuthenticationHeaderValue(C_HEADER_BEARER, HttpClientData.token);
-
-
-                var multipartContent = new MultipartFormDataContent();
-
-                multipartContent.Add(new StringContent(data.success[0].user_id.ToString()), "user_id");
-                multipartContent.Add(new ByteArrayContent(data.success[0].fingerprint_image), "fingerprint_image");
-
-
-
-                // ByteArrayContent byteContent = new ByteArrayContent(data.success[0].fingerprint_image);
-                // StringContent stringContent = new StringContent(data.success[0].user_id.ToString());
-
-                // multipartContent.Add(byteContent);
-                // multipartContent.Add(stringContent);
-
-                //// var result = await client.PostAsync(url, content);
-
-
-                var reponse = await client.PostAsync(url, multipartContent);
-
-
-                string resultContent = await reponse.Content.ReadAsStringAsync();
-
-
-
-                responseResult = reponse.StatusCode.ToString();
-
-
-
-                //var stringContent = new StringContent(JsonConvert.SerializeObject(request));
-                //stringContent.Headers.Add("Content-Disposition", "form-data; name=\"json\"");
-                //content.Add(stringContent, "json");
-
-                //string path = @"E:\8.Picture\JPG-Images (8)\164.jpg";
-                //FileStream fs = File.OpenRead(path);
-
-                //var streamContent = new StreamContent(fs);
-                //streamContent.Headers.Add("Content-Type", "application/octet-stream");
-                ////Content-Disposition: form-data; name="file"; filename="C:\B2BAssetRoot\files\596090\596090.1.mp4";
-                //streamContent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + Path.GetFileName(path) + "\"");
-                //content.Add(streamContent, "file", Path.GetFileName(path));
-
-                //content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-
-
-
-                //Task<HttpResponseMessage> message = client.PostAsync("http://api.brightcove.com/services/post", content);
-
-                //var input = message.Result.Content.ReadAsStringAsync();
-                //Console.WriteLine(input.Result);
-
-            }
-            catch (Exception ex)
-            {
-                LoggerExtensions.log(ex);
-            }
-
-            return responseResult;
-        }
 
     }
 }

@@ -18,9 +18,9 @@ class CreateFingerprintsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('fingerprint_user_id');
             // $table->tinyInteger('fingerprint_sub_id')->nullable;
-            $table->binary('image')->nullable();
+            // $table->binary('image')->nullable();
             $table->unsignedInteger('image_quality')->nullable();
-            $table->binary('template')->nullable();
+            // $table->binary('template')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
@@ -30,6 +30,10 @@ class CreateFingerprintsTable extends Migration
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
         });
+
+        // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
+        DB::statement("ALTER TABLE fingerprints ADD image LONGBLOB");
+        DB::statement("ALTER TABLE fingerprints ADD template LONGBLOB");
     }
 
     /**

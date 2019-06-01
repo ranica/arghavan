@@ -14,7 +14,7 @@ class FingerprintDeviceSeeder extends Seeder
         \App\FingerprintDevice::create([
         	'ip' => '192.168.1.1',
         	'port' => '1470',
-            'name' => 'سنسور اثرانگشت تماره یک',
+            'name' => 'سنسور اثرانگشت شماره یک',
             'net_state' => 0,
             'enabled' => 1,
         ]);

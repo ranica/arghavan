@@ -50,6 +50,13 @@ class AmoebaController extends Controller
         return new AmoebaCollection($result);
     }
 
+    /**
+     * Load valid Person
+     *
+     * @param      <type>              $amoeba_ip  The amoeba ip
+     *
+     * @return     ListDataCollection  ( description_of_the_return_value )
+     */
     public function listDataUser($amoeba_ip)
     {
         $ip = $amoeba_ip;

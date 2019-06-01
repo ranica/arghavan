@@ -216,32 +216,34 @@ Route::get('ipass', function () {
 
 Route::get('suprima', function(){
 
-    $code = '0000000000';
-    $fun = [
-        'people' => function($query){
-             $query->select([
-                'id',
-                'name',
-                'lastname',
-                'nationalId'
-                ]);
-            },
-        ];
-    $items = \App\User::wherehas('people',function($query) use($code){
-                    $query->Where('users.code', $code);
-                    $query->orWhere('people.nationalId', $code);
-                })
-                ->leftJoin('fingerprints', 'fingerprints.user_id', 'users.id')
+    $code = '2';
+        $fun = [
+            'people' => function($query){
+                 $query->select([
+                    'id',
+                    'name',
+                    'lastname',
+                    'nationalId'
+                    ]);
+                },
+            ];
 
+        $items = \App\User::wherehas('people')
+                ->leftJoin('fingerprints', 'fingerprints.user_id', 'users.id', function($query) use ($code){
+                    $query->Where('fingerprints.fingerprint_user_id', $code);
+                })
                 ->with($fun)
-                ->select(['users.id',
-                            'users.code',
-                            'people_id',
-                            'fingerprints.id as finger_id',
-                            'fingerprints.fingerprint_user_id',
-                            'fingerprints.image_url',
+                ->select(['users.id as user_id',
+                            'users.code as user_code',
+                            'groups.name as group_name',
+                            'people_id as people_id',
+                            'fingerprints.id as fingerprint_id',
+                            'fingerprints.fingerprint_user_id as fingerprint_user_id',
+                            'fingerprints.image as fingerprint_image',
+                            'fingerprints.template as fingerprint_template',
                         ])
                 ->get();
+               
 
 
         return $items;

@@ -310,7 +310,6 @@ class PassportController extends Controller
      */
     public function getFingerprintUser(Request $request)
     {
-
        $code = $request->code;
         $fun = [
             'people' => function($query){
@@ -393,6 +392,47 @@ class PassportController extends Controller
 
         return response()->json($fields,
                                 $this->successStatus);
+    }
+
+
+    public function getIdentifyFingerprint(Request $request)
+    {
+
+       $code = $request->fp_user_id;
+        $fun = [
+            'people' => function($query){
+                 $query->select([
+                    'id',
+                    'name',
+                    'lastname',
+                    'nationalId'
+                    ]);
+                },
+            ];
+
+        $items = \App\User::wherehas('people')
+                ->leftJoin('fingerprints', 'fingerprints.user_id', 'users.id', function($query) use ($code){
+                    $query->Where('fingerprints.fingerprint_user_id', $code);
+                })
+                ->with($fun)
+                ->select(['users.id as user_id',
+                            'users.code as user_code',
+                            'groups.name as group_name',
+                            'people_id as people_id',
+                            'fingerprints.id as fingerprint_id',
+                            'fingerprints.fingerprint_user_id as fingerprint_user_id',
+                            'fingerprints.image as fingerprint_image',
+                            'fingerprints.template as fingerprint_template',
+                        ])
+                ->get();
+
+                $resultUser = \App\Http\Resources\FingerprintDataResource::collection ($items);
+                $fields = ['success' => $resultUser];
+
+                $result = response()->json($fields,
+                                   $this->successStatus);
+                // ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE
+        return $result;
     }
 
 

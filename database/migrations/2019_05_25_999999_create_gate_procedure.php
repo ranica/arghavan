@@ -299,7 +299,7 @@ class CreateGateProcedure extends Migration
                     gatedevices.netState = 1 AND gatedevices.gate = 1 AND gatedevices.state = 1 AND gatedevices.type = 0;
             END";
 
-            $sp_update_traffic = "CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_update_traffic`(IN `CDN` VARCHAR(191) CHARSET utf8, IN `GATEMESSAGE_ID` INT, , IN `GATEDIRECT_ID` INT)
+            $sp_update_traffic = "CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_update_traffic`(IN `CDN` VARCHAR(191) CHARSET utf8, IN `GATEMESSAGE_ID` INT, IN `GATEDIRECT_ID` INT)
             BEGIN
                 SET @cdn = CDN;
                 SET @gatemessage_id = GATEMESSAGE_ID;
@@ -310,7 +310,7 @@ class CreateGateProcedure extends Migration
                 SET
                     gatetraffics.gatemessage_id = @gatemessage_id
                 WHERE
-                    gatetraffics.gatemessage_id = 3 AND 
+                    gatetraffics.gatemessage_id = 3 AND
                     gatetraffics.gatedirect_id = @direct AND
                     TIMESTAMPDIFF(
                         SECOND,
