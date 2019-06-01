@@ -296,5 +296,27 @@ Route::get('student-chart', 'StudentController@studentChart')
 Route::get('teacher-chart', 'TeacherController@teacherChart')
         ->name('report.user.teacher.count.all');
 Route::put('/room/{room}/setMaterial', 'RoomController@setMaterial');
-Route::get('accesscontrol/{code}/{ip}', 'API\PassportController@webService');
-Route::get('accesscontrol/gataresponse/{code}/{ip}', 'API\PassportController@getResponseWebService');
+Route::put('/cards/{card}/setGatedevice', 'CardController@setGatedevice');
+
+/**
+ * get cdn -> send user picture
+ */
+Route::get('getUserCDN/{cdn}/image', 'RaspberryController@getPictureUserByCDN');
+
+/**
+ * get cdn -> send Data user:(name, lastname, code, enabled_card, enabled_user)
+ */
+Route::get('getDataUser/{cdn}/listdata', 'RaspberryController@getDataUserByCDN');
+/**
+ * get IP Amoeba ->  send [cdn, gatedevice_ip]
+ */
+Route::get('listAllowTraffic/{amoeba_ip}', 'AmoebaController@listAllowTraffic');
+
+Route::get('listDataUser/{amoeba_ip}', 'AmoebaController@listDataUser');
+
+Route::get('myData', 'RaspberryController@routin_check_data');
+
+Route::get('accesscontrol/{code}/{ip}/{command}', 'RaspberryController@routin_check_data');
+// Route::get('accesscontrol/{code}/{ip}', 'RaspberryController@webService');
+// Route::get('gateresponse/{code}/{ip}', 'RaspberryController@sendResponseWebService');
+Route::get('sendresponse/{code}/{ip}', 'RaspberryController@sendResponseWebService');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Enums\MessageGate;
 use DateTime;
+use Image;
 
 
 
@@ -34,7 +35,7 @@ class RaspberryController extends Controller
         // $cdn = '2047437529';
         $direct_input = 1;
         $direct_output = 2;
-        switch ($command) 
+        switch ($command)
         {
             case '5308':
                         {
@@ -626,13 +627,13 @@ class RaspberryController extends Controller
                 },
         ];
 
-        $res = Card::where('cdn', $card)
+        $res = \App\Card::where('cdn', $card)
                         ->whereHas('users.people')
                         ->with($fun)
                         ->first();
 
         // $th_name = $res->users[0]->people->picture;
-        $th_name = 'xbHsuVeiqBst2YY4puL0C4pzApWvB5ORprYAoEoE.jpeg';
+        $th_name = 'rBwL7SEmZtN39SdkNe0FKQarRRCeuT3FAx8S4znE.jpeg';
         $localFileName = \Storage::path($th_name);
 
         return Image::make($localFileName)->response();
